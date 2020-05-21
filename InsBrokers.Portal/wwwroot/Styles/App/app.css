@@ -24,7 +24,8 @@ header {
   header .main-nav ul {
     padding: 15px 0; }
     header .main-nav ul li {
-      display: inline-block; }
+      display: inline-block;
+      color: #fff; }
       header .main-nav ul li a {
         padding: 5px 7.5px;
         cursor: pointer; }

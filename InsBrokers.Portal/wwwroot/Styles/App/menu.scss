@@ -1,8 +1,9 @@
-﻿$navLinkColor: #666;
+﻿$navLinkColor: #fff;
 $navLinkHoverColor: red;
 $navLinkActiveBorderColor: blue;
 $menuPadding: 7.5px;
-$subMenuBgColor:#fff;
+$subMenuBgColor: #fff;
+
 header {
     position: fixed;
     top: 0;
@@ -29,6 +30,7 @@ header {
 
             li {
                 display: inline-block;
+                color: $navLinkColor;
 
                 a {
                     padding: 5px 7.5px;

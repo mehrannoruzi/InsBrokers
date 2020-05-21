@@ -6,4 +6,7 @@ $(document).ready(function () {
         adaptiveHeight: true,
         slidesToShow: 1
     });
+    $('#switch').click(function () {
+        $('#cover').addClass('animated slideOutUp');
+    });
 });

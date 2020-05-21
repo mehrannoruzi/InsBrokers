@@ -1,0 +1,20 @@
+﻿<!DOCTYPE html>
+
+<html lang="fa" dir="rtl">
+
+<head>
+    @RenderSection("styles", false)
+    <partial name="Partials/_LayoutHeader" />
+</head>
+<body dir="rtl">
+    <header>
+        <partial name="Partials/_Menu" />
+    </header>
+    <section>
+        @RenderBody()
+    </section>
+    <footer></footer>
+    <partial name="Partials/_LayoutFooter" />
+    @RenderSection("Scripts", false)
+</body>
+</html>
