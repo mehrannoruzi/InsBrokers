@@ -1,0 +1,48 @@
+[
+  {
+    "outputFileName": "wwwroot/Styles/App/app.css",
+    "inputFiles": [
+      "wwwroot/Styles/App/template.css",
+      "wwwroot/Styles/App/common.css",
+      "wwwroot/Styles/App/fa.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/Styles/Libs/libs.css",
+    "inputFiles": [
+      "wwwroot/Styles/Libs/bootstrap.min.css",
+      "wwwroot/Styles/Libs/material-design-iconic-font.min.css",
+      "wwwroot/Styles/Libs/footable.core.css",
+      "wwwroot/Styles/Libs/zebra-date-picker.css",
+      "wwwroot/Styles/Libs/toastr.css",
+      "wwwroot/Styles/Libs/animate.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/Scripts/App/app.js",
+    "inputFiles": [
+      "wwwroot/Scripts/App/template.js",
+      "wwwroot/Scripts/App/plugins.js",
+      "wwwroot/Scripts/App/common.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/Scripts/Libs/libs.js",
+    "inputFiles": [
+      "wwwroot/Scripts/Libs/jquery-3.1.1.min.js",
+      "wwwroot/Scripts/Libs/jquery.validate.min.js",
+      "wwwroot/Scripts/Libs/jquery.validate.unobtrusive.min.js",
+      "wwwroot/Scripts/Libs/popper.min.js",
+      "wwwroot/Scripts/Libs/bootstrap.min.js",
+      "wwwroot/Scripts/Libs/pace.js",
+      "wwwroot/Scripts/Libs/footable.all.min.js",
+      "wwwroot/Scripts/Libs/toastr.js",
+      "wwwroot/Scripts/Libs/zebra-date-picker.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  }
+]

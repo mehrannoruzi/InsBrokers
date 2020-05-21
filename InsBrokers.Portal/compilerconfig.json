@@ -1,0 +1,22 @@
+﻿[
+  {
+    "outputFile": "wwwroot/Styles/App/common.css",
+    "inputFile": "wwwroot/Styles/App/common.scss"
+  },
+  {
+    "outputFile": "wwwroot/Styles/App/fa.css",
+    "inputFile": "wwwroot/Styles/App/fa.scss"
+  },
+  {
+    "outputFile": "wwwroot/Styles/App/material-design.css",
+    "inputFile": "wwwroot/Styles/App/material-design.scss"
+  },
+  {
+    "outputFile": "wwwroot/Styles/App/menu.css",
+    "inputFile": "wwwroot/Styles/App/menu.scss"
+  },
+  {
+    "outputFile": "wwwroot/Styles/App/template.css",
+    "inputFile": "wwwroot/Styles/App/template.scss"
+  }
+]

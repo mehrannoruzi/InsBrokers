@@ -1,0 +1,342 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Actions" xml:space="preserve">
+    <value>عملیات</value>
+  </data>
+  <data name="Active" xml:space="preserve">
+    <value>فعال</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>افزودن</value>
+  </data>
+  <data name="AreYouSure" xml:space="preserve">
+    <value>آیا از انجام این کار مطمن هستید؟</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>انصراف</value>
+  </data>
+  <data name="CannotUploadAnyMoreFiles" xml:space="preserve">
+    <value>امکان آپلود بیشتر از {{maxFiles}} فایل نیست</value>
+  </data>
+  <data name="CickHere" xml:space="preserve">
+    <value>اینجا کلیک کنید</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>بستن</value>
+  </data>
+  <data name="CopyRights" xml:space="preserve">
+    <value>تمام حقوق مادی و معنوی این اثر متعلق به  &lt;a href="https://kingofday.ir/"&gt;Kingofday.ir&lt;/a&gt; می باشد</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>جزییات</value>
+  </data>
+  <data name="DropYourFileHere" xml:space="preserve">
+    <value>فایل خود را اینجا رها کنید</value>
+  </data>
+  <data name="DropYourFilesHere" xml:space="preserve">
+    <value>فایل های خود را اینجا رها کنید</value>
+  </data>
+  <data name="DropzoneFileIsTooBig" xml:space="preserve">
+    <value>"حجم فایل ({{filesize}}) بیش از حد مجاز است ({{maxFilesize}}MB)."</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>ویرایش</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>خطایی رخ داده است، دوباره تلاش نمایید</value>
+  </data>
+  <data name="ErrorPageMessage" xml:space="preserve">
+    <value>در پردازش درخواست خطا رخ داده است</value>
+  </data>
+  <data name="FileFormatNotSupported" xml:space="preserve">
+    <value>فرمت فایل پشتیبانی نمی شود</value>
+  </data>
+  <data name="FillFieldCorrectly" xml:space="preserve">
+    <value>مقدار صحیح نیست</value>
+  </data>
+  <data name="Filters" xml:space="preserve">
+    <value>فیلترها</value>
+  </data>
+  <data name="ForgotPassword" xml:space="preserve">
+    <value>رمز عبور را فراموش کرده ام!</value>
+  </data>
+  <data name="GoTo" xml:space="preserve">
+    <value>برو به</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>صفحه اصلی</value>
+  </data>
+  <data name="InActive" xml:space="preserve">
+    <value>غیرفعال</value>
+  </data>
+  <data name="IncorrectDate" xml:space="preserve">
+    <value>لطفا تاریخ را درست وارد نمایید</value>
+  </data>
+  <data name="IncorrectDateISO" xml:space="preserve">
+    <value>لطفا تاریخ را درست وارد نمایید (ISO)</value>
+  </data>
+  <data name="IncorrectFormat" xml:space="preserve">
+    <value>لطفا مقداری با فرمت مناسب وارد نمایید</value>
+  </data>
+  <data name="IncorrectUrl" xml:space="preserve">
+    <value>لطفا آدرس اینترنتی را درست وارد نمایید</value>
+  </data>
+  <data name="InvalidEmail" xml:space="preserve">
+    <value>ایمیل وارد شده صحیح نمی باشد</value>
+  </data>
+  <data name="Item" xml:space="preserve">
+    <value>آیتم</value>
+  </data>
+  <data name="Items" xml:space="preserve">
+    <value>آیتم ها</value>
+  </data>
+  <data name="LenghIsNotInRange" xml:space="preserve">
+    <value>تعداد کاراکترها میبایست بین {0} و {1} باشد</value>
+  </data>
+  <data name="Management" xml:space="preserve">
+    <value>مدیریت</value>
+  </data>
+  <data name="MaxLength" xml:space="preserve">
+    <value>لطفا بیشتر از {1} کاراکتر وارد ننمایید</value>
+  </data>
+  <data name="MaxLengthExeeded" xml:space="preserve">
+    <value>لطفا بیشتر از {0} کاراکتر وارد ننمایید</value>
+  </data>
+  <data name="MaxValueExceeded" xml:space="preserve">
+    <value>لطفا مقداری کمتر یا مساوی با {0} وارد نمایید</value>
+  </data>
+  <data name="MinLength" xml:space="preserve">
+    <value>لطفا کمتر از {1} کاراکتر وارد ننمایید</value>
+  </data>
+  <data name="MinLengthNotReached" xml:space="preserve">
+    <value>لطفا حداقل {0} کاراکتر وارد نمایید</value>
+  </data>
+  <data name="MinValueNotReached" xml:space="preserve">
+    <value>لطفا مقداری بیشتر یا مساوی با {0} وارد نمایید</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>خیر</value>
+  </data>
+  <data name="NotFound" xml:space="preserve">
+    <value>پیدا نشد</value>
+  </data>
+  <data name="NotFoundPageMessage" xml:space="preserve">
+    <value>صفحه مورد نظر یافت نشد!</value>
+  </data>
+  <data name="Pages" xml:space="preserve">
+    <value>صفحات</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>گذرواژه</value>
+  </data>
+  <data name="PleaseSelect" xml:space="preserve">
+    <value>لطفا انتخاب نمایید</value>
+  </data>
+  <data name="PrevPage" xml:space="preserve">
+    <value>صفحه قبلی</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>پروفایل</value>
+  </data>
+  <data name="RecordNotFound" xml:space="preserve">
+    <value>{0} مورد نظر وجود ندارد</value>
+  </data>
+  <data name="Recover" xml:space="preserve">
+    <value>بازیابی</value>
+  </data>
+  <data name="RecoverPasswordHint" xml:space="preserve">
+    <value>رمز جدید به ایمیل شما ارسال خواهد شد</value>
+  </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>مرا بخاطر بسپار</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="Required" xml:space="preserve">
+    <value>این فیلد اجباری می باشد</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>جستجو</value>
+  </data>
+  <data name="SearchHere" xml:space="preserve">
+    <value>اینجا جستجو کنید</value>
+  </data>
+  <data name="Searching" xml:space="preserve">
+    <value>در حال جستجو ...</value>
+  </data>
+  <data name="SignIn" xml:space="preserve">
+    <value>ورود</value>
+  </data>
+  <data name="SignOut" xml:space="preserve">
+    <value>خروج</value>
+  </data>
+  <data name="String53" xml:space="preserve">
+    <value>ثبت نام</value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>ثبت</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>عملیات با موفقیت انجام شد</value>
+  </data>
+  <data name="ThereIsNoRecord" xml:space="preserve">
+    <value>هیچ {0}ی پبدا نشد</value>
+  </data>
+  <data name="UnAuthorizedPageMessage" xml:space="preserve">
+    <value>امکان دسترسی به بخش مورد نظر وجود ندارد</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>ویرایش</value>
+  </data>
+  <data name="Upload" xml:space="preserve">
+    <value>آپلود</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>نام کاربری (ایمیل)</value>
+  </data>
+  <data name="ValidationFailed" xml:space="preserve">
+    <value>اعتبار سنجی ناموفق بود، دویاره سعی نمایید</value>
+  </data>
+  <data name="ValueIsNotInRange" xml:space="preserve">
+    <value>لطفا مقداری بین {0} و {1} وارد نمایید</value>
+  </data>
+  <data name="ValueMustBeDigit" xml:space="preserve">
+    <value>لطفا رقم وارد نمایید</value>
+  </data>
+  <data name="ValueMustBeNumber" xml:space="preserve">
+    <value>لطفا عدد وارد نمایید</value>
+  </data>
+  <data name="ValueNotMatched" xml:space="preserve">
+    <value>لطفا همان مقدار را دوباره وارد نمایید</value>
+  </data>
+  <data name="WelcomeMessage" xml:space="preserve">
+    <value>به داشبورد مدیریت Eagle خوش آمدید</value>
+  </data>
+  <data name="WrongEmailFormat" xml:space="preserve">
+    <value>وروذی باید ایمیل باشد</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>بله</value>
+  </data>
+</root>

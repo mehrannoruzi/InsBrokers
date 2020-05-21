@@ -1,0 +1,17 @@
+﻿<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>@ViewBag.Title</title>
+<meta name="keywords" content="@ViewBag.Keywords" />
+<meta name="description" content="@ViewBag.Description" />
+<link rel="icon" href="@Url.Content("~/images/logo.png")" sizes="32x32" />
+<link rel="icon" href="@Url.Content("~/images/logo.png")" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="@Url.Content("~/images/logo.png")" />
+
+<environment include="Development">
+    <link href="@Url.Content("~/Styles/Libs/libs.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Styles/App/app.css")" rel="stylesheet"  asp-append-version="true" />
+</environment>
+<environment include="Production ">
+    <link href="@Url.Content("~/Styles/Libs/libs.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Styles/App/app.min.css")" rel="stylesheet"  asp-append-version="true" />
+</environment>

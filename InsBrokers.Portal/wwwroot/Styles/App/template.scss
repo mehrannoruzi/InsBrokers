@@ -1,0 +1,11 @@
+﻿[class^=col-]{
+    display:flex;
+}
+ul{
+    list-style:none;
+    padding:0;
+}
+html{
+    font-size:12px;
+}
+@import 'menu.scss';
