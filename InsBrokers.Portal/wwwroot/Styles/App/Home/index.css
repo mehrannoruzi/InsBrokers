@@ -1,0 +1,32 @@
+﻿#home-index-page #main-slider-wrapper {
+  position: relative; }
+  #home-index-page #main-slider-wrapper #main-slider .slide img {
+    width: 100%; }
+  #home-index-page #main-slider-wrapper #cover {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 990;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-bottom: solid 10px #666;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end; }
+    #home-index-page #main-slider-wrapper #cover #switch {
+      background-color: transparent;
+      border: none;
+      color: #fff;
+      font-size: 25px;
+      font: normal normal normal 14px/1 'Material-Design-Iconic-Font';
+      display: flex;
+      flex-direction: column; }
+      #home-index-page #main-slider-wrapper #cover #switch:before {
+        content: '\f2fc';
+        height: 5px; }
+      #home-index-page #main-slider-wrapper #cover #switch:after {
+        content: '\f2fc'; }
+      #home-index-page #main-slider-wrapper #cover #switch i {
+        font-size: 20px;
+        color: #fff; }

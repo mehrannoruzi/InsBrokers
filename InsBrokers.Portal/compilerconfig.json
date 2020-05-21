@@ -18,5 +18,9 @@
   {
     "outputFile": "wwwroot/Styles/App/template.css",
     "inputFile": "wwwroot/Styles/App/template.scss"
+  },
+  {
+    "outputFile": "wwwroot/Styles/App/Home/index.css",
+    "inputFile": "wwwroot/Styles/App/Home/index.scss"
   }
 ]

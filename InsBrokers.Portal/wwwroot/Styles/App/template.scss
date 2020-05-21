@@ -1,11 +1,30 @@
-﻿[class^=col-]{
-    display:flex;
+﻿[class^=col-] {
+    display: flex;
 }
-ul{
-    list-style:none;
-    padding:0;
+
+ul {
+    list-style: none;
+    padding: 0;
 }
-html{
-    font-size:12px;
+
+html {
+    font-size: 12px;
 }
+
 @import 'menu.scss';
+
+body {
+    min-height: 100vh;
+}
+
+ul {
+    margin-bottom: 0;
+}
+
+button {
+    border: none;
+    background:none;
+    &:focus {
+        outline: none;
+    }
+}

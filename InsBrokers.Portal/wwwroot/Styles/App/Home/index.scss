@@ -1,0 +1,51 @@
+﻿#home-index-page {
+    #main-slider-wrapper {
+        position: relative;
+
+        #main-slider {
+            .slide {
+                img {
+                    width: 100%;
+                }
+            }
+        }
+
+        #cover {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            z-index: 990;
+            background-color: rgba(0,0,0,0.5);
+            border-bottom: solid 10px #666;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+
+            #switch {
+                background-color: transparent;
+                border: none;
+                color: #fff;
+                font-size: 25px;
+                font: normal normal normal 14px/1 'Material-Design-Iconic-Font';
+                display: flex;
+                flex-direction: column;
+
+                &:before {
+                    content: '\f2fc';
+                    height:5px;
+                }
+
+                &:after {
+                    content: '\f2fc';
+                }
+
+                i {
+                    font-size: 20px;
+                    color: #fff;
+                }
+            }
+        }
+    }
+}

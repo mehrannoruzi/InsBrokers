@@ -3,48 +3,19 @@ $navLinkHoverColor: red;
 $navLinkActiveBorderColor: blue;
 $menuPadding: 7.5px;
 $subMenuBgColor:#fff;
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
 
-.main-nav {
+    .main-nav {
 
-    .menu-icon {
-        padding-left: $menuPadding;
-        display: none;
-        padding: 15px 0;
-
-        i {
-            font-size: 20px;
-            vertical-align: middle;
-        }
-    }
-
-
-    ul {
-        padding: 15px 0;
-
-        li {
-            display: inline-block;
-
-            a {
-                padding: 5px 7.5px;
-                cursor: pointer;
-
-                &:hover {
-                    color: $navLinkHoverColor !important;
-                }
-            }
-
-            &:hover {
-                .sub-menu {
-                    display: block;
-                }
-            }
-        }
-
-        .close-menu {
+        .menu-icon {
+            padding-left: $menuPadding;
             display: none;
-            position: absolute;
-            top: 10px;
-            left: 10px;
+            padding: 15px 0;
 
             i {
                 font-size: 20px;
@@ -52,65 +23,103 @@ $subMenuBgColor:#fff;
             }
         }
 
-        .logo {
-
-            img {
-                width: 32px;
-            }
-        }
-
-        @media(max-width:576px) {
-
-            .logo {
-                display: none;
-            }
-        }
-    }
-
-    .sub-menu {
-        display: none;
-        background-color: $subMenuBgColor;
-        box-shadow: 0 4px 7px 0 rgba(0,0,0,0.75) !important;
-        position: absolute;
-
-        li {
-            display: flex;
-        }
-    }
-
-    @media(max-width:576px) {
-        .menu-icon {
-            display: inline-block;
-        }
 
         ul {
+            padding: 15px 0;
+
+            li {
+                display: inline-block;
+
+                a {
+                    padding: 5px 7.5px;
+                    cursor: pointer;
+
+                    &:hover {
+                        color: $navLinkHoverColor !important;
+                    }
+                }
+
+                &:hover {
+                    .sub-menu {
+                        display: block;
+                    }
+                }
+            }
+
+            .close-menu {
+                display: none;
+                position: absolute;
+                top: 10px;
+                left: 10px;
+
+                i {
+                    font-size: 20px;
+                    vertical-align: middle;
+                }
+            }
+
+            .logo {
+
+                img {
+                    width: 32px;
+                }
+            }
+
+            @media(max-width:576px) {
+
+                .logo {
+                    display: none;
+                }
+            }
+        }
+
+        .sub-menu {
             display: none;
-            padding-top:30px;
-            animation-name:slideInRight;
-            position: fixed;
-            z-index:999;
-            top: 0;
-            bottom: 0;
-            width: 70%;
-            flex-direction: column;
             background-color: $subMenuBgColor;
-            box-shadow: 0 0 2px rgba(0,0,0,0.75);
-            right: 0;
+            box-shadow: 0 4px 7px 0 rgba(0,0,0,0.75) !important;
+            position: absolute;
+            z-index: 999;
 
             li {
                 display: flex;
             }
-
-            .close-menu {
-                display: block;
-            }
         }
 
-        [name=toggle]:checked + ul {
-            display: flex;
+        @media(max-width:576px) {
+            .menu-icon {
+                display: inline-block;
+            }
+
+            ul {
+                display: none;
+                padding-top: 30px;
+                animation-name: slideInRight;
+                position: fixed;
+                z-index: 999;
+                top: 0;
+                bottom: 0;
+                width: 70%;
+                flex-direction: column;
+                background-color: $subMenuBgColor;
+                box-shadow: 0 0 2px rgba(0,0,0,0.75);
+                right: 0;
+
+                li {
+                    display: flex;
+                }
+
+                .close-menu {
+                    display: block;
+                }
+            }
+
+            [name=toggle]:checked + ul {
+                display: flex;
+            }
         }
     }
 }
+
 
 html[dir=ltr] {
     .main-nav {
