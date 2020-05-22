@@ -24,27 +24,27 @@ namespace InsBrokers.Notifier.Filters
                     var application = applicationRepo.GetAsync(token).Result;
                     if (application != null)
                     {
-                        if (application.ValidIp.Split(',').Any(x => x == ip))
-                        {
+                        //if (application.ValidIp.Split(',').Any(x => x == ip))
+                        //{
                             if (filterContext.ActionArguments.ContainsKey("Application"))
                                 filterContext.ActionArguments["Application"] = application;
 
                             base.OnActionExecuting(filterContext);
-                        }
-                        else
-                        {
-                            FileLoger.Info($"Invalid Token To Access Api. Ip Not Valid !" + Environment.NewLine +
-                            $"IP:{ip}" + Environment.NewLine +
-                            $"Token:{filterContext.HttpContext.Request.Headers["Token"][0]}");
+                        //}
+                        //else
+                        //{
+                        //    FileLoger.Info($"Invalid Token To Access Api. Ip Not Valid !" + Environment.NewLine +
+                        //    $"IP:{ip}" + Environment.NewLine +
+                        //    $"Token:{filterContext.HttpContext.Request.Headers["Token"][0]}");
 
-                            filterContext.HttpContext.Response.StatusCode = 403;
-                            filterContext.Result = new JsonResult(new
-                            {
-                                IsSuccessful = false,
-                                Result = 403,
-                                Message = "UnAuthorized Access. Ip Not Valid."
-                            });
-                        }
+                        //    filterContext.HttpContext.Response.StatusCode = 403;
+                        //    filterContext.Result = new JsonResult(new
+                        //    {
+                        //        IsSuccessful = false,
+                        //        Result = 403,
+                        //        Message = "UnAuthorized Access. Ip Not Valid."
+                        //    });
+                        //}
                     }
                     else
                     {
