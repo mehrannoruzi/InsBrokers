@@ -9,7 +9,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="InsBrokers\Entity\Insurance\" />
     <Folder Include="InsBrokers\Repositories\Auth\" />
     <Folder Include="InsBrokers\Repositories\Insurance\" />
   </ItemGroup>

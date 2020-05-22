@@ -138,6 +138,15 @@
   <data name="BankName" xml:space="preserve">
     <value>نام بانک</value>
   </data>
+  <data name="BaseInsurance" xml:space="preserve">
+    <value>بیمه پایه</value>
+  </data>
+  <data name="BirthDay" xml:space="preserve">
+    <value>تاریخ تولد</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>شهر</value>
+  </data>
   <data name="Code" xml:space="preserve">
     <value>کد</value>
   </data>
@@ -146,6 +155,9 @@
   </data>
   <data name="ControllerName" xml:space="preserve">
     <value>نام کنترلر</value>
+  </data>
+  <data name="Cost" xml:space="preserve">
+    <value>مبلغ هزینه</value>
   </data>
   <data name="Count" xml:space="preserve">
     <value>تعداد</value>
@@ -167,6 +179,12 @@
   </data>
   <data name="Extention" xml:space="preserve">
     <value>پسوند</value>
+  </data>
+  <data name="Family" xml:space="preserve">
+    <value>نام خانوادگی</value>
+  </data>
+  <data name="FatherName" xml:space="preserve">
+    <value>نام پدر</value>
   </data>
   <data name="FileType" xml:space="preserve">
     <value>نوع فایل</value>
@@ -216,6 +234,12 @@
   <data name="Longitude" xml:space="preserve">
     <value>طول جغرافیایی</value>
   </data>
+  <data name="LossDateSh" xml:space="preserve">
+    <value>تاریخ هزینه</value>
+  </data>
+  <data name="LossType" xml:space="preserve">
+    <value>نوع هزینه</value>
+  </data>
   <data name="MobileNumber" xml:space="preserve">
     <value>موبایل</value>
   </data>
@@ -230,6 +254,9 @@
   </data>
   <data name="NameFa" xml:space="preserve">
     <value>نام فارسی</value>
+  </data>
+  <data name="NationalCode" xml:space="preserve">
+    <value>کد ملی</value>
   </data>
   <data name="NewPassword" xml:space="preserve">
     <value>گذرواژه جدید</value>
@@ -246,11 +273,23 @@
   <data name="Path" xml:space="preserve">
     <value>مسیر</value>
   </data>
+  <data name="PatientName" xml:space="preserve">
+    <value>نام بیمار</value>
+  </data>
   <data name="Percent" xml:space="preserve">
     <value>درصد</value>
   </data>
+  <data name="Province" xml:space="preserve">
+    <value>استان</value>
+  </data>
+  <data name="RelationType" xml:space="preserve">
+    <value>نسبت</value>
+  </data>
   <data name="Role" xml:space="preserve">
     <value>نقش</value>
+  </data>
+  <data name="Shaba" xml:space="preserve">
+    <value>شماره شبا</value>
   </data>
   <data name="ShowInMenu" xml:space="preserve">
     <value>نمایش در منو</value>

@@ -124,6 +124,33 @@ namespace InsBrokers.Domain.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to بیمه پایه.
+        /// </summary>
+        public static string BaseInsurance {
+            get {
+                return ResourceManager.GetString("BaseInsurance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to تاریخ تولد.
+        /// </summary>
+        public static string BirthDay {
+            get {
+                return ResourceManager.GetString("BirthDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شهر.
+        /// </summary>
+        public static string City {
+            get {
+                return ResourceManager.GetString("City", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to کد.
         /// </summary>
         public static string Code {
@@ -147,6 +174,15 @@ namespace InsBrokers.Domain.Resource {
         public static string ControllerName {
             get {
                 return ResourceManager.GetString("ControllerName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to مبلغ هزینه.
+        /// </summary>
+        public static string Cost {
+            get {
+                return ResourceManager.GetString("Cost", resourceCulture);
             }
         }
         
@@ -210,6 +246,24 @@ namespace InsBrokers.Domain.Resource {
         public static string Extention {
             get {
                 return ResourceManager.GetString("Extention", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to نام خانوادگی.
+        /// </summary>
+        public static string Family {
+            get {
+                return ResourceManager.GetString("Family", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to نام پدر.
+        /// </summary>
+        public static string FatherName {
+            get {
+                return ResourceManager.GetString("FatherName", resourceCulture);
             }
         }
         
@@ -358,6 +412,24 @@ namespace InsBrokers.Domain.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to تاریخ هزینه.
+        /// </summary>
+        public static string LossDateSh {
+            get {
+                return ResourceManager.GetString("LossDateSh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to نوع هزینه.
+        /// </summary>
+        public static string LossType {
+            get {
+                return ResourceManager.GetString("LossType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to موبایل.
         /// </summary>
         public static string MobileNumber {
@@ -399,6 +471,15 @@ namespace InsBrokers.Domain.Resource {
         public static string NameFa {
             get {
                 return ResourceManager.GetString("NameFa", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to کد ملی.
+        /// </summary>
+        public static string NationalCode {
+            get {
+                return ResourceManager.GetString("NationalCode", resourceCulture);
             }
         }
         
@@ -448,6 +529,15 @@ namespace InsBrokers.Domain.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to نام بیمار.
+        /// </summary>
+        public static string PatientName {
+            get {
+                return ResourceManager.GetString("PatientName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to درصد.
         /// </summary>
         public static string Percent {
@@ -457,11 +547,38 @@ namespace InsBrokers.Domain.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to استان.
+        /// </summary>
+        public static string Province {
+            get {
+                return ResourceManager.GetString("Province", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to نسبت.
+        /// </summary>
+        public static string RelationType {
+            get {
+                return ResourceManager.GetString("RelationType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to نقش.
         /// </summary>
         public static string Role {
             get {
                 return ResourceManager.GetString("Role", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شماره شبا.
+        /// </summary>
+        public static string Shaba {
+            get {
+                return ResourceManager.GetString("Shaba", resourceCulture);
             }
         }
         

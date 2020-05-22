@@ -20,19 +20,6 @@ namespace InsBrokers.Domain
         [Required(ErrorMessageResourceName = nameof(ErrorMessage.Required), ErrorMessageResourceType = typeof(ErrorMessage))]
         public Guid UserId { get; set; }
 
-        [Display(Name = nameof(Strings.AddressType), ResourceType = typeof(Strings))]
-        [Required(ErrorMessageResourceName = nameof(ErrorMessage.Required), ErrorMessageResourceType = typeof(ErrorMessage))]
-        public AddressType AddressType { get; set; }
-
-        [Display(Name = nameof(Strings.IsDefault), ResourceType = typeof(Strings))]
-        public bool IsDefault { get; set; }
-
-        [Display(Name = nameof(Strings.Latitude), ResourceType = typeof(Strings))]
-        public double Latitude { get; set; }
-
-        [Display(Name = nameof(Strings.Longitude), ResourceType = typeof(Strings))]
-        public double Longitude { get; set; }
-
         [Display(Name = nameof(Strings.InsertDate), ResourceType = typeof(Strings))]
         public DateTime InsertDateMi { get; set; }
 
@@ -40,6 +27,18 @@ namespace InsBrokers.Domain
         [Display(Name = nameof(Strings.InsertDate), ResourceType = typeof(Strings))]
         [MaxLength(10, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
         public string InsertDateSh { get; set; }
+
+        [Display(Name = nameof(Strings.Province), ResourceType = typeof(Strings))]
+        [Required(ErrorMessageResourceName = nameof(ErrorMessage.Required), ErrorMessageResourceType = typeof(ErrorMessage))]
+        [MaxLength(250, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
+        [StringLength(250, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
+        public string Province { get; set; }
+
+        [Display(Name = nameof(Strings.City), ResourceType = typeof(Strings))]
+        [Required(ErrorMessageResourceName = nameof(ErrorMessage.Required), ErrorMessageResourceType = typeof(ErrorMessage))]
+        [MaxLength(250, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
+        [StringLength(250, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
+        public string City { get; set; }
 
         [Display(Name = nameof(Strings.Address), ResourceType = typeof(Strings))]
         [Required(ErrorMessageResourceName = nameof(ErrorMessage.Required), ErrorMessageResourceType = typeof(ErrorMessage))]
