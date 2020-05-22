@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01-InsBrokers", "01-InsBrok
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02-Notifier", "02-Notifier", "{318A3195-D73B-4F60-B8E7-36BAC08146B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsBrokers.InfraStructure", "InsBrokers.InfraStructure\InsBrokers.InfraStructure.csproj", "{A847ECAD-8A5A-4F6B-AC99-C647EAE10D8A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InsBrokers.InfraStructure", "InsBrokers.InfraStructure\InsBrokers.InfraStructure.csproj", "{A847ECAD-8A5A-4F6B-AC99-C647EAE10D8A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01-Domain", "01-Domain", "{E851BA8D-812B-4F3B-A8E8-03D793E08EA9}"
 EndProject
@@ -21,17 +21,35 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04-DependencyResolver", "04
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "05-EndPoints", "05-EndPoints", "{433EE5D7-78F4-4E07-AE4B-13916316552D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsBrokers.Domain", "InsBrokers.Domain\InsBrokers.Domain.csproj", "{4A8C17C7-D790-42CC-8378-A9361E68E3A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InsBrokers.Domain", "InsBrokers.Domain\InsBrokers.Domain.csproj", "{4A8C17C7-D790-42CC-8378-A9361E68E3A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsBrokers.DataAccess.Dapper", "InsBrokers.DataAccess.Dapper\InsBrokers.DataAccess.Dapper.csproj", "{AED86531-213A-4464-86CF-AA719B16E107}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InsBrokers.DataAccess.Dapper", "InsBrokers.DataAccess.Dapper\InsBrokers.DataAccess.Dapper.csproj", "{AED86531-213A-4464-86CF-AA719B16E107}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsBrokers.DataAccess.Ef", "InsBrokers.DataAccess.Ef\InsBrokers.DataAccess.Ef.csproj", "{87078E98-2B91-436E-B8CF-08623ED8D7D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InsBrokers.DataAccess.Ef", "InsBrokers.DataAccess.Ef\InsBrokers.DataAccess.Ef.csproj", "{87078E98-2B91-436E-B8CF-08623ED8D7D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsBrokers.Service", "InsBrokers.Service\InsBrokers.Service.csproj", "{22C19793-8C75-479B-9D84-5ED03DAFC532}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InsBrokers.Service", "InsBrokers.Service\InsBrokers.Service.csproj", "{22C19793-8C75-479B-9D84-5ED03DAFC532}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsBrokers.DependencyResolver", "InsBrokers.DependencyResolver\InsBrokers.DependencyResolver.csproj", "{552D15DB-4605-42B7-8A15-34866B3C6147}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InsBrokers.DependencyResolver", "InsBrokers.DependencyResolver\InsBrokers.DependencyResolver.csproj", "{552D15DB-4605-42B7-8A15-34866B3C6147}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsBrokers.Portal", "InsBrokers.Portal\InsBrokers.Portal.csproj", "{BF62E32F-CA1F-4136-BCD4-91985C349F69}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InsBrokers.Portal", "InsBrokers.Portal\InsBrokers.Portal.csproj", "{BF62E32F-CA1F-4136-BCD4-91985C349F69}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02-DataAccess", "02-DataAccess", "{E5717336-EA3A-4A53-8BA2-9740EF8FF4BC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03-Service", "03-Service", "{33B2F02E-BE2D-4555-99D8-304E6EED5B1C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04-DependencyResolver", "04-DependencyResolver", "{CB1EC9F9-26D8-4B5E-83F8-DF66FD2B9E43}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "05-EndPoints", "05-EndPoints", "{984D2DB2-CF2C-4501-9DE7-8EF581158E8A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsBrokers.Notifier.DataAccess.Dapper", "InsBrokers.Notifier.DataAccess.Dapper\InsBrokers.Notifier.DataAccess.Dapper.csproj", "{8B1B1E32-E9A8-47B6-A4B1-922A6D62F189}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsBrokers.Notifier.DataAccess.Ef", "InsBrokers.Notifier.DataAccess.Ef\InsBrokers.Notifier.DataAccess.Ef.csproj", "{0491FD04-9D36-4B0F-9E7F-30B6E3156428}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsBrokers.Notifier.Service", "InsBrokers.Notifier.Service\InsBrokers.Notifier.Service.csproj", "{2940DEA3-99E7-4F81-BD97-F7459FA56FC5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsBrokers.Notifier.DependencyResolver", "InsBrokers.Notifier.DependencyResolver\InsBrokers.Notifier.DependencyResolver.csproj", "{93388D94-1D7F-41E6-B098-C02A5EAC2A55}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsBrokers.Notifier", "InsBrokers.Notifier\InsBrokers.Notifier.csproj", "{C414AD0F-DD30-47EE-AD12-886204FADF7D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -67,6 +85,26 @@ Global
 		{BF62E32F-CA1F-4136-BCD4-91985C349F69}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF62E32F-CA1F-4136-BCD4-91985C349F69}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF62E32F-CA1F-4136-BCD4-91985C349F69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B1B1E32-E9A8-47B6-A4B1-922A6D62F189}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B1B1E32-E9A8-47B6-A4B1-922A6D62F189}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B1B1E32-E9A8-47B6-A4B1-922A6D62F189}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B1B1E32-E9A8-47B6-A4B1-922A6D62F189}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0491FD04-9D36-4B0F-9E7F-30B6E3156428}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0491FD04-9D36-4B0F-9E7F-30B6E3156428}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0491FD04-9D36-4B0F-9E7F-30B6E3156428}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0491FD04-9D36-4B0F-9E7F-30B6E3156428}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2940DEA3-99E7-4F81-BD97-F7459FA56FC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2940DEA3-99E7-4F81-BD97-F7459FA56FC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2940DEA3-99E7-4F81-BD97-F7459FA56FC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2940DEA3-99E7-4F81-BD97-F7459FA56FC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93388D94-1D7F-41E6-B098-C02A5EAC2A55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93388D94-1D7F-41E6-B098-C02A5EAC2A55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93388D94-1D7F-41E6-B098-C02A5EAC2A55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93388D94-1D7F-41E6-B098-C02A5EAC2A55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C414AD0F-DD30-47EE-AD12-886204FADF7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C414AD0F-DD30-47EE-AD12-886204FADF7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C414AD0F-DD30-47EE-AD12-886204FADF7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C414AD0F-DD30-47EE-AD12-886204FADF7D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -84,6 +122,15 @@ Global
 		{22C19793-8C75-479B-9D84-5ED03DAFC532} = {7DC869E8-5761-4844-BA3F-4A457E36F8AF}
 		{552D15DB-4605-42B7-8A15-34866B3C6147} = {2FEB02D9-94BC-48BF-B936-C871EC3E033B}
 		{BF62E32F-CA1F-4136-BCD4-91985C349F69} = {433EE5D7-78F4-4E07-AE4B-13916316552D}
+		{E5717336-EA3A-4A53-8BA2-9740EF8FF4BC} = {318A3195-D73B-4F60-B8E7-36BAC08146B3}
+		{33B2F02E-BE2D-4555-99D8-304E6EED5B1C} = {318A3195-D73B-4F60-B8E7-36BAC08146B3}
+		{CB1EC9F9-26D8-4B5E-83F8-DF66FD2B9E43} = {318A3195-D73B-4F60-B8E7-36BAC08146B3}
+		{984D2DB2-CF2C-4501-9DE7-8EF581158E8A} = {318A3195-D73B-4F60-B8E7-36BAC08146B3}
+		{8B1B1E32-E9A8-47B6-A4B1-922A6D62F189} = {E5717336-EA3A-4A53-8BA2-9740EF8FF4BC}
+		{0491FD04-9D36-4B0F-9E7F-30B6E3156428} = {E5717336-EA3A-4A53-8BA2-9740EF8FF4BC}
+		{2940DEA3-99E7-4F81-BD97-F7459FA56FC5} = {33B2F02E-BE2D-4555-99D8-304E6EED5B1C}
+		{93388D94-1D7F-41E6-B098-C02A5EAC2A55} = {CB1EC9F9-26D8-4B5E-83F8-DF66FD2B9E43}
+		{C414AD0F-DD30-47EE-AD12-886204FADF7D} = {984D2DB2-CF2C-4501-9DE7-8EF581158E8A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5EDACB32-C76D-4D3D-AF98-060A85592730}
