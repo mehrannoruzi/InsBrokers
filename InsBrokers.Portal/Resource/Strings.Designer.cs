@@ -585,6 +585,15 @@ namespace InsBrokers.Portal.Resource {
         /// <summary>
         ///   Looks up a localized string similar to ثبت نام.
         /// </summary>
+        public static string SignUp {
+            get {
+                return ResourceManager.GetString("SignUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ثبت نام.
+        /// </summary>
         public static string String53 {
             get {
                 return ResourceManager.GetString("String53", resourceCulture);

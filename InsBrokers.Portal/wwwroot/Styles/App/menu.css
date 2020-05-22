@@ -1,16 +1,19 @@
 ﻿header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 999; }
+  /*position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;*/
+  background-color: #34495e; }
   header .main-nav .menu-icon {
     padding-left: 7.5px;
     display: none;
-    padding: 15px 0; }
+    padding: 15px 0;
+    margin-bottom: 0; }
     header .main-nav .menu-icon i {
       font-size: 20px;
-      vertical-align: middle; }
+      vertical-align: middle;
+      color: #fff; }
   header .main-nav ul {
     padding: 15px 0; }
     header .main-nav ul li {
@@ -38,7 +41,8 @@
         display: none; } }
   header .main-nav .sub-menu {
     display: none;
-    background-color: #fff;
+    background-color: #34495e;
+    min-width: 100px;
     box-shadow: 0 4px 7px 0 rgba(0, 0, 0, 0.75) !important;
     position: absolute;
     z-index: 999; }
@@ -57,7 +61,7 @@
       bottom: 0;
       width: 70%;
       flex-direction: column;
-      background-color: #fff;
+      background-color: #34495e;
       box-shadow: 0 0 2px rgba(0, 0, 0, 0.75);
       right: 0; }
       header .main-nav ul li {

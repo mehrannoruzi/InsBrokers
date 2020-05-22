@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = $"{Strings.SignUp} | {Strings.SignIn}";
+}
+@section styles{ 
+    <link href="~/Styles/App/Home/auth.min.css" rel="stylesheet" />
+}
+<div class="container home-register-page">
+    <div class="row">
+        <div class="col-12 tabs mb-5">
+            <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="pills-sign-up-tab" data-toggle="pill" href="#pills-sign-up" role="tab" aria-controls="pills-sign-up" aria-selected="true">@Strings.SignUp</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="pills-sign-in-tab" data-toggle="pill" href="#pills-sign-in" role="tab" aria-controls="pills-sign-in" aria-selected="false">@Strings.SignIn</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-12">
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-sign-up" role="tabpanel" aria-labelledby="pills-home-tab">
+                    <partial name="./Partials/_SignUp" model="new PortalSignUpModel()" />
+                </div>
+                <div class="tab-pane fade" id="pills-sign-in" role="tabpanel" aria-labelledby="pills-profile-tab">
+                    2222
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+

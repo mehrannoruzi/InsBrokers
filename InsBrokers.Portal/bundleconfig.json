@@ -2,6 +2,7 @@
   {
     "outputFileName": "wwwroot/Styles/App/app.css",
     "inputFiles": [
+      "wwwroot/Styles/App/menu.css",
       "wwwroot/Styles/App/template.css",
       "wwwroot/Styles/App/common.css",
       "wwwroot/Styles/App/fa.css"

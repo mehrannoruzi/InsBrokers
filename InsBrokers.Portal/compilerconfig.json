@@ -22,5 +22,9 @@
   {
     "outputFile": "wwwroot/Styles/App/Home/index.css",
     "inputFile": "wwwroot/Styles/App/Home/index.scss"
+  },
+  {
+    "outputFile": "wwwroot/Styles/App/Home/register.css",
+    "inputFile": "wwwroot/Styles/App/Home/register.scss"
   }
 ]

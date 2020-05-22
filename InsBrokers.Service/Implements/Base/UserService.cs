@@ -49,7 +49,7 @@ namespace InsBrokers.Service
             if (findedUser == null) return new Response<User> { Message = ServiceMessage.RecordNotExist.Fill(DomainStrings.User) };
 
             findedUser.Password = HashGenerator.Hash(model.Password);
-            findedUser.FullName = model.FullName;
+            findedUser.Name = model.Name;
 
             var saveResult = _appUow.ElkSaveChangesAsync();
             return new Response<User> { Result = findedUser, IsSuccessful = saveResult.Result.IsSuccessful, Message = saveResult.Result.Message };
@@ -63,7 +63,8 @@ namespace InsBrokers.Service
             if (model.MustChangePassword)
                 findedUser.Password = HashGenerator.Hash(model.Password);
 
-            findedUser.FullName = model.FullName;
+            findedUser.Name = model.Name;
+            findedUser.NationalCode = model.NationalCode;
             findedUser.IsActive = model.IsActive;
 
             var saveResult = _appUow.ElkSaveChangesAsync();
@@ -239,7 +240,7 @@ namespace InsBrokers.Service
             if (filter != null)
             {
                 if (!string.IsNullOrWhiteSpace(filter.FullNameF))
-                    conditions = conditions.And(x => x.FullName.Contains(filter.FullNameF));
+                    conditions = conditions.And(x => x.Name.Contains(filter.FullNameF));
                 if (!string.IsNullOrWhiteSpace(filter.EmailF))
                     conditions = x => x.Email.Contains(filter.EmailF);
                 if (!string.IsNullOrWhiteSpace(filter.MobileNumberF))
@@ -251,17 +252,19 @@ namespace InsBrokers.Service
         }
 
         public IDictionary<object, object> Search(string searchParameter, int take = 10)
-            => _appUow.UserRepo.Get(conditions: x => x.FullName.Contains(searchParameter))
+            => _appUow.UserRepo.Get(conditions: x => x.Name.Contains(searchParameter))
+                .Union(_appUow.UserRepo.Get(conditions: x => x.Family.Contains(searchParameter)))
                 .Union(_appUow.UserRepo.Get(conditions: x => x.Email.Contains(searchParameter)))
                 .Select(x => new
                 {
                     x.UserId,
                     x.Email,
-                    x.FullName
+                    x.Name,
+                    x.Family
                 })
-                .OrderBy(x => x.FullName)
+                .OrderBy(x => x.Name)
                 .Take(take)
-                .ToDictionary(k => (object)k.UserId, v => (object)$"{v.FullName}({v.Email})");
+                .ToDictionary(k => (object)k.UserId, v => (object)$"{v.Name} {v.Family}({v.Email})");
 
         public async Task<IResponse<string>> RecoverPassword(long mobileNumber, string from, EmailMessage model)
         {
