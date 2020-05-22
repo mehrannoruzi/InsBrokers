@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace InsBrokers.Domain
 {
     [Table(nameof(Loss), Schema = "Insurance")]
-    public class Loss : IInsertDateProperties, IEntity
+    public class Loss : IInsertDateProperties, IModifyDateProperties, IEntity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -34,6 +34,9 @@ namespace InsBrokers.Domain
         [Display(Name = nameof(Strings.InsertDate), ResourceType = typeof(Strings))]
         public DateTime InsertDateMi { get; set; }
 
+        [Display(Name = nameof(Strings.ModifyDate), ResourceType = typeof(Strings))]
+        public DateTime ModifyDateMi { get; set; }
+
         [Column(TypeName = "char(10)")]
         [Display(Name = nameof(Strings.LossDateSh), ResourceType = typeof(Strings))]
         [MaxLength(10, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
@@ -43,6 +46,11 @@ namespace InsBrokers.Domain
         [Display(Name = nameof(Strings.InsertDate), ResourceType = typeof(Strings))]
         [MaxLength(10, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
         public string InsertDateSh { get; set; }
+
+        [Column(TypeName = "char(10)")]
+        [Display(Name = nameof(Strings.ModifyDate), ResourceType = typeof(Strings))]
+        [MaxLength(10, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
+        public string ModifyDateSh { get; set; }
 
         [Display(Name = nameof(Strings.RelationType), ResourceType = typeof(Strings))]
         [Required(ErrorMessageResourceName = nameof(ErrorMessage.Required), ErrorMessageResourceType = typeof(ErrorMessage))]

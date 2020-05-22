@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace InsBrokers.Domain
 {
     [Table(nameof(BankAccount), Schema = "Base")]
-    public class BankAccount : IInsertDateProperties, IModifyDateProperties, ISoftDeleteProperty, IEntity
+    public class BankAccount : IInsertDateProperties, IModifyDateProperties, IEntity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
