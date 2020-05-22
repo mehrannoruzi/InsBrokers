@@ -1,15 +1,23 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+﻿using Elk.Core;
+using InsBrokers.Domain;
+using InsBrokers.Portal.Resource;
+using InsBrokers.Service;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using System.Threading.Tasks;
 
 namespace InsBrokers.Portal.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseAuthController
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IUserService _userSrv;
+        private IConfiguration _configuration;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IUserService userSrv, IConfiguration configuration, IHttpContextAccessor httpAccessor) : base(httpAccessor)
         {
-            _logger = logger;
+            _userSrv = userSrv;
+            _configuration = configuration;
         }
 
         public IActionResult Index()
@@ -17,9 +25,22 @@ namespace InsBrokers.Portal.Controllers
             return View();
         }
 
-        public IActionResult Auth()
+        public IActionResult Auth() => View();
+
+        [HttpPost]
+        public async Task<IActionResult> SignUp([FromBody]PortalSignUpModel model)
         {
-            return View();
+            return Json(new Response<string> { Message = Strings.ValidationFailed });
+            if (!ModelState.IsValid) return Json(new Response<string> { Message = Strings.ValidationFailed });
+            model.MemberRoleId = int.Parse(_configuration["CustomSettings:MemberRoleId"]);
+            var save = await _userSrv.SignUp(model);
+            if (!save.IsSuccessful) return Json(save);
+            var menuRep = _userSrv.GetAvailableActions(save.Result.UserId, null, _configuration["CustomSettings:UrlPrefix"]);
+            if (menuRep == null) return Json(new Response<string> { IsSuccessful = false, Message = Strings.ThereIsNoViewForUser });
+
+            await CreateCookie(save.Result, true);
+
+            return Json(save);
         }
     }
 }

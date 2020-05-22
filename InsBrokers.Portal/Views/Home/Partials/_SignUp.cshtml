@@ -4,7 +4,7 @@
 }
 @using Elk.Core
 
-    <form id="frm-register">
+    <form id="frm-register" action="@Url.Action("SignUp","Home")">
         <div class="row">
             <div class="col-12 col-sm-6 col-md-4">
                 <custom-input-for for="Name" class="form-control" />
@@ -17,14 +17,33 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-12 col-sm-6 col-md-4">
+            <div class="col-12 col-sm-6">
                 <custom-input-for for="NationalCode" class="form-control ltr-elm" />
             </div>
-            <div class="col-12 col-sm-6 col-md-4">
+            <div class="col-12 col-sm-6">
+                <custom-input-for for="MobileNumber" class="form-control ltr-elm" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
                 <custom-input-for for="Email" class="form-control ltr-elm" />
             </div>
+            <div class="col-12 col-sm-6">
+                <custom-input-for for="Password" class="form-control ltr-elm" type="password" />
+            </div>
+        </div>
+        <div class="row">
             <div class="col-12 col-sm-6 col-md-4">
-                <custom-input-for for="Password" class="form-control ltr-elm" />
+                <custom-select-for for="BankName" class="form-control" items="EnumExtension.GetEnumElements<BankName>().Select(x=>new SelectListItem {
+                Text = x.Description,
+                Value = x.Name
+            }).ToList()" />
+            </div>
+            <div class="col-12 col-sm-6 col-md-4">
+                <custom-input-for for="AccountNumber" class="form-control ltr-elm" />
+            </div>
+            <div class="col-12 col-sm-6 col-md-4">
+                <custom-input-for for="Shaba" class="form-control ltr-elm" />
             </div>
         </div>
         <div class="row">
@@ -35,20 +54,20 @@
             }).ToList()" />
             </div>
             <div class="col-12 col-sm-6 col-md-4">
-                <custom-input-for for="Province" class="form-control ltr-elm" />
+                <custom-input-for for="Province" class="form-control" />
             </div>
             <div class="col-12 col-sm-6 col-md-4">
-                <custom-input-for for="City" class="form-control ltr-elm" />
+                <custom-input-for for="City" class="form-control" />
             </div>
         </div>
         <div class="row">
             <div class="col-12">
-                <custom-textarea-for for="AddressDetails" class="form-control ltr-elm" />
+                <custom-textarea-for for="AddressDetails" class="form-control" />
             </div>
         </div>
         <div class="row">
             <div class="col-12 d-flex justify-content-end">
-                <custom-button class="btn btn-primary" type="button" text="@Strings.Submit" icon="zmdi zmdi-floppy"></custom-button>
+                <custom-button id="btn-sign-up" class="btn btn-primary" type="button" text="@Strings.Submit" icon="zmdi zmdi-floppy"></custom-button>
             </div>
         </div>
     </form>

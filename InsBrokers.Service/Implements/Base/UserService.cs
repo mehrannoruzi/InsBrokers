@@ -16,18 +16,22 @@ namespace InsBrokers.Service
 {
     public class UserService : IUserService, IUserActionProvider
     {
+        private readonly AuthUnitOfWork _authUow;
         private readonly AppUnitOfWork _appUow;
         private readonly IEmailService _emailService;
+        private readonly IGenericRepo<UserInRole> _userInRoleRepo;
         private readonly IMemoryCacheProvider _cache;
         private readonly DapperUserRepo _dapperUserRepo;
 
-        public UserService(AppUnitOfWork uow, IMemoryCacheProvider cache,
+        public UserService(AppUnitOfWork appUow, AuthUnitOfWork authUow, IGenericRepo<UserInRole> userInRoleRepo, IMemoryCacheProvider cache,
             IEmailService emailService, DapperUserRepo dapperUserRepo)
         {
-            _appUow = uow;
+            _appUow = appUow;
             _cache = cache;
             _emailService = emailService;
             _dapperUserRepo = dapperUserRepo;
+            _authUow = authUow;
+            _userInRoleRepo = userInRoleRepo;
         }
 
 
@@ -282,6 +286,60 @@ namespace InsBrokers.Service
             model.Body = model.Body.Fill(newPassword);
             _emailService.Send(user.Email, new List<string> { from }, model);
             return new Response<string> { IsSuccessful = true, Message = saveResult.Message };
+        }
+
+        public async Task<IResponse<User>> SignUp(PortalSignUpModel model)
+        {
+            var user = await _appUow.UserRepo.FirstOrDefaultAsync(conditions: x => x.Email == model.Email);
+            if (user != null) return new Response<User> { Message = ServiceMessage.RecordNotExist };
+            user = new User
+            {
+                Name = model.Name,
+                Family = model.Family,
+                FatherName = model.FatherName,
+                Email = model.Email,
+                MobileNumber = long.Parse(model.MobileNumber),
+                BaseInsurance = model.BaseInsurance,
+                Password = HashGenerator.Hash(model.Password),
+                IsActive = true,
+                NationalCode = model.NationalCode,
+                BankAccounts = new List<BankAccount>{
+                    new BankAccount
+                    {
+                        BankName = model.BankName,
+                        AccountNumber = model.AccountNumber,
+                        Shaba = model.Shaba
+                    }
+                },
+                Addresses = new List<Address> {
+                    new Address {
+                        Province = model.Province,
+                        City = model.City,
+                        AddressDetails = model.AddressDetails
+                    }
+                }
+            };
+            using var bt = _appUow.Database.BeginTransaction();
+            await _appUow.UserRepo.AddAsync(user);
+            var save = await _appUow.ElkSaveChangesAsync();
+            if (!save.IsSuccessful) return new Response<User> {Message = save.Message };
+            await _userInRoleRepo.AddAsync(new UserInRole {
+                RoleId = model.MemberRoleId,
+                UserId = user.UserId
+            });
+            var addUserInRole = await _authUow.ElkSaveChangesAsync();
+            if(!addUserInRole.IsSuccessful)
+            {
+                bt.Rollback();
+                return new Response<User> { Message = addUserInRole.Message };
+            }
+            bt.Commit();
+            return new Response<User>
+            {
+                IsSuccessful = save.IsSuccessful,
+                Result = user,
+                Message = save.Message
+            };
         }
     }
 }

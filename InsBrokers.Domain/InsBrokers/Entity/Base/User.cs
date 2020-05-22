@@ -98,8 +98,11 @@ namespace InsBrokers.Domain
         [StringLength(50, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
         public string Email { get; set; }
 
+        [NotMapped]
+        public string Fullname => $"{Name} {Family}";
 
         public List<Address> Addresses { get; set; }
+        public List<BankAccount> BankAccounts { get; set; }
         public List<UserAttachment> UserAttachments { get; set; }
     }
 }

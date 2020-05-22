@@ -14,7 +14,7 @@ $(document).ready(function () {
         if ($(this).val().length === 0) $lbl.removeClass('lbl-top');
     });;
 
-    fireGlobalPlugins();
+    if (typeof fireGlobalPlugins === 'function') fireGlobalPlugins();
 
 
     //change default validation messages 
@@ -268,7 +268,7 @@ var postObjectList = function ({ url, model, success, error }) {
     $.ajax({
         url: url,
         data: model,
-        method: 'post',
+        type: 'post',
         contentType: 'application/json; charset=utf-8;',
         success: function (rep) { if (success) success(rep); },
         error: function (e) { if (error) error(e); }

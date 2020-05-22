@@ -4,6 +4,6 @@ namespace InsBrokers.DataAccess.Ef
 {
     public class AuthGenericRepo<T> : EfGenericRepo<T> where T : class
     {
-        public AuthGenericRepo(AppDbContext appDbContext) : base(appDbContext) { }
+        public AuthGenericRepo(AuthDbContext authDbContext) : base(authDbContext) { }
     }
 }

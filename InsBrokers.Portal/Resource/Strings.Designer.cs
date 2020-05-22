@@ -385,6 +385,15 @@ namespace InsBrokers.Portal.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to حداقل کاراکتر مجاز 5  و حداکثر {1} می باشد..
+        /// </summary>
+        public static string Min5MaxLength {
+            get {
+                return ResourceManager.GetString("Min5MaxLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to لطفا کمتر از {1} کاراکتر وارد ننمایید.
         /// </summary>
         public static string MinLength {
@@ -624,6 +633,15 @@ namespace InsBrokers.Portal.Resource {
         public static string ThereIsNoRecord {
             get {
                 return ResourceManager.GetString("ThereIsNoRecord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شما به هیچ صفحه ای دسترسی ندارید.
+        /// </summary>
+        public static string ThereIsNoViewForUser {
+            get {
+                return ResourceManager.GetString("ThereIsNoViewForUser", resourceCulture);
             }
         }
         

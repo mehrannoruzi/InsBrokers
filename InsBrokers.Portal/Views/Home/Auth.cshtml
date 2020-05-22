@@ -1,10 +1,10 @@
 ﻿@{
     ViewBag.Title = $"{Strings.SignUp} | {Strings.SignIn}";
 }
-@section styles{ 
+@section styles{
     <link href="~/Styles/App/Home/auth.min.css" rel="stylesheet" />
 }
-<div class="container home-register-page">
+<div class="container" id="home-auth-page">
     <div class="row">
         <div class="col-12 tabs mb-5">
             <ul class="nav nav-pills" id="pills-tab" role="tablist">
@@ -29,4 +29,6 @@
         </div>
     </div>
 </div>
-
+@section scripts{
+    <script src="~/Scripts/App/Home/auth.js"></script>
+}

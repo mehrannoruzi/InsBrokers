@@ -1,17 +1,17 @@
-﻿.home-register-page {
+﻿#home-auth-page {
   padding-top: 50px; }
-  .home-register-page .tabs {
+  #home-auth-page .tabs {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: row; }
-    .home-register-page .tabs .nav {
+    #home-auth-page .tabs .nav {
       margin-bottom: 0;
       margin: 0 10px; }
-    .home-register-page .tabs:after, .home-register-page .tabs:before {
+    #home-auth-page .tabs:after, #home-auth-page .tabs:before {
       content: '';
       height: 1px;
       background-color: #ccc;
       flex: 1; }
-  .home-register-page .tab-content {
+  #home-auth-page .tab-content {
     width: 100%; }

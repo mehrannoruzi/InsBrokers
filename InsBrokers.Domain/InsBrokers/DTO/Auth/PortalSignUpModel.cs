@@ -37,7 +37,7 @@ namespace InsBrokers.Domain
 
         [Display(Name = nameof(Strings.MobileNumber), ResourceType = typeof(Strings))]
         [Required(ErrorMessageResourceName = nameof(ErrorMessage.Required), ErrorMessageResourceType = typeof(ErrorMessage))]
-        [RegularExpression(@"$0?9\d(9)")]
+        [RegularExpression(@"^0?9\d{9}$", ErrorMessageResourceName = nameof(ErrorMessage.InvalidMobileNumber), ErrorMessageResourceType = typeof(ErrorMessage))]
         public string MobileNumber { get; set; }
 
         [Display(Name = nameof(Strings.Email), ResourceType = typeof(Strings))]
@@ -70,6 +70,24 @@ namespace InsBrokers.Domain
         [MaxLength(250, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
         [StringLength(250, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
         public string AddressDetails { get; set; }
+
+        [Display(Name = nameof(Strings.BankName), ResourceType = typeof(Strings))]
+        [Required(ErrorMessageResourceName = nameof(ErrorMessage.Required), ErrorMessageResourceType = typeof(ErrorMessage))]
+        public BankName BankName { get; set; }
+
+        [Display(Name = nameof(Strings.AccountNumber), ResourceType = typeof(Strings))]
+        [MaxLength(20, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
+        [StringLength(20, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
+        [Required(ErrorMessageResourceName = nameof(ErrorMessage.Required), ErrorMessageResourceType = typeof(ErrorMessage))]
+        public string AccountNumber { get; set; }
+
+        [Required(ErrorMessageResourceName = nameof(ErrorMessage.Required), ErrorMessageResourceType = typeof(ErrorMessage))]
+        [Display(Name = nameof(Strings.Shaba), ResourceType = typeof(Strings))]
+        [MaxLength(24, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
+        [StringLength(24, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
+        public string Shaba { get; set; }
+
+        public int MemberRoleId { get; set; }
 
     }
 }

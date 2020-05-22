@@ -704,7 +704,7 @@ html, body {
 ------------------------------------*/
 @font-face {
   font-family: "iransans";
-  src: url(../../Fonts/iransans.eot) format("embedded-opentype"), url(../../Fonts/iransans.ttf) format("truetype");
+  src: url(/Fonts/iransans.eot) format("embedded-opentype"), url(/Fonts/iransans.ttf) format("truetype");
   font-weight: normal;
   font-style: normal; }
 

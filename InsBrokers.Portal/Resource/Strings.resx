@@ -225,6 +225,9 @@
   <data name="MaxValueExceeded" xml:space="preserve">
     <value>لطفا مقداری کمتر یا مساوی با {0} وارد نمایید</value>
   </data>
+  <data name="Min5MaxLength" xml:space="preserve">
+    <value>حداقل کاراکتر مجاز 5  و حداکثر {1} می باشد.</value>
+  </data>
   <data name="MinLength" xml:space="preserve">
     <value>لطفا کمتر از {1} کاراکتر وارد ننمایید</value>
   </data>
@@ -305,6 +308,9 @@
   </data>
   <data name="ThereIsNoRecord" xml:space="preserve">
     <value>هیچ {0}ی پبدا نشد</value>
+  </data>
+  <data name="ThereIsNoViewForUser" xml:space="preserve">
+    <value>شما به هیچ صفحه ای دسترسی ندارید</value>
   </data>
   <data name="UnAuthorizedPageMessage" xml:space="preserve">
     <value>امکان دسترسی به بخش مورد نظر وجود ندارد</value>

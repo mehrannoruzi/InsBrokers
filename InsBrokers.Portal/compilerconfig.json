@@ -26,5 +26,9 @@
   {
     "outputFile": "wwwroot/Styles/App/Home/register.css",
     "inputFile": "wwwroot/Styles/App/Home/register.scss"
+  },
+  {
+    "outputFile": "wwwroot/Styles/App/Home/auth.css",
+    "inputFile": "wwwroot/Styles/App/Home/auth.scss"
   }
 ]

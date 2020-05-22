@@ -20,5 +20,6 @@ namespace InsBrokers.Service
         PagingListDetails<User> Get(UserSearchFilter filter);
         IDictionary<object, object> Search(string query, int take = 10);
         Task<IResponse<string>> RecoverPassword(long mobileNumber, string from, EmailMessage model);
+        Task<IResponse<User>> SignUp(PortalSignUpModel model);
     }
 }

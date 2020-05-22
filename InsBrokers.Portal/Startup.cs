@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Text.Json.Serialization;
 
 namespace InsBrokers.Portal
 {
@@ -31,7 +32,12 @@ namespace InsBrokers.Portal
             //})
             //.AddXmlSerializerFormatters()
             //.AddJsonOptions(opts => opts.JsonSerializerOptions.PropertyNamingPolicy = null);
-            services.AddControllersWithViews().AddJsonOptions(opts => opts.JsonSerializerOptions.PropertyNamingPolicy = null);
+            services.AddControllersWithViews()
+    .AddJsonOptions(opts =>
+    {
+        opts.JsonSerializerOptions.PropertyNamingPolicy = null;
+        opts.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    });
             services.AddMemoryCache();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(option =>
