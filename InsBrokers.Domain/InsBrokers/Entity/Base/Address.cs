@@ -16,6 +16,7 @@ namespace InsBrokers.Domain
         [ForeignKey(nameof(UserId))]
         [Display(Name = nameof(Strings.User), ResourceType = typeof(Strings))]
         public User User { get; set; }
+
         [Display(Name = nameof(Strings.User), ResourceType = typeof(Strings))]
         [Required(ErrorMessageResourceName = nameof(ErrorMessage.Required), ErrorMessageResourceType = typeof(ErrorMessage))]
         public Guid UserId { get; set; }

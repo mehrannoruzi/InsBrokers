@@ -16,5 +16,10 @@ namespace InsBrokers.Portal.Controllers
         {
             return View();
         }
+
+        public IActionResult Auth()
+        {
+            return View();
+        }
     }
 }

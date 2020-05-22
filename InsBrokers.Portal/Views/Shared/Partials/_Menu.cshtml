@@ -6,14 +6,15 @@
             <ul class="animated">
                 <li class="logo"><img src="/Images/kingofday-black.png" /></li>
                 <li class="close-menu"><label for="toggle"><i class="zmdi zmdi-close"></i></label></li>
-                <li class="navlink"><a>خانه</a></li>
-                <li class="navlink">
+                <li class="navlink"><a href="@Url.Action("Index","Home",new { })">خانه</a></li>
+                @*<li class="navlink">
                     <a>دسته ها</a>
                     <ul class="sub-menu animated slideDown">
                         <li class="navlink"><a>آیتم 1</a></li>
                         <li class="navlink"><a>آیتم 2</a></li>
                     </ul>
-                </li>
+                </li>*@
+                <li class="navlink"><a href="@Url.Action("Auth","Home",new { })">ثبت نام | ورود</a></li>
                 <li class="navlink"><a>درباره ما</a></li>
                 <li class="navlink"><a>تماس با ما</a></li>
             </ul>

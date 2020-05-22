@@ -23,8 +23,6 @@ namespace InsBrokers.Service
             var addresses = _addressRepo.Get(selector: a => new AddressDTO
             {
                 Id = a.AddressId,
-                Lat = a.Latitude,
-                Lng = a.Longitude,
                 Address = a.AddressDetails
             },
             conditions: x => x.UserId == userId,

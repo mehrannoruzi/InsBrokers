@@ -2,14 +2,16 @@
 $navLinkHoverColor: red;
 $navLinkActiveBorderColor: blue;
 $menuPadding: 7.5px;
-$subMenuBgColor: #fff;
+$subMenuBgColor: #34495e;
+$headerBgColor: #34495e;
 
 header {
-    position: fixed;
+    /*position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    z-index: 999;
+    z-index: 999;*/
+    background-color: $headerBgColor;
 
     .main-nav {
 
@@ -17,10 +19,12 @@ header {
             padding-left: $menuPadding;
             display: none;
             padding: 15px 0;
+            margin-bottom: 0;
 
             i {
                 font-size: 20px;
                 vertical-align: middle;
+                color: $navLinkColor;
             }
         }
 
@@ -78,6 +82,7 @@ header {
         .sub-menu {
             display: none;
             background-color: $subMenuBgColor;
+            min-width: 100px;
             box-shadow: 0 4px 7px 0 rgba(0,0,0,0.75) !important;
             position: absolute;
             z-index: 999;

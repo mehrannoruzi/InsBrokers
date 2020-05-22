@@ -11,7 +11,6 @@ html {
     font-size: 12px;
 }
 
-@import 'menu.scss';
 
 body {
     min-height: 100vh;
@@ -20,10 +19,16 @@ body {
 ul {
     margin-bottom: 0;
 }
-
+*{
+    text-align:right;
+}
+.form-group{
+    width:100%;
+}
 button {
     border: none;
-    background:none;
+    background: none;
+
     &:focus {
         outline: none;
     }

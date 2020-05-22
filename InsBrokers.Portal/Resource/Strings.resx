@@ -291,6 +291,9 @@
   <data name="SignOut" xml:space="preserve">
     <value>خروج</value>
   </data>
+  <data name="SignUp" xml:space="preserve">
+    <value>ثبت نام</value>
+  </data>
   <data name="String53" xml:space="preserve">
     <value>ثبت نام</value>
   </data>
