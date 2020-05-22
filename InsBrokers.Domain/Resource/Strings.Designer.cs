@@ -493,6 +493,15 @@ namespace InsBrokers.Domain.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to نوع اطلاع رسانی.
+        /// </summary>
+        public static string NotifyStrategy {
+            get {
+                return ResourceManager.GetString("NotifyStrategy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to اولویت.
         /// </summary>
         public static string OrderPriority {
@@ -556,6 +565,15 @@ namespace InsBrokers.Domain.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to گیرنده.
+        /// </summary>
+        public static string Receiver {
+            get {
+                return ResourceManager.GetString("Receiver", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to نسبت.
         /// </summary>
         public static string RelationType {
@@ -570,6 +588,24 @@ namespace InsBrokers.Domain.Resource {
         public static string Role {
             get {
                 return ResourceManager.GetString("Role", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to تاریخ ارسال.
+        /// </summary>
+        public static string SendDate {
+            get {
+                return ResourceManager.GetString("SendDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to وضعیت ارسال.
+        /// </summary>
+        public static string SendStatus {
+            get {
+                return ResourceManager.GetString("SendStatus", resourceCulture);
             }
         }
         

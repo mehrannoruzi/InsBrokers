@@ -261,6 +261,9 @@
   <data name="NewPassword" xml:space="preserve">
     <value>گذرواژه جدید</value>
   </data>
+  <data name="NotifyStrategy" xml:space="preserve">
+    <value>نوع اطلاع رسانی</value>
+  </data>
   <data name="OrderPriority" xml:space="preserve">
     <value>اولویت</value>
   </data>
@@ -282,11 +285,20 @@
   <data name="Province" xml:space="preserve">
     <value>استان</value>
   </data>
+  <data name="Receiver" xml:space="preserve">
+    <value>گیرنده</value>
+  </data>
   <data name="RelationType" xml:space="preserve">
     <value>نسبت</value>
   </data>
   <data name="Role" xml:space="preserve">
     <value>نقش</value>
+  </data>
+  <data name="SendDate" xml:space="preserve">
+    <value>تاریخ ارسال</value>
+  </data>
+  <data name="SendStatus" xml:space="preserve">
+    <value>وضعیت ارسال</value>
   </data>
   <data name="Shaba" xml:space="preserve">
     <value>شماره شبا</value>
