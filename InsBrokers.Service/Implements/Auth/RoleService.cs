@@ -37,8 +37,8 @@ namespace InsBrokers.Service
             findedRole.RoleNameFa = model.RoleNameFa;
             findedRole.RoleNameEn = model.RoleNameEn;
 
-            var saveResult = _authUow.ElkSaveChangesAsync();
-            return new Response<Role> { Result = findedRole, IsSuccessful = saveResult.Result.IsSuccessful, Message = saveResult.Result.Message };
+            var saveResult = await _authUow.ElkSaveChangesAsync();
+            return new Response<Role> { Result = findedRole, IsSuccessful = saveResult.IsSuccessful, Message = saveResult.Message };
         }
 
         public async Task<IResponse<bool>> DeleteAsync(int roleId)

@@ -24,20 +24,12 @@ namespace InsBrokers.Portal
 
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddMvc(option =>
-            //{
-            //    option.EnableEndpointRouting = false;
-            //    option.ReturnHttpNotAcceptable = true;
-            //    // option.Filters.Add(typeof(ModelValidationFilter));
-            //})
-            //.AddXmlSerializerFormatters()
-            //.AddJsonOptions(opts => opts.JsonSerializerOptions.PropertyNamingPolicy = null);
             services.AddControllersWithViews()
-    .AddJsonOptions(opts =>
-    {
-        opts.JsonSerializerOptions.PropertyNamingPolicy = null;
-        opts.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-    });
+            .AddJsonOptions(opts =>
+            {
+                opts.JsonSerializerOptions.PropertyNamingPolicy = null;
+                opts.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+            });
             services.AddMemoryCache();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(option =>

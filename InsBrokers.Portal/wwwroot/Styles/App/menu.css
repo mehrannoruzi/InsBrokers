@@ -70,6 +70,12 @@
         display: block; }
     header .main-nav [name=toggle]:checked + ul {
       display: flex; } }
+  header .auth {
+    padding: 15px 0;
+    display: flex; }
+    header .auth > a {
+      padding: 5px 0;
+      color: #fff; }
 
 html[dir=ltr] .main-nav ul {
   animation-name: slideInLeft; }

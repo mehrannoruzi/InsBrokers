@@ -9,7 +9,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Repositories\Auth\" />
     <Folder Include="Repositories\Insurance\" />
   </ItemGroup>
 

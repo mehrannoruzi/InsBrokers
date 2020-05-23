@@ -9,7 +9,16 @@
     ]
   },
   {
-    "outputFileName": "wwwroot/Styles/Libs/libs.css",
+    "outputFileName": "wwwroot/Styles/App/portal-app.css",
+    "inputFiles": [
+      "wwwroot/Styles/App/menu.css",
+      "wwwroot/Styles/App/template.css",
+      "wwwroot/Styles/App/common.css",
+      "wwwroot/Styles/App/fa.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/Styles/Libs/portal-libs.css",
     "inputFiles": [
       "wwwroot/Styles/Libs/bootstrap.min.css",
       "wwwroot/Styles/Libs/material-design-iconic-font.min.css",
@@ -18,27 +27,40 @@
     ]
   },
   {
-    "outputFileName": "wwwroot/Styles/Libs/dashboard-libs.css",
+    "outputFileName": "wwwroot/Styles/Libs/libs.css",
     "inputFiles": [
       "wwwroot/Styles/Libs/bootstrap.min.css",
       "wwwroot/Styles/Libs/material-design-iconic-font.min.css",
+      "wwwroot/Styles/Libs/select2.css",
       "wwwroot/Styles/Libs/footable.core.css",
       "wwwroot/Styles/Libs/zebra-date-picker.css",
       "wwwroot/Styles/Libs/toastr.css",
-      "wwwroot/Styles/Libs/animate.css",
-      "wwwroot/Styles/Libs/icheck.css"
+      "wwwroot/Styles/Libs/icheck.css",
+      "wwwroot/Styles/Libs/sweetalert.css",
+      "wwwroot/Styles/Libs/dropzone.css",
+      "wwwroot/Styles/Libs/animate.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/Scripts/App/portal-app.js",
+    "inputFiles": [
+      "wwwroot/Scripts/App/portal-template.js",
+      "wwwroot/Scripts/App/portal-plugins.js",
+      "wwwroot/Scripts/App/common.js"
     ]
   },
   {
     "outputFileName": "wwwroot/Scripts/App/app.js",
     "inputFiles": [
+      "wwwroot/Scripts/App/modal.js",
+      "wwwroot/Scripts/App/list.js",
       "wwwroot/Scripts/App/template.js",
       "wwwroot/Scripts/App/plugins.js",
       "wwwroot/Scripts/App/common.js"
     ]
   },
   {
-    "outputFileName": "wwwroot/Scripts/Libs/libs.js",
+    "outputFileName": "wwwroot/Scripts/Libs/portal-libs.js",
     "inputFiles": [
       "wwwroot/Scripts/Libs/jquery-3.1.1.min.js",
       "wwwroot/Scripts/Libs/jquery.validate.min.js",
@@ -55,18 +77,24 @@
     "sourceMap": false
   },
   {
-    "outputFileName": "wwwroot/Scripts/Libs/dashboard-libs.js",
+    "outputFileName": "wwwroot/Scripts/Libs/libs.js",
     "inputFiles": [
       "wwwroot/Scripts/Libs/jquery-3.1.1.min.js",
       "wwwroot/Scripts/Libs/jquery.validate.min.js",
       "wwwroot/Scripts/Libs/jquery.validate.unobtrusive.min.js",
+      "wwwroot/Scripts/Libs/icheck-1.0.2.min.js",
       "wwwroot/Scripts/Libs/popper.min.js",
       "wwwroot/Scripts/Libs/bootstrap.min.js",
-      "wwwroot/Scripts/Libs/pace.js",
+      "wwwroot/Scripts/Libs/metis-menu.js",
+      "wwwroot/Scripts/Libs/jquery.slimscroll.min.js",
+      "wwwroot/Scripts/Libs/pace.min.js",
       "wwwroot/Scripts/Libs/footable.all.min.js",
+      "wwwroot/Scripts/Libs/select2.js",
       "wwwroot/Scripts/Libs/toastr.js",
       "wwwroot/Scripts/Libs/zebra-date-picker.js",
-      "wwwroot/Scripts/Libs/icheck-1.0.2.min.js"
+      "wwwroot/Scripts/Libs/loadover.js",
+      "wwwroot/Scripts/Libs/dropzone.js",
+      "wwwroot/Scripts/Libs/sweetalert.js"
     ],
     "minify": {
       "enabled": true,

@@ -1,0 +1,53 @@
+﻿<script>
+        const urlPrefix = '@Configuration["UrlPrefix"]';
+        const strings = {
+            error: '@Html.Raw(Strings.Error)',
+            success: "@Html.Raw(Strings.Success)",
+            pleaseSelect: '@Html.Raw(Strings.PleaseSelect)',
+            searchHere:'@Html.Raw(Strings.SearchHere)',
+            thereIsNoResult: '@Html.Raw(string.Format(Strings.ThereIsNoRecord, Strings.Item))',
+            yes: '@Html.Raw(Strings.Yes)',
+            no: '@Html.Raw(Strings.No)',
+            close: '@Html.Raw(Strings.Close)',
+            AreYouSure: '@Html.Raw(Strings.AreYouSure)',
+            unAuthorizedErrorMessage: "@Html.Raw(Strings.UnAuthorizedPageMessage)",
+            signInUrl: "@Url.Action("SignIn","Auth")",
+            searching: '@Html.Raw(Strings.Searching)',
+            remove: '@Html.Raw(Strings.Remove)',
+            dropzoneFileTooBig:'@Html.Raw(Strings.DropzoneFileIsTooBig)',
+            fileFormatNotSupported: '@Html.Raw(Strings.FileFormatNotSupported)',
+            cancel: '@Html.Raw(Strings.Cancel)',
+            areYouSure: '@Html.Raw(Strings.AreYouSure)',
+            dropYourFileHere:'@Html.Raw(Strings.DropYourFileHere)',
+            dropYourFilesHere:'@Html.Raw(Strings.DropYourFilesHere)',
+            cannotUploadAnyMoreFiles: "@Html.Raw(Strings.CannotUploadAnyMoreFiles)",
+            Required: "@Html.Raw(Strings.Required)",
+            remote: "@Html.Raw(Strings.FillFieldCorrectly)",
+            email: "@Html.Raw(Strings.InvalidEmail)",
+            url: "@Html.Raw(Strings.IncorrectUrl)",
+            date: "@Html.Raw(Strings.IncorrectDate)",
+            dateISO: "@Html.Raw(Strings.IncorrectDateISO)",
+            number: "@Html.Raw(Strings.ValueMustBeNumber)",
+            digits: "@Html.Raw(Strings.ValueMustBeDigit)",
+            equalTo: "@Html.Raw(Strings.ValueNotMatched)",
+            accept: "@Html.Raw(Strings.IncorrectFormat)",
+            maxlength: "@Html.Raw(Strings.MaxLengthExeeded)",
+            minlength: "@Html.Raw(Strings.MinLengthNotReached)",
+            rangelength: "@Html.Raw(Strings.LenghIsNotInRange)",
+            range: "@Html.Raw(Strings.ValueIsNotInRange)",
+            max: "@Html.Raw(Strings.MaxValueExceeded)",
+            min: "@Html.Raw(Strings.MinValueNotReached)"
+        };
+
+
+</script>
+
+<partial name="Partials/_Modal" />
+<environment include="Development">
+    <script src="@Url.Content("~/Scripts/Libs/portal-libs.js")"></script>
+    <script src="@Url.Content("~/Scripts/App/portal-app.js")" asp-append-version="true"></script>
+</environment>
+<environment include="Production ">
+    <script src="@Url.Content("~/Scripts/Libs/portal-libs.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/App/portal-app.min.js")"  asp-append-version="true"></script>
+</environment>

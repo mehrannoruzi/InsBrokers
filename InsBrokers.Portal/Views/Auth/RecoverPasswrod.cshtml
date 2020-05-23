@@ -1,0 +1,41 @@
+@model User
+@{
+    ViewBag.Title = $"{Strings.Recover} {Strings.Password}";
+    Layout = Url.Content("~/Views/Auth/_Layout.cshtml");
+}
+
+
+@section styles{
+    <link href="@Url.Content("~/Styles/App/Auth/signin.css")" rel="stylesheet" />
+}
+<div class="middle-box text-center loginscreen animated fadeInDown">
+    <div>
+        <h3 class="title alert alert-info">@($"{Strings.Recover} {Strings.Password}")</h3>
+        <small>@Strings.RecoverPasswordHint</small>
+        <form class="m-t" asp-controller="Auth" asp-action="RecoverPasswrod" role="form">
+
+            <div class="alert alert-danger invisible">
+                <p class="text"></p>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group">
+                        <input asp-for="Email" class="form-control ltr-elm p-h-r" placeholder="@Html.DisplayNameFor(x => x.Email)" />
+                    </div>
+                    <small class="float-left">
+                        <span asp-validation-for="Email"></span>
+                    </small>
+                </div>
+            </div>
+            <div class="text-center">
+                <custom-button type="button" icon="zmdi zmdi-sign-in rotate-180 default-i" text="@Strings.Recover" class="btn-primary  btn-recover-password m-b m-t"></custom-button>
+            </div>
+
+            <a asp-controller="Auth" asp-action="SignIn"><small>@Strings.SignIn</small></a>
+        </form>
+        <p class="m-t"><a href="https://kingofday.ir/"> <small>kingofday.ir &copy; @DateTime.Now.Year</small></a> </p>
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript" src="@Url.Content("~/Scripts/App/Auth/recover-password.js")"></script>
+}

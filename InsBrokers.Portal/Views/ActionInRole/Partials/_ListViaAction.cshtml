@@ -1,0 +1,63 @@
+@model IEnumerable<ActionInRole>
+@{
+    Layout = null;
+}
+<div class="row action-in-roles" data-url="@Url.Action("GetViaAction", "ActionInRole")">
+    <div class="col-12 m-b">
+        <h5>@Strings.AddedRolesToThisAction</h5>
+    </div>
+    <div class="col-12 list-with-scroll">
+        @if (Model != null && Model.Count() > 0)
+        {
+            int i = 0;
+            <table class="footable table table-stripped toggle-arrow-tiny">
+                <thead>
+                    <tr>
+                        <th data-toggle="true">#</th>
+                        <th>@Html.DisplayNameFor(x => x.Role.RoleNameFa) @InsBrokers.Domain.Resource.Strings.Role</th>
+                        <th>@InsBrokers.Domain.Resource.Strings.Action @Html.DisplayNameFor(x => x.IsDefault)</th>
+                        <th>@Strings.Delete </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.ToList())
+                    {
+                        <tr>
+                            <td>@(i + 1)</td>
+                            <td>@item.Role.RoleNameFa</td>
+                            <td>
+                                @if (item.IsDefault)
+                                {
+                                    <i class="zmdi zmdi-check green"></i>
+                                }
+                                else
+                                {
+                                    <i class="zmdi zmdi-close red"></i>
+                                }
+                            </td>
+                            <td class="actions">
+                                <a class="delete-user-in-role" data-url="@Url.Action("Delete","ActionInRole",new { id = item.ActionInRoleId })"><i class="zmdi zmdi-delete"></i></a>
+                            </td>
+                        </tr>
+                        i++;
+                    }
+                </tbody>
+                <tfoot class="d-none">
+                    <tr>
+                        <td colspan="5">
+                            <ul class="pagination float-right"></ul>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        }
+        else
+        {
+            <div class="alert alert-warning text-center">
+                <small>@string.Format(Strings.ThereIsNoRecord, Strings.Item)</small>
+            </div>
+        }
+
+    </div>
+
+</div>

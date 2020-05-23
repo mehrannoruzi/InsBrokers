@@ -1,0 +1,37 @@
+@model User
+@{
+    Layout = null;
+    var addMode = Model.UserId == Guid.Empty;
+}
+    <div class="row">
+        @Html.HiddenFor(x => x.UserId)
+        <div class="col-12 col-sm-4">
+            <custom-input-for for="Name" />
+        </div>
+        <div class="col-12 col-sm-4">
+            <custom-input-for for="Family" />
+        </div>
+        <div class="col-12 col-sm-4">
+            <custom-input-for for="Email" readonly="!addMode" class="form-control ltr-elm" />
+        </div>
+    </div>
+<div class="row">
+    <div class="col-12 col-sm-6">
+        <custom-input-for for="MobileNumber" class="form-control ltr-elm" type="number" />
+    </div>
+    <div class="col-12 col-sm-6">
+        @if (addMode)
+        {
+            <custom-input-for for="Password" class="form-control ltr-elm" />
+        }
+        else
+        {
+            <custom-input-for for="NewPassword" class="form-control ltr-elm" />
+        }
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 col-sm-6">
+        <custom-checkbox-for  wrapper-class="chb-group" for="IsActive" />
+    </div>
+</div>

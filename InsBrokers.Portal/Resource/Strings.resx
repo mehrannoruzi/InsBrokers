@@ -126,6 +126,9 @@
   <data name="Add" xml:space="preserve">
     <value>افزودن</value>
   </data>
+  <data name="AddedRolesToThisAction" xml:space="preserve">
+    <value>نقش های اضافه شده به این این اکشن</value>
+  </data>
   <data name="AreYouSure" xml:space="preserve">
     <value>آیا از انجام این کار مطمن هستید؟</value>
   </data>
@@ -288,6 +291,9 @@
   <data name="Searching" xml:space="preserve">
     <value>در حال جستجو ...</value>
   </data>
+  <data name="SelectPlease" xml:space="preserve">
+    <value>لطفا انتخاب نمایید</value>
+  </data>
   <data name="SignIn" xml:space="preserve">
     <value>ورود</value>
   </data>
@@ -324,6 +330,9 @@
   <data name="Username" xml:space="preserve">
     <value>نام کاربری (ایمیل)</value>
   </data>
+  <data name="UsersInThisRole" xml:space="preserve">
+    <value>کاربران این نقش</value>
+  </data>
   <data name="ValidationFailed" xml:space="preserve">
     <value>اعتبار سنجی ناموفق بود، دویاره سعی نمایید</value>
   </data>
@@ -338,6 +347,9 @@
   </data>
   <data name="ValueNotMatched" xml:space="preserve">
     <value>لطفا همان مقدار را دوباره وارد نمایید</value>
+  </data>
+  <data name="WebsiteName" xml:space="preserve">
+    <value>کارگزاری رسمی بیمه نفت و انرژی</value>
   </data>
   <data name="WelcomeMessage" xml:space="preserve">
     <value>به داشبورد مدیریت Eagle خوش آمدید</value>

@@ -30,5 +30,13 @@
   {
     "outputFile": "wwwroot/Styles/App/Home/auth.css",
     "inputFile": "wwwroot/Styles/App/Home/auth.scss"
+  },
+  {
+    "outputFile": "wwwroot/Styles/App/Role/manage.css",
+    "inputFile": "wwwroot/Styles/App/Role/manage.scss"
+  },
+  {
+    "outputFile": "wwwroot/Styles/App/portal-template.css",
+    "inputFile": "wwwroot/Styles/App/portal-template.scss"
   }
 ]

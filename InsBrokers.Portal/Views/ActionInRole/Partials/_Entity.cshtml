@@ -1,0 +1,21 @@
+@model ActionInRole
+@{
+    Layout = null;
+}
+<form asp-controller="ActionInRole" asp-action="Add">
+    @Html.HiddenFor(x => x.RoleId)
+    <div class="row">
+        <div class="col-12 col-sm-8">
+            <custom-select-for for="ActionId" class="form-control select2 w-100 with-ajax" select-data-url='@Url.Action("Search", "Action")' />
+        </div>
+        <div class="col-12 col-sm-4">
+            <custom-checkbox-for for="IsDefault" wrapper-class="chb-group" />
+        </div>
+    </div>
+    <div class="row m-b">
+        <div class="col-12">
+            <custom-button class="btn-info float-left btn-add-action-in-role" text="@Strings.Add" icon="zmdi zmdi-floppy"></custom-button>
+        </div>
+    </div>
+</form>
+<partial name="Partials/_ListViaAction" model="new List<ActionInRole>()" />

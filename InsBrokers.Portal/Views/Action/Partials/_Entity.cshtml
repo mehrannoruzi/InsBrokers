@@ -1,0 +1,42 @@
+@model InsBrokers.Domain.Action
+@{
+    Layout = null;
+}
+    <form asp-controller="Action" asp-action="@(Model.ActionId==0?"Add":"Update")">
+        <div class="row">
+            @Html.HiddenFor(x => x.ActionId)
+            <div class="col-12 col-sm-6">
+                <custom-select-for for="ParentId" optional-label="@Strings.SelectPlease" class="form-control select2 w-100" items="(List<SelectListItem>)ViewBag.Actions" />
+            </div>
+            <div class="col-12 col-sm-6">
+                <custom-input-for for="Name" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <custom-input-for for="ControllerName" class="form-control ltr-elm" />
+            </div>
+            <div class="col-12 col-sm-6">
+                <custom-input-for for="ActionName" class="form-control ltr-elm" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <custom-input-for for="Icon" class="form-control ltr-elm" />
+            </div>
+            <div class="col-12 col-sm-6">
+                <custom-input-for for="OrderPriority" type="number" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <custom-checkbox-for wrapper-class="chb-group" for="ShowInMenu" />
+            </div>
+        </div>
+        <div class="custom-modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">@Strings.Close</button>
+            <custom-button text="@Strings.Submit" icon="zmdi zmdi-floppy" class="btn-primary btn-submit-view float-left"></custom-button>
+        </div>
+    </form>
+

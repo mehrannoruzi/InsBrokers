@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="fa">
+<head>
+    @RenderSection("styles", false)
+    <partial name="Partials/_LayoutHeader" />
+</head>
+<body class="gray-bg rtls" dir="rtl">
+    <div class="d-flex justify-content-center align-items-center full-height">
+        @RenderBody()
+    </div>
+    <partial name="Partials/_LayoutFooter" />
+    @RenderSection("Scripts", false)
+</body>
+</html>

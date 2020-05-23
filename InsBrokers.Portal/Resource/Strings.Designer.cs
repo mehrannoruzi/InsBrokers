@@ -88,6 +88,15 @@ namespace InsBrokers.Portal.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to نقش های اضافه شده به این این اکشن.
+        /// </summary>
+        public static string AddedRolesToThisAction {
+            get {
+                return ResourceManager.GetString("AddedRolesToThisAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to آیا از انجام این کار مطمن هستید؟.
         /// </summary>
         public static string AreYouSure {
@@ -574,6 +583,15 @@ namespace InsBrokers.Portal.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to لطفا انتخاب نمایید.
+        /// </summary>
+        public static string SelectPlease {
+            get {
+                return ResourceManager.GetString("SelectPlease", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ورود.
         /// </summary>
         public static string SignIn {
@@ -682,6 +700,15 @@ namespace InsBrokers.Portal.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to کاربران این نقش.
+        /// </summary>
+        public static string UsersInThisRole {
+            get {
+                return ResourceManager.GetString("UsersInThisRole", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to اعتبار سنجی ناموفق بود، دویاره سعی نمایید.
         /// </summary>
         public static string ValidationFailed {
@@ -723,6 +750,15 @@ namespace InsBrokers.Portal.Resource {
         public static string ValueNotMatched {
             get {
                 return ResourceManager.GetString("ValueNotMatched", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to کارگزاری رسمی بیمه نفت و انرژی.
+        /// </summary>
+        public static string WebsiteName {
+            get {
+                return ResourceManager.GetString("WebsiteName", resourceCulture);
             }
         }
         

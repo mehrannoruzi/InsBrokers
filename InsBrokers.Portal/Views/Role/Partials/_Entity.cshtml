@@ -1,0 +1,18 @@
+@model Role
+@{
+    Layout = null;
+}
+<div class="row">
+    @Html.HiddenFor(x => x.RoleId)
+    <div class="col-12 col-sm-6">
+        <custom-input-for for="RoleNameFa" />
+    </div>
+    <div class="col-12 col-sm-6">
+        <custom-input-for for="RoleNameEn" class="form-control ltr-elm"/>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 col-sm-6">
+        <custom-checkbox-for wrapper-class="chb-group" for="Enabled" />
+    </div>
+</div>

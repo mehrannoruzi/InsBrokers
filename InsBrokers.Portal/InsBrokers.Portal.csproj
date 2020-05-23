@@ -12,10 +12,38 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="wwwroot\Styles\App\menu.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\Styles\Libs\portal-libs.css" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="compilerconfig.json" />
+    <None Include="Views\ActionInRole\Partials\_Entity.cshtml" />
+    <None Include="Views\ActionInRole\Partials\_ListViaAction.cshtml" />
+    <None Include="Views\ActionInRole\Partials\_ListViaRole.cshtml" />
+    <None Include="Views\Action\Manage.cshtml" />
+    <None Include="Views\Action\Partials\_Entity.cshtml" />
+    <None Include="Views\Action\Partials\_Filters.cshtml" />
+    <None Include="Views\Action\Partials\_List.cshtml" />
+    <None Include="Views\Auth\Partials\_NewPassword.cshtml" />
+    <None Include="Views\Auth\RecoverPasswrod.cshtml" />
+    <None Include="Views\Auth\SignIn.cshtml" />
+    <None Include="Views\Auth\_Layout.cshtml" />
+    <None Include="Views\Role\Manage.cshtml" />
+    <None Include="Views\Role\Partials\_Entity.cshtml" />
+    <None Include="Views\Role\Partials\_Filters.cshtml" />
+    <None Include="Views\Role\Partials\_List.cshtml" />
+    <None Include="Views\UserInRole\Partials\_Entity.cshtml" />
+    <None Include="Views\UserInRole\Partials\_List.cshtml" />
+    <None Include="Views\User\Manage.cshtml" />
+    <None Include="Views\User\Partials\_Entity.cshtml" />
+    <None Include="Views\User\Partials\_Filters.cshtml" />
+    <None Include="Views\User\Partials\_List.cshtml" />
+    <None Include="Views\User\ProfileInfo.cshtml" />
+    <None Include="wwwroot\Scripts\App\Action\manage.js" />
+    <None Include="wwwroot\Scripts\App\Auth\recover-password.js" />
+    <None Include="wwwroot\Scripts\App\Auth\signin.js" />
+    <None Include="wwwroot\Scripts\App\Role\manage.js" />
+    <None Include="wwwroot\Styles\App\Role\manage.scss" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,0 +1,52 @@
+@model IEnumerable<UserInRole>
+@{
+    Layout = null;
+}
+<div class="row user-in-roles" data-url="@Url.Action("Get","UserInRole")">
+    <div class="col-12 m-b">
+        <h5>@Strings.UsersInThisRole</h5>
+    </div>
+    <div class="col-12 list-with-scroll">
+        @if (Model != null && Model.Count() > 0)
+        {
+            int i = 0;
+            <table class="footable table table-stripped toggle-arrow-tiny">
+                <thead>
+                    <tr>
+                        <th data-toggle="true">#</th>
+                        <th>@Html.DisplayNameFor(x => x.Role.RoleNameFa)</th>
+                        <th>@Strings.Delete </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@(i + 1)</td>
+                            <td>@item.Role.RoleNameFa</td>
+                            <td class="actions">
+                                <a class="delete-user-in-role" data-url="@Url.Action("Delete","UserInRole",new { id = item.UserInRoleId })"><i class="zmdi zmdi-delete"></i></a>
+                            </td>
+                        </tr>
+                        i++;
+                    }
+                </tbody>
+                <tfoot class="d-none">
+                    <tr>
+                        <td colspan="5">
+                            <ul class="pagination float-right"></ul>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        }
+        else
+        {
+            <div class="alert alert-warning text-center">
+                <small>@string.Format(Strings.ThereIsNoRecord, Strings.Item)</small>
+            </div>
+        }
+
+    </div>
+
+</div>

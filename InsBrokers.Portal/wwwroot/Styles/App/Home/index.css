@@ -13,7 +13,7 @@
     border-bottom: solid 10px #666;
     display: flex;
     justify-content: center;
-    align-items: flex-end; }
+    align-items: center; }
     #home-index-page #main-slider-wrapper #cover #switch {
       background-color: transparent;
       border: none;
@@ -21,7 +21,12 @@
       font-size: 25px;
       font: normal normal normal 14px/1 'Material-Design-Iconic-Font';
       display: flex;
-      flex-direction: column; }
+      align-self: flex-end;
+      flex-direction: column;
+      position: absolute;
+      bottom: 0;
+      right: 50%;
+      transform: translateX(-50%); }
       #home-index-page #main-slider-wrapper #cover #switch:before {
         content: '\f2fc';
         height: 5px; }
@@ -30,3 +35,9 @@
       #home-index-page #main-slider-wrapper #cover #switch i {
         font-size: 20px;
         color: #fff; }
+    #home-index-page #main-slider-wrapper #cover .hx {
+      margin-bottom: 0;
+      color: #fff; }
+    @media (max-width: 576px) {
+      #home-index-page #main-slider-wrapper #cover .hx {
+        font-size: 1.2rem; } }

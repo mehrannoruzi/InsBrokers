@@ -30,7 +30,6 @@ namespace InsBrokers.Portal.Controllers
         [HttpPost]
         public async Task<IActionResult> SignUp([FromBody]PortalSignUpModel model)
         {
-            return Json(new Response<string> { Message = Strings.ValidationFailed });
             if (!ModelState.IsValid) return Json(new Response<string> { Message = Strings.ValidationFailed });
             model.MemberRoleId = int.Parse(_configuration["CustomSettings:MemberRoleId"]);
             var save = await _userSrv.SignUp(model);
@@ -40,7 +39,7 @@ namespace InsBrokers.Portal.Controllers
 
             await CreateCookie(save.Result, true);
 
-            return Json(save);
+            return Json(new {IsSuccessful = true, Result = Url.Action(menuRep.DefaultUserAction.Action, menuRep.DefaultUserAction.Controller, new { })});
         }
     }
 }

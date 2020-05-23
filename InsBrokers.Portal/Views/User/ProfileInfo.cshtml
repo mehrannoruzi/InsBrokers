@@ -1,0 +1,70 @@
+@model User
+@{
+    ViewBag.Title = Strings.Profile;
+}
+
+<div class="row">
+    <div class="col-12 col-sm-12">
+        <div class="ibox ">
+            <div class="ibox-title">
+                <h5>@Strings.Profile</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="zmdi zmdi-chevron-down"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="zmdi zmdi-close"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <form role="form" asp-controller="User" asp-action="ProfileInfo" method="post">
+                    @Html.HiddenFor(x => x.UserId)
+                    <div class="row">
+                        <div class="col-12 col-sm-4">
+                            <custom-input-for for="Email"></custom-input-for>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <custom-input-for for="Name"></custom-input-for>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <custom-input-for for="Family"></custom-input-for>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-sm-6">
+                            <custom-input-for for="MobileNumber"></custom-input-for>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <custom-input-for type="password" for="NewPassword"></custom-input-for>
+                        </div>
+                    </div>
+                    @*<div class="row">
+                            <div class="col-12 col-sm-6 col-md-4">
+                                @Html.CustomTextBoxFor(x => x.Email, new CustomTextBoxForModel { InputClass = "form-control ltr-elm", @InputOtherAttribute = "readonly='true'" })
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-4">
+                                @Html.CustomTextBoxFor(x => x.FullName, new CustomTextBoxForModel { })
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-4">
+                                @Html.CustomTextBoxFor(x => x.MobileNumber, new CustomTextBoxForModel { InputClass = "form-control ltr-elm" })
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-4">
+                                @Html.CustomPasswordFor(x => x.NewPassword, new CustomTextBoxForModel { InputClass = "form-control ltr-elm", @InputOtherAttribute = "autocomplete='off' autocorrect='off'" })
+                            </div>
+                        </div>*@
+                    <div class="row btn-group">
+                        <div class="col-12">
+                            <button type="button" class="btn btn-primary block m-b m-t btn-action btn-sign-in" data-ajax-submit="true">
+                                <span class="text">@Strings.Submit</span>
+                                <div class="icon">
+                                    <i class="zmdi zmdi-floppy rotate-180 default-i"></i>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

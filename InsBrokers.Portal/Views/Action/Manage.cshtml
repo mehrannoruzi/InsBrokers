@@ -1,0 +1,13 @@
+@model PagingListDetails<InsBrokers.Domain.Action>
+@{
+    ViewBag.Title = $"{Strings.Management} {InsBrokers.Domain.Resource.Strings.Action}";
+    Layout = "_LayoutManage";
+}
+
+@section filter{
+    <partial name="Partials/_Filters" model="new ActionSearchFilter()" />
+}
+<partial name="Partials/_List" model="@Model" />
+@section scripts{
+    <script src="@Url.Content("~/Scripts/App/Action/manage.js")"></script>
+}

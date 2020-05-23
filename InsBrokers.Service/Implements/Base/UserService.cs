@@ -19,11 +19,10 @@ namespace InsBrokers.Service
         private readonly AuthUnitOfWork _authUow;
         private readonly AppUnitOfWork _appUow;
         private readonly IEmailService _emailService;
-        private readonly IGenericRepo<UserInRole> _userInRoleRepo;
         private readonly IMemoryCacheProvider _cache;
         private readonly DapperUserRepo _dapperUserRepo;
 
-        public UserService(AppUnitOfWork appUow, AuthUnitOfWork authUow, IGenericRepo<UserInRole> userInRoleRepo, IMemoryCacheProvider cache,
+        public UserService(AppUnitOfWork appUow, AuthUnitOfWork authUow, IMemoryCacheProvider cache,
             IEmailService emailService, DapperUserRepo dapperUserRepo)
         {
             _appUow = appUow;
@@ -31,7 +30,6 @@ namespace InsBrokers.Service
             _emailService = emailService;
             _dapperUserRepo = dapperUserRepo;
             _authUow = authUow;
-            _userInRoleRepo = userInRoleRepo;
         }
 
 
@@ -323,7 +321,7 @@ namespace InsBrokers.Service
             await _appUow.UserRepo.AddAsync(user);
             var save = await _appUow.ElkSaveChangesAsync();
             if (!save.IsSuccessful) return new Response<User> {Message = save.Message };
-            await _userInRoleRepo.AddAsync(new UserInRole {
+            await _authUow.UserInRoleRepo.AddAsync(new UserInRole {
                 RoleId = model.MemberRoleId,
                 UserId = user.UserId
             });

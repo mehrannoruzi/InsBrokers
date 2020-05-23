@@ -42,8 +42,8 @@ namespace InsBrokers.Portal.Controllers
         [HttpGet]
         public virtual ActionResult SignIn()
         {
-            var t = new AclSeed(_db,_appDb);
-            var rep = t.Init();
+            //var t = new AclSeed(_db,_appDb);
+            //var rep = t.Init();
 
             if (User.Identity.IsAuthenticated)
             {

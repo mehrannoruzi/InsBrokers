@@ -1,0 +1,39 @@
+@model SignInModel
+@{
+    ViewBag.Title = Strings.SignIn;
+    Layout = Url.Content("~/Views/Auth/_Layout.cshtml");
+}
+@section styles{
+    <link href="@Url.Content("~/Styles/App/Auth/signin.css")" rel="stylesheet" />
+}
+<input type="hidden" id="t_id" value="123" />
+<div class="middle-box text-center loginscreen animated fadeInDown">
+    <div>
+        <h4 class="title alert alert-info">@Strings.WelcomeMessage</h4>
+        <form class="m-t" role="form" asp-action="SignIn" asp-controller="Auth" method="post">
+            <div class="alert alert-danger invisible">
+                <p class="text"></p>
+            </div>
+            <div class="form-group">
+                <input asp-for="MobileNumber" class="form-control ltr-elm p-h-r" placeholder="@Html.DisplayNameFor(x => x.MobileNumber)" />
+            </div>
+            <small class="float-right">
+                <span asp-validation-for="MobileNumber"></span>
+            </small>
+            <div class="form-group">
+                <input type="password" asp-for="Password" class="form-control ltr-elm p-h-r" placeholder="@Html.DisplayNameFor(x => x.Password)" />
+            </div>
+            <small class="float-right">
+                <span asp-validation-for="Password"></span>
+            </small>
+            <custom-checkbox-for for="RememberMe"></custom-checkbox-for>
+            <custom-button  text="@Strings.SignIn" icon="zmdi zmdi-sign-in rotate-180 default-i" class="btn-primary full-width m-b btn-action btn-sign-in"></custom-button>
+            <a asp-controller="Auth" asp-action="RecoverPasswrod"><small>@Strings.ForgotPassword</small></a>
+        </form>
+        <p class="m-t"><a href="https://kingofday.ir/"> <small>kingofday.ir &copy; @DateTime.Now.Year</small></a> </p>
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript" src="@Url.Content("~/Scripts/App/Auth/signin.js")"></script>
+}
+

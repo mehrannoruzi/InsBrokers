@@ -1,0 +1,24 @@
+@model UserInRole
+@{
+    Layout = null;
+}
+<form asp-controller="UserInRole" asp-action="Add" method="post">
+    @Html.HiddenFor(x => x.RoleId)
+    <div class="row">
+
+        <div class="col-12 col-sm-6">
+            <custom-select-for for="UserId" class="form-control select2 w-100 with-ajax" select-data-url='@Url.Action("Search", "User")' />
+        </div>
+        <div class="col-2 col-sm-2">
+            <br />
+            <br />
+            <div class="loader"></div>
+        </div>
+    </div>
+    <div class="row m-b">
+        <div class="col-12">
+            <custom-button text="@Strings.Add" icon="zmdi zmdi-floppy" class="btn-info float-left btn-add-user-in-role"></custom-button>
+        </div>
+    </div>
+</form>
+<partial name="Partials/_List" model="new List<UserInRole>()"/>
