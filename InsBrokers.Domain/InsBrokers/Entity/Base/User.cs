@@ -101,6 +101,9 @@ namespace InsBrokers.Domain
         [NotMapped]
         public string Fullname => $"{Name} {Family}";
 
+
+
+        public List<Loss> losses { get; set; }
         public List<Address> Addresses { get; set; }
         public List<BankAccount> BankAccounts { get; set; }
         public List<UserAttachment> UserAttachments { get; set; }

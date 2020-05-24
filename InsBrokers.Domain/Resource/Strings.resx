@@ -237,6 +237,9 @@
   <data name="Longitude" xml:space="preserve">
     <value>طول جغرافیایی</value>
   </data>
+  <data name="Loss" xml:space="preserve">
+    <value>هزینه درمانی</value>
+  </data>
   <data name="LossDateSh" xml:space="preserve">
     <value>تاریخ هزینه</value>
   </data>

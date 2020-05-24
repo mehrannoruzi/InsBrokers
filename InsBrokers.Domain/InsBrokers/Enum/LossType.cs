@@ -19,11 +19,11 @@ namespace InsBrokers.Domain.InsBrokers.Enum
         [Description("عینک")]
         Glass = 5,
 
-        [Description("سمعک")]
-        HearingAids = 6,
+        [Description("شنوایی سنجی")]
+        Audiologists = 6,
 
-        [Description("عصا")]
-        Cane = 7,
+        [Description("لیزر درمانی")]
+        LaserTherapy = 7,
 
         [Description("بستری در بیمارستان")]
         Hospitalization = 8,

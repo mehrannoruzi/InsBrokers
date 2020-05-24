@@ -1,6 +1,7 @@
 ﻿using System;
 using Elk.Core;
 using InsBrokers.Domain.Resource;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -68,5 +69,9 @@ namespace InsBrokers.Domain
         [MaxLength(250, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
         [StringLength(250, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
         public string Description { get; set; }
+
+
+
+        public List<LossAsset> LossAssets  { get; set; }
     }
 }

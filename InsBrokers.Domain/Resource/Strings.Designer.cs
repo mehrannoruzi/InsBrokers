@@ -421,6 +421,15 @@ namespace InsBrokers.Domain.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to هزینه درمانی.
+        /// </summary>
+        public static string Loss {
+            get {
+                return ResourceManager.GetString("Loss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to تاریخ هزینه.
         /// </summary>
         public static string LossDateSh {
