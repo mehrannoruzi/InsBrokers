@@ -243,6 +243,12 @@
   <data name="LossDateSh" xml:space="preserve">
     <value>تاریخ هزینه</value>
   </data>
+  <data name="LossDateShFrom" xml:space="preserve">
+    <value>از تاریخ</value>
+  </data>
+  <data name="LossDateShTo" xml:space="preserve">
+    <value>تا تاریخ</value>
+  </data>
   <data name="LossType" xml:space="preserve">
     <value>نوع هزینه</value>
   </data>

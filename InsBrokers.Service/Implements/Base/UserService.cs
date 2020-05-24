@@ -60,8 +60,8 @@ namespace InsBrokers.Service
             user.NationalCode = model.NationalCode;
             user.BaseInsurance = model.BaseInsurance;
 
-            var saveResult = _appUow.ElkSaveChangesAsync();
-            return new Response<User> { Result = user, IsSuccessful = saveResult.Result.IsSuccessful, Message = saveResult.Result.Message };
+            var saveResult = await _appUow.ElkSaveChangesAsync();
+            return new Response<User> { Result = user, IsSuccessful = saveResult.IsSuccessful, Message = saveResult.Message };
         }
 
         public async Task<IResponse<User>> UpdateAsync(User model)

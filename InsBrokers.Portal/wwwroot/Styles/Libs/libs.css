@@ -7239,7 +7239,7 @@ button.Zebra_DatePicker_Icon_Disabled {
 }
 
 .pdate{
-    padding-left:35px;
+    padding-left:35px!important;
 }
 .toast-title {
     font-weight: 700

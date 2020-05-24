@@ -30,7 +30,11 @@ namespace InsBrokers.DataAccess.Ef
         public IGenericRepo<BankAccount> BankAccountRepo=> _serviceProvider.GetService<IGenericRepo<BankAccount>>();
         #endregion
 
-        
+        #region Insurance
+        public IGenericRepo<Loss> LossRepo => _serviceProvider.GetService<IGenericRepo<Loss>>();
+        public IGenericRepo<LossAsset> LossAssetRepo => _serviceProvider.GetService<IGenericRepo<LossAsset>>(); 
+        #endregion
+
 
         public ChangeTracker ChangeTracker { get => _appDbContext.ChangeTracker; }
         public DatabaseFacade Database { get => _appDbContext.Database; }

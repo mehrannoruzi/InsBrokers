@@ -1,0 +1,23 @@
+@model LossSearchFilter
+@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-12 col-sm-6">
+        <custom-select-for for="LossType" items="((List<LossDescriptionDTO>)ViewBag.Types).Select(x=>new SelectListItem {
+                    Text = x.Name_Fa,
+                    Value = x.Code.ToString()
+                }).ToList()" />
+    </div>
+    <div class="col-12 col-sm-6">
+        <custom-input-for for="PatientName" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 col-sm-6">
+        <custom-input-for for="LossDateShFrom" class="form-control pdate ltr-elm" />
+    </div>
+    <div class="col-12 col-sm-6">
+        <custom-input-for for="LossDateShTo" class="form-control pdate ltr-elm" />
+    </div>
+</div>

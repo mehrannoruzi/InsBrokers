@@ -439,6 +439,24 @@ namespace InsBrokers.Domain.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to از تاریخ.
+        /// </summary>
+        public static string LossDateShFrom {
+            get {
+                return ResourceManager.GetString("LossDateShFrom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to تا تاریخ.
+        /// </summary>
+        public static string LossDateShTo {
+            get {
+                return ResourceManager.GetString("LossDateShTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to نوع هزینه.
         /// </summary>
         public static string LossType {

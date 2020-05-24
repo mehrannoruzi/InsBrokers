@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Text.Json.Serialization;
+using Elk.Core;
 
 namespace InsBrokers.Portal
 {
@@ -69,9 +70,11 @@ namespace InsBrokers.Portal
                     if (!context.Request.IsAjaxRequest())
                     {
                         var handled = context.Features.Get<IStatusCodeReExecuteFeature>();
+                        var exp = context.Features.Get<IExceptionHandlerFeature>();
                         var statusCode = context.Response.StatusCode;
                         if (handled == null && statusCode >= 400)
                         {
+                            FileLoger.Info(exp.Error.Message);
                             context.Response.Redirect($"/Error/Details?code={statusCode}");
                         }
                     }

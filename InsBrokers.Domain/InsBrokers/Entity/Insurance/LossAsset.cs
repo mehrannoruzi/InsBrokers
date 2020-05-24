@@ -48,5 +48,11 @@ namespace InsBrokers.Domain
         [MaxLength(1000, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
         [StringLength(1000, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
         public string FileUrl { get; set; }
+
+        [Column(TypeName = "varchar(1000)")]
+        [Display(Name = nameof(Strings.FileUrl), ResourceType = typeof(Strings))]
+        [MaxLength(1000, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
+        [StringLength(1000, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
+        public string PhysicalPath { get; set; }
     }
 }

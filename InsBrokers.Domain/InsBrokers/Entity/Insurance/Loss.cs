@@ -13,13 +13,15 @@ namespace InsBrokers.Domain
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int LossId { get; set; }
-
         [ForeignKey(nameof(UserId))]
         [Display(Name = nameof(Strings.User), ResourceType = typeof(Strings))]
         public User User { get; set; }
         [Display(Name = nameof(Strings.User), ResourceType = typeof(Strings))]
         [Required(ErrorMessageResourceName = nameof(ErrorMessage.Required), ErrorMessageResourceType = typeof(ErrorMessage))]
         public Guid UserId { get; set; }
+
+        [Display(Name = nameof(Strings.Status), ResourceType = typeof(Strings))]
+        public LossStatus Status { get; set; }
 
         [Display(Name = nameof(Strings.Cost), ResourceType = typeof(Strings))]
         [Required(ErrorMessageResourceName = nameof(ErrorMessage.Required), ErrorMessageResourceType = typeof(ErrorMessage))]
@@ -55,9 +57,9 @@ namespace InsBrokers.Domain
 
         [Display(Name = nameof(Strings.RelationType), ResourceType = typeof(Strings))]
         [Required(ErrorMessageResourceName = nameof(ErrorMessage.Required), ErrorMessageResourceType = typeof(ErrorMessage))]
-        [MaxLength(25, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
-        [StringLength(25, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
-        public string RelationType { get; set; }
+        //[MaxLength(25, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
+        //[StringLength(25, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
+        public RelationType RelationType { get; set; }
 
         [Display(Name = nameof(Strings.PatientName), ResourceType = typeof(Strings))]
         [Required(ErrorMessageResourceName = nameof(ErrorMessage.Required), ErrorMessageResourceType = typeof(ErrorMessage))]

@@ -3,14 +3,8 @@
     ViewBag.Title = $"{Strings.Management} {InsBrokers.Domain.Resource.Strings.Address}";
     Layout = "_LayoutManage";
 }
-@section styles{
-    <link href="@Url.Content("~/Styles/App/Role/manage.css")" rel="stylesheet" />
-}
 
 @section filter{
     <partial name="Partials/_Filters" model="new AddressSearchFilter()" />
 }
 <partial name="Partials/_List" model="@Model" />
-@section scripts{
-    <script src="@Url.Content("~/Scripts/App/Role/manage.js")"></script>
-}

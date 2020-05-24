@@ -38,5 +38,13 @@
   {
     "outputFile": "wwwroot/Styles/App/portal-template.css",
     "inputFile": "wwwroot/Styles/App/portal-template.scss"
+  },
+  {
+    "outputFile": "wwwroot/Styles/App/Loss/manage.css",
+    "inputFile": "wwwroot/Styles/App/Loss/manage.scss"
+  },
+  {
+    "outputFile": "wwwroot/Styles/App/MemberLoss/manage.css",
+    "inputFile": "wwwroot/Styles/App/MemberLoss/manage.scss"
   }
 ]

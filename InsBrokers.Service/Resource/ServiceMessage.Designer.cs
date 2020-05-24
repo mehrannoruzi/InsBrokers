@@ -88,6 +88,15 @@ namespace InsBrokers.Service.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to خطایی رخ داده است.
+        /// </summary>
+        public static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to نام کاربری یا رمز عبور اشتباه است.
         /// </summary>
         public static string InvalidUsernameOrPassword {
@@ -120,6 +129,15 @@ namespace InsBrokers.Service.Resource {
         public static string RecoverPassword {
             get {
                 return ResourceManager.GetString("RecoverPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ذخیر فایل با مشکل مواجه شد.
+        /// </summary>
+        public static string SaveFileFailed {
+            get {
+                return ResourceManager.GetString("SaveFileFailed", resourceCulture);
             }
         }
     }

@@ -1,0 +1,15 @@
+@model PagingListDetails<Loss>
+@{
+    ViewBag.Title = $"{Strings.Management} {InsBrokers.Domain.Resource.Strings.Loss}";
+    Layout = "_LayoutManage";
+}
+@section styles{
+    <link href="@Url.Content("~/Styles/App/MemberLoss/manage.min.css")" rel="stylesheet" />
+}
+@section filter{
+    <partial name="Partials/_Filters" model="new LossSearchFilter()" />
+}
+<partial name="Partials/_List" model="@Model" />
+@section scripts{
+    <script src="@Url.Content("~/Scripts/App/MemberLoss/manage.js")"></script>
+}

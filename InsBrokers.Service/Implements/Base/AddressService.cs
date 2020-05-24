@@ -20,27 +20,27 @@ namespace InsBrokers.Service
             _addressRepo = appUOW.AddressRepo;
         }
 
-        public IResponse<PagingListDetails<AddressDTO>> Get(Guid userId)
-        {
-            var currentDT = DateTime.Now;
-            var addresses = _addressRepo.Get(selector: a => new AddressDTO
-            {
-                Id = a.AddressId,
-                Address = a.AddressDetails
-            },
-            conditions: x => x.UserId == userId,
-            pagingParameter: new PagingParameter
-            {
-                PageNumber = 1,
-                PageSize = 3
-            },
-            orderBy: o => o.OrderByDescending(x => x.AddressId));
-            return new Response<PagingListDetails<AddressDTO>>
-            {
-                Result = addresses,
-                IsSuccessful = true
-            };
-        }
+        //public IResponse<PagingListDetails<AddressSearchFilter>> Get(Guid userId)
+        //{
+        //    var currentDT = DateTime.Now;
+        //    var addresses = _addressRepo.Get(selector: a => new AddressSearchFilter
+        //    {
+        //        UserId = userId,
+        //        Details = a.AddressDetails
+        //    },
+        //    conditions: x => x.UserId == userId,
+        //    pagingParameter: new PagingParameter
+        //    {
+        //        PageNumber = 1,
+        //        PageSize = 3
+        //    },
+        //    orderBy: o => o.OrderByDescending(x => x.AddressId));
+        //    return new Response<PagingListDetails<AddressSearchFilter>>
+        //    {
+        //        Result = addresses,
+        //        IsSuccessful = true
+        //    };
+        //}
 
         public PagingListDetails<Address> Get(AddressSearchFilter filter)
         {

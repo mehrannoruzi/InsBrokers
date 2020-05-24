@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\Styles\App\MemberLoss\manage.css" />
     <_ContentIncludedByDefault Remove="wwwroot\Styles\App\menu.css" />
     <_ContentIncludedByDefault Remove="wwwroot\Styles\Libs\portal-libs.css" />
   </ItemGroup>
