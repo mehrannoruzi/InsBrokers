@@ -1,0 +1,32 @@
+@model InsBrokers.Domain.MenuModel
+@{
+    Layout = null;
+}
+<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav metismenu" id="side-menu">
+            <li class="nav-header">
+                <div class="dropdown profile-element">
+                    <img alt="image" class="rounded-circle" src="@Url.Content("/images/user.png")" />
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <span class="block m-t-xs font-bold">@User.GetFullname()</span>
+                        <span class="text-muted text-xs block username" dir="ltr"> <b class="caret"></b>&nbsp; @User.GetUsername() </span>
+                    </a>
+                    <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                        <li><a class="dropdown-item"><strong>@Strings.Roles :</strong></a></li>
+                        @foreach (var item in Model.Roles)
+                        {
+                            <li><a class="dropdown-item" href="#">@item.Value</a></li>
+                        }
+                    </ul>
+                </div>
+                <div class="logo-element">
+                    <img src="@Url.Content("/images/logo.png")" />
+                </div>
+            </li>
+            @Html.Raw(Model.Menu)
+        </ul>
+
+    </div>
+</nav>
+

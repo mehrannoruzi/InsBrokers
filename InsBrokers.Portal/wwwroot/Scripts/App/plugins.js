@@ -1,4 +1,11 @@
-﻿
+﻿var notifyType = {
+    success: "success",
+    danger: "danger",
+    info: "info",
+    warning: "warning"
+};
+
+
 var fireGlobalPlugins = function () {
     //fireDropzone();
 

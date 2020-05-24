@@ -1,19 +1,25 @@
 ﻿<!DOCTYPE html>
 
 <html lang="fa" dir="rtl">
-
 <head>
     @RenderSection("styles", false)
     <partial name="Partials/_LayoutHeader" />
 </head>
-<body dir="rtl">
-    <header>
-        <partial name="Partials/_Menu" />
-    </header>
-    <section>
-        @RenderBody()
-    </section>
-    <footer></footer>
+<body class="rtls">
+    <div id="wrapper">
+        <vc:sidebar></vc:sidebar>
+        <div id="page-wrapper" class="gray-bg">
+            <partial name="Partials/_Navbar" />
+
+            <div class="wrapper wrapper-content animated fadeInRight">
+                @RenderBody()
+            </div>
+            <div class="footer">
+                <div class="text-center">@Html.Raw(Strings.CopyRights)</div>
+            </div>
+
+        </div>
+    </div>
     <partial name="Partials/_LayoutFooter" />
     @RenderSection("Scripts", false)
 </body>

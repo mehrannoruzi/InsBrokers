@@ -32,6 +32,7 @@
     <None Include="Views\Role\Partials\_Entity.cshtml" />
     <None Include="Views\Role\Partials\_Filters.cshtml" />
     <None Include="Views\Role\Partials\_List.cshtml" />
+    <None Include="Views\Shared\Components\Sidebar\Default.cshtml" />
     <None Include="Views\UserInRole\Partials\_Entity.cshtml" />
     <None Include="Views\UserInRole\Partials\_List.cshtml" />
     <None Include="Views\User\Manage.cshtml" />

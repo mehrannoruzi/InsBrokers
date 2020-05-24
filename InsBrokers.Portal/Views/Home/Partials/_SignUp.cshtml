@@ -4,71 +4,77 @@
 }
 @using Elk.Core
 
-    <form id="frm-register" action="@Url.Action("SignUp","Home")">
-        <div class="row">
-            <div class="col-12 col-sm-6 col-md-4">
-                <custom-input-for for="Name" class="form-control" />
-            </div>
-            <div class="col-12 col-sm-6 col-md-4">
-                <custom-input-for for="Family" class="form-control" />
-            </div>
-            <div class="col-12 col-sm-6 col-md-4">
-                <custom-input-for for="FatherName" class="form-control" />
-            </div>
+<form id="frm-register" action="@Url.Action("SignUp","Home")">
+    <div class="row">
+        <div class="col-12 col-sm-6 col-md-4">
+            <custom-input-for for="Name" class="form-control" />
         </div>
-        <div class="row">
-            <div class="col-12 col-sm-6">
-                <custom-input-for for="NationalCode" class="form-control ltr-elm" />
-            </div>
-            <div class="col-12 col-sm-6">
-                <custom-input-for for="MobileNumber" class="form-control ltr-elm" />
-            </div>
+        <div class="col-12 col-sm-6 col-md-4">
+            <custom-input-for for="Family" class="form-control" />
         </div>
-        <div class="row">
-            <div class="col-12 col-sm-6">
-                <custom-input-for for="Email" class="form-control ltr-elm" />
-            </div>
-            <div class="col-12 col-sm-6">
-                <custom-input-for for="Password" class="form-control ltr-elm" type="password" />
-            </div>
+        <div class="col-12 col-sm-6 col-md-4">
+            <custom-input-for for="FatherName" class="form-control" />
         </div>
-        <div class="row">
-            <div class="col-12 col-sm-6 col-md-4">
-                <custom-select-for for="BankName" class="form-control" items="EnumExtension.GetEnumElements<BankName>().Select(x=>new SelectListItem {
+    </div>
+    <div class="row">
+        <div class="col-12 col-sm-6">
+            <custom-input-for for="NationalCode" class="form-control ltr-elm" />
+        </div>
+        <div class="col-12 col-sm-6">
+            <custom-input-for for="MobileNumber" class="form-control ltr-elm" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-sm-6">
+            <custom-input-for for="Email" class="form-control ltr-elm" />
+        </div>
+        <div class="col-12 col-sm-6">
+            <custom-input-for for="Password" class="form-control ltr-elm" type="password" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-sm-6 col-md-4">
+            <custom-select-for for="BankName" class="form-control" items="EnumExtension.GetEnumElements<BankName>().Select(x=>new SelectListItem {
                 Text = x.Description,
                 Value = x.Name
             }).ToList()" />
-            </div>
-            <div class="col-12 col-sm-6 col-md-4">
-                <custom-input-for for="AccountNumber" class="form-control ltr-elm" />
-            </div>
-            <div class="col-12 col-sm-6 col-md-4">
-                <custom-input-for for="Shaba" class="form-control ltr-elm" />
-            </div>
         </div>
-        <div class="row">
-            <div class="col-12 col-sm-6 col-md-4">
-                <custom-select-for for="BaseInsurance" class="form-control" items="EnumExtension.GetEnumElements<BaseInsuranceType>().Select(x=>new SelectListItem {
+        <div class="col-12 col-sm-6 col-md-4">
+            <custom-input-for for="AccountNumber" class="form-control ltr-elm" />
+        </div>
+        <div class="col-12 col-sm-6 col-md-4">
+            <custom-input-for for="Shaba" class="form-control ltr-elm" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-sm-6 col-md-4">
+            <custom-select-for for="BaseInsurance" class="form-control" items="EnumExtension.GetEnumElements<BaseInsuranceType>().Select(x=>new SelectListItem {
                 Text = x.Description,
                 Value = x.Description
             }).ToList()" />
-            </div>
-            <div class="col-12 col-sm-6 col-md-4">
-                <custom-input-for for="Province" class="form-control" />
-            </div>
-            <div class="col-12 col-sm-6 col-md-4">
-                <custom-input-for for="City" class="form-control" />
-            </div>
         </div>
-        <div class="row">
-            <div class="col-12">
-                <custom-textarea-for for="AddressDetails" class="form-control" />
-            </div>
+        <div class="col-12 col-sm-6 col-md-4">
+            <custom-input-for for="Province" class="form-control" />
         </div>
-        <div class="row">
-            <div class="col-12 d-flex justify-content-end mb-15">
-                <custom-button id="btn-sign-up" class="btn btn-primary" type="button" text="@Strings.Submit" icon="zmdi zmdi-floppy"></custom-button>
-            </div>
+        <div class="col-12 col-sm-6 col-md-4">
+            <custom-input-for for="City" class="form-control" />
         </div>
-    </form>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <custom-textarea-for for="AddressDetails" class="form-control" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 d-flex justify-content-between mb-15">
+            <a class="btn btn-info btn-action ltr" href="@Url.Action("SignIn","Auth")">
+                <span class="text">@Strings.SignInToAccount</span>
+                <div class="icon">
+                    <i class="zmdi zmdi-sign-in"></i>
+                </div>
+            </a>
+            <custom-button id="btn-sign-up" class="btn btn-primary" type="button" text="@Strings.SignUp" icon="zmdi zmdi-floppy"></custom-button>
+        </div>
+    </div>
+</form>
 

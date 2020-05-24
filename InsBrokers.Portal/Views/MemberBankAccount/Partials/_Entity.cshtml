@@ -1,0 +1,19 @@
+@model BankAccount
+@{
+    Layout = null;
+}
+<div class="row">
+    @Html.HiddenFor(x => x.BankAccountId)
+    <div class="col-12 col-sm-6 col-md-4">
+        <custom-select-for for="BankName" class="form-control" items="EnumExtension.GetEnumElements<BankName>().Select(x=>new SelectListItem {
+                Text = x.Description,
+                Value = x.Name
+            }).ToList()" />
+    </div>
+    <div class="col-12 col-sm-4">
+        <custom-input-for for="Shaba" class="form-control ltr-elm" />
+    </div>
+    <div class="col-12 col-sm-4">
+        <custom-input-for for="AccountNumber" class="form-control ltr-elm" />
+    </div>
+</div>

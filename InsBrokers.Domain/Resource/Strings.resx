@@ -135,6 +135,9 @@
   <data name="Application" xml:space="preserve">
     <value>اپلیکیشن</value>
   </data>
+  <data name="BankAccount" xml:space="preserve">
+    <value>حساب بانکی</value>
+  </data>
   <data name="BankName" xml:space="preserve">
     <value>نام بانک</value>
   </data>

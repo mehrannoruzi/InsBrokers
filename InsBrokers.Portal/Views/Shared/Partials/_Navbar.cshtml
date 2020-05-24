@@ -1,0 +1,30 @@
+
+<div class="row border-bottom">
+    <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary varia rtl-f-r" href="#"><i class="zmdi zmdi-menu"></i></a>
+            <div class="minimalize-styl-2">
+                <span class="m-r-sm text-muted welcome-message">@Strings.WelcomeMessage.</span>
+            </div>
+        </div>
+        <ul class="nav navbar-top-links navbar-right">
+            <li>
+                <a asp-controller="Auth" asp-action="SignOut" >
+                    <span><i class="zmdi zmdi-power default-i"></i></span> @Strings.SignOut
+                </a>
+            </li>
+        </ul>
+
+    </nav>
+</div>
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active">
+                <a href="#">@ViewBag.Title</a>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2"></div>
+</div>

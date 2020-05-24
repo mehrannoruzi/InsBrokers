@@ -23,9 +23,9 @@ namespace InsBrokers.Portal.Controllers
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier,user.UserId.ToString()),
-                new Claim(ClaimTypes.Name, user.Email),
+                new Claim(ClaimTypes.Name, user.MobileNumber.ToString()),
                 new Claim(ClaimTypes.Email, user.Email),
-                new Claim("Fullname", user.Family)
+                new Claim("Fullname", user.Fullname)
             };
 
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);

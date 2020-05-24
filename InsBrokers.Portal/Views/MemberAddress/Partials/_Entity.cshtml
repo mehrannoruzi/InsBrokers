@@ -1,18 +1,18 @@
-@model Role
+@model Address
 @{
     Layout = null;
 }
 <div class="row">
-    @Html.HiddenFor(x => x.RoleId)
+    @Html.HiddenFor(x => x.AddressId)
     <div class="col-12 col-sm-6">
-        <custom-input-for for="RoleNameFa" />
+        <custom-input-for for="Province" />
     </div>
     <div class="col-12 col-sm-6">
-        <custom-input-for for="RoleNameEn" class="form-control ltr-elm"/>
+        <custom-input-for for="City" />
     </div>
 </div>
 <div class="row">
-    <div class="col-12 col-sm-6">
-        <custom-checkbox-for wrapper-class="chb-group" for="Enabled" />
+    <div class="col-12">
+        <custom-textarea-for for="AddressDetails"></custom-textarea-for>
     </div>
 </div>

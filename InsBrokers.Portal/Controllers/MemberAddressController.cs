@@ -10,7 +10,7 @@ using DomainString = InsBrokers.Domain.Resource.Strings;
 
 namespace InsBrokers.Portal.Controllers
 {
-    [AuthorizationFilter]
+   // [AuthorizationFilter]
     public partial class MemberAddressController : Controller
     {
         private readonly IAddressService _MemberAddressSrv;
@@ -33,6 +33,7 @@ namespace InsBrokers.Portal.Controllers
         [HttpPost]
         public virtual async Task<JsonResult> Add(Address model)
         {
+            model.UserId = User.GetUserId();
             if (!ModelState.IsValid) return Json(new { IsSuccessful = false, Message = ModelState.GetModelError() });
             return Json(await _MemberAddressSrv.AddAsync(model));
         }
@@ -66,6 +67,7 @@ namespace InsBrokers.Portal.Controllers
         [HttpGet]
         public virtual ActionResult Manage(AddressSearchFilter filter)
         {
+            filter.UserId = User.GetUserId();
             if (!Request.IsAjaxRequest()) return View(_MemberAddressSrv.Get(filter));
             else return PartialView("Partials/_List", _MemberAddressSrv.Get(filter));
         }

@@ -142,7 +142,7 @@ namespace InsBrokers.Portal.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to تمام حقوق مادی و معنوی این اثر متعلق به  &lt;a href=&quot;https://kingofday.ir/&quot;&gt;Kingofday.ir&lt;/a&gt; می باشد.
+        ///   Looks up a localized string similar to تمام حقوق مادی و معنوی این اثر محفوظ می باشد.
         /// </summary>
         public static string CopyRights {
             get {
@@ -556,6 +556,15 @@ namespace InsBrokers.Portal.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to نقش ها.
+        /// </summary>
+        public static string Roles {
+            get {
+                return ResourceManager.GetString("Roles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to جستجو.
         /// </summary>
         public static string Search {
@@ -597,6 +606,15 @@ namespace InsBrokers.Portal.Resource {
         public static string SignIn {
             get {
                 return ResourceManager.GetString("SignIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ورود به حساب.
+        /// </summary>
+        public static string SignInToAccount {
+            get {
+                return ResourceManager.GetString("SignInToAccount", resourceCulture);
             }
         }
         
@@ -763,7 +781,7 @@ namespace InsBrokers.Portal.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to به داشبورد مدیریت Eagle خوش آمدید.
+        ///   Looks up a localized string similar to به داشبورد مدیریت کارگزاری رسمی بیمه نفت و انرژی خوش آمدید.
         /// </summary>
         public static string WelcomeMessage {
             get {

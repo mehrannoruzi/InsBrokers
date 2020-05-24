@@ -1,0 +1,25 @@
+@model int
+@{
+    var sizes = new int[] { 10, 20, 50, 100, 300 };
+}
+<div class="ibox-title">
+    <h5>@Strings.Items</h5>
+
+    <div class="ibox-tools">
+        <a class="collapse-link">
+            <i class="zmdi zmdi-chevron-down"></i>
+        </a>
+        <a class="refresh-link">
+            <i class="zmdi zmdi-refresh"></i>
+        </a>
+        <a class="close-link">
+            <i class="zmdi zmdi-close"></i>
+        </a>
+    </div>
+    <select class="form-control page-size" name="PageSize">
+        @foreach (var item in sizes)
+        {
+            <option selected="@(item==Model)">@item</option>
+        }
+    </select>
+</div>

@@ -38,7 +38,24 @@
             max: "@Html.Raw(Strings.MaxValueExceeded)",
             min: "@Html.Raw(Strings.MinValueNotReached)"
         };
-
+        const validationMessages = {
+            Required: "@Html.Raw(Strings.Required)",
+            remote: "@Html.Raw(Strings.FillFieldCorrectly)",
+            email: "@Html.Raw(Strings.InvalidEmail)",
+            url: "@Html.Raw(Strings.IncorrectUrl)",
+            date: "@Html.Raw(Strings.IncorrectDate)",
+            dateISO: "@Html.Raw(Strings.IncorrectDateISO)",
+            number: "@Html.Raw(Strings.ValueMustBeNumber)",
+            digits: "@Html.Raw(Strings.ValueMustBeDigit)",
+            equalTo: "@Html.Raw(Strings.ValueNotMatched)",
+            accept: "@Html.Raw(Strings.IncorrectFormat)",
+            maxlength: "@Html.Raw(Strings.MaxLengthExeeded)",
+            minlength: "@Html.Raw(Strings.MinLengthNotReached)",
+            rangelength: "@Html.Raw(Strings.LenghIsNotInRange)",
+            range: "@Html.Raw(Strings.ValueIsNotInRange)",
+            max: "@Html.Raw(Strings.MaxValueExceeded)",
+            min: "@Html.Raw(Strings.MinValueNotReached)"
+        };
 
 </script>
 
@@ -49,5 +66,5 @@
 </environment>
 <environment include="Production ">
     <script src="@Url.Content("~/Scripts/Libs/libs.min.js")"></script>
-    <script src="@Url.Content("~/Scripts/App/app.min.js")"  asp-append-version="true"></script>
+    <script src="@Url.Content("~/Scripts/App/app.min.js")" asp-append-version="true"></script>
 </environment>

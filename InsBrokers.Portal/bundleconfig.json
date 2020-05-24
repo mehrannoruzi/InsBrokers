@@ -12,7 +12,7 @@
     "outputFileName": "wwwroot/Styles/App/portal-app.css",
     "inputFiles": [
       "wwwroot/Styles/App/menu.css",
-      "wwwroot/Styles/App/template.css",
+      "wwwroot/Styles/App/portal-template.css",
       "wwwroot/Styles/App/common.css",
       "wwwroot/Styles/App/fa.css"
     ]
@@ -46,7 +46,7 @@
     "inputFiles": [
       "wwwroot/Scripts/App/portal-template.js",
       "wwwroot/Scripts/App/portal-plugins.js",
-      "wwwroot/Scripts/App/common.js"
+      "wwwroot/Scripts/App/portal-common.js"
     ]
   },
   {
