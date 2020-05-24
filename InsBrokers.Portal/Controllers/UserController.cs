@@ -69,7 +69,8 @@ namespace InsBrokers.Portal.Controllers
         public virtual async Task<JsonResult> Delete(Guid id) => Json(await _userSrv.DeleteAsync(id));
 
         [HttpGet]
-        public virtual async Task<ActionResult> ProfileInfo() => View((await _userSrv.FindAsync(User.GetUserId())).Result);
+        public virtual async Task<ActionResult> ProfileInfo()
+                => View((await _userSrv.FindAsync(User.GetUserId())).Result);
 
         [HttpPost]
         public virtual async Task<JsonResult> ProfileInfo(User model)

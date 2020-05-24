@@ -1,18 +1,12 @@
-using System;
 using Elk.Core;
-using InsBrokers.Domain;
 using InsBrokers.Service;
-using Elk.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using System.Security.Claims;
 
 using Microsoft.AspNetCore.Mvc;
 using InsBrokers.Portal.Resource;
 using Microsoft.AspNetCore.Http;
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Configuration;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using InsBrokers.DataAccess.Ef;
 using Elk.AspNetCore;
 

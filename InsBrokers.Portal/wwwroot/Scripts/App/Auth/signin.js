@@ -2,9 +2,12 @@
 $(document).ready(function () {
     $(document).on('click', '.btn-sign-in', function () {
         let $btn = $(this);
+
         submitAjaxForm(
             $btn,
             function (rep) {
+                console.log('rep');
+                console.log(rep);
                 window.location.href = rep.Result;
             }
         );

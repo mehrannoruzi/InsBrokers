@@ -47,14 +47,21 @@ namespace InsBrokers.Service
 
         public async Task<IResponse<User>> UpdateProfile(User model)
         {
-            var findedUser = await _appUow.UserRepo.FindAsync(model.UserId);
-            if (findedUser == null) return new Response<User> { Message = ServiceMessage.RecordNotExist.Fill(DomainStrings.User) };
+            var user = await _appUow.UserRepo.FindAsync(model.UserId);
+            if (user == null) return new Response<User> { Message = ServiceMessage.RecordNotExist.Fill(DomainStrings.User) };
 
-            findedUser.Password = HashGenerator.Hash(model.Password);
-            findedUser.Name = model.Name;
+            if (!string.IsNullOrWhiteSpace(model.NewPassword))
+                user.Password = HashGenerator.Hash(model.NewPassword);
+            user.Name = model.Name;
+            user.Family = model.Family;
+            user.FatherName = model.FatherName;
+            user.Email = model.Email;
+            user.BirthDay = model.BirthDay;
+            user.NationalCode = model.NationalCode;
+            user.BaseInsurance = model.BaseInsurance;
 
             var saveResult = _appUow.ElkSaveChangesAsync();
-            return new Response<User> { Result = findedUser, IsSuccessful = saveResult.Result.IsSuccessful, Message = saveResult.Result.Message };
+            return new Response<User> { Result = user, IsSuccessful = saveResult.Result.IsSuccessful, Message = saveResult.Result.Message };
         }
 
         public async Task<IResponse<User>> UpdateAsync(User model)
@@ -298,7 +305,7 @@ namespace InsBrokers.Service
                 Email = model.Email,
                 MobileNumber = long.Parse(model.MobileNumber),
                 BaseInsurance = model.BaseInsurance,
-                Password = HashGenerator.Hash(model.Password),
+                Password = HashGenerator.Hash(model.MobileNumber),
                 IsActive = true,
                 NationalCode = model.NationalCode,
                 BankAccounts = new List<BankAccount>{
@@ -320,13 +327,14 @@ namespace InsBrokers.Service
             using var bt = _appUow.Database.BeginTransaction();
             await _appUow.UserRepo.AddAsync(user);
             var save = await _appUow.ElkSaveChangesAsync();
-            if (!save.IsSuccessful) return new Response<User> {Message = save.Message };
-            await _authUow.UserInRoleRepo.AddAsync(new UserInRole {
+            if (!save.IsSuccessful) return new Response<User> { Message = save.Message };
+            await _authUow.UserInRoleRepo.AddAsync(new UserInRole
+            {
                 RoleId = model.MemberRoleId,
                 UserId = user.UserId
             });
             var addUserInRole = await _authUow.ElkSaveChangesAsync();
-            if(!addUserInRole.IsSuccessful)
+            if (!addUserInRole.IsSuccessful)
             {
                 bt.Rollback();
                 return new Response<User> { Message = addUserInRole.Message };

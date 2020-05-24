@@ -25,3 +25,9 @@ button {
   background: none; }
   button:focus {
     outline: none; }
+
+footer {
+  padding: 10px;
+  text-align: center;
+  background-color: #34495e;
+  color: #fff; }

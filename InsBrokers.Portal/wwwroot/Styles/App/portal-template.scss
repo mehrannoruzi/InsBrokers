@@ -1,4 +1,6 @@
-﻿[class^=col-] {
+﻿$primaryColor: #34495e;
+
+[class^=col-] {
     display: flex;
 }
 
@@ -32,4 +34,10 @@ button {
     &:focus {
         outline: none;
     }
+}
+footer {
+    padding: 10px;
+    text-align: center;
+    background-color: $primaryColor;
+    color:#fff;
 }

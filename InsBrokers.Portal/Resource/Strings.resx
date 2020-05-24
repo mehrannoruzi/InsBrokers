@@ -145,7 +145,7 @@
     <value>بستن</value>
   </data>
   <data name="CopyRights" xml:space="preserve">
-    <value>تمام حقوق مادی و معنوی این اثر متعلق به  &lt;a href="https://kingofday.ir/"&gt;Kingofday.ir&lt;/a&gt; می باشد</value>
+    <value>تمام حقوق مادی و معنوی این اثر محفوظ می باشد</value>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>حذف</value>
@@ -282,6 +282,9 @@
   <data name="Required" xml:space="preserve">
     <value>این فیلد اجباری می باشد</value>
   </data>
+  <data name="Roles" xml:space="preserve">
+    <value>نقش ها</value>
+  </data>
   <data name="Search" xml:space="preserve">
     <value>جستجو</value>
   </data>
@@ -296,6 +299,9 @@
   </data>
   <data name="SignIn" xml:space="preserve">
     <value>ورود</value>
+  </data>
+  <data name="SignInToAccount" xml:space="preserve">
+    <value>ورود به حساب</value>
   </data>
   <data name="SignOut" xml:space="preserve">
     <value>خروج</value>
@@ -352,7 +358,7 @@
     <value>کارگزاری رسمی بیمه نفت و انرژی</value>
   </data>
   <data name="WelcomeMessage" xml:space="preserve">
-    <value>به داشبورد مدیریت Eagle خوش آمدید</value>
+    <value>به داشبورد مدیریت کارگزاری رسمی بیمه نفت و انرژی خوش آمدید</value>
   </data>
   <data name="WrongEmailFormat" xml:space="preserve">
     <value>وروذی باید ایمیل باشد</value>

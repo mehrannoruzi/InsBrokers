@@ -1,41 +1,122 @@
 ﻿///<reference path="../Libs/jquery-3.1.1.min.js" />
 var $threeDotLoader = '<span class="three-dot-loader"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span>';
 var $circularLoader = '<div class="spinner"><svg viewBox="25 25 50 50"><circle cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></circle></svg></div>';
-
+var notifyType = {
+    success: "success",
+    danger: "danger",
+    info: "info",
+    warning: "warning"
+};
 
 
 $(document).ready(function () {
 
-    $(document).on('focus', '.material-input', function () {
-        let $lbl = $(this).next();
-        if (!$lbl.hasClass('lbl-top')) $lbl.addClass('lbl-top');
-    }).on('focusout', '.material-input', function () {
-        let $lbl = $(this).next();
-        if ($(this).val().length === 0) $lbl.removeClass('lbl-top');
-    });;
+    var setActiveMenu = function () {
+        let currentUrl = window.location.href.toString().toLowerCase();
+        $('nav ul.nav > li:not(".nav-header")  a:not([href="#"])').each(function () {
+            var linkUrl = $(this).attr('href');
+            if (currentUrl.endsWith(linkUrl.toLowerCase().split('?')[0])) {
+                $(this).closest('li').addClass('active').closest('.link-parent').addClass('active');
+                let $parentUl = $(this).closest('ul.nav-second-level');
+                if ($parentUl.length > 0) {
+                    $parentUl.addClass('in');
+                }
+                return false;
+            }
+        });
+    }();
 
-    if (typeof fireGlobalPlugins === 'function') fireGlobalPlugins();
+    fireGlobalPlugins();
 
+    //auto submit form with ajax
+    $(document).on('click', '[data-ajax-submit="true"]', function () {
+        let $btn = $(this);
+        submitAjaxForm($btn, function (rep) { showNotif(notifyType.success, strings.success); });
+    });
+
+    //open close filter ibox
+    $(document).on('click', '.filters .ibox-title', function (e) {
+        var $ibox = $(this).closest('div.ibox');
+        var button = $(this).find('.collapse-icon i');
+        let nowClosed = button.hasClass('zmdi-chevron-down');
+        var content = $ibox.children('.ibox-content');
+        content.slideToggle(200);
+        button.toggleClass('zmdi-chevron-up').toggleClass('zmdi-chevron-down');
+        $ibox.toggleClass('').toggleClass('border-bottom');
+        setTimeout(function () {
+            $ibox.resize();
+            $ibox.find('[id^=map-]').resize();
+        }, 50);
+        let $filters = $(this).closest('.filters');
+        if ($ibox.hasClass('fixed-ibox'))
+            return;
+        if (nowClosed) {
+            $ibox.animate({ 'margin-left': '-=125px' });
+            $filters.animate({ 'padding-top': '+=40px' });
+        }
+        else {
+            $ibox.animate({ 'margin-left': '+=125px' });
+            $filters.animate({ 'padding-top': '-=40px' });
+        }
+    });
+
+    //call appropriate action with json response via ajax
+    $(document).on('click', '[data-ajax-action]', function () {
+        let $elm = $(this);
+        let type = 'post';
+        if ($elm.data('type'))
+            tyep = $elm.data('type');
+        let $content = $elm.html();
+        $elm.html($circularLoader);
+        $.ajax({
+            type: type,
+            url: $elm.data('ajax-action'),
+            contentType: 'json',
+            success: function (rep) {
+                $elm.html($content);
+                if (rep.IsSuccessful) showNotif(notifyType.success, strings.success);
+                else showNotif(notifyType.danger, rep.Message);
+            },
+            error: function () {
+                $elm.html($content);
+                showNotif(notifyType.danger, strings.error);
+            }
+        });
+    });
+
+    //load appropriate partial to load in target element
+    $(document).on('click', '[data-ajax-load]', function () {
+        let $target = $('.content-wrapper');
+        if ($(this).data('target')) $target = $($(this).data('target'));
+        $target.loadOverStart();
+        $.get($(this).data('ajax-load'))
+            .done(function (rep) {
+                $target.html(rep).loadOverStop();
+            })
+            .fail(function (e) {
+                $target.loadOverStop();
+            });
+    });
 
     //change default validation messages 
     jQuery.extend(jQuery.validator.messages, {
-        required: strings.required,
-        remote: strings.remote,
-        email: strings.email,
-        url: strings.url,
-        date: strings.date,
-        dateISO: strings.dateISO,
-        number: strings.number,
-        digits: strings.digits,
-        creditcard: strings.creditcard,
-        equalTo: strings.equalTo,
-        accept: strings.accept,
-        maxlength: jQuery.validator.format(strings.maxlength),
-        minlength: jQuery.validator.format(strings.minlength),
-        rangelength: jQuery.validator.format(strings.rangelength),
-        range: jQuery.validator.format(strings.range),
-        max: jQuery.validator.format(strings.max),
-        min: jQuery.validator.format(strings.min)
+        required: validationMessages.required,
+        remote: validationMessages.remote,
+        email: validationMessages.email,
+        url: validationMessages.url,
+        date: validationMessages.date,
+        dateISO: validationMessages.dateISO,
+        number: validationMessages.number,
+        digits: validationMessages.digits,
+        creditcard: validationMessages.creditcard,
+        equalTo: validationMessages.equalTo,
+        accept: validationMessages.accept,
+        maxlength: jQuery.validator.format(validationMessages.maxlength),
+        minlength: jQuery.validator.format(validationMessages.minlength),
+        rangelength: jQuery.validator.format(validationMessages.rangelength),
+        range: jQuery.validator.format(validationMessages.range),
+        max: jQuery.validator.format(validationMessages.max),
+        min: jQuery.validator.format(validationMessages.min)
     });
 
     //
@@ -120,11 +201,11 @@ var submitAjaxForm = function ($btn, successFunc, errorFunc, useToastr) {
     let $frm = $btn.closest('form');
     if (!$frm.valid()) return;
     ajaxBtn.inProgress($btn);
-
-    $.post($frm.attr('action'), $frm.serialize())
+    let model = customSerialize($frm, true);
+    console.log(model);
+    $.post($frm.attr('action'), model)
         .done(function (rep) {
-            console.log(rep);
-            if (rep.Success) {
+            if (rep.IsSuccessful) {
                 if (successFunc && typeof successFunc === 'function') successFunc(rep);
             }
             else {
@@ -137,6 +218,7 @@ var submitAjaxForm = function ($btn, successFunc, errorFunc, useToastr) {
             ajaxBtn.normal();
         })
         .fail(function (e) {
+            ajaxBtn.normal();
             if (useToastr) showNotif(notifyType.danger, strings.error);
             else $frm.inlineNotify(notifyType.danger, strings.error);
 
@@ -165,7 +247,7 @@ var ajaxCall = function ($elm, data, successFunc, errorFunc, loader, method) {
 
                 $elm.prop('disabled', false);
 
-                if (rep.Success) {
+                if (rep.IsSuccessful) {
                     if (typeof successFunc === 'function') successFunc(rep);
                 }
                 else {
@@ -191,7 +273,7 @@ var ajaxCall = function ($elm, data, successFunc, errorFunc, loader, method) {
                 else $elm.html(elmHtml);
 
                 $elm.prop('disabled', false);
-                if (rep.Success) {
+                if (rep.IsSuccessful) {
                     if (typeof successFunc === 'function') successFunc(rep);
                 }
                 else {
@@ -243,10 +325,13 @@ $(document).ajaxError(function (event, jqxhr, settings, thrownError) {
     catch (e) { console.log(e); }
 });
 
-var customSerialize = function ($wrapper) {
+var customSerialize = function ($wrapper, checkNumbers) {
     let model = {};
     $wrapper.find('input:not([type="checkbox"]):not([type="radio"]),select,textarea').each(function () {
-        model[$(this).attr('name')] = $(this).val();
+        if (checkNumbers && !isNaN($(this).val()))
+            model[$(this).attr('name')] = parseInt($(this).val());
+        else
+            model[$(this).attr('name')] = $(this).val();
     });
 
     $wrapper.find('input[type="checkbox"],input[type="radio"]').each(function () {
@@ -264,12 +349,14 @@ var customSerialize = function ($wrapper) {
     return model;
 };
 
-var postObjectList = function ({ url, model, success, error }) {
+var postObjectList = function (url, model, success, error) {
+    console.log('model5:');
+    console.log(JSON.stringify(model));
     $.ajax({
+        type: 'POST',
         url: url,
-        data: model,
-        type: 'post',
-        contentType: 'application/json; charset=utf-8;',
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify(model),
         success: function (rep) { if (success) success(rep); },
         error: function (e) { if (error) error(e); }
     });

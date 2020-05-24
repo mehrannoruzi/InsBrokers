@@ -47,6 +47,8 @@ namespace InsBrokers.Service
             Expression<Func<Address, bool>> conditions = x => true;
             if (filter != null)
             {
+                if (filter.UserId != null)
+                    conditions = conditions.And(x => x.UserId == filter.UserId);
                 if (!string.IsNullOrWhiteSpace(filter.Details))
                     conditions = conditions.And(x => x.AddressDetails.Contains(filter.Details));
             }
@@ -66,7 +68,7 @@ namespace InsBrokers.Service
         public async Task<IResponse<Address>> UpdateAsync(Address model)
         {
             var address = await _addressRepo.FindAsync(model.AddressId);
-            if (address == null) return new Response<Address> { Message = ServiceMessage.RecordNotExist};
+            if (address == null) return new Response<Address> { Message = ServiceMessage.RecordNotExist };
 
             address.AddressDetails = model.AddressDetails;
 

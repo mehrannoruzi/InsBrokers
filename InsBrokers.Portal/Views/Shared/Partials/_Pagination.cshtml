@@ -1,0 +1,29 @@
+@model PagingDetails
+@{
+    var items = new List<Tuple<bool, int>>();
+    int baseNumber = 0;
+    if (Model.PageNumber >= 4)
+    {
+        baseNumber = Model.PageNumber - 3;
+    }
+}
+<nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+        <li class="page-item @(Model.HasPrevious?"":"disabled")">
+            <a class="page-link" data-number="1"><i class="zmdi zmdi-long-arrow-right"></i></a>
+        </li>
+        @{
+            var pageNumber = 0;
+            for (int i = 1; i <= 5; i++)
+            {
+                pageNumber = baseNumber + i;
+                <li class="page-item @(Model.PageNumber == pageNumber?"active":"") @(((pageNumber-1)*Model.PageSize)<Model.TotalCount?"":"disabled")">
+                    <a class="page-link" data-number="@pageNumber">@pageNumber</a>
+                </li>
+            }
+        }
+        <li class="page-item">
+            <a class="page-link" data-number="@(Model.TotalCount/Model.PageSize)"><i class="zmdi zmdi-long-arrow-left"></i></a>
+        </li>
+    </ul>
+</nav>

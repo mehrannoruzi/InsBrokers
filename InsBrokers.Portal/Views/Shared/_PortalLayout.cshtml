@@ -13,8 +13,10 @@
     <section>
         @RenderBody()
     </section>
-    <footer></footer>
-    <partial name="Partials/_LayoutFooter" />
+    <footer>
+        @Strings.CopyRights
+    </footer>
+    <partial name="Partials/_PortalLayoutFooter" />
     @RenderSection("Scripts", false)
 </body>
 </html>

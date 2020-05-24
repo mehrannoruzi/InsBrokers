@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+@{
+    var withotAddBotton = ViewBag.WithoutAddButton ?? false;
+}
+<html lang="fa" dir="rtl">
+<head>
+    @RenderSection("styles", false)
+    <partial name="Partials/_LayoutHeader" />
+</head>
+<body class="rtls">
+    <div id="wrapper">
+        <vc:sidebar></vc:sidebar>
+        <div id="page-wrapper" class="gray-bg">
+            <partial name="Partials/_Navbar" />
+
+            <div class="wrapper wrapper-content animated fadeInRight">
+
+                <form asp-action="Manage" method="get">
+                    <!-- ============================================================
+                                    Filters
+                    ================================================================= -->
+                    <div class="row">
+                        <div class="col-12 col-sm-12">
+                            <div class="filters">
+                                <div class="ibox collapsed @(withotAddBotton?"fixed-ibox":"")">
+                                    <div class="ibox-title">
+                                        <h5>@Strings.Filters</h5>
+                                        <div class="ibox-tools">
+                                            <a class="collapse-icon">
+                                                <i class="zmdi zmdi-chevron-down"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="ibox-content">
+                                        @RenderSection("filter", false)
+                                        <div class="row btn-group">
+                                            <div class="col-12">
+                                                <button type="button" class="btn btn-info m-t btn-action search">
+                                                    <span class="text">@Strings.Search</span>
+                                                    <div class="icon">
+                                                        <i class="zmdi zmdi-search-for"></i>
+                                                    </div>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @if (!withotAddBotton)
+                                {
+                                    <custom-button text="@Strings.Add"
+                                                   icon="zmdi zmdi-plus"
+                                                   class="btn btn-primary btn-action btn-modal m-b"
+                                                   data-url="@Url.Action("Add")"></custom-button>
+                                }
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <!-- ============================================================
+                                List
+                    ================================================================= -->
+                    <div class="row list">
+                        <div class="col-12">
+                            <div class="ibox ">
+                                @{
+                                    var sizes = new int[] { 10, 20, 50, 100, 300 };
+                                }
+                                <div class="ibox-title">
+                                    <h5>@Strings.Items</h5>
+
+                                    <div class="ibox-tools">
+                                        <a class="refresh-link">
+                                            <i class="zmdi zmdi-refresh"></i>
+                                        </a>
+                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                            <i class="zmdi zmdi-format-list-numbered"></i>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-user page-size">
+                                            @foreach (var item in sizes)
+                                            {
+                                                <li>
+                                                    <a href="#" class="dropdown-item @(item==10?"active":"")">@item</a>
+                                                </li>
+                                            }
+                                        </ul>
+                                        <input type="hidden" id="pagesize" name="pagesize" value="10" />
+                                    </div>
+                                </div>
+                                <div class="ibox-content">
+                                    @RenderBody()
+                                </div>
+                            </div>
+                        </div>
+                        @*<div class="col-12">
+                                <partial name="Partials/_Pagination" model="@Model" />
+                            </div>*@
+
+                    </div>
+                </form>
+
+            </div>
+            <div class="footer">
+                <div>@Html.Raw(Strings.CopyRights)</div>
+            </div>
+
+        </div>
+    </div>
+    <partial name="Partials/_LayoutFooter" />
+    @RenderSection("Scripts", false)
+</body>
+</html>

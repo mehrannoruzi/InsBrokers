@@ -32,27 +32,31 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-12 col-sm-6">
+                        <div class="col-12 col-sm-4">
+                            <custom-input-for for="NationalCode"></custom-input-for>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <custom-input-for for="FatherName"></custom-input-for>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <custom-select-for for="BaseInsurance" class="form-control" items="EnumExtension.GetEnumElements<BaseInsuranceType>().Select(x=>new SelectListItem {
+                                Text = x.Description,
+                                Value = x.Description
+                            }).ToList()" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-sm-4">
+                            <custom-input-for for="BirthDay" class="form-control pdate"></custom-input-for>
+                        </div>
+                        <div class="col-12 col-sm-4">
                             <custom-input-for for="MobileNumber"></custom-input-for>
                         </div>
-                        <div class="col-12 col-sm-6">
+                        <div class="col-12 col-sm-4">
                             <custom-input-for type="password" for="NewPassword"></custom-input-for>
                         </div>
                     </div>
-                    @*<div class="row">
-                            <div class="col-12 col-sm-6 col-md-4">
-                                @Html.CustomTextBoxFor(x => x.Email, new CustomTextBoxForModel { InputClass = "form-control ltr-elm", @InputOtherAttribute = "readonly='true'" })
-                            </div>
-                            <div class="col-12 col-sm-6 col-md-4">
-                                @Html.CustomTextBoxFor(x => x.FullName, new CustomTextBoxForModel { })
-                            </div>
-                            <div class="col-12 col-sm-6 col-md-4">
-                                @Html.CustomTextBoxFor(x => x.MobileNumber, new CustomTextBoxForModel { InputClass = "form-control ltr-elm" })
-                            </div>
-                            <div class="col-12 col-sm-6 col-md-4">
-                                @Html.CustomPasswordFor(x => x.NewPassword, new CustomTextBoxForModel { InputClass = "form-control ltr-elm", @InputOtherAttribute = "autocomplete='off' autocorrect='off'" })
-                            </div>
-                        </div>*@
+
                     <div class="row btn-group">
                         <div class="col-12">
                             <button type="button" class="btn btn-primary block m-b m-t btn-action btn-sign-in" data-ajax-submit="true">
