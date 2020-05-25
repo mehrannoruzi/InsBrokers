@@ -35,7 +35,7 @@ namespace InsBrokers.DataAccess.Ef
                     Count = g.Count()
                 }).ToListAsync();
 
-            for (int i = dayCount - 1; i >= 0; i++)
+            for (int i = dayCount - 1; i >= 0; i--)
             {
                 var date = PersianDateTime.Parse(DateTime.Now.AddDays(-i)).ToString(PersianDateTimeFormat.Date);
                 var statistic = userCount.FirstOrDefault(x => x.Date == date);

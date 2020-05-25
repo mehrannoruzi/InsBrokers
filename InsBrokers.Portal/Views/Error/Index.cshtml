@@ -1,0 +1,45 @@
+﻿@model int
+@{
+    var notFoundError = Model >= 400 && Model < 500;
+    string msg = string.Empty;
+    string url = string.Empty;
+
+    switch (Model)
+    {
+        case 404:
+            msg = Strings.NotFoundPageMessage;
+            url = "~/Images/Failed/notfound.png";
+            break;
+        case 401:
+            msg = Strings.UnAuthorizedPageMessage;
+            url = "~/Images/Failed/unauthorized.png";
+            break;
+        default:
+            msg = Strings.ErrorPageMessage;
+            url = "~/Images/Failed/error.png";
+            break;
+    }
+}
+<div class="col-12 col-sm12 text-center ">
+    <p class="text-danger">
+        <br />
+        <br />
+        <span>@msg</span>
+    </p>
+</div>
+<div class="text-center col-md-12 image-wrapper">
+    <img src="@Url.Content(url)" class="col-md-8 col-sm-12" />
+</div>
+<div class="col-12 col-sm12 text-center">
+    @Strings.GoTo
+    @{
+        var referer = Context.Request.Headers["Referer"].ToString();
+        if (!string.IsNullOrWhiteSpace(referer))
+        {
+            <a href="@referer">@Strings.PrevPage</a>
+            <spa>&nbsp;| &nbsp;</spa>
+        }
+    }
+    <a asp-controller="Auth" asp-action="SignIn">@Strings.Home</a>
+</div>
+

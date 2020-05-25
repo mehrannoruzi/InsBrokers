@@ -1,19 +1,55 @@
-﻿
+﻿@model StatisticModel
 @{
-    ViewData["Title"] = "Index";
+    ViewBag.Title = "آمار";
 }
-
-<div class="col-lg-3">
-    <div class="widget style1 navy-bg">
-        <div class="row">
-            <div class="col-4">
-                <i class="fa fa-cloud fa-5x"></i>
+    <div class="continer">
+        <div class="row m-b">
+            <div class="col-12 col-sm-6">
+                <div class="widget style1 navy-bg">
+                    <div class="row">
+                        <div class="col-4">
+                            <i class="zmdi zmdi-account font-5x"></i>
+                        </div>
+                        <div class="col-8 text-center">
+                            <span> تعداد کل کاربران </span>
+                            <h2 class="font-bold">@Model.UserCount</h2>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-8 text-right">
-                <span> Today degrees </span>
-                <h2 class="font-bold">26'C</h2>
+            <div class="col-12 col-sm-6">
+                <div class="widget style1 lazur-bg">
+                    <div class="row">
+                        <div class="col-4">
+                            <i class="zmdi zmdi-receipt font-5x"></i>
+                        </div>
+                        <div class="col-8 text-center">
+                            <span> تعداد کل هزینه ها </span>
+                            <h2 class="font-bold">@Model.LossCount</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row m-b">
+            <div class="col-12">
+                <canvas height="300" id="user_in_days"></canvas>
+            </div>
+        </div>
+        <div class="row m-b">
+            <div class="col-12">
+                <canvas style="height:300px" id="loss_in_days"></canvas>
             </div>
         </div>
     </div>
-</div>
+@section scripts{
+    <script src="~/Scripts/Libs/chart.min.js"></script>
+    <script>
+        var userInDays = @(Html.Raw(Model.UserInDays.SerializeToJson()));
+        var lossInDays = @(Html.Raw(Model.LossInDays.SerializeToJson()));
+
+    </script>
+    <script src="~/Scripts/App/Statistic/index.js"></script>
+}
+
 

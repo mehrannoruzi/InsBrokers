@@ -33,6 +33,7 @@
     <None Include="Views\Auth\RecoverPasswrod.cshtml" />
     <None Include="Views\Auth\SignIn.cshtml" />
     <None Include="Views\Auth\_Layout.cshtml" />
+    <None Include="Views\Error\Index.cshtml" />
     <None Include="Views\Role\Manage.cshtml" />
     <None Include="Views\Role\Partials\_Entity.cshtml" />
     <None Include="Views\Role\Partials\_Filters.cshtml" />
