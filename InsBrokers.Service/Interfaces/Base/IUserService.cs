@@ -21,5 +21,6 @@ namespace InsBrokers.Service
         IDictionary<object, object> Search(string query, int take = 10);
         Task<IResponse<string>> RecoverPassword(long mobileNumber, string from, EmailMessage model);
         Task<IResponse<User>> SignUp(PortalSignUpModel model);
+        Task<IResponse<Dictionary<string, int>>> GetUserCountLastDaysAsync(int dayCount = 10);
     }
 }

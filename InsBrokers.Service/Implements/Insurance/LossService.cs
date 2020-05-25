@@ -31,10 +31,6 @@ namespace InsBrokers.Service
 
 
 
-            return _LossRepo.Get(conditions, filter, x => x.OrderByDescending(u => u.LossId), new List<Expression<Func<Loss, object>>> { i => i.User, i => i.LossAssets }); ;
-        }
-
-
         public async Task<IResponse<Loss>> AddAsync(Loss model, string root, IList<IFormFile> files)
         {
             var getAssets = await _LossAssetSrv.SaveRange(root, model.UserId, files);
