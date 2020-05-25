@@ -41,15 +41,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04-DependencyResolver", "04
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "05-EndPoints", "05-EndPoints", "{984D2DB2-CF2C-4501-9DE7-8EF581158E8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsBrokers.Notifier.DataAccess.Dapper", "InsBrokers.Notifier.DataAccess.Dapper\InsBrokers.Notifier.DataAccess.Dapper.csproj", "{8B1B1E32-E9A8-47B6-A4B1-922A6D62F189}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InsBrokers.Notifier.DataAccess.Dapper", "InsBrokers.Notifier.DataAccess.Dapper\InsBrokers.Notifier.DataAccess.Dapper.csproj", "{8B1B1E32-E9A8-47B6-A4B1-922A6D62F189}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsBrokers.Notifier.DataAccess.Ef", "InsBrokers.Notifier.DataAccess.Ef\InsBrokers.Notifier.DataAccess.Ef.csproj", "{0491FD04-9D36-4B0F-9E7F-30B6E3156428}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InsBrokers.Notifier.DataAccess.Ef", "InsBrokers.Notifier.DataAccess.Ef\InsBrokers.Notifier.DataAccess.Ef.csproj", "{0491FD04-9D36-4B0F-9E7F-30B6E3156428}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsBrokers.Notifier.Service", "InsBrokers.Notifier.Service\InsBrokers.Notifier.Service.csproj", "{2940DEA3-99E7-4F81-BD97-F7459FA56FC5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InsBrokers.Notifier.Service", "InsBrokers.Notifier.Service\InsBrokers.Notifier.Service.csproj", "{2940DEA3-99E7-4F81-BD97-F7459FA56FC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsBrokers.Notifier.DependencyResolver", "InsBrokers.Notifier.DependencyResolver\InsBrokers.Notifier.DependencyResolver.csproj", "{93388D94-1D7F-41E6-B098-C02A5EAC2A55}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InsBrokers.Notifier.DependencyResolver", "InsBrokers.Notifier.DependencyResolver\InsBrokers.Notifier.DependencyResolver.csproj", "{93388D94-1D7F-41E6-B098-C02A5EAC2A55}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsBrokers.Notifier", "InsBrokers.Notifier\InsBrokers.Notifier.csproj", "{C414AD0F-DD30-47EE-AD12-886204FADF7D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InsBrokers.Notifier", "InsBrokers.Notifier\InsBrokers.Notifier.csproj", "{C414AD0F-DD30-47EE-AD12-886204FADF7D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
