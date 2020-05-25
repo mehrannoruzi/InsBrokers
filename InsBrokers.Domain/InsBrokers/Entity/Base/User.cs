@@ -87,9 +87,7 @@ namespace InsBrokers.Domain
 
         [Display(Name = nameof(Strings.BaseInsurance), ResourceType = typeof(Strings))]
         [Required(ErrorMessageResourceName = nameof(ErrorMessage.Required), ErrorMessageResourceType = typeof(ErrorMessage))]
-        [MaxLength(20, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
-        [StringLength(20, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
-        public string BaseInsurance { get; set; }
+        public BaseInsuranceType BaseInsurance { get; set; }
 
         [Column(TypeName = "varchar(50)")]
         [Display(Name = nameof(Strings.Email), ResourceType = typeof(Strings))]

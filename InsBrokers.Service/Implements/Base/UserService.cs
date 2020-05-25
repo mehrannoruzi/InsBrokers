@@ -147,7 +147,7 @@ namespace InsBrokers.Service
             //}
             user.LastLoginDateMi = DateTime.Now;
             user.LastLoginDateSh = PersianDateTime.Now.ToString(PersianDateTimeFormat.Date);
-
+            _appUow.UserRepo.Update(user);
             var saveResult = await _appUow.ElkSaveChangesAsync();
             return new Response<User> { IsSuccessful = saveResult.IsSuccessful, Message = saveResult.Message, Result = user };
         }

@@ -1,0 +1,71 @@
+﻿@model User
+@{
+    Layout = null;
+    var addMode = Model.UserId == Guid.Empty;
+}
+<div class="row">
+    @Html.HiddenFor(x => x.UserId)
+    <div class="col-12 col-sm-4">
+        <custom-input-for for="Name" readonly="true" />
+    </div>
+    <div class="col-12 col-sm-4">
+        <custom-input-for for="Family" readonly="true" />
+    </div>
+    <div class="col-12 col-sm-4">
+        <custom-input-for for="FatherName" readonly="true"></custom-input-for>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 col-sm-4">
+        <custom-input-for for="NationalCode" readonly="true"></custom-input-for>
+    </div>
+    <div class="col-12 col-sm-4">
+        <custom-input-for for="Email" class="form-control ltr-elm" readonly="true" />
+    </div>
+    <div class="col-12 col-sm-4">
+        <custom-input-for for="MobileNumber" readonly="true" class="form-control ltr-elm" type="number" />
+    </div>
+</div>
+<div class="row">
+
+    <div class="col-12 col-sm-4">
+        <custom-select-for for="BaseInsurance" readonly="true" class="form-control" items="EnumExtension.GetEnumElements<BaseInsuranceType>().Select(x=>new SelectListItem {
+                                Text = x.Description,
+                                Value = x.Name
+                            }).ToList()" />
+    </div>
+    <div class="col-12 col-sm-4">
+        <custom-input-for for="BirthDay" readonly="true" class="form-control pdate"></custom-input-for>
+    </div>
+    <div class="col-12 col-sm-4">
+        <custom-checkbox-for wrapper-class="chb-group" for="IsActive" readonly="true" />
+    </div>
+</div>
+<hr />
+<h6>@Html.DisplayNameFor(x => x.Addresses)</h6>
+<div class="row">
+    @if (Model.Addresses != null)
+    {
+        foreach (var addr in Model.Addresses)
+        {
+            <div class="col-12 m-b">
+                <p>@addr.Province-@addr.City-@addr.AddressDetails</p>
+            </div>
+        }
+
+    }
+</div>
+<hr />
+<h6>@Html.DisplayNameFor(x => x.BankAccounts)</h6>
+<div class="row">
+    @if (Model.BankAccounts != null)
+    {
+        foreach (var acc in Model.BankAccounts)
+        {
+            <div class="col-12 m-b">
+                <p>@acc.BankName (Html.DisplayNameFor(x=>x.BankAccounts[0].AccountNumber):@acc.BankName)</p>
+                <p>@Html.DisplayNameFor(x=>x.BankAccounts[0].Shaba):@acc.Shaba</p>
+            </div>
+        }
+    }
+</div>

@@ -40,7 +40,7 @@
     <div class="col-12 col-sm-4">
         <custom-select-for for="BaseInsurance" class="form-control" items="EnumExtension.GetEnumElements<BaseInsuranceType>().Select(x=>new SelectListItem {
                                 Text = x.Description,
-                                Value = x.Description
+                                Value = x.Name
                             }).ToList()" />
     </div>
 </div>

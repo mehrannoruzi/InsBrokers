@@ -90,7 +90,7 @@ namespace InsBrokers.Portal
                 IsActive = true,
                 NationalCode = "5160000608",
                 FatherName ="father",
-                BaseInsurance = "آرمان",
+                BaseInsurance = BaseInsuranceType.BeduneBimehPayeh,
                 LastLoginDateSh = "1397/06/04",
                 LastLoginDateMi = new DateTime(2018, 8, 26),
                 InsertDateSh = "1397/06/04",
