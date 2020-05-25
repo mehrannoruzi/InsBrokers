@@ -43,9 +43,34 @@ namespace InsBrokers.Service
             return new Response<Loss> { Result = model, IsSuccessful = saveResult.IsSuccessful, Message = saveResult.Message };
         }
 
+        public async Task<IResponse<Loss>> AdminUpdateAsync(Loss model, string root, IList<IFormFile> files)
+        {
+            var Loss = await _LossRepo.FirstOrDefaultAsync(conditions: x => x.LossId == model.LossId, new List<Expression<Func<Loss, object>>> { i => i.User });
+            if (Loss == null) return new Response<Loss> { Message = ServiceMessage.RecordNotExist };
+
+            Loss.Status = model.Status;
+            Loss.RelationType = model.RelationType;
+            Loss.LossType = model.LossType;
+            Loss.LossDateSh = model.LossDateSh;
+            Loss.LossDateMi = PersianDateTime.Parse(model.LossDateSh).ToDateTime();
+            Loss.PatientName = model.PatientName;
+            Loss.Cost = model.Cost;
+            Loss.Description = model.Description;
+            _LossRepo.Update(Loss);
+            var getAssets = await _LossAssetSrv.SaveRange(root, model.UserId, files);
+            if (!getAssets.IsSuccessful) return new Response<Loss> { Message = getAssets.Message };
+            foreach (var item in getAssets.Result)
+                item.LossId = Loss.LossId;
+            await _appUow.LossAssetRepo.AddRangeAsync(getAssets.Result);
+            var updateResult = await _appUow.ElkSaveChangesAsync();
+            if (!updateResult.IsSuccessful) _LossAssetSrv.DeleteRange(getAssets.Result);
+            return new Response<Loss> { Result = Loss, IsSuccessful = updateResult.IsSuccessful, Message = updateResult.Message };
+        }
+
+
         public async Task<IResponse<Loss>> UpdateAsync(Loss model, string root, IList<IFormFile> files)
         {
-            var Loss = await _LossRepo.FindAsync(model.LossId);
+            var Loss = await _LossRepo.FirstOrDefaultAsync(conditions: x => x.LossId == model.LossId, new List<Expression<Func<Loss, object>>> { i => i.User });
             if (Loss == null) return new Response<Loss> { Message = ServiceMessage.RecordNotExist };
 
             Loss.RelationType = model.RelationType;
@@ -60,6 +85,7 @@ namespace InsBrokers.Service
             foreach (var item in getAssets.Result)
                 item.LossId = Loss.LossId;
             await _appUow.LossAssetRepo.AddRangeAsync(getAssets.Result);
+            _LossRepo.Update(Loss);
             var updateResult = await _appUow.ElkSaveChangesAsync();
             if (!updateResult.IsSuccessful) _LossAssetSrv.DeleteRange(getAssets.Result);
             return new Response<Loss> { Result = Loss, IsSuccessful = updateResult.IsSuccessful, Message = updateResult.Message };
@@ -80,7 +106,7 @@ namespace InsBrokers.Service
 
         public async Task<IResponse<Loss>> FindAsync(int id)
         {
-            var Loss = await _LossRepo.FirstOrDefaultAsync(x => x.LossId == id, new List<Expression<Func<Loss, object>>> { x => x.LossAssets });
+            var Loss = await _LossRepo.FirstOrDefaultAsync(x => x.LossId == id, new List<Expression<Func<Loss, object>>> { x => x.LossAssets, x => x.User });
             if (Loss == null) return new Response<Loss> { Message = ServiceMessage.RecordNotExist };
             return new Response<Loss> { Result = Loss, IsSuccessful = true };
         }

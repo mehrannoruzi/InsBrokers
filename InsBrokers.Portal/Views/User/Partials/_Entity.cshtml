@@ -12,12 +12,12 @@
             <custom-input-for for="Family" />
         </div>
         <div class="col-12 col-sm-4">
-            <custom-input-for for="Email" readonly="!addMode" class="form-control ltr-elm" />
+            <custom-input-for for="Email" class="form-control ltr-elm" />
         </div>
     </div>
 <div class="row">
     <div class="col-12 col-sm-6">
-        <custom-input-for for="MobileNumber" class="form-control ltr-elm" type="number" />
+        <custom-input-for for="MobileNumber"  readonly="!addMode" class="form-control ltr-elm" type="number" />
     </div>
     <div class="col-12 col-sm-6">
         @if (addMode)
@@ -31,7 +31,24 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-12 col-sm-6">
-        <custom-checkbox-for  wrapper-class="chb-group" for="IsActive" />
+    <div class="col-12 col-sm-4">
+        <custom-input-for for="NationalCode"></custom-input-for>
+    </div>
+    <div class="col-12 col-sm-4">
+        <custom-input-for for="FatherName"></custom-input-for>
+    </div>
+    <div class="col-12 col-sm-4">
+        <custom-select-for for="BaseInsurance" class="form-control" items="EnumExtension.GetEnumElements<BaseInsuranceType>().Select(x=>new SelectListItem {
+                                Text = x.Description,
+                                Value = x.Description
+                            }).ToList()" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 col-sm-4">
+        <custom-input-for for="BirthDay" class="form-control pdate"></custom-input-for>
+    </div>
+    <div class="col-12 col-sm-4">
+        <custom-checkbox-for wrapper-class="chb-group" for="IsActive" />
     </div>
 </div>

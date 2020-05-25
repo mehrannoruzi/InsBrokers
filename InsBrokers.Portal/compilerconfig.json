@@ -46,5 +46,9 @@
   {
     "outputFile": "wwwroot/Styles/App/MemberLoss/manage.css",
     "inputFile": "wwwroot/Styles/App/MemberLoss/manage.scss"
+  },
+  {
+    "outputFile": "wwwroot/Styles/App/LossAsset/uploader.css",
+    "inputFile": "wwwroot/Styles/App/LossAsset/uploader.scss"
   }
 ]

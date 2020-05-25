@@ -12,7 +12,7 @@ using Elk.Http;
 
 namespace InsBrokers.Portal.Controllers
 {
-    [AuthorizationFilter]
+    //[AuthorizationFilter]
     public partial class RoleController : Controller
     {
         private readonly IRoleService _roleSrv;

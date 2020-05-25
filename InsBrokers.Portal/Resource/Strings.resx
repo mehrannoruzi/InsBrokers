@@ -153,6 +153,9 @@
   <data name="Details" xml:space="preserve">
     <value>جزییات</value>
   </data>
+  <data name="Download" xml:space="preserve">
+    <value>دانلود</value>
+  </data>
   <data name="DropYourFileHere" xml:space="preserve">
     <value>فایل خود را اینجا رها کنید</value>
   </data>

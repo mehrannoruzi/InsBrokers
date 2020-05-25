@@ -1,0 +1,38 @@
+﻿@model IEnumerable<LossAsset>
+@{
+    Layout = null;
+}
+
+<input id="input-file" type="file" class="d-none" />
+<div class="upload-box">
+    <div class="row" id="files">
+        <div class="col-12 col-sm-4 m-b">
+            <div id="uploader">
+                <i class="zmdi zmdi-plus"></i>
+                <label>آپلود مدرک</label>
+            </div>
+        </div>
+        @if (Model != null)
+        {
+            foreach (var asset in Model)
+            {
+                <div class="col-12 col-sm-4 uploaded m-b">
+                    <button type="button" class="btn-remove" data-url="@Url.Action("DeleteAsset", "MemberLoss", new { assetId = asset.LossAssetId })"><i class="zmdi zmdi-close"></i></button>
+                    @{
+                        if (asset.FileType == FileType.Image)
+                        {
+
+                            <img src="@Url.Content(asset.FileUrl)" />
+                        }
+                        else
+                        {
+                            <img src="@Url.Content($"~/Images/FileTypes/{asset.FileType.ToString().ToLower()}.png")" />
+                        }
+                    }
+                    <a target="_blank" href="@Url.Content(asset.FileUrl)">@Strings.Download</a>
+                </div>
+            }
+        }
+    </div>
+</div>
+

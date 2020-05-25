@@ -15,7 +15,7 @@ using Elk.AspNetCore;
 namespace InsBrokers.Portal.Controllers
 {
 
-    [AuthorizationFilter]
+    //[AuthorizationFilter]
     public partial class UserInRoleController : Controller
     {
         private readonly IUserInRoleService _userInRoleSrv;

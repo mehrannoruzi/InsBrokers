@@ -7,7 +7,7 @@ namespace InsBrokers.Domain
         [Description("ثبت شده")]
         Added = 0,
 
-        [Description("پرداهت شده")]
+        [Description("پرداخت شده")]
         Payed = 1
     }
 }

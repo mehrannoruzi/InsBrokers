@@ -48,27 +48,7 @@
             <p class="alert alert-info text-center" id="asset-description"></p>
         </div>
         <div class="col-12">
-            <input id="input-file" type="file" class="d-none" />
-            <div class="upload-box">
-                <div class="row" id="files">
-                    <div class="col-12 col-sm-4">
-                        <div id="uploader">
-                            <i class="zmdi zmdi-plus"></i>
-                            <label>آپلود مدرک</label>
-                        </div>
-                    </div>
-                    @if (Model.LossAssets != null)
-                    {
-                        foreach (var asset in Model.LossAssets)
-                        {
-                            <div class="col-12 col-sm-4 uploaded">
-                                <button type="button" class="btn-remove" data-url="@Url.Action("DeleteAsset","MemberLoss",new { assetId = asset.LossAssetId })"><i class="zmdi zmdi-close"></i></button>
-                                <img class="w-100" src="@Url.Content(asset.FileUrl)" />
-                            </div>
-                        }
-                    }
-                </div>
-            </div>
+            <partial name="~/Views/LossAsset/Partials/_Entity.cshtml" model="Model.LossAssets??new List<LossAsset>()" />
         </div>
     </div>
     <div class="custom-modal-footer">

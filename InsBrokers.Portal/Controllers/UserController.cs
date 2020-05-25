@@ -11,7 +11,7 @@ using DomainString = InsBrokers.Domain.Resource.Strings;
 
 namespace InsBrokers.Portal.Controllers
 {
-    [AuthorizationFilter]
+    //[AuthorizationFilter]
     public partial class UserController : Controller
     {
         private readonly IUserService _userSrv;

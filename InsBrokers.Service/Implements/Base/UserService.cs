@@ -68,18 +68,23 @@ namespace InsBrokers.Service
 
         public async Task<IResponse<User>> UpdateAsync(User model)
         {
-            var findedUser = await _appUow.UserRepo.FindAsync(model.UserId);
-            if (findedUser == null) return new Response<User> { Message = ServiceMessage.RecordNotExist.Fill(DomainStrings.User) };
+            var user = await _appUow.UserRepo.FindAsync(model.UserId);
+            if (user == null) return new Response<User> { Message = ServiceMessage.RecordNotExist.Fill(DomainStrings.User) };
 
-            if (model.MustChangePassword)
-                findedUser.Password = HashGenerator.Hash(model.Password);
-
-            findedUser.Name = model.Name;
-            findedUser.NationalCode = model.NationalCode;
-            findedUser.IsActive = model.IsActive;
+            //if (model.MustChangePassword)
+            //    findedUser.Password = HashGenerator.Hash(model.Password);
+            if (!string.IsNullOrWhiteSpace(user.NewPassword))
+                user.Password = HashGenerator.Hash(model.NewPassword);
+            user.Name = model.Name;
+            user.Family = model.Family;
+            user.FatherName = model.FatherName;
+            user.NationalCode = model.NationalCode;
+            user.Email = model.Email;
+            user.BirthDay = model.BirthDay;
+            user.IsActive = model.IsActive;
 
             var saveResult = _appUow.ElkSaveChangesAsync();
-            return new Response<User> { Result = findedUser, IsSuccessful = saveResult.Result.IsSuccessful, Message = saveResult.Result.Message };
+            return new Response<User> { Result = user, IsSuccessful = saveResult.Result.IsSuccessful, Message = saveResult.Result.Message };
         }
 
         public async Task<IResponse<bool>> DeleteAsync(Guid userId)
@@ -262,19 +267,10 @@ namespace InsBrokers.Service
         }
 
         public IDictionary<object, object> Search(string searchParameter, int take = 10)
-            => _appUow.UserRepo.Get(conditions: x => x.Name.Contains(searchParameter))
-                .Union(_appUow.UserRepo.Get(conditions: x => x.Family.Contains(searchParameter)))
-                .Union(_appUow.UserRepo.Get(conditions: x => x.Email.Contains(searchParameter)))
-                .Select(x => new
-                {
-                    x.UserId,
-                    x.Email,
-                    x.Name,
-                    x.Family
-                })
-                .OrderBy(x => x.Name)
-                .Take(take)
-                .ToDictionary(k => (object)k.UserId, v => (object)$"{v.Name} {v.Family}({v.Email})");
+        {
+            var items = _appUow.UserRepo.Get(x => x.Name.Contains(searchParameter) || x.Family.Contains(searchParameter), o => o.OrderByDescending(x => x.UserId));
+            return items?.ToDictionary(k => (object)k.UserId, v => (object)$"{v.Name} {v.Family}({v.Email})"); ;
+        }
 
         public async Task<IResponse<string>> RecoverPassword(long mobileNumber, string from, EmailMessage model)
         {
@@ -381,7 +377,7 @@ namespace InsBrokers.Service
                 result.IsSuccessful = true;
                 result.Message = ServiceMessage.Success;
                 _cacheProvider.Add(UserCountLastDaysCacheKey(), result, DateTimeOffset.Now.AddMinutes(30));
-                
+
                 return result;
             }
             catch (Exception e)

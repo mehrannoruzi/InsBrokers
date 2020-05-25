@@ -514,7 +514,6 @@ var notifyType = {
 
 var fireGlobalPlugins = function () {
     //fireDropzone();
-    console.log('fired');
     $('.footable').footable({
         pageSize: 200,
         "breakpoints": {
