@@ -31,7 +31,7 @@ namespace InsBrokers.DataAccess.Ef
         #endregion
 
         #region Insurance
-        public IGenericRepo<Loss> LossRepo => _serviceProvider.GetService<IGenericRepo<Loss>>();
+        public ILossRepo LossRepo => _serviceProvider.GetService<ILossRepo>();
         public IGenericRepo<LossAsset> LossAssetRepo => _serviceProvider.GetService<IGenericRepo<LossAsset>>(); 
         #endregion
 

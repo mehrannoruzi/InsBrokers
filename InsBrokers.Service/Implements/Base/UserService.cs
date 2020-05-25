@@ -349,6 +349,24 @@ namespace InsBrokers.Service
             };
         }
 
+        public async Task<IResponse<int>> GetUserCount()
+        {
+            var result = new Response<int>();
+            try
+            {
+                result.Result = await _appUow.UserRepo.GetUserCount();
+
+                result.IsSuccessful = true;
+                result.Message = ServiceMessage.Success;
+                return result;
+            }
+            catch (Exception e)
+            {
+                FileLoger.Error(e);
+                return result;
+            }
+        }
+
         public async Task<IResponse<Dictionary<string, int>>> GetUserCountLastDaysAsync(int dayCount = 10)
         {
             var result = new Response<Dictionary<string, int>>();

@@ -7,6 +7,7 @@ namespace InsBrokers.Domain
     public interface IUserRepo : IGenericRepo<User>, IScopedInjection
     {
         Task<User> FindByMobileNumber(long mobileNumber);
+        Task<int> GetUserCount();
         Task<Dictionary<string, int>> GetUserCountLastDaysAsync(int dayCount = 10);
     }
 }

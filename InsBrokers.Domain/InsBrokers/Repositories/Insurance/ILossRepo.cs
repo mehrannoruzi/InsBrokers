@@ -6,6 +6,7 @@ namespace InsBrokers.Domain
 {
     public interface ILossRepo : IGenericRepo<Loss>, IScopedInjection
     {
+        Task<int> GetLossCount();
         Task<Dictionary<string, int>> GetLossCountLastDaysAsync(int dayCount = 10);
     }
 }

@@ -13,6 +13,7 @@ namespace InsBrokers.Service
         Task<IResponse<Loss>> FindAsync(int id);
         PagingListDetails<Loss> Get(LossSearchFilter filter);
         Task<IResponse<Loss>> UpdateAsync(Loss model, string root, IList<IFormFile> files);
-        Task<IResponse<Dictionary<string, int>>> GetUserCountLastDaysAsync(int dayCount = 10);
+        Task<IResponse<int>> GetLossCount();
+        Task<IResponse<Dictionary<string, int>>> GetLossCountLastDaysAsync(int dayCount = 10);
     }
 }
