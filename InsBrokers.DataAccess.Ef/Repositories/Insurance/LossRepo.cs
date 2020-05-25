@@ -14,6 +14,8 @@ namespace InsBrokers.DataAccess.Ef
         public LossRepo(AppDbContext appContext) : base(appContext)
         { }
 
+        public async Task<int> GetLossCount() => await _dbSet.CountAsync();
+
         public async Task<Dictionary<string, int>> GetLossCountLastDaysAsync(int dayCount = 10)
         {
             var fromDate = DateTime.Now.AddDays(-dayCount);

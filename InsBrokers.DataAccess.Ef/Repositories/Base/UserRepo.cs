@@ -20,6 +20,8 @@ namespace InsBrokers.DataAccess.Ef
 
         public async Task<User> FindByMobileNumber(long mobileNumber) => await FirstOrDefaultAsync(conditions: x => x.MobileNumber == mobileNumber);
 
+        public async Task<int> GetUserCount() => await _dbSet.CountAsync();
+
         public async Task<Dictionary<string, int>> GetUserCountLastDaysAsync(int dayCount = 10)
         {
             var fromDate = DateTime.Now.AddDays(-dayCount);

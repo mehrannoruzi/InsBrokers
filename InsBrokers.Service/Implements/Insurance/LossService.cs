@@ -14,8 +14,8 @@ namespace InsBrokers.Service
 {
     public class LossService : ILossService
     {
+        private readonly ILossRepo _LossRepo;
         private readonly AppUnitOfWork _appUow;
-        private readonly IGenericRepo<Loss> _LossRepo;
         private readonly ILossAssetService _LossAssetSrv;
         private readonly IMemoryCacheProvider _cacheProvider;
         private string LossCountLastDaysCacheKey() => "LossCountLastDays";
@@ -28,6 +28,8 @@ namespace InsBrokers.Service
             _LossAssetSrv = LossAssetSrv;
             _cacheProvider = cacheProvider;
         }
+
+
 
         public async Task<IResponse<Loss>> AddAsync(Loss model, string root, IList<IFormFile> files)
         {
@@ -82,7 +84,7 @@ namespace InsBrokers.Service
             if (Loss == null) return new Response<Loss> { Message = ServiceMessage.RecordNotExist };
             return new Response<Loss> { Result = Loss, IsSuccessful = true };
         }
-
+        
         public PagingListDetails<Loss> Get(LossSearchFilter filter)
         {
             Expression<Func<Loss, bool>> conditions = x => true;
@@ -107,10 +109,28 @@ namespace InsBrokers.Service
 
             }
 
-            return _LossRepo.Get(conditions, filter, x => x.OrderByDescending(u => u.LossId), new List<Expression<Func<Loss, object>>> { i => i.User, i => i.LossAssets }); ;
+            return _LossRepo.Get(conditions, filter, x => x.OrderByDescending(u => u.LossId)); ;
         }
 
-        public async Task<IResponse<Dictionary<string, int>>> GetUserCountLastDaysAsync(int dayCount = 10)
+        public async Task<IResponse<int>> GetLossCount()
+        {
+            var result = new Response<int>();
+            try
+            {
+                result.Result = await _appUow.LossRepo.GetLossCount();
+
+                result.IsSuccessful = true;
+                result.Message = ServiceMessage.Success;
+                return result;
+            }
+            catch (Exception e)
+            {
+                FileLoger.Error(e);
+                return result;
+            }
+        }
+
+        public async Task<IResponse<Dictionary<string, int>>> GetLossCountLastDaysAsync(int dayCount = 10)
         {
             var result = new Response<Dictionary<string, int>>();
             try
@@ -118,7 +138,7 @@ namespace InsBrokers.Service
                 var cache = (Response<Dictionary<string, int>>)_cacheProvider.Get(LossCountLastDaysCacheKey());
                 if (cache != null) return cache;
 
-                result.Result = await _appUow.UserRepo.GetUserCountLastDaysAsync(dayCount);
+                result.Result = await _appUow.LossRepo.GetLossCountLastDaysAsync(dayCount);
                 if (result.Result.Count() == 0) return new Response<Dictionary<string, int>> { Message = ServiceMessage.RecordNotExist };
 
                 result.IsSuccessful = true;
