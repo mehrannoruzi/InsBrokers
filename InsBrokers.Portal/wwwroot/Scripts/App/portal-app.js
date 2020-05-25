@@ -1,8 +1,3 @@
-///<reference path="../Libs/jquery-3.1.1.min.js" />
-
-$(document).ready(function () {
-
-});
 var notifyType = {
     success: "success",
     danger: "danger",
@@ -56,7 +51,7 @@ var showToast = function (type, message) {
 
 ///<reference path="../Libs/jquery-3.1.1.min.js" />
 var $threeDotLoader = '<span class="three-dot-loader"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span>';
-var $circularLoader = '<div class="spinner"><svg viewBox="25 25 50 50"><circle cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></circle></svg></div>';
+var $circularLoader = '<div class="circular-spinner"><svg viewBox="25 25 50 50"><circle cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></circle></svg></div>';
 
 
 $(document).ready(function () {

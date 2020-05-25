@@ -89,7 +89,8 @@
   position: relative;
   text-align: center;
   min-width: 100px;
-  color: #fff !important; }
+  color: #fff !important;
+  height: auto !important; }
   .btn-action .icon {
     position: absolute;
     left: 0;
@@ -206,7 +207,7 @@ input:-webkit-autofill:active {
 /*-----------------------------------
               spinner loader
 ------------------------------------*/
-.spinner {
+.circular-spinner {
   position: relative;
   padding: 0 10px;
   width: 24px;
@@ -225,27 +226,25 @@ input:-webkit-autofill:active {
   display: flex;
   margin-left: auto;
   margin-right: auto; }
-
-.spinner svg {
-  -webkit-animation: rotate 2s linear infinite;
-  animation: rotate 2s linear infinite;
-  -webkit-transform-origin: center center;
-  transform-origin: center center;
-  width: 24px;
-  height: 24px;
-  position: absolute;
-  top: 50%;
-  margin-top: -12px;
-  left: 50%;
-  margin-left: -12px; }
-
-.spinner svg circle {
-  stroke-dasharray: 1,200;
-  stroke-dashoffset: 0;
-  -webkit-animation: dash 1.5s ease-in-out infinite;
-  animation: dash 1.5s ease-in-out infinite;
-  stroke-linecap: round;
-  stroke: white; }
+  .circular-spinner svg {
+    -webkit-animation: rotate 2s linear infinite;
+    animation: rotate 2s linear infinite;
+    -webkit-transform-origin: center center;
+    transform-origin: center center;
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 50%;
+    margin-top: -12px;
+    left: 50%;
+    margin-left: -12px; }
+    .circular-spinner svg circle {
+      stroke-dasharray: 1,200;
+      stroke-dashoffset: 0;
+      -webkit-animation: dash 1.5s ease-in-out infinite;
+      animation: dash 1.5s ease-in-out infinite;
+      stroke-linecap: round;
+      stroke: white; }
 
 @-webkit-keyframes rotate {
   100% {

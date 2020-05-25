@@ -16,6 +16,7 @@ namespace InsBrokers.Portal
 {
     public class Startup
     {
+        readonly string AllowedOrigins = "_Origins";
         private IConfiguration _config { get; }
 
         public Startup(IConfiguration configuration)
@@ -62,7 +63,7 @@ namespace InsBrokers.Portal
 
                 app.UseExceptionHandler("/Home/Error");
 
-                app.UseHsts();
+               // app.UseHsts();
 
                 app.Use(async (context, next) =>
                 {
@@ -89,7 +90,7 @@ namespace InsBrokers.Portal
                 {
                     endpoints.MapControllerRoute(
                         name: "default",
-                        pattern: "{controller=Home}/{action=Index}");
+                        pattern: "{controller=Home}/{action=Register}");
                 });
         }
     }

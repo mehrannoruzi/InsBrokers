@@ -1,129 +1,3 @@
-header {
-  /*position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 999;*/
-  background-color: #34495e; }
-  header .main-nav .menu-icon {
-    padding-left: 7.5px;
-    display: none;
-    padding: 15px 0;
-    margin-bottom: 0; }
-    header .main-nav .menu-icon i {
-      font-size: 20px;
-      vertical-align: middle;
-      color: #fff; }
-  header .main-nav ul {
-    padding: 15px 0; }
-    header .main-nav ul li {
-      display: inline-block;
-      color: #fff; }
-      header .main-nav ul li a {
-        padding: 5px 7.5px;
-        cursor: pointer; }
-        header .main-nav ul li a:hover {
-          color: red !important; }
-      header .main-nav ul li:hover .sub-menu {
-        display: block; }
-    header .main-nav ul .close-menu {
-      display: none;
-      position: absolute;
-      top: 10px;
-      left: 10px; }
-      header .main-nav ul .close-menu i {
-        font-size: 20px;
-        vertical-align: middle; }
-    header .main-nav ul .logo img {
-      width: 32px; }
-    @media (max-width: 576px) {
-      header .main-nav ul .logo {
-        display: none; } }
-  header .main-nav .sub-menu {
-    display: none;
-    background-color: #34495e;
-    min-width: 100px;
-    box-shadow: 0 4px 7px 0 rgba(0, 0, 0, 0.75) !important;
-    position: absolute;
-    z-index: 999; }
-    header .main-nav .sub-menu li {
-      display: flex; }
-  @media (max-width: 576px) {
-    header .main-nav .menu-icon {
-      display: inline-block; }
-    header .main-nav ul {
-      display: none;
-      padding-top: 30px;
-      animation-name: slideInRight;
-      position: fixed;
-      z-index: 999;
-      top: 0;
-      bottom: 0;
-      width: 70%;
-      flex-direction: column;
-      background-color: #34495e;
-      box-shadow: 0 0 2px rgba(0, 0, 0, 0.75);
-      right: 0; }
-      header .main-nav ul li {
-        display: flex; }
-      header .main-nav ul .close-menu {
-        display: block; }
-    header .main-nav [name=toggle]:checked + ul {
-      display: flex; } }
-  header .auth {
-    padding: 15px 0;
-    display: flex; }
-    header .auth > a {
-      padding: 5px 0;
-      color: #fff; }
-
-html[dir=ltr] .main-nav ul {
-  animation-name: slideInLeft; }
-  html[dir=ltr] .main-nav ul .menu-icon {
-    padding-right: 7.5px;
-    padding-right: 0; }
-  html[dir=ltr] .main-nav ul .close-menu {
-    right: auto;
-    right: 10px; }
-
-@media (max-wdith: 576ps) {
-  html[dir=ltr] .main-nav ul {
-    box-shadow: 0 0 -2px rgba(0, 0, 0, 0.75); } }
-
-[class^=col-] {
-  display: flex; }
-
-ul {
-  list-style: none;
-  padding: 0; }
-
-html {
-  font-size: 12px; }
-
-body {
-  min-height: 100vh; }
-
-ul {
-  margin-bottom: 0; }
-
-* {
-  text-align: right; }
-
-.form-group {
-  width: 100%; }
-
-button {
-  border: none;
-  background: none; }
-  button:focus {
-    outline: none; }
-
-footer {
-  padding: 10px;
-  text-align: center;
-  background-color: #34495e;
-  color: #fff; }
-
 /*-----------------------------------
                 utils
 ------------------------------------*/
@@ -215,7 +89,8 @@ footer {
   position: relative;
   text-align: center;
   min-width: 100px;
-  color: #fff !important; }
+  color: #fff !important;
+  height: auto !important; }
   .btn-action .icon {
     position: absolute;
     left: 0;
@@ -332,7 +207,7 @@ input:-webkit-autofill:active {
 /*-----------------------------------
               spinner loader
 ------------------------------------*/
-.spinner {
+.circular-spinner {
   position: relative;
   padding: 0 10px;
   width: 24px;
@@ -351,27 +226,25 @@ input:-webkit-autofill:active {
   display: flex;
   margin-left: auto;
   margin-right: auto; }
-
-.spinner svg {
-  -webkit-animation: rotate 2s linear infinite;
-  animation: rotate 2s linear infinite;
-  -webkit-transform-origin: center center;
-  transform-origin: center center;
-  width: 24px;
-  height: 24px;
-  position: absolute;
-  top: 50%;
-  margin-top: -12px;
-  left: 50%;
-  margin-left: -12px; }
-
-.spinner svg circle {
-  stroke-dasharray: 1,200;
-  stroke-dashoffset: 0;
-  -webkit-animation: dash 1.5s ease-in-out infinite;
-  animation: dash 1.5s ease-in-out infinite;
-  stroke-linecap: round;
-  stroke: white; }
+  .circular-spinner svg {
+    -webkit-animation: rotate 2s linear infinite;
+    animation: rotate 2s linear infinite;
+    -webkit-transform-origin: center center;
+    transform-origin: center center;
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 50%;
+    margin-top: -12px;
+    left: 50%;
+    margin-left: -12px; }
+    .circular-spinner svg circle {
+      stroke-dasharray: 1,200;
+      stroke-dashoffset: 0;
+      -webkit-animation: dash 1.5s ease-in-out infinite;
+      animation: dash 1.5s ease-in-out infinite;
+      stroke-linecap: round;
+      stroke: white; }
 
 @-webkit-keyframes rotate {
   100% {
@@ -698,152 +571,3 @@ ul.nav.metismenu li.active .fa.arrow:before {
 .copied-value {
   cursor: not-allowed;
   color: #00b597; }
-
-html, body {
-  font-size: 13px; }
-
-.form-group {
-  text-align: right; }
-
-.rtl-f-r {
-  float: right; }
-
-.rtl-ta-r {
-  text-align: right; }
-
-.rtl-f-l {
-  float: left; }
-
-.rtl-ta-l {
-  text-align: left; }
-
-/*-----------------------------------
-              font
-------------------------------------*/
-@font-face {
-  font-family: "iransans";
-  src: url(/Fonts/iransans.eot) format("embedded-opentype"), url(/Fonts/iransans.ttf) format("truetype");
-  font-weight: normal;
-  font-style: normal; }
-
-*:not(i) {
-  font-family: "iransans"; }
-
-select {
-  height: 32px !important;
-  padding-top: 0 !important;
-  padding-bottom: 0 !important; }
-
-/*-----------------------------------
-              modal
-------------------------------------*/
-.modal-header .close {
-  margin: -1rem auto -1rem -1rem; }
-
-.modal-footer > :not(:first-child) {
-  margin-left: 0;
-  margin-right: .25rem; }
-
-/*-----------------------------------
-              select2
-------------------------------------*/
-.select2 {
-  direction: rtl; }
-
-.select2-container .select2-selection--single .select2-selection__rendered {
-  padding-right: 8px !important;
-  padding-left: 20px !important; }
-
-.select2-container--default .select2-selection--single .select2-selection__arrow {
-  right: auto !important;
-  left: 1px; }
-
-.select2-results {
-  text-align: right;
-  direction: rtl; }
-
-.select2-search__field {
-  text-align: right;
-  direction: rtl; }
-
-/*-----------------------------------
-              alert
-------------------------------------*/
-.popover .alert > i {
-  float: right; }
-
-/*-----------------------------------
-              dropzone.js
-------------------------------------*/
-.dropzone .dz-preview.dz-error:hover .dz-error-message {
-  direction: rtl;
-  text-align: right; }
-
-/*-----------------------------------
-              toastr.js
-------------------------------------*/
-#toast-container > div {
-  background-position: right 15px center !important; }
-
-#toast-container > .toast {
-  display: flex;
-  align-items: center; }
-
-.toast-close-button {
-  position: absolute !important;
-  left: 10px !important;
-  top: 50% !important;
-  margin-top: -15px !important; }
-
-.toast-message {
-  text-align: right;
-  font-family: 'iransans';
-  font-size: 0.9rem; }
-
-/*-----------------------------------
-              template
-------------------------------------*/
-ul.nav.metismenu {
-  padding-right: 0; }
-  ul.nav.metismenu li > a {
-    text-align: right;
-    padding: 14px 25px 14px 20px; }
-  ul.nav.metismenu .arrow {
-    float: left; }
-
-.mini-navbar li.active .nav-second-level {
-  left: auto !important;
-  right: 65px; }
-
-@media (min-width: 768px) {
-  #page-wrapper {
-    margin: 0 220px 0 0; } }
-
-.profile-element {
-  direction: rtl;
-  text-align: right; }
-
-.btn-group {
-  text-align: left;
-  direction: ltr;
-  margin-right: 10px; }
-
-table th, table td {
-  text-align: right; }
-
-table .actions a {
-  text-align: right;
-  padding: 8px;
-  padding-left: 15px; }
-  table .actions a i {
-    margin-left: 5px; }
-
-.icheckbox_square-green {
-  margin-left: 5px; }
-
-.nav > li > a i {
-  margin-right: 0 !important;
-  margin-left: 6px; }
-
-.label {
-  font-family: 'iransan' !important; }

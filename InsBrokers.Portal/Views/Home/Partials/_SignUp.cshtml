@@ -1,10 +1,10 @@
 ﻿@model PortalSignUpModel
+@using Elk.Core
 @{
     Layout = null;
 }
-@using Elk.Core
 
-<form id="frm-register" action="@Url.Action("SignUp","Home")">
+<form id="frm-register" class="w-100" action="@Url.Action("SignUp","Home")">
     <div class="row">
         <div class="col-12 col-sm-6 col-md-4">
             <custom-input-for for="Name" class="form-control" />

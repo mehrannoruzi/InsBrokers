@@ -292,15 +292,16 @@ namespace InsBrokers.Service
 
         public async Task<IResponse<User>> SignUp(PortalSignUpModel model)
         {
-            var user = await _appUow.UserRepo.FirstOrDefaultAsync(conditions: x => x.Email == model.Email);
-            if (user != null) return new Response<User> { Message = ServiceMessage.RecordNotExist };
+            var mobNum = long.Parse(model.MobileNumber);
+            var user = await _appUow.UserRepo.FirstOrDefaultAsync(conditions: x => x.MobileNumber == mobNum);
+            if (user != null) return new Response<User> { Message = ServiceMessage.DuplicateRecord };
             user = new User
             {
                 Name = model.Name,
                 Family = model.Family,
                 FatherName = model.FatherName,
                 Email = model.Email,
-                MobileNumber = long.Parse(model.MobileNumber),
+                MobileNumber = mobNum,
                 BaseInsurance = model.BaseInsurance,
                 Password = HashGenerator.Hash(model.Password),
                 IsActive = true,

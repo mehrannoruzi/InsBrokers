@@ -10,16 +10,13 @@
   {
     "outputFileName": "wwwroot/Styles/App/portal-app.css",
     "inputFiles": [
-      "wwwroot/Styles/App/menu.css",
-      "wwwroot/Styles/App/portal-template.css",
-      "wwwroot/Styles/App/common.css",
-      "wwwroot/Styles/App/fa.css"
+      "wwwroot/Styles/App/common.css"
     ]
   },
   {
     "outputFileName": "wwwroot/Styles/Libs/portal-libs.css",
     "inputFiles": [
-      "wwwroot/Styles/Libs/bootstrap.min.css",
+      //"wwwroot/Styles/Libs/bootstrap.min.css",
       "wwwroot/Styles/Libs/material-design-iconic-font.min.css",
       "wwwroot/Styles/Libs/toastr.css",
       "wwwroot/Styles/Libs/animate.css"
@@ -43,7 +40,7 @@
   {
     "outputFileName": "wwwroot/Scripts/App/portal-app.js",
     "inputFiles": [
-      "wwwroot/Scripts/App/portal-template.js",
+      //"wwwroot/Scripts/App/portal-template.js",
       "wwwroot/Scripts/App/portal-plugins.js",
       "wwwroot/Scripts/App/portal-common.js"
     ]

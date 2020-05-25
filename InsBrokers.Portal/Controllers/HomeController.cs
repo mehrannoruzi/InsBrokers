@@ -25,7 +25,7 @@ namespace InsBrokers.Portal.Controllers
             return View();
         }
 
-        public IActionResult Auth() => View();
+        public IActionResult Register() => View();
 
         [HttpPost]
         public async Task<IActionResult> SignUp([FromBody]PortalSignUpModel model)
