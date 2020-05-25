@@ -127,7 +127,10 @@
     <value>رکورد مورد نظر هم اکنون وجود دارد</value>
   </data>
   <data name="Error" xml:space="preserve">
-    <value>خطایی رخ داده است</value>
+    <value>عملیات مورد نظر با خطا رو به رو شده است.</value>
+  </data>
+  <data name="Exception" xml:space="preserve">
+    <value>عملیات مورد نظر سمت سرور با خطا رو به رو شده است</value>
   </data>
   <data name="InvalidUsernameOrPassword" xml:space="preserve">
     <value>نام کاربری یا رمز عبور اشتباه است</value>
@@ -143,5 +146,8 @@
   </data>
   <data name="SaveFileFailed" xml:space="preserve">
     <value>ذخیر فایل با مشکل مواجه شد</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>عملیات مورد نظر با موفقیت انجام شد.</value>
   </data>
 </root>

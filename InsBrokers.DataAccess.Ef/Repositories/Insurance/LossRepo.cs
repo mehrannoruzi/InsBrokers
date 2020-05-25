@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Elk.Core;
 using System.Linq;
 using InsBrokers.Domain;
@@ -9,18 +9,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace InsBrokers.DataAccess.Ef
 {
-    public class UserRepo : EfGenericRepo<User>, IUserRepo
+    public class LossRepo : EfGenericRepo<Loss>, ILossRepo
     {
-        private readonly AppDbContext _appContext;
+        public LossRepo(AppDbContext appContext) : base(appContext)
+        { }
 
-        public UserRepo(AppDbContext appContext) : base(appContext)
-        {
-            _appContext = appContext;
-        }
-
-        public async Task<User> FindByMobileNumber(long mobileNumber) => await FirstOrDefaultAsync(conditions: x => x.MobileNumber == mobileNumber);
-
-        public async Task<Dictionary<string, int>> GetUserCountLastDaysAsync(int dayCount = 10)
+        public async Task<Dictionary<string, int>> GetLossCountLastDaysAsync(int dayCount = 10)
         {
             var fromDate = DateTime.Now.AddDays(-dayCount);
             var result = new Dictionary<string, int>();
