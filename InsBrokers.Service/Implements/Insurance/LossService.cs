@@ -108,7 +108,7 @@ namespace InsBrokers.Service
 
             }
 
-            return _LossRepo.Get(conditions, filter, x => x.OrderByDescending(u => u.LossId)); ;
+            return _LossRepo.Get(conditions, filter, x => x.OrderByDescending(u => u.LossId), new List<Expression<Func<Loss, object>>> { i => i.LossAssets, i => i.User }); ;
         }
 
         public async Task<IResponse<Dictionary<string, int>>> GetUserCountLastDaysAsync(int dayCount = 10)
