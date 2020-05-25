@@ -88,11 +88,20 @@ namespace InsBrokers.Service.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to خطایی رخ داده است.
+        ///   Looks up a localized string similar to عملیات مورد نظر با خطا رو به رو شده است..
         /// </summary>
         public static string Error {
             get {
                 return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to عملیات مورد نظر سمت سرور با خطا رو به رو شده است.
+        /// </summary>
+        public static string Exception {
+            get {
+                return ResourceManager.GetString("Exception", resourceCulture);
             }
         }
         
@@ -138,6 +147,15 @@ namespace InsBrokers.Service.Resource {
         public static string SaveFileFailed {
             get {
                 return ResourceManager.GetString("SaveFileFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to عملیات مورد نظر با موفقیت انجام شد..
+        /// </summary>
+        public static string Success {
+            get {
+                return ResourceManager.GetString("Success", resourceCulture);
             }
         }
     }

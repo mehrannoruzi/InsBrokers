@@ -1,13 +1,14 @@
 ﻿using System;
 using Elk.Core;
+using Elk.Cache;
 using System.Linq;
 using InsBrokers.Domain;
-using InsBrokers.DataAccess.Ef;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
-using InsBrokers.Service.Resource;
-using System.Collections.Generic;
+using System.Linq.Expressions;
+using InsBrokers.DataAccess.Ef;
 using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
+using InsBrokers.Service.Resource;
 
 namespace InsBrokers.Service
 {
@@ -16,37 +17,19 @@ namespace InsBrokers.Service
         private readonly AppUnitOfWork _appUow;
         private readonly IGenericRepo<Loss> _LossRepo;
         private readonly ILossAssetService _LossAssetSrv;
+        private readonly IMemoryCacheProvider _cacheProvider;
+        private string LossCountLastDaysCacheKey() => "LossCountLastDays";
 
-        public LossService(AppUnitOfWork appUOW, ILossAssetService LossAssetSrv)
+        public LossService(AppUnitOfWork appUOW, ILossAssetService LossAssetSrv,
+            IMemoryCacheProvider cacheProvider)
         {
             _appUow = appUOW;
             _LossRepo = appUOW.LossRepo;
             _LossAssetSrv = LossAssetSrv;
+            _cacheProvider = cacheProvider;
         }
 
-        public PagingListDetails<Loss> Get(LossSearchFilter filter)
-        {
-            Expression<Func<Loss, bool>> conditions = x => true;
-            if (filter != null)
-            {
-                if (filter.UserId != null)
-                    conditions = conditions.And(x => x.UserId == filter.UserId);
-                if (!string.IsNullOrWhiteSpace(filter.LossDateShFrom))
-                {
-                    var from = PersianDateTime.Parse(filter.LossDateShFrom).ToDateTime();
-                    conditions = conditions.And(x => x.InsertDateMi >= from);
-                }
-                if (!string.IsNullOrWhiteSpace(filter.LossDateShFrom))
-                {
-                    var to = PersianDateTime.Parse(filter.LossDateShFrom).ToDateTime();
-                    conditions = conditions.And(x => x.InsertDateMi <= to);
-                }
-                if (!string.IsNullOrWhiteSpace(filter.LossType))
-                    conditions = conditions.And(x => x.LossType == filter.LossType);
-                if (!string.IsNullOrWhiteSpace(filter.PatientName))
-                    conditions = conditions.And(x => x.PatientName.Contains(filter.PatientName));
 
-            }
 
             return _LossRepo.Get(conditions, filter, x => x.OrderByDescending(u => u.LossId), new List<Expression<Func<Loss, object>>> { i => i.User, i => i.LossAssets }); ;
         }
@@ -104,6 +87,57 @@ namespace InsBrokers.Service
             var Loss = await _LossRepo.FirstOrDefaultAsync(x => x.LossId == id, new List<Expression<Func<Loss, object>>> { x => x.LossAssets });
             if (Loss == null) return new Response<Loss> { Message = ServiceMessage.RecordNotExist };
             return new Response<Loss> { Result = Loss, IsSuccessful = true };
+        }
+        
+        public PagingListDetails<Loss> Get(LossSearchFilter filter)
+        {
+            Expression<Func<Loss, bool>> conditions = x => true;
+            if (filter != null)
+            {
+                if (filter.UserId != null)
+                    conditions = conditions.And(x => x.UserId == filter.UserId);
+                if (!string.IsNullOrWhiteSpace(filter.LossDateShFrom))
+                {
+                    var from = PersianDateTime.Parse(filter.LossDateShFrom).ToDateTime();
+                    conditions = conditions.And(x => x.InsertDateMi >= from);
+                }
+                if (!string.IsNullOrWhiteSpace(filter.LossDateShFrom))
+                {
+                    var to = PersianDateTime.Parse(filter.LossDateShFrom).ToDateTime();
+                    conditions = conditions.And(x => x.InsertDateMi <= to);
+                }
+                if (!string.IsNullOrWhiteSpace(filter.LossType))
+                    conditions = conditions.And(x => x.LossType == filter.LossType);
+                if (!string.IsNullOrWhiteSpace(filter.PatientName))
+                    conditions = conditions.And(x => x.PatientName.Contains(filter.PatientName));
+
+            }
+
+            return _LossRepo.Get(conditions, filter, x => x.OrderByDescending(u => u.LossId)); ;
+        }
+
+        public async Task<IResponse<Dictionary<string, int>>> GetUserCountLastDaysAsync(int dayCount = 10)
+        {
+            var result = new Response<Dictionary<string, int>>();
+            try
+            {
+                var cache = (Response<Dictionary<string, int>>)_cacheProvider.Get(LossCountLastDaysCacheKey());
+                if (cache != null) return cache;
+
+                result.Result = await _appUow.UserRepo.GetUserCountLastDaysAsync(dayCount);
+                if (result.Result.Count() == 0) return new Response<Dictionary<string, int>> { Message = ServiceMessage.RecordNotExist };
+
+                result.IsSuccessful = true;
+                result.Message = ServiceMessage.Success;
+                _cacheProvider.Add(LossCountLastDaysCacheKey(), result, DateTimeOffset.Now.AddMinutes(30));
+
+                return result;
+            }
+            catch (Exception e)
+            {
+                FileLoger.Error(e);
+                return result;
+            }
         }
     }
 }

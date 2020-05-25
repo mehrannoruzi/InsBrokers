@@ -8,8 +8,4 @@
     <ProjectReference Include="..\InsBrokers.Domain\InsBrokers.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Repositories\Insurance\" />
-  </ItemGroup>
-
 </Project>

@@ -59,6 +59,9 @@ namespace InsBrokers.DependencyResolver
             #endregion
 
             #region Insurance
+
+            services.AddScoped<ILossRepo, LossRepo>();
+
             services.AddScoped<ILossService, LossService>(); 
             services.AddScoped<ILossAssetService, LossAssetService>(); 
             #endregion

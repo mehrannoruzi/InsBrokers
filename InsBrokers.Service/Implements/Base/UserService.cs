@@ -16,20 +16,22 @@ namespace InsBrokers.Service
 {
     public class UserService : IUserService, IUserActionProvider
     {
-        private readonly AuthUnitOfWork _authUow;
         private readonly AppUnitOfWork _appUow;
+        private readonly AuthUnitOfWork _authUow;
         private readonly IEmailService _emailService;
-        private readonly IMemoryCacheProvider _cache;
         private readonly DapperUserRepo _dapperUserRepo;
+        private readonly IMemoryCacheProvider _cacheProvider;
+        private string UserCountLastDaysCacheKey() => "UserCountLastDays";
+        private string MenuModelCacheKey(Guid userId) => $"MenuModel_{userId.ToString().Replace("-", "_")}";
 
-        public UserService(AppUnitOfWork appUow, AuthUnitOfWork authUow, IMemoryCacheProvider cache,
+        public UserService(AppUnitOfWork appUow, AuthUnitOfWork authUow, IMemoryCacheProvider cacheProvider,
             IEmailService emailService, DapperUserRepo dapperUserRepo)
         {
             _appUow = appUow;
-            _cache = cache;
-            _emailService = emailService;
-            _dapperUserRepo = dapperUserRepo;
             _authUow = authUow;
+            _emailService = emailService;
+            _cacheProvider = cacheProvider;
+            _dapperUserRepo = dapperUserRepo;
         }
 
 
@@ -102,7 +104,6 @@ namespace InsBrokers.Service
 
         #endregion
 
-        private string MenuModelCacheKey(Guid userId) => $"MenuModel_{userId.ToString().Replace("-", "_")}";
 
         public IEnumerable<UserAction> GetUserActions(string userId, string urlPrefix = "")
             => GetAvailableActions(Guid.Parse(userId), null, urlPrefix).ActionList;
@@ -181,7 +182,7 @@ namespace InsBrokers.Service
 
         public MenuModel GetAvailableActions(Guid userId, List<MenuSPModel> spResult = null, string urlPrefix = "")
         {
-            var userMenu = (MenuModel)_cache.Get(MenuModelCacheKey(userId));
+            var userMenu = (MenuModel)_cacheProvider.Get(MenuModelCacheKey(userId));
             if (userMenu != null) return userMenu;
 
             userMenu = new MenuModel();
@@ -234,13 +235,13 @@ namespace InsBrokers.Service
             userMenu.Menu = GetAvailableMenu(spResult, urlPrefix);
             userMenu.ActionList = userActions;
 
-            _cache.Add(MenuModelCacheKey(userId), userMenu, DateTime.Now.AddMinutes(30));
+            _cacheProvider.Add(MenuModelCacheKey(userId), userMenu, DateTime.Now.AddMinutes(30));
             return userMenu;
         }
 
         public void SignOut(Guid userId)
         {
-            _cache.Remove(MenuModelCacheKey(userId));
+            _cacheProvider.Remove(MenuModelCacheKey(userId));
         }
 
         public PagingListDetails<User> Get(UserSearchFilter filter)
@@ -346,6 +347,30 @@ namespace InsBrokers.Service
                 Result = user,
                 Message = save.Message
             };
+        }
+
+        public async Task<IResponse<Dictionary<string, int>>> GetUserCountLastDaysAsync(int dayCount = 10)
+        {
+            var result = new Response<Dictionary<string, int>>();
+            try
+            {
+                var cache = (Response<Dictionary<string, int>>)_cacheProvider.Get(UserCountLastDaysCacheKey());
+                if (cache != null) return cache;
+
+                result.Result = await _appUow.UserRepo.GetUserCountLastDaysAsync(dayCount);
+                if (result.Result.Count() == 0) return new Response<Dictionary<string, int>> { Message = ServiceMessage.RecordNotExist };
+
+                result.IsSuccessful = true;
+                result.Message = ServiceMessage.Success;
+                _cacheProvider.Add(UserCountLastDaysCacheKey(), result, DateTimeOffset.Now.AddMinutes(30));
+                
+                return result;
+            }
+            catch (Exception e)
+            {
+                FileLoger.Error(e);
+                return result;
+            }
         }
     }
 }
