@@ -305,7 +305,7 @@ namespace InsBrokers.Service
                 Email = model.Email,
                 MobileNumber = long.Parse(model.MobileNumber),
                 BaseInsurance = model.BaseInsurance,
-                Password = HashGenerator.Hash(model.MobileNumber),
+                Password = HashGenerator.Hash(model.Password),
                 IsActive = true,
                 NationalCode = model.NationalCode,
                 BankAccounts = new List<BankAccount>{

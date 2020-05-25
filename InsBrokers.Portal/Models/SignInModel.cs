@@ -1,3 +1,4 @@
+using DomainString = InsBrokers.Domain.Resource.Strings;
 using DomainError = InsBrokers.Domain.Resource.ErrorMessage;
 using InsBrokers.Portal.Resource;
 using System.ComponentModel.DataAnnotations;
@@ -9,7 +10,7 @@ namespace InsBrokers.Portal
     {
 
         [RegularExpression(@"^0?9\d{9}$", ErrorMessageResourceName = nameof(DomainError.InvalidMobileNumber), ErrorMessageResourceType = typeof(DomainError))]
-        [Display(Name = nameof(Resource.Strings.Username), ResourceType = typeof(Resource.Strings))]
+        [Display(Name = nameof(DomainString.MobileNumber), ResourceType = typeof(DomainString))]
         [Required(ErrorMessageResourceName = nameof(Resource.Strings.Required), ErrorMessageResourceType = typeof(Resource.Strings), AllowEmptyStrings = false)]
         public string MobileNumber { get; set; }
 

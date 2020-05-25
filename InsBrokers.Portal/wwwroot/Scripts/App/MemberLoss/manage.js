@@ -1,5 +1,5 @@
 ﻿/// <reference path="../../Libs/jquery-3.1.1.min.js" />
-var $fileBox = '<div class="col-12 col-sm-4 uploaded">' +
+var $fileBox = '<div class="col-12 col-sm-4 uploaded new">' +
     '<button class="btn-remove"><i class="zmdi zmdi-close"></i></button>' +
     '<img class="w-100" src="{0}"/>' +
     '</div>';
@@ -12,16 +12,15 @@ $(document).ready(function () {
         e.stopPropagation();
         let $btn = $(this);
         let $box = $btn.closest('.uploaded');
-        let idx = $('#modal .uploaded').index($box);
 
         let removeUrl = $btn.data('url');
+        console.log(removeUrl);
         if (removeUrl) {
-            ajaxBtn.inProgress();
+            ajaxBtn.inProgress($btn);
             $.post(removeUrl)
                 .done(function (data) {
                     ajaxBtn.normal();
                     if (data.IsSuccessful) {
-                        assets.splice(idx, 1);
                         $box.remove();
                     }
                     else showNotif(notifyType.danger, data.Message);
@@ -31,6 +30,7 @@ $(document).ready(function () {
                 });
         }
         else {
+            let idx = $('#modal .uploaded.new').index($box);
             $box.remove();
             assets.splice(idx, 1);
         }
@@ -57,13 +57,40 @@ $(document).ready(function () {
         reader.readAsDataURL(file);
         //$('').trigger('click');
     });
-    $('#modal').on('click', '.btn-remove', function (event) {
-    });
 
     //submit view
     $(document).on('click', '.btn-submit-loss', function () {
         let $btn = $(this);
+        let $frm = $(this).closest('form');
+        let frmData = new FormData();
+        var model = customSerialize($frm);
+        for (var k in model)
+            frmData.append(k, model[k]);
+        for (var i = 0; i < assets.length; i++)
+            frmData.append('Files', assets[i]);
+        console.log(frmData);
+        console.log(assets);
+        ajaxBtn.inProgress($btn);
+        $.ajax({
+            type: 'POST',
+            url: $frm.attr('action'),
+            //contentType: 'application/json; charset=utf-8;',
+            data: frmData,
+            contentType: false,
+            processData: false,
+            success: function (rep) {
+                ajaxBtn.normal();
+                if (!rep.IsSuccessful)
+                    showNotif(notifyType.danger, rep.Message);
+                else {
+                    $('#modal').modal('hide');
+                }
+            },
+            error: function (e) {
+                ajaxBtn.normal();
 
+            }
+        });
     });
 
 });

@@ -48,7 +48,7 @@ namespace InsBrokers.Service
 
             }
 
-            return _LossRepo.Get(conditions, filter, x => x.OrderByDescending(u => u.LossId)); ;
+            return _LossRepo.Get(conditions, filter, x => x.OrderByDescending(u => u.LossId), new List<Expression<Func<Loss, object>>> { i => i.User, i => i.LossAssets }); ;
         }
 
 
@@ -56,6 +56,7 @@ namespace InsBrokers.Service
         {
             var getAssets = await _LossAssetSrv.SaveRange(root, model.UserId, files);
             if (!getAssets.IsSuccessful) return new Response<Loss> { Message = getAssets.Message };
+            model.LossAssets = getAssets.Result;
             await _appUow.LossRepo.AddAsync(model);
 
             var saveResult = await _appUow.ElkSaveChangesAsync();
@@ -77,6 +78,8 @@ namespace InsBrokers.Service
             Loss.Description = model.Description;
             var getAssets = await _LossAssetSrv.SaveRange(root, model.UserId, files);
             if (!getAssets.IsSuccessful) return new Response<Loss> { Message = getAssets.Message };
+            foreach (var item in getAssets.Result)
+                item.LossId = Loss.LossId;
             await _appUow.LossAssetRepo.AddRangeAsync(getAssets.Result);
             var updateResult = await _appUow.ElkSaveChangesAsync();
             if (!updateResult.IsSuccessful) _LossAssetSrv.DeleteRange(getAssets.Result);

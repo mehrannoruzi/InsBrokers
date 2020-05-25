@@ -2,7 +2,7 @@
 @{
     Layout = null;
 }
-<form asp-controller="Loss" asp-action="@(Model.LossId==0?"Add":"Update")">
+<form asp-controller="MemberLoss" asp-action="@(Model.LossId==0?"Add":"Update")">
     <div class="row">
         @Html.HiddenFor(x => x.LossId)
         <div class="col-12 col-sm-6">
@@ -34,7 +34,7 @@
             <custom-input-for for="LossDateSh" class="form-control pdate ltr-elm" />
         </div>
         <div class="col-12 col-sm-4">
-            <custom-input-for for="Cost" class="form-control pdate" />
+            <custom-input-for for="Cost" class="form-control ltr-elm" />
         </div>
     </div>
     <div class="row">
@@ -61,8 +61,8 @@
                         foreach (var asset in Model.LossAssets)
                         {
                             <div class="col-12 col-sm-4 uploaded">
-                                <button tye="button" class="btn-remove" data-url="@Url.Action("DeleteAssetAsync","MemberLoss",new { assetId = asset.LossAssetId })"><i class="zmdi zmdi-close"></i></button>
-                                <img src="@Url.Content(asset.FileUrl)" />
+                                <button type="button" class="btn-remove" data-url="@Url.Action("DeleteAsset","MemberLoss",new { assetId = asset.LossAssetId })"><i class="zmdi zmdi-close"></i></button>
+                                <img class="w-100" src="@Url.Content(asset.FileUrl)" />
                             </div>
                         }
                     }
@@ -72,7 +72,7 @@
     </div>
     <div class="custom-modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">@Strings.Close</button>
-        <custom-button text="@Strings.Submit" icon="zmdi zmdi-floppy" class="btn-primary btn-submit-view float-left"></custom-button>
+        <custom-button text="@Strings.Submit" icon="zmdi zmdi-floppy" class="btn-primary btn-submit-loss float-left"></custom-button>
     </div>
 </form>
 <script>

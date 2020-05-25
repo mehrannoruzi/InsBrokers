@@ -52,11 +52,12 @@ namespace InsBrokers.Portal.Controllers
 
 
         [HttpPost]
-        public virtual async Task<JsonResult> Add(Loss model, IList<IFormFile> files)
+        public virtual async Task<JsonResult> Add(LossAddModel model)
         {
             model.UserId = User.GetUserId();
             if (!ModelState.IsValid) return Json(new { IsSuccessful = false, Message = ModelState.GetModelError() });
-            return Json(await _LossSrv.AddAsync(model, _env.ContentRootPath, files));
+            var save = await _LossSrv.AddAsync(model, _env.ContentRootPath, model.Files);
+            return Json(new { save.IsSuccessful, save.Message });
         }
 
         [HttpGet]
@@ -78,7 +79,8 @@ namespace InsBrokers.Portal.Controllers
         public virtual async Task<JsonResult> Update(Loss model, IList<IFormFile> files)
         {
             if (!ModelState.IsValid) return Json(new { IsSuccessful = false, Message = ModelState.GetModelError() });
-            return Json(await _LossSrv.UpdateAsync(model, _env.ContentRootPath, files));
+            var update = await _LossSrv.UpdateAsync(model, _env.ContentRootPath, files);
+            return Json(new { update.IsSuccessful,update.Message });
         }
 
         [HttpPost]
@@ -94,7 +96,7 @@ namespace InsBrokers.Portal.Controllers
         }
 
         [HttpPost]
-        public virtual async Task<JsonResult> DeleteAssetAsync([FromServices] ILossAssetService assetSrv, int assetId)
+        public virtual async Task<JsonResult> DeleteAsset([FromServices] ILossAssetService assetSrv, int assetId)
             => Json(await assetSrv.DeleteAsync(assetId));
 
     }

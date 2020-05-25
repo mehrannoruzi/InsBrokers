@@ -34,11 +34,11 @@
                                 <i class="zmdi zmdi-more rotate-90"></i>
                             </span>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item update" data-url="@Url.Action("Update","Loss",new { id = item.LossId })">
+                                <a class="dropdown-item update" data-url="@Url.Action("Update","MemberLoss",new { id = item.LossId })">
                                     <i class="zmdi zmdi-edit default-i"></i>
                                     @Strings.Edit
                                 </a>
-                                <a class="dropdown-item delete" data-url="@Url.Action("Delete","Loss",new { id = item.LossId })">
+                                <a class="dropdown-item delete" data-url="@Url.Action("Delete","MemberLoss",new { id = item.LossId })">
                                     <i class="zmdi zmdi-delete default-i"></i>
                                     @Strings.Delete
                                 </a>

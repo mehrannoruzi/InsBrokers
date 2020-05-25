@@ -4,7 +4,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100px; }
+  height: 100px;
+  flex-direction: column; }
   #uploader i {
     font-size: 20px; }
 

@@ -4,10 +4,16 @@
 }
 <div class="row">
     <div class="col-12 col-sm-6">
-        <custom-select-for for="LossType" items="((List<LossDescriptionDTO>)ViewBag.Types).Select(x=>new SelectListItem {
-                    Text = x.Name_Fa,
-                    Value = x.Code.ToString()
-                }).ToList()" />
+        <div class="form-group">
+            <label for="@nameof(Model.LossType)">@Html.DisplayNameFor(x => x.LossType)</label>
+            <select class="form-control" id="@nameof(Model.LossType)" name="@nameof(Model.LossType)">
+                <option value="">@Strings.SelectPlease</option>
+                @foreach (var type in (List<LossDescriptionDTO>)ViewBag.Types)
+                {
+                    <option value="@type.Code">@type.Name_Fa</option>
+                }
+            </select>
+        </div>
     </div>
     <div class="col-12 col-sm-6">
         <custom-input-for for="PatientName" />

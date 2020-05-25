@@ -74,6 +74,6 @@ namespace InsBrokers.Domain
 
 
 
-        public List<LossAsset> LossAssets  { get; set; }
+        public IList<LossAsset> LossAssets  { get; set; }
     }
 }
