@@ -19,6 +19,7 @@ $(document).ready(function () {
             ajaxBtn.inProgress($btn);
             $.post(removeUrl)
                 .done(function (data) {
+                    console.log(data);
                     ajaxBtn.normal();
                     if (data.IsSuccessful) {
                         $box.remove();

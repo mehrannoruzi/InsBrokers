@@ -4,6 +4,7 @@
 }
 <form asp-controller="MemberLoss" asp-action="@(Model.LossId==0?"Add":"Update")">
     <div class="row">
+        @Html.HiddenFor(x => x.UserId)
         @Html.HiddenFor(x => x.LossId)
         <div class="col-12 col-sm-6">
             <div class="form-group">

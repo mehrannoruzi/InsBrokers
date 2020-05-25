@@ -22,37 +22,40 @@ namespace InsBrokers.Service
 
         public async Task<IResponse<IList<LossAsset>>> SaveRange(string root, Guid userId, IList<IFormFile> files)
         {
-            //try
-            //{
-            var items = new List<LossAsset>();
-            var id = userId.ToString().Replace("-", "_");
-            var pdt = PersianDateTime.Now;
-            var dir = $"/Files/{id}/{pdt.Year}/{pdt.Month}";
-            if (!FileOperation.CreateDirectory(root + "/wwwroot" + dir))
-                return new Response<IList<LossAsset>> { Message = ServiceMessage.SaveFileFailed };
-            foreach (var file in files)
+            try
             {
-                var relativePath = $"{dir}/{Guid.NewGuid().ToString().Replace("-", "_")}{Path.GetExtension(file.FileName)}";
-                var physicalPath = (root + "/wwwroot" + relativePath).Replace("/", "\\");
-                items.Add(new LossAsset
+                var items = new List<LossAsset>();
+                var id = userId.ToString().Replace("-", "_");
+                var pdt = PersianDateTime.Now;
+                var dir = $"/Files/{id}/{pdt.Year}/{pdt.Month}";
+                if (!FileOperation.CreateDirectory(root + "/wwwroot" + dir))
+                    return new Response<IList<LossAsset>> { Message = ServiceMessage.SaveFileFailed };
+                foreach (var file in files)
                 {
-                    Name = file.FileName,
-                    Extention = Path.GetExtension(file.FileName),
-                    FileType = FileOperation.GetFileType(file.FileName),
-                    FileUrl = "~" + relativePath,
-                    PhysicalPath = physicalPath
-                });
-                using (var stream = File.Create(physicalPath))
-                    await file.CopyToAsync(stream);
-            }
+                    var relativePath = $"{dir}/{Guid.NewGuid().ToString().Replace("-", "_")}{Path.GetExtension(file.FileName)}";
+                    var physicalPath = (root + "/wwwroot" + relativePath).Replace("/", "\\");
+                    items.Add(new LossAsset
+                    {
+                        Name = file.FileName,
+                        Extention = Path.GetExtension(file.FileName),
+                        FileType = FileOperation.GetFileType(file.FileName),
+                        FileUrl = "~" + relativePath,
+                        PhysicalPath = physicalPath
+                    });
+                    using (var stream = File.Create(physicalPath))
+                        await file.CopyToAsync(stream);
+                }
 
-            return new Response<IList<LossAsset>> { IsSuccessful = true, Result = items };
-            //}
-            //catch (Exception e)
-            //{
-            //    FileLoger.Error(e);
-            //    return new Response<IList<LossAsset>> { Message = ServiceMessage.SaveFileFailed };
-            //}
+                return new Response<IList<LossAsset>> { IsSuccessful = true, Result = items };
+            }
+            catch (Exception e)
+            {
+                FileLoger.Error(e);
+                return new Response<IList<LossAsset>>
+                {
+                    Message = ServiceMessage.SaveFileFailed
+                };
+            }
 
         }
 
@@ -101,9 +104,11 @@ namespace InsBrokers.Service
                 var asset = await _lossAssetRepo.FindAsync(id);
                 if (asset == null)
                     return new Response<string> { Message = ServiceMessage.RecordNotExist };
+                _lossAssetRepo.Delete(asset);
+                var delete = await _appUow.ElkSaveChangesAsync();
                 if (File.Exists(asset.PhysicalPath))
                     File.Delete(asset.PhysicalPath);
-                return new Response<string> { IsSuccessful = true };
+                return new Response<string> { IsSuccessful = delete.IsSuccessful, Message = delete.Message };
             }
             catch (Exception e)
             {
