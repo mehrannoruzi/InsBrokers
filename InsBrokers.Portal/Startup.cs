@@ -1,3 +1,4 @@
+using Elk.Core;
 using Elk.Http;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
@@ -5,18 +6,16 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using InsBrokers.DependencyResolver;
+using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using System.Text.Json.Serialization;
-using Elk.Core;
 
 namespace InsBrokers.Portal
 {
     public class Startup
     {
-        readonly string AllowedOrigins = "_Origins";
         private IConfiguration _config { get; }
 
         public Startup(IConfiguration configuration)
@@ -48,14 +47,16 @@ namespace InsBrokers.Portal
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            var cachePeriod = "0";
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage(); app.UseStaticFiles();
                 app.UseStaticFiles();
+                cachePeriod = "1";
             }
             else
             {
-                var cachePeriod = env.IsDevelopment() ? "1" : "604800";
+                cachePeriod = "604800";
                 app.UseStaticFiles(new StaticFileOptions
                 {
                     OnPrepareResponse = ctx => { ctx.Context.Response.Headers.Append("Cache-Control", $"public, max-age={cachePeriod}"); }

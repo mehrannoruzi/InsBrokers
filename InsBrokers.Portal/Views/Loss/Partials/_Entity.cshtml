@@ -34,7 +34,7 @@
             <custom-input-for for="PatientName" />
         </div>
         <div class="col-12 col-sm-6">
-            <custom-select-for for="RelationType" items="EnumExtension.GetEnumElements<RelationType>().Select(x=>new SelectListItem {
+            <custom-select-for for="RelationType" items="EnumExtension.GetEnumElements<RelativeType>().Select(x=>new SelectListItem {
                     Text = x.Description,
                     Value = x.Name
                 }).ToList()" />

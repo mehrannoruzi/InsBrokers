@@ -322,11 +322,29 @@ namespace InsBrokers.Domain.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to جنسیت.
+        /// </summary>
+        public static string Gender {
+            get {
+                return ResourceManager.GetString("Gender", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to آیکون.
         /// </summary>
         public static string Icon {
             get {
                 return ResourceManager.GetString("Icon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شماره شناسنامه.
+        /// </summary>
+        public static string IdentityNumber {
+            get {
+                return ResourceManager.GetString("IdentityNumber", resourceCulture);
             }
         }
         
@@ -646,6 +664,24 @@ namespace InsBrokers.Domain.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to بستگان.
+        /// </summary>
+        public static string Relatives {
+            get {
+                return ResourceManager.GetString("Relatives", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to نسبت.
+        /// </summary>
+        public static string RelativeType {
+            get {
+                return ResourceManager.GetString("RelativeType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to نقش.
         /// </summary>
         public static string Role {
@@ -705,6 +741,15 @@ namespace InsBrokers.Domain.Resource {
         public static string Status {
             get {
                 return ResourceManager.GetString("Status", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to نوع تکفل.
+        /// </summary>
+        public static string TakafolKind {
+            get {
+                return ResourceManager.GetString("TakafolKind", resourceCulture);
             }
         }
         
@@ -795,6 +840,15 @@ namespace InsBrokers.Domain.Resource {
         public static string User {
             get {
                 return ResourceManager.GetString("User", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to مدارک پرسنلی.
+        /// </summary>
+        public static string UserAttachments {
+            get {
+                return ResourceManager.GetString("UserAttachments", resourceCulture);
             }
         }
         

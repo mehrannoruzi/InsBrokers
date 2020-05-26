@@ -204,8 +204,14 @@
   <data name="FullName" xml:space="preserve">
     <value>نام و نام خانوادگی</value>
   </data>
+  <data name="Gender" xml:space="preserve">
+    <value>جنسیت</value>
+  </data>
   <data name="Icon" xml:space="preserve">
     <value>آیکون</value>
+  </data>
+  <data name="IdentityNumber" xml:space="preserve">
+    <value>شماره شناسنامه</value>
   </data>
   <data name="InsertDate" xml:space="preserve">
     <value>تاریخ ثبت</value>
@@ -312,6 +318,12 @@
   <data name="RelationType" xml:space="preserve">
     <value>نسبت</value>
   </data>
+  <data name="Relatives" xml:space="preserve">
+    <value>بستگان</value>
+  </data>
+  <data name="RelativeType" xml:space="preserve">
+    <value>نسبت</value>
+  </data>
   <data name="Role" xml:space="preserve">
     <value>نقش</value>
   </data>
@@ -332,6 +344,9 @@
   </data>
   <data name="Status" xml:space="preserve">
     <value>وضعیت</value>
+  </data>
+  <data name="TakafolKind" xml:space="preserve">
+    <value>نوع تکفل</value>
   </data>
   <data name="ThumbnailUrl" xml:space="preserve">
     <value>آدرس فایل کوچک</value>
@@ -362,6 +377,9 @@
   </data>
   <data name="User" xml:space="preserve">
     <value>کاربر</value>
+  </data>
+  <data name="UserAttachments" xml:space="preserve">
+    <value>مدارک پرسنلی</value>
   </data>
   <data name="UserAttachmentType" xml:space="preserve">
     <value>نوع مدرک</value>
