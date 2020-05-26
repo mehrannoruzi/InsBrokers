@@ -54,7 +54,7 @@ namespace InsBrokers.Portal.Controllers
         {
             if (model.ParentId != null && (string.IsNullOrWhiteSpace(model.ControllerName) || string.IsNullOrWhiteSpace(model.ActionName)))
                 return Json(new Response<string> { IsSuccessful = false, Message = Strings.ValidationFailed });
-
+            ModelState.Remove(nameof(model.ParentId));
             if (!ModelState.IsValid) return Json(new Response<string> { IsSuccessful = false, Message = ModelState.GetModelError() });
             return Json(await _actionSrv.AddAsync(model));
         }
@@ -78,10 +78,10 @@ namespace InsBrokers.Portal.Controllers
         [HttpPost]
         public virtual async Task<JsonResult> Update(Action model)
         {
-            if (!ModelState.IsValid) return Json(new Response<string> { IsSuccessful = false, Message = ModelState.GetModelError() });
             if (model.ParentId != null && (string.IsNullOrWhiteSpace(model.ControllerName) || string.IsNullOrWhiteSpace(model.ActionName)))
                 return Json(new Response<string> { IsSuccessful = false, Message = Strings.ValidationFailed });
-
+            ModelState.Remove(nameof(model.ParentId));
+            if (!ModelState.IsValid) return Json(new Response<string> { IsSuccessful = false, Message = ModelState.GetModelError() });
             return Json(await _actionSrv.UpdateAsync(model));
         }
 

@@ -1,0 +1,52 @@
+@model Relative
+@{
+    Layout = null;
+}
+@Html.HiddenFor(x => x.RelativeId)
+    <div class="row">
+        <div class="col-12 col-sm-4">
+            <custom-input-for for="Name" />
+        </div>
+        <div class="col-12 col-sm-4">
+            <custom-input-for for="Family" />
+        </div>
+        <div class="col-12 col-sm-4">
+            <custom-input-for for="FatherName" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-sm-4">
+            <custom-input-for for="IdentityNumber" class="form-control ltr-elm" />
+        </div>
+        <div class="col-12 col-sm-4">
+            <custom-input-for for="NationalCode" class="form-control ltr-elm" />
+        </div>
+        <div class="col-12 col-sm-4">
+            <custom-input-for for="BirthDay" class="form-control ltr-elm pdate" />
+        </div>
+    </div>
+<div class="row">
+    <div class="col-12 col-sm-6">
+        <custom-select-for for="Gender" class="form-control" items="EnumExtension.GetEnumElements<Gender>().Select(x=>new SelectListItem {
+                                Text = x.Description,
+                                Value = x.Name
+                            }).ToList()" />
+    </div>
+    <div class="col-12 col-sm-6">
+        <custom-select-for for="RelativeType" class="form-control" items="EnumExtension.GetEnumElements<RelativeType>().Select(x=>new SelectListItem {
+                                Text = x.Description,
+                                Value = x.Name
+                            }).ToList()" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 col-sm-6">
+        <custom-select-for for="TakafolKind" class="form-control" items="EnumExtension.GetEnumElements<TakafolKind>().Select(x=>new SelectListItem {
+                                Text = x.Description,
+                                Value = x.Name
+                            }).ToList()" />
+    </div>
+    <div class="col-12 col-sm-6">
+
+    </div>
+</div>

@@ -294,6 +294,9 @@
   <data name="OrderPriority" xml:space="preserve">
     <value>اولویت</value>
   </data>
+  <data name="OriginalInsured" xml:space="preserve">
+    <value>بیمه شده اصلی</value>
+  </data>
   <data name="Parent" xml:space="preserve">
     <value>سر شاخه</value>
   </data>
@@ -314,6 +317,9 @@
   </data>
   <data name="Receiver" xml:space="preserve">
     <value>گیرنده</value>
+  </data>
+  <data name="Relation" xml:space="preserve">
+    <value>نسبت</value>
   </data>
   <data name="RelationType" xml:space="preserve">
     <value>نسبت</value>

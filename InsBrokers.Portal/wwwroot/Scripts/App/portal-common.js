@@ -11,9 +11,9 @@ $(document).ready(function () {
     }).on('focusout', '.material-input', function () {
         let $lbl = $(this).next();
         if ($(this).val().length === 0) $lbl.removeClass('lbl-top');
-    });;
+    });
 
-    if (typeof fireGlobalPlugins === 'function') fireGlobalPlugins();
+    fireGlobalPlugins();
 
 
     //change default validation messages 

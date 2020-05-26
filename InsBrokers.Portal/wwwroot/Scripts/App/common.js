@@ -328,8 +328,11 @@ $(document).ajaxError(function (event, jqxhr, settings, thrownError) {
 var customSerialize = function ($wrapper, checkNumbers) {
     let model = {};
     $wrapper.find('input:not([type="checkbox"]):not([type="radio"]),select,textarea').each(function () {
-        if (checkNumbers && !isNaN($(this).val()))
+
+        if (checkNumbers && !isNaN($(this).val()) && $(this).val() !== '') {
             model[$(this).attr('name')] = parseInt($(this).val());
+
+        }
         else
             model[$(this).attr('name')] = $(this).val();
     });

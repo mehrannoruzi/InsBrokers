@@ -37,9 +37,11 @@ namespace InsBrokers.DependencyResolver
 
             services.AddScoped<IRoleService, RoleService>();
             services.AddScoped<IGenericRepo<Role>, RoleRepo>();
+           
             services.AddScoped<IActionService, ActionService>();
             services.AddScoped<IGenericRepo<Action>, ActionRepo>();
             services.AddScoped<IActionInRoleService, ActionInRoleService>();
+            services.AddScoped<IGenericRepo<ActionInRole>, ActionInRoleRepo>();
             services.AddScoped<IUserInRoleService, UserInRoleService>();
             services.AddScoped<IGenericRepo<UserInRole>, UserInRoleRepo>();
 
@@ -55,6 +57,7 @@ namespace InsBrokers.DependencyResolver
             services.AddScoped<IGenericRepo<Address>, AddressRepo>();
             services.AddScoped<IAddressService, AddressService>();
             services.AddScoped<IBankAccountService, BankAccountService>();
+            services.AddScoped<IRelativeService, RelativeService>();
 
             #endregion
 

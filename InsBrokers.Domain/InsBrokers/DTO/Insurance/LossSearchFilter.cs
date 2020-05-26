@@ -18,7 +18,7 @@ namespace InsBrokers.Domain
         [Display(Name = nameof(Strings.LossDateShTo), ResourceType = typeof(Strings))]
         public string LossDateShTo { get; set; }
 
-        [Display(Name = nameof(Strings.PatientName), ResourceType = typeof(Strings))]
-        public string PatientName { get; set; }
+        [Display(Name = nameof(Strings.NationalCode), ResourceType = typeof(Strings))]
+        public string NationalCode { get; set; }
     }
 }

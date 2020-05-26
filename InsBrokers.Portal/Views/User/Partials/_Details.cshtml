@@ -42,6 +42,54 @@
         <custom-checkbox-for wrapper-class="chb-group" for="IsActive" readonly="true" />
     </div>
 </div>
+@if (Model.Relatives != null)
+{
+    <h5>@Html.DisplayNameFor(x => x.Relatives)</h5>
+    <div class="row">
+        <div class="col-12">
+            <table class="footable table table-stripped toggle-arrow-tiny">
+                <thead>
+                    <tr>
+                        <th data-toggle="true">#</th>
+                        <th>@Html.DisplayNameFor(x => x.Relatives[0].Fullname)</th>
+                        <th>@Html.DisplayNameFor(x => x.Relatives[0].NationalCode)</th>
+                        <th>@Html.DisplayNameFor(x => x.Relatives[0].RelativeType)</th>
+                        <th data-hide="all">@Html.DisplayNameFor(x => x.Relatives[0].TakafolKind)</th>
+                        <th data-hide="all">@Html.DisplayNameFor(x => x.Relatives[0].FatherName)</th>
+                        <th data-hide="all">@Html.DisplayNameFor(x => x.Relatives[0].BirthDay)</th>
+                        <th data-hide="all">@Html.DisplayNameFor(x => x.Relatives[0].InsertDateSh)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var rel in Model.Relatives)
+                    {
+                        <tr>
+                            <td>@index</td>
+                            <td>@rel.Fullname</td>
+                            <td>@rel.NationalCode</td>
+                            <td>@rel.RelativeType.GetDescription()</td>
+                            <td>@rel.TakafolKind.GetDescription()</td>
+                            <td>@rel.FatherName</td>
+                            <td>@rel.BirthDay</td>
+                            <td>@rel.InsertDateSh</td>
+                        </tr>
+                        index++;
+                    }
+                </tbody>
+                <tfoot class="d-none">
+                    <tr>
+                        <td colspan="5">
+                            <ul class="pagination float-right"></ul>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+    </div>
+
+}
+@{index = 1;}
 @if (Model.Addresses != null)
 {
     <h5>@Html.DisplayNameFor(x => x.Addresses)</h5>

@@ -49,11 +49,11 @@ namespace InsBrokers.Service
             if (Loss == null) return new Response<Loss> { Message = ServiceMessage.RecordNotExist };
 
             Loss.Status = model.Status;
-            Loss.RelationType = model.RelationType;
+            Loss.RelativeId = model.RelativeId;
             Loss.LossType = model.LossType;
             Loss.LossDateSh = model.LossDateSh;
             Loss.LossDateMi = PersianDateTime.Parse(model.LossDateSh).ToDateTime();
-            Loss.PatientName = model.PatientName;
+            //Loss.PatientName = model.PatientName;
             Loss.Cost = model.Cost;
             Loss.Description = model.Description;
             _LossRepo.Update(Loss);
@@ -73,11 +73,11 @@ namespace InsBrokers.Service
             var Loss = await _LossRepo.FirstOrDefaultAsync(conditions: x => x.LossId == model.LossId, new List<Expression<Func<Loss, object>>> { i => i.User });
             if (Loss == null) return new Response<Loss> { Message = ServiceMessage.RecordNotExist };
 
-            Loss.RelationType = model.RelationType;
+            Loss.RelativeId = model.RelativeId;
             Loss.LossType = model.LossType;
             Loss.LossDateSh = model.LossDateSh;
             Loss.LossDateMi = PersianDateTime.Parse(model.LossDateSh).ToDateTime();
-            Loss.PatientName = model.PatientName;
+            //Loss.PatientName = model.PatientName;
             Loss.Cost = model.Cost;
             Loss.Description = model.Description;
             var getAssets = await _LossAssetSrv.SaveRange(root, model.UserId, files);
@@ -130,12 +130,16 @@ namespace InsBrokers.Service
                 }
                 if (!string.IsNullOrWhiteSpace(filter.LossType))
                     conditions = conditions.And(x => x.LossType == filter.LossType);
-                if (!string.IsNullOrWhiteSpace(filter.PatientName))
-                    conditions = conditions.And(x => x.PatientName.Contains(filter.PatientName));
+                if (!string.IsNullOrWhiteSpace(filter.NationalCode))
+                    conditions = conditions.And(x => x.User.NationalCode == filter.NationalCode);
 
             }
-
-            return _LossRepo.Get(conditions, filter, x => x.OrderByDescending(u => u.LossId), new List<Expression<Func<Loss, object>>> { i => i.User, i => i.LossAssets });
+            var result = _LossRepo.Get(conditions, filter, x => x.OrderByDescending(u => u.LossId), new List<Expression<Func<Loss, object>>> { i => i.User, i => i.LossAssets });
+            var ids = result.Items.Where(x => x.RelativeId != null).Select(x => x.RelativeId).ToList();
+            var relatives = _appUow.RelativeRepo.Get(x => ids.Contains(x.RelativeId), o=>o.OrderByDescending(x=>x.RelativeId));
+            foreach (var loss in result.Items.Where(x=>x.RelativeId!=null))
+                loss.Relative = relatives.FirstOrDefault(x => x.RelativeId == loss.RelativeId);
+            return result;
         }
 
         public async Task<IResponse<int>> GetLossCount()

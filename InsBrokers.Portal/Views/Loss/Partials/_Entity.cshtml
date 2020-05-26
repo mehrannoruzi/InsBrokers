@@ -30,20 +30,27 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-12 col-sm-6">
+        @*<div class="col-12 col-sm-6">
             <custom-input-for for="PatientName" />
-        </div>
+        </div>*@
         <div class="col-12 col-sm-6">
-            <custom-select-for for="RelationType" items="EnumExtension.GetEnumElements<RelativeType>().Select(x=>new SelectListItem {
-                    Text = x.Description,
-                    Value = x.Name
-                }).ToList()" />
+            <custom-select-for for="RelativeId"
+                               optional-label="@Strings.OriginalInsured"
+                               items="Model.Relative==null?new List<SelectListItem>():new List<SelectListItem> {
+                                    new SelectListItem{
+                                    Text = Model.Relative.Fullname,
+                                    Value = Model.RelativeId.ToString()
+                                    }
+                                }"
+                               class="form-control with-ajax select2"
+                               select-data-url="@Url.Action("Search","MemberRelative")" />
         </div>
-    </div>
-    <div class="row">
         <div class="col-12 col-sm-6">
             <custom-input-for for="LossDateSh" class="form-control pdate ltr-elm" />
         </div>
+    </div>
+    <div class="row">
+
         <div class="col-12 col-sm-6">
             <custom-input-for for="Cost" class="form-control ltr-elm" />
         </div>

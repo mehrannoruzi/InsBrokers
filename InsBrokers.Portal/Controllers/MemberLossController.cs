@@ -61,16 +61,22 @@ namespace InsBrokers.Portal.Controllers
         }
 
         [HttpGet]
-        public virtual async Task<JsonResult> Update(int id)
+        public virtual async Task<JsonResult> Update([FromServices]IRelativeService relativeSrv,int id)
         {
-            var findRep = await _LossSrv.FindAsync(id);
-            if (!findRep.IsSuccessful) return Json(new { IsSuccessful = false, Message = Strings.RecordNotFound.Fill(DomainString.Loss) });
+            var find = await _LossSrv.FindAsync(id);
+            if (!find.IsSuccessful) return Json(new { IsSuccessful = false, Message = Strings.RecordNotFound.Fill(DomainString.Loss) });
             ViewBag.Types = GetTypes();
+            if(find.Result.RelativeId!=null)
+            {
+                var rel = await relativeSrv.FindAsync(find.Result.RelativeId ?? 0);
+                find.Result.Relative = rel.Result;
+            }
+
             return Json(new Modal
             {
                 Title = $"{Strings.Update} {DomainString.Loss}",
                 AutoSubmitBtnText = Strings.Edit,
-                Body = ControllerExtension.RenderViewToString(this, "Partials/_Entity", findRep.Result),
+                Body = ControllerExtension.RenderViewToString(this, "Partials/_Entity", find.Result),
                 AutoSubmit = false
             });
         }

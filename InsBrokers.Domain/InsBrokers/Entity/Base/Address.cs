@@ -48,6 +48,6 @@ namespace InsBrokers.Domain
         public string AddressDetails { get; set; }
 
         [NotMapped]
-        public string FullAddress => $"{Province}-{City}={AddressDetails}";
+        public string FullAddress => $"{Province}-{City}-{AddressDetails}";
     }
 }

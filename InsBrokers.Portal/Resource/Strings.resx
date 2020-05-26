@@ -252,6 +252,9 @@
   <data name="NotFoundPageMessage" xml:space="preserve">
     <value>صفحه مورد نظر یافت نشد!</value>
   </data>
+  <data name="OriginalInsured" xml:space="preserve">
+    <value>بیمه شده اصلی</value>
+  </data>
   <data name="Pages" xml:space="preserve">
     <value>صفحات</value>
   </data>

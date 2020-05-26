@@ -10,6 +10,8 @@
   {
     "outputFileName": "wwwroot/Styles/App/portal-app.css",
     "inputFiles": [
+      "wwwroot/Styles/Libs/zebra-date-picker.css",
+      "wwwroot/Styles/App/portal-template.css",
       "wwwroot/Styles/App/common.css"
     ]
   },
@@ -64,7 +66,8 @@
       "wwwroot/Scripts/Libs/popper.min.js",
       "wwwroot/Scripts/Libs/bootstrap.min.js",
       "wwwroot/Scripts/Libs/pace.js",
-      "wwwroot/Scripts/Libs/toastr.js"
+      "wwwroot/Scripts/Libs/toastr.js",
+      "wwwroot/Scripts/Libs/zebra-date-picker.js"
     ],
     "minify": {
       "enabled": true,

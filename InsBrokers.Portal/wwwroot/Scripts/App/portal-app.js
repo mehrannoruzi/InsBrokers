@@ -4,7 +4,16 @@ var notifyType = {
     info: "info",
     warning: "warning"
 };
+var fireGlobalPlugins = function () {
 
+    $('.i-checks').iCheck({
+        checkboxClass: 'icheckbox_square-green',
+        radioClass: 'iradio_square-green',
+    });
+
+    $('.pdate').Zebra_DatePicker();
+
+};
 /*--------------------------------------
             notifications
 ---------------------------------------*/
@@ -62,9 +71,9 @@ $(document).ready(function () {
     }).on('focusout', '.material-input', function () {
         let $lbl = $(this).next();
         if ($(this).val().length === 0) $lbl.removeClass('lbl-top');
-    });;
+    });
 
-    if (typeof fireGlobalPlugins === 'function') fireGlobalPlugins();
+    fireGlobalPlugins();
 
 
     //change default validation messages 

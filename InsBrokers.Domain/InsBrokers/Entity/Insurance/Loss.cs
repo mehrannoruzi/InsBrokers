@@ -14,7 +14,8 @@ namespace InsBrokers.Domain
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int LossId { get; set; }
         [ForeignKey(nameof(UserId))]
-        [Display(Name = nameof(Strings.User), ResourceType = typeof(Strings))]
+
+        [Display(Name = nameof(Strings.OriginalInsured), ResourceType = typeof(Strings))]
         public User User { get; set; }
         [Display(Name = nameof(Strings.User), ResourceType = typeof(Strings))]
         [Required(ErrorMessageResourceName = nameof(ErrorMessage.Required), ErrorMessageResourceType = typeof(ErrorMessage))]
@@ -26,6 +27,9 @@ namespace InsBrokers.Domain
         [Display(Name = nameof(Strings.Cost), ResourceType = typeof(Strings))]
         [Required(ErrorMessageResourceName = nameof(ErrorMessage.Required), ErrorMessageResourceType = typeof(ErrorMessage))]
         public int Cost { get; set; }
+
+        [Display(Name = nameof(Strings.Relation), ResourceType = typeof(Strings))]
+        public int? RelativeId { get; set; }
 
         [Display(Name = nameof(Strings.LossType), ResourceType = typeof(Strings))]
         [Required(ErrorMessageResourceName = nameof(ErrorMessage.Required), ErrorMessageResourceType = typeof(ErrorMessage))]
@@ -55,17 +59,11 @@ namespace InsBrokers.Domain
         [MaxLength(10, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
         public string ModifyDateSh { get; set; }
 
-        [Display(Name = nameof(Strings.RelationType), ResourceType = typeof(Strings))]
-        [Required(ErrorMessageResourceName = nameof(ErrorMessage.Required), ErrorMessageResourceType = typeof(ErrorMessage))]
-        //[MaxLength(25, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
-        //[StringLength(25, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
-        public RelativeType RelationType { get; set; }
-
-        [Display(Name = nameof(Strings.PatientName), ResourceType = typeof(Strings))]
-        [Required(ErrorMessageResourceName = nameof(ErrorMessage.Required), ErrorMessageResourceType = typeof(ErrorMessage))]
-        [MaxLength(50, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
-        [StringLength(50, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
-        public string PatientName { get; set; }
+        //[Display(Name = nameof(Strings.PatientName), ResourceType = typeof(Strings))]
+        //[Required(ErrorMessageResourceName = nameof(ErrorMessage.Required), ErrorMessageResourceType = typeof(ErrorMessage))]
+        //[MaxLength(50, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
+        //[StringLength(50, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
+        //public string PatientName { get; set; }
 
         [Display(Name = nameof(Strings.Description), ResourceType = typeof(Strings))]
         [MaxLength(250, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
@@ -75,5 +73,9 @@ namespace InsBrokers.Domain
 
 
         public IList<LossAsset> LossAssets  { get; set; }
+
+        [NotMapped]
+        [Display(Name = nameof(Strings.PatientName), ResourceType = typeof(Strings))]
+        public Relative Relative { get; set; }
     }
 }

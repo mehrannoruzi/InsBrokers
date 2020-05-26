@@ -44,7 +44,7 @@
                                     <i class="zmdi zmdi-account-add default-i"></i>
                                     @($"{Strings.Add} {InsBrokers.Domain.Resource.Strings.User}")
                                 </a>
-                                <a class="dropdown-item btn-modal" data-url="@Url.Action("GetByRole","ActionInRole",new { roleId = item.RoleId })">
+                                <a class="dropdown-item btn-modal" data-url="@Url.Action("GetViaRole","ActionInRole",new { roleId = item.RoleId })">
                                     <i class="zmdi zmdi-view-list default-i"></i>
                                     @($"{Strings.Pages}")
                                 </a>

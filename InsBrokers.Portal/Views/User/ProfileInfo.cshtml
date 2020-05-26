@@ -33,27 +33,38 @@
                     </div>
                     <div class="row">
                         <div class="col-12 col-sm-4">
-                            <custom-input-for for="NationalCode"></custom-input-for>
-                        </div>
-                        <div class="col-12 col-sm-4">
                             <custom-input-for for="FatherName"></custom-input-for>
                         </div>
                         <div class="col-12 col-sm-4">
-                            <custom-select-for for="BaseInsurance" class="form-control" items="EnumExtension.GetEnumElements<BaseInsuranceType>().Select(x=>new SelectListItem {
-                                Text = x.Description,
-                                Value = x.Description
-                            }).ToList()" />
+                            <custom-input-for for="NationalCode" class="form-control ltr-elm"></custom-input-for>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <custom-input-for for="IdentityNumber" class="form-control ltr-elm" />
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-12 col-sm-4">
-                            <custom-input-for for="BirthDay" class="form-control pdate"></custom-input-for>
+                            <custom-select-for for="BaseInsurance" items="EnumExtension.GetEnumElements<BaseInsuranceType>().Select(x=>new SelectListItem {
+                                Text = x.Description,
+                                Value = x.Description
+                            }).ToList()" />
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <custom-input-for for="BirthDay" class="form-control pdate ltr-elm"></custom-input-for>
                         </div>
                         <div class="col-12 col-sm-4">
                             <custom-input-for for="MobileNumber"></custom-input-for>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-12 col-sm-4">
-                            <custom-input-for type="password" for="NewPassword"></custom-input-for>
+                            <custom-select-for for="Gender" class="form-control" items="EnumExtension.GetEnumElements<Gender>().Select(x=>new SelectListItem {
+                                Text = x.Description,
+                                Value = x.Name
+                            }).ToList()" />
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <custom-input-for type="password" for="NewPassword" class="form-control ltr-elm"></custom-input-for>
                         </div>
                     </div>
 

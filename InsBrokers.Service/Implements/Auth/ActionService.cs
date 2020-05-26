@@ -32,18 +32,20 @@ namespace InsBrokers.Service
 
         public async Task<IResponse<Action>> UpdateAsync(Action model)
         {
-            var findedAction = await _authUow.ActionRepo.FindAsync(model.ActionId);
-            if (findedAction == null) return new Response<Action> { Message = ServiceMessage.RecordNotExist.Fill(DomainStrings.Action) };
+            var action = await _authUow.ActionRepo.FindAsync(model.ActionId);
+            if (action == null) return new Response<Action> { Message = ServiceMessage.RecordNotExist.Fill(DomainStrings.Action) };
 
-            findedAction.Name = model.Name;
-            findedAction.Icon = model.Icon;
-            findedAction.ParentId = model.ParentId;
-            findedAction.ShowInMenu = model.ShowInMenu;
-            findedAction.ActionName = model.ActionName;
-            findedAction.OrderPriority = model.OrderPriority;
+            action.Name = model.Name;
+            action.ControllerName = model.ControllerName;
+            action.ActionName = null;// model.ActionName;
+            action.Icon = model.Icon;
+            action.ParentId = model.ParentId;
+            action.ShowInMenu = model.ShowInMenu;
+            action.ActionName = model.ActionName;
+            action.OrderPriority = model.OrderPriority;
 
-            var saveResult = _authUow.ElkSaveChangesAsync();
-            return new Response<Action> { Result = findedAction, IsSuccessful = saveResult.Result.IsSuccessful, Message = saveResult.Result.Message };
+            var saveResult = await _authUow.ElkSaveChangesAsync();
+            return new Response<Action> { Result = action, IsSuccessful = saveResult.IsSuccessful, Message = saveResult.Message };
         }
 
         public async Task<IResponse<bool>> DeleteAsync(int actionId)
@@ -87,10 +89,7 @@ namespace InsBrokers.Service
         }
 
         public IDictionary<object, object> Search(string searchParameter, int take = 10)
-            => _authUow.ActionRepo.Get(conditions: x => x.Name.Contains(searchParameter))
-            .Union(_authUow.ActionRepo.Get(conditions: x => x.ControllerName.Contains(searchParameter) || x.ActionName.Contains(searchParameter)))
-            .OrderByDescending(x => x.Name)
-            .Take(take)
+            => _authUow.ActionRepo.Get(conditions: x => x.Name.Contains(searchParameter) || x.ControllerName.Contains(searchParameter) || x.ActionName.Contains(searchParameter), o => o.OrderBy(x => x.ActionId))
             .ToDictionary(k => (object)k.ActionId, v => (object)$"{v.Name}(/{v.ControllerName}/{v.ActionName})");
     }
 }

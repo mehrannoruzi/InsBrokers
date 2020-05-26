@@ -24,8 +24,5 @@ namespace InsBrokers.Domain
 
         [Description("پدربزرگ/مادربزرگ")]
         Grandpa = 11,
-
-        [Description("پدربزرگ/مادربزرگ")]
-        Grandma = 12
     }
 }

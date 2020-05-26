@@ -3,23 +3,29 @@
     Layout = null;
     var addMode = Model.UserId == Guid.Empty;
 }
-    <div class="row">
-        @Html.HiddenFor(x => x.UserId)
-        <div class="col-12 col-sm-4">
-            <custom-input-for for="Name" />
-        </div>
-        <div class="col-12 col-sm-4">
-            <custom-input-for for="Family" />
-        </div>
-        <div class="col-12 col-sm-4">
-            <custom-input-for for="Email" class="form-control ltr-elm" />
-        </div>
-    </div>
 <div class="row">
-    <div class="col-12 col-sm-6">
-        <custom-input-for for="MobileNumber"  readonly="!addMode" class="form-control ltr-elm" type="number" />
+    @Html.HiddenFor(x => x.UserId)
+    <div class="col-12 col-sm-4">
+        <custom-input-for for="Name" />
     </div>
-    <div class="col-12 col-sm-6">
+    <div class="col-12 col-sm-4">
+        <custom-input-for for="Family" />
+    </div>
+    <div class="col-12 col-sm-4">
+        <custom-input-for for="Email" class="form-control ltr-elm" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 col-sm-4">
+        <custom-input-for for="MobileNumber" readonly="!addMode" class="form-control ltr-elm" type="number" />
+    </div>
+    <div class="col-12 col-sm-4">
+        <custom-select-for for="Gender" class="form-control" items="EnumExtension.GetEnumElements<Gender>().Select(x=>new SelectListItem {
+                                Text = x.Description,
+                                Value = x.Name
+                            }).ToList()" />
+    </div>
+    <div class="col-12 col-sm-4">
         @if (addMode)
         {
             <custom-input-for for="Password" class="form-control ltr-elm" />
@@ -32,21 +38,24 @@
 </div>
 <div class="row">
     <div class="col-12 col-sm-4">
-        <custom-input-for for="NationalCode"></custom-input-for>
+        <custom-input-for for="FatherName"></custom-input-for>
     </div>
     <div class="col-12 col-sm-4">
-        <custom-input-for for="FatherName"></custom-input-for>
+        <custom-input-for for="NationalCode" class="form-control ltr-elm"></custom-input-for>
+    </div>
+    <div class="col-12 col-sm-4">
+        <custom-input-for for="IdentityNumber" class="form-control ltr-elm"></custom-input-for>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 col-sm-4">
+        <custom-input-for for="BirthDay" class="form-control ltr-elm pdate"></custom-input-for>
     </div>
     <div class="col-12 col-sm-4">
         <custom-select-for for="BaseInsurance" class="form-control" items="EnumExtension.GetEnumElements<BaseInsuranceType>().Select(x=>new SelectListItem {
                                 Text = x.Description,
                                 Value = x.Name
                             }).ToList()" />
-    </div>
-</div>
-<div class="row">
-    <div class="col-12 col-sm-4">
-        <custom-input-for for="BirthDay" class="form-control pdate"></custom-input-for>
     </div>
     <div class="col-12 col-sm-4">
         <custom-checkbox-for wrapper-class="chb-group" for="IsActive" />

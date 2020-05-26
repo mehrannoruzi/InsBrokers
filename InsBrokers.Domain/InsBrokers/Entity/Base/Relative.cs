@@ -55,11 +55,11 @@ namespace InsBrokers.Domain
         [StringLength(10, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
         public string NationalCode { get; set; }
 
-        [Column(TypeName = "varchar(6)")]
+        [Column(TypeName = "varchar(10)")]
         [Display(Name = nameof(Strings.IdentityNumber), ResourceType = typeof(Strings))]
         [Required(ErrorMessageResourceName = nameof(ErrorMessage.Required), ErrorMessageResourceType = typeof(ErrorMessage))]
-        [MaxLength(6, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
-        [StringLength(6, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
+        [MaxLength(10, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
+        [StringLength(10, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
         public string IdentityNumber { get; set; }
 
         [Display(Name = nameof(Strings.Name), ResourceType = typeof(Strings))]
@@ -81,6 +81,7 @@ namespace InsBrokers.Domain
         public string FatherName { get; set; }
 
         [NotMapped]
+        [Display(Name = nameof(Strings.Family), ResourceType = typeof(Strings))]
         public string Fullname => $"{Name} {Family}";
     }
 }

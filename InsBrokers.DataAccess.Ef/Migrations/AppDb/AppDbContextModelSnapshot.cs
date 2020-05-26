@@ -142,13 +142,8 @@ namespace InsBrokers.DataAccess.Ef.Migrations.AppDb
                         .HasColumnType("char(10)")
                         .HasMaxLength(10);
 
-                    b.Property<string>("PatientName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
-
-                    b.Property<byte>("RelationType")
-                        .HasColumnType("tinyint");
+                    b.Property<int?>("RelativeId")
+                        .HasColumnType("int");
 
                     b.Property<byte>("Status")
                         .HasColumnType("tinyint");
@@ -236,8 +231,8 @@ namespace InsBrokers.DataAccess.Ef.Migrations.AppDb
 
                     b.Property<string>("IdentityNumber")
                         .IsRequired()
-                        .HasColumnType("varchar(6)")
-                        .HasMaxLength(6);
+                        .HasColumnType("varchar(10)")
+                        .HasMaxLength(10);
 
                     b.Property<DateTime>("InsertDateMi")
                         .HasColumnType("datetime2");
@@ -308,8 +303,8 @@ namespace InsBrokers.DataAccess.Ef.Migrations.AppDb
 
                     b.Property<string>("IdentityNumber")
                         .IsRequired()
-                        .HasColumnType("varchar(6)")
-                        .HasMaxLength(6);
+                        .HasColumnType("varchar(10)")
+                        .HasMaxLength(10);
 
                     b.Property<DateTime>("InsertDateMi")
                         .HasColumnType("datetime2");

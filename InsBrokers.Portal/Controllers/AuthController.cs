@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Configuration;
 using InsBrokers.DataAccess.Ef;
 using Elk.AspNetCore;
+using Elk.Cache;
+using InsBrokers.InfraStructure;
 
 namespace InsBrokers.Portal.Controllers
 {
@@ -23,7 +25,7 @@ namespace InsBrokers.Portal.Controllers
         private readonly AppDbContext _appDb;
 
         public AuthController(IHttpContextAccessor httpAccessor, IConfiguration configuration,
-            IUserService userSrv, AuthDbContext db, AppDbContext appDb):base(httpAccessor)
+            IUserService userSrv, AuthDbContext db, AppDbContext appDb) : base(httpAccessor)
         {
             _userSrv = userSrv;
             _config = configuration;
@@ -38,11 +40,11 @@ namespace InsBrokers.Portal.Controllers
         {
             //var t = new AclSeed(_db,_appDb);
             //var rep = t.Init();
-
+            var pw = HashGenerator.Hash("9334188184");
             if (User.Identity.IsAuthenticated)
             {
                 var urlPrefix = _config.GetValue<string>(UrlPrefixKey);
-                var defaultUA =  _userSrv.GetAvailableActions(User.GetUserId(), null, urlPrefix).DefaultUserAction;
+                var defaultUA = _userSrv.GetAvailableActions(User.GetUserId(), null, urlPrefix).DefaultUserAction;
                 return Redirect($"{urlPrefix}/{defaultUA.Controller}/{defaultUA.Action}");
             }
             return View(new SignInModel { RememberMe = true });
@@ -63,26 +65,27 @@ namespace InsBrokers.Portal.Controllers
             return Json(new Response<string> { IsSuccessful = true, Result = Url.Action(menuRep.DefaultUserAction.Action, menuRep.DefaultUserAction.Controller, new { }), });
         }
 
-        public virtual async Task<ActionResult> SignOut()
+        public virtual async Task<ActionResult> SignOut([FromServices]IMemoryCacheProvider cacheProvider)
         {
             if (User.Identity.IsAuthenticated)
             {
+                cacheProvider.Remove(GlobalVariables.CacheSettings.MenuModelCacheKey(User.GetUserId()));
                 await _httpAccessor.HttpContext.SignOutAsync();
-            }
+    }
 
             return RedirectToAction("SignIn");
-        }
+}
 
-        [HttpGet]
-        public virtual ActionResult RecoverPasswrod() => View();
+[HttpGet]
+public virtual ActionResult RecoverPasswrod() => View();
 
-        [HttpPost]
-        public virtual async Task<JsonResult> RecoverPasswrod(string mobileNumber)
-        {
-            var emailModel = new EmailMessage();
-            emailModel.Body = await ControllerExtension.RenderViewToStringAsync(this, "Partials/_NewPassword", "");
-            return Json(await _userSrv.RecoverPassword(long.Parse(mobileNumber), _config["CustomSettings:EmailServiceConfig:EmailUserName"], emailModel));
-        }
+[HttpPost]
+public virtual async Task<JsonResult> RecoverPasswrod(string mobileNumber)
+{
+    var emailModel = new EmailMessage();
+    emailModel.Body = await ControllerExtension.RenderViewToStringAsync(this, "Partials/_NewPassword", "");
+    return Json(await _userSrv.RecoverPassword(long.Parse(mobileNumber), _config["CustomSettings:EmailServiceConfig:EmailUserName"], emailModel));
+}
 
     }
 }

@@ -5,7 +5,7 @@ $(document).ready(function () {
         let $btn = $(this);
         submitAjaxForm($(this),
             function (rep) {
-                if ($('#ViewId').val() === '0') {
+                if ($('#ActionId').val() === '0') {
                     let $frm = $btn.closest('form').inlineNotify(notifyType.success, strings.success)[0].reset();
                     if (!rep.Result.ControllerName && !rep.Result.ActionName)
                         $('#ParentId').append(new Option(rep.Result.Name, rep.Result.ViewId, false, false)).trigger('change');

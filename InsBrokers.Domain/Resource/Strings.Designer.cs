@@ -592,6 +592,15 @@ namespace InsBrokers.Domain.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to بیمه شده اصلی.
+        /// </summary>
+        public static string OriginalInsured {
+            get {
+                return ResourceManager.GetString("OriginalInsured", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to سر شاخه.
         /// </summary>
         public static string Parent {
@@ -651,6 +660,15 @@ namespace InsBrokers.Domain.Resource {
         public static string Receiver {
             get {
                 return ResourceManager.GetString("Receiver", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to نسبت.
+        /// </summary>
+        public static string Relation {
+            get {
+                return ResourceManager.GetString("Relation", resourceCulture);
             }
         }
         

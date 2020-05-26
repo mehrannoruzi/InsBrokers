@@ -466,6 +466,15 @@ namespace InsBrokers.Portal.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to بیمه شده اصلی.
+        /// </summary>
+        public static string OriginalInsured {
+            get {
+                return ResourceManager.GetString("OriginalInsured", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to صفحات.
         /// </summary>
         public static string Pages {

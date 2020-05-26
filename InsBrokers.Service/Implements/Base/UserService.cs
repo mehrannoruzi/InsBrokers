@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using InsBrokers.Service.Resource;
 using InsBrokers.DataAccess.Dapper;
 using DomainStrings = InsBrokers.Domain.Resource.Strings;
+using InsBrokers.InfraStructure;
 
 namespace InsBrokers.Service
 {
@@ -22,7 +23,7 @@ namespace InsBrokers.Service
         private readonly DapperUserRepo _dapperUserRepo;
         private readonly IMemoryCacheProvider _cacheProvider;
         private string UserCountLastDaysCacheKey() => "UserCountLastDays";
-        private string MenuModelCacheKey(Guid userId) => $"MenuModel_{userId.ToString().Replace("-", "_")}";
+        //private string MenuModelCacheKey(Guid userId) => $"MenuModel_{userId.ToString().Replace("-", "_")}";
 
         public UserService(AppUnitOfWork appUow, AuthUnitOfWork authUow, IMemoryCacheProvider cacheProvider,
             IEmailService emailService, DapperUserRepo dapperUserRepo)
@@ -60,7 +61,9 @@ namespace InsBrokers.Service
             user.Email = model.Email;
             user.BirthDay = model.BirthDay;
             user.NationalCode = model.NationalCode;
+            user.IdentityNumber = model.IdentityNumber;
             user.BaseInsurance = model.BaseInsurance;
+            user.Gender = model.Gender;
 
             var saveResult = await _appUow.ElkSaveChangesAsync();
             return new Response<User> { Result = user, IsSuccessful = saveResult.IsSuccessful, Message = saveResult.Message };
@@ -79,12 +82,14 @@ namespace InsBrokers.Service
             user.Family = model.Family;
             user.FatherName = model.FatherName;
             user.NationalCode = model.NationalCode;
+            user.IdentityNumber = model.IdentityNumber;
             user.Email = model.Email;
             user.BirthDay = model.BirthDay;
+            user.BirthDayMi = PersianDateTime.Parse(model.BirthDay).ToDateTime();
             user.IsActive = model.IsActive;
 
-            var saveResult = _appUow.ElkSaveChangesAsync();
-            return new Response<User> { Result = user, IsSuccessful = saveResult.Result.IsSuccessful, Message = saveResult.Result.Message };
+            var saveResult = await _appUow.ElkSaveChangesAsync();
+            return new Response<User> { Result = user, IsSuccessful = saveResult.IsSuccessful, Message = saveResult.Message };
         }
 
         public async Task<IResponse<bool>> DeleteAsync(Guid userId)
@@ -101,7 +106,7 @@ namespace InsBrokers.Service
 
         public async Task<IResponse<User>> FindAsync(Guid userId)
         {
-            var findedUser = await _appUow.UserRepo.FirstOrDefaultAsync(conditions: x => x.UserId == userId, new List<Expression<Func<User, object>>> { x => x.Addresses, x => x.BankAccounts });
+            var findedUser = await _appUow.UserRepo.FirstOrDefaultAsync(conditions: x => x.UserId == userId, new List<Expression<Func<User, object>>> { x => x.Addresses, x => x.BankAccounts, x => x.Relatives });
             if (findedUser == null) return new Response<User> { Message = ServiceMessage.RecordNotExist.Fill(DomainStrings.User) };
 
             return new Response<User> { Result = findedUser, IsSuccessful = true };
@@ -187,7 +192,7 @@ namespace InsBrokers.Service
 
         public MenuModel GetAvailableActions(Guid userId, List<MenuSPModel> spResult = null, string urlPrefix = "")
         {
-            var userMenu = (MenuModel)_cacheProvider.Get(MenuModelCacheKey(userId));
+            var userMenu = (MenuModel)_cacheProvider.Get(GlobalVariables.CacheSettings.MenuModelCacheKey(userId));
             if (userMenu != null) return userMenu;
 
             userMenu = new MenuModel();
@@ -240,13 +245,13 @@ namespace InsBrokers.Service
             userMenu.Menu = GetAvailableMenu(spResult, urlPrefix);
             userMenu.ActionList = userActions;
 
-            _cacheProvider.Add(MenuModelCacheKey(userId), userMenu, DateTime.Now.AddMinutes(30));
+            _cacheProvider.Add(GlobalVariables.CacheSettings.MenuModelCacheKey(userId), userMenu, DateTime.Now.AddMinutes(30));
             return userMenu;
         }
 
         public void SignOut(Guid userId)
         {
-            _cacheProvider.Remove(MenuModelCacheKey(userId));
+            _cacheProvider.Remove(GlobalVariables.CacheSettings.MenuModelCacheKey(userId));
         }
 
         public PagingListDetails<User> Get(UserSearchFilter filter)
@@ -305,7 +310,11 @@ namespace InsBrokers.Service
                 BaseInsurance = model.BaseInsurance,
                 Password = HashGenerator.Hash(model.Password),
                 IsActive = true,
+                Gender = model.Gender,
+                BirthDay = model.BirthDay,
+                BirthDayMi = PersianDateTime.Parse(model.BirthDay).ToDateTime(),
                 NationalCode = model.NationalCode,
+                IdentityNumber = model.IdentityNumber,
                 BankAccounts = new List<BankAccount>{
                     new BankAccount
                     {

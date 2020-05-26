@@ -5,8 +5,9 @@ namespace InsBrokers.Domain
 {
     public class PortalSignUpModel
     {
-        [Display(Name = nameof(Strings.Name), ResourceType = typeof(Strings))]
-        public bool IsMale { get; set; }
+        [Display(Name = nameof(Strings.Gender), ResourceType = typeof(Strings))]
+        [Required(ErrorMessageResourceName = nameof(ErrorMessage.Required), ErrorMessageResourceType = typeof(ErrorMessage))]
+        public Gender Gender { get; set; }
 
         [Display(Name = nameof(Strings.Name), ResourceType = typeof(Strings))]
         [Required(ErrorMessageResourceName = nameof(ErrorMessage.Required), ErrorMessageResourceType = typeof(ErrorMessage))]
@@ -31,6 +32,12 @@ namespace InsBrokers.Domain
         [MaxLength(10, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
         [StringLength(10, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
         public string NationalCode { get; set; }
+
+        [Display(Name = nameof(Strings.IdentityNumber), ResourceType = typeof(Strings))]
+        [Required(ErrorMessageResourceName = nameof(ErrorMessage.Required), ErrorMessageResourceType = typeof(ErrorMessage))]
+        [MaxLength(10, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
+        [StringLength(10, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
+        public string IdentityNumber { get; set; }
 
         [Display(Name = nameof(Strings.Password), ResourceType = typeof(Strings))]
         [Required(ErrorMessageResourceName = nameof(ErrorMessage.Required), ErrorMessageResourceType = typeof(ErrorMessage))]
