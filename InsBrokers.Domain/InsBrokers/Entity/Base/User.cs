@@ -101,7 +101,7 @@ namespace InsBrokers.Domain
 
 
         [Display(Name = nameof(Strings.Losses), ResourceType = typeof(Strings))]
-        public List<Loss> losses { get; set; }
+        public List<Loss> Losses { get; set; }
         [Display(Name = nameof(Strings.Addresses), ResourceType = typeof(Strings))]
         public List<Address> Addresses { get; set; }
         [Display(Name = nameof(Strings.BankAccounts), ResourceType = typeof(Strings))]
