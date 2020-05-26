@@ -101,7 +101,7 @@ namespace InsBrokers.Service
 
         public async Task<IResponse<User>> FindAsync(Guid userId)
         {
-            var findedUser = await _appUow.UserRepo.FindAsync(userId);
+            var findedUser = await _appUow.UserRepo.FirstOrDefaultAsync(conditions: x => x.UserId == userId, new List<Expression<Func<User, object>>> { x => x.Addresses, x => x.BankAccounts });
             if (findedUser == null) return new Response<User> { Message = ServiceMessage.RecordNotExist.Fill(DomainStrings.User) };
 
             return new Response<User> { Result = findedUser, IsSuccessful = true };

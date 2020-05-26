@@ -97,6 +97,15 @@ namespace InsBrokers.Domain.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to آدرس ها.
+        /// </summary>
+        public static string Addresses {
+            get {
+                return ResourceManager.GetString("Addresses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to نوع آدرس.
         /// </summary>
         public static string AddressType {
@@ -120,6 +129,15 @@ namespace InsBrokers.Domain.Resource {
         public static string BankAccount {
             get {
                 return ResourceManager.GetString("BankAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to حساب های بانکی.
+        /// </summary>
+        public static string BankAccounts {
+            get {
+                return ResourceManager.GetString("BankAccounts", resourceCulture);
             }
         }
         
@@ -453,6 +471,15 @@ namespace InsBrokers.Domain.Resource {
         public static string LossDateShTo {
             get {
                 return ResourceManager.GetString("LossDateShTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to هزینه های درمانی.
+        /// </summary>
+        public static string Losses {
+            get {
+                return ResourceManager.GetString("Losses", resourceCulture);
             }
         }
         

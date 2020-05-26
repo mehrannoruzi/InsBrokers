@@ -100,9 +100,11 @@ namespace InsBrokers.Domain
         public string Fullname => $"{Name} {Family}";
 
 
-
+        [Display(Name = nameof(Strings.Losses), ResourceType = typeof(Strings))]
         public List<Loss> losses { get; set; }
+        [Display(Name = nameof(Strings.Addresses), ResourceType = typeof(Strings))]
         public List<Address> Addresses { get; set; }
+        [Display(Name = nameof(Strings.BankAccounts), ResourceType = typeof(Strings))]
         public List<BankAccount> BankAccounts { get; set; }
         public List<UserAttachment> UserAttachments { get; set; }
     }

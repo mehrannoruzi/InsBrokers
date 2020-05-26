@@ -129,6 +129,9 @@
   <data name="Address" xml:space="preserve">
     <value>آدرس</value>
   </data>
+  <data name="Addresses" xml:space="preserve">
+    <value>آدرس ها</value>
+  </data>
   <data name="AddressType" xml:space="preserve">
     <value>نوع آدرس</value>
   </data>
@@ -137,6 +140,9 @@
   </data>
   <data name="BankAccount" xml:space="preserve">
     <value>حساب بانکی</value>
+  </data>
+  <data name="BankAccounts" xml:space="preserve">
+    <value>حساب های بانکی</value>
   </data>
   <data name="BankName" xml:space="preserve">
     <value>نام بانک</value>
@@ -248,6 +254,9 @@
   </data>
   <data name="LossDateShTo" xml:space="preserve">
     <value>تا تاریخ</value>
+  </data>
+  <data name="Losses" xml:space="preserve">
+    <value>هزینه های درمانی</value>
   </data>
   <data name="LossType" xml:space="preserve">
     <value>نوع هزینه</value>

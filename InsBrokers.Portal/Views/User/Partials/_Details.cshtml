@@ -2,6 +2,7 @@
 @{
     Layout = null;
     var addMode = Model.UserId == Guid.Empty;
+    int index = 1;
 }
 <div class="row">
     @Html.HiddenFor(x => x.UserId)
@@ -41,31 +42,35 @@
         <custom-checkbox-for wrapper-class="chb-group" for="IsActive" readonly="true" />
     </div>
 </div>
-<hr />
-<h6>@Html.DisplayNameFor(x => x.Addresses)</h6>
-<div class="row">
-    @if (Model.Addresses != null)
-    {
-        foreach (var addr in Model.Addresses)
+@if (Model.Addresses != null)
+{
+    <h5>@Html.DisplayNameFor(x => x.Addresses)</h5>
+    <hr />
+    <div class="row">
+        @foreach (var addr in Model.Addresses)
         {
             <div class="col-12 m-b">
-                <p>@addr.Province-@addr.City-@addr.AddressDetails</p>
+                <p><span class="badge badge-info">@index</span><span class="copy-value" data-copy-value="@addr.FullAddress"></span> @addr.FullAddress</p>
             </div>
+            index++;
         }
+    </div>
 
-    }
-</div>
-<hr />
-<h6>@Html.DisplayNameFor(x => x.BankAccounts)</h6>
-<div class="row">
-    @if (Model.BankAccounts != null)
-    {
-        foreach (var acc in Model.BankAccounts)
+}
+@{index = 1;}
+@if (Model.BankAccounts != null)
+{
+    <h5>@Html.DisplayNameFor(x => x.BankAccounts)</h5>
+    <hr />
+    <div class="row">
+        @foreach (var acc in Model.BankAccounts)
         {
             <div class="col-12 m-b">
-                <p>@acc.BankName (Html.DisplayNameFor(x=>x.BankAccounts[0].AccountNumber):@acc.BankName)</p>
-                <p>@Html.DisplayNameFor(x=>x.BankAccounts[0].Shaba):@acc.Shaba</p>
+                <p><span class="badge badge-primary">@index</span> @acc.BankName.GetDescription()</p>
+                <p>@Html.DisplayNameFor(x => x.BankAccounts[0].AccountNumber):<span class="copy-value" data-copy-value="@acc.AccountNumber"> @acc.AccountNumber</span></p>
+                <p>@Html.DisplayNameFor(x => x.BankAccounts[0].Shaba):<span class="copy-value" data-copy-value="@acc.Shaba"> @acc.Shaba</span></p>
             </div>
+            index++;
         }
-    }
-</div>
+    </div>
+}

@@ -89,5 +89,21 @@ namespace InsBrokers.Portal.Controllers
         public virtual JsonResult Search(string q)
             => Json(_userSrv.Search(q).ToSelectListItems());
 
+        [HttpGet]
+        public virtual async Task<IActionResult> Details(Guid id)
+        {
+            var foundUser = await _userSrv.FindAsync(id);
+            if (!foundUser.IsSuccessful)
+                return Json(new Modal { IsSuccessful = false, Message = Strings.NotFound });
+            return Json(new Modal
+            {
+                IsSuccessful = true,
+                Title = $"{Strings.Details} {DomainString.User}",
+                AutoSubmitBtnText = Strings.Edit,
+                Body = await ControllerExtension.RenderViewToStringAsync(this, "Partials/_Details", foundUser.Result),
+                AutoSubmit = false
+            });
+        }
+
     }
 }

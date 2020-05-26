@@ -46,6 +46,10 @@
                                     <i class="zmdi zmdi-delete default-i"></i>
                                     @Strings.Delete
                                 </a>
+                                <a class="dropdown-item btn-modal" data-url="@Url.Action("Details","User",new { id = item.UserId })">
+                                    <i class="zmdi zmdi-eye default-i"></i>
+                                    @Strings.Details
+                                </a>
                             </div>
                         </div>
                     </td>
