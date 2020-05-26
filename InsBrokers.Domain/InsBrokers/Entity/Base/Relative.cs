@@ -1,43 +1,39 @@
 ﻿using System;
 using Elk.Core;
 using InsBrokers.Domain.Resource;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace InsBrokers.Domain
 {
-    [Table(nameof(User), Schema = "Base")]
-    public class User : IInsertDateProperties, IEntity
+    [Table(nameof(Relative), Schema = "Base")]
+    public class Relative : IInsertDateProperties, IEntity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid UserId { get; set; }
+        public int RelativeId { get; set; }
 
-        [Display(Name = nameof(Strings.MobileNumber), ResourceType = typeof(Strings))]
+        [ForeignKey(nameof(UserId))]
+        [Display(Name = nameof(Strings.User), ResourceType = typeof(Strings))]
+        public User User { get; set; }
+        [Display(Name = nameof(Strings.User), ResourceType = typeof(Strings))]
         [Required(ErrorMessageResourceName = nameof(ErrorMessage.Required), ErrorMessageResourceType = typeof(ErrorMessage))]
-        public long MobileNumber { get; set; }
+        public Guid UserId { get; set; }
 
         [Display(Name = nameof(Strings.Gender), ResourceType = typeof(Strings))]
         [Required(ErrorMessageResourceName = nameof(ErrorMessage.Required), ErrorMessageResourceType = typeof(ErrorMessage))]
         public Gender Gender { get; set; }
-
-        [Display(Name = nameof(Strings.BaseInsurance), ResourceType = typeof(Strings))]
+        
+        [Display(Name = nameof(Strings.TakafolKind), ResourceType = typeof(Strings))]
         [Required(ErrorMessageResourceName = nameof(ErrorMessage.Required), ErrorMessageResourceType = typeof(ErrorMessage))]
-        public BaseInsuranceType BaseInsurance { get; set; }
+        public TakafolKind TakafolKind { get; set; }
 
-        [Display(Name = nameof(Strings.IsActive), ResourceType = typeof(Strings))]
+        [Display(Name = nameof(Strings.RelativeType), ResourceType = typeof(Strings))]
         [Required(ErrorMessageResourceName = nameof(ErrorMessage.Required), ErrorMessageResourceType = typeof(ErrorMessage))]
-        public bool IsActive { get; set; }
-
-        [Display(Name = nameof(Strings.IsRecoveredPassword), ResourceType = typeof(Strings))]
-        public bool MustChangePassword { get; set; }
+        public RelativeType RelativeType { get; set; }
 
         [Display(Name = nameof(Strings.InsertDate), ResourceType = typeof(Strings))]
         public DateTime InsertDateMi { get; set; }
-
-        [Display(Name = nameof(Strings.LastLoginDate), ResourceType = typeof(Strings))]
-        public DateTime? LastLoginDateMi { get; set; }
 
         [Display(Name = nameof(Strings.BirthDay), ResourceType = typeof(Strings))]
         public DateTime BirthDayMi { get; set; }
@@ -48,13 +44,7 @@ namespace InsBrokers.Domain
         public string InsertDateSh { get; set; }
 
         [Column(TypeName = "char(10)")]
-        [Display(Name = nameof(Strings.LastLoginDate), ResourceType = typeof(Strings))]
-        [MaxLength(10, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
-        public string LastLoginDateSh { get; set; }
-
-        [Column(TypeName = "char(10)")]
         [Display(Name = nameof(Strings.BirthDay), ResourceType = typeof(Strings))]
-        [Required(ErrorMessageResourceName = nameof(ErrorMessage.Required), ErrorMessageResourceType = typeof(ErrorMessage))]
         [MaxLength(10, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
         public string BirthDay { get; set; }
 
@@ -71,20 +61,6 @@ namespace InsBrokers.Domain
         [MaxLength(6, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
         [StringLength(6, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
         public string IdentityNumber { get; set; }
-
-        [Column(TypeName = "varchar(50)")]
-        [DataType(DataType.Password)]
-        [Display(Name = nameof(Strings.Password), ResourceType = typeof(Strings))]
-        [Required(ErrorMessageResourceName = nameof(ErrorMessage.Required), ErrorMessageResourceType = typeof(ErrorMessage))]
-        [MaxLength(50, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
-        [StringLength(50, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
-        public string Password { get; set; }
-
-        [Column(TypeName = "varchar(50)")]
-        [Display(Name = nameof(Strings.Password), ResourceType = typeof(Strings))]
-        [MaxLength(50, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
-        [StringLength(50, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
-        public string NewPassword { get; set; }
 
         [Display(Name = nameof(Strings.Name), ResourceType = typeof(Strings))]
         [Required(ErrorMessageResourceName = nameof(ErrorMessage.Required), ErrorMessageResourceType = typeof(ErrorMessage))]
@@ -104,30 +80,7 @@ namespace InsBrokers.Domain
         [StringLength(25, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
         public string FatherName { get; set; }
 
-        [Column(TypeName = "varchar(50)")]
-        [Display(Name = nameof(Strings.Email), ResourceType = typeof(Strings))]
-        [EmailAddress(ErrorMessageResourceName = nameof(ErrorMessage.WrongEmailFormat), ErrorMessageResourceType = typeof(ErrorMessage))]
-        [MaxLength(50, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
-        [StringLength(50, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
-        public string Email { get; set; }
-
         [NotMapped]
         public string Fullname => $"{Name} {Family}";
-
-
-        [Display(Name = nameof(Strings.Relatives), ResourceType = typeof(Strings))]
-        public List<Relative> Relatives { get; set; }
-
-        [Display(Name = nameof(Strings.Losses), ResourceType = typeof(Strings))]
-        public List<Loss> losses { get; set; }
-
-        [Display(Name = nameof(Strings.Addresses), ResourceType = typeof(Strings))]
-        public List<Address> Addresses { get; set; }
-        
-        [Display(Name = nameof(Strings.BankAccounts), ResourceType = typeof(Strings))]
-        public List<BankAccount> BankAccounts { get; set; }
-
-        [Display(Name = nameof(Strings.UserAttachments), ResourceType = typeof(Strings))]
-        public List<UserAttachment> UserAttachments { get; set; }
     }
 }

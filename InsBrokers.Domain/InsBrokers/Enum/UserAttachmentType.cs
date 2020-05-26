@@ -12,5 +12,8 @@ namespace InsBrokers.Domain
 
         [Description("عکس پرسنلی")]
         PersoneliPicture = 3,
+
+        [Description("دفترچه بیمه")]
+        InsuranceBooklet = 4,
     }
 }
