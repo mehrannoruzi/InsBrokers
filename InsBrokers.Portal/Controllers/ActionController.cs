@@ -1,25 +1,21 @@
 using Elk.Core;
-using System.Linq;
+using Elk.Http;
+using Elk.Cache;
+using Elk.AspNetCore;
 using InsBrokers.Domain;
 using InsBrokers.Service;
-using Elk.AspNetCore;
-using Elk.AspNetCore.Mvc;
 using System.Threading.Tasks;
-
 using Microsoft.AspNetCore.Mvc;
-using InsBrokers.Portal.Resource;
 using System.Collections.Generic;
+using InsBrokers.Portal.Resource;
 using Action = InsBrokers.Domain.Action;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using DomainString = InsBrokers.Domain.Resource.Strings;
-
-using Elk.Cache;
 using static InsBrokers.InfraStructure.GlobalVariables;
-using Elk.Http;
+using DomainString = InsBrokers.Domain.Resource.Strings;
 
 namespace InsBrokers.Portal.Controllers
 {
-    //[AuthorizationFilter]
+    [AuthorizationFilter]
     public partial class ActionController : Controller
     {
         private readonly IActionService _actionSrv;
