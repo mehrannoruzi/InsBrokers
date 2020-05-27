@@ -2,7 +2,7 @@
 @{
     Layout = null;
 }
-<div class="row">
+<div class="row m-b">
     <div class="col-12 col-sm-6">
         <div class="form-group">
             <label for="@nameof(Model.UserId)">@Html.DisplayNameFor(x => x.User)</label>
@@ -16,7 +16,7 @@
         </div>
     </div>
 </div>
-<div class="row">
+<div class="row m-b">
     <div class="col-12 col-sm-6">
         <div class="form-group">
             <label for="@nameof(Model.LossType)">@Html.DisplayNameFor(x => x.LossType)</label>
@@ -33,7 +33,7 @@
         <custom-input-for for="Cost" class="form-control ltr-elm" readonly="true" />
     </div>
 </div>
-<div class="row">
+<div class="row m-b">
     <div class="col-12 col-sm-6">
         <div class="form-group">
             <label for="@nameof(Model.Status)">@Html.DisplayNameFor(x => x.Status)</label>
@@ -44,18 +44,18 @@
         <custom-input-for for="LossDateSh" class="form-control ltr-elm" readonly="true" />
     </div>
 </div>
-<div class="row">
+<div class="row m-b">
     <div class="col-12">
         <custom-textarea-for for="Description" readonly="true"></custom-textarea-for>
     </div>
 </div>
-<div class="row">
+<div class="row m-b">
     <div class="col-12">
         <p class="alert alert-info text-center" id="asset-description"></p>
     </div>
     <div class="col-12">
-            <partial name="~/Views/LossAsset/Partials/_Details.cshtml" model="Model.LossAssets??new List<LossAsset>()" />
-        </div>
+        <partial name="~/Views/LossAsset/Partials/_Details.cshtml" model="Model.LossAssets??new List<LossAsset>()" />
+    </div>
 </div>
 <script>
     $('#asset-description').text($('#modal #' + '@nameof(Model.LossType)' + ' option:selected').data('description'));
