@@ -51,9 +51,10 @@ namespace InsBrokers.Domain
         public string AccountNumber { get; set; }
 
         [Column(TypeName = "varchar(24)")]
+        [RegularExpression(@"IR\d()")]
         [Display(Name = nameof(Strings.Shaba), ResourceType = typeof(Strings))]
-        [MaxLength(24, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
-        [StringLength(24, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
+        [MaxLength(26, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
+        [StringLength(26, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
         public string Shaba { get; set; }
     }
 }

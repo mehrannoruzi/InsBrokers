@@ -52,7 +52,7 @@ h5 {
 
 .navbar-default .nav > li > a:hover,
 .navbar-default .nav > li > a:focus {
-  background-color: #1bb394;
+  background-color: #0058AF;
   color: white; }
 
 .nav .open > a,
@@ -179,7 +179,7 @@ h5 {
 
 .nav-header {
   padding: 10px 25px 15px 25px;
-  background-color: #005846; }
+  background-color: #0058AF; }
 
 .caret {
   display: inline-block;
@@ -198,11 +198,11 @@ h5 {
   transition: all 0.4s; }
 
 ul.nav-second-level {
-  background: #1b826d; }
+  background: #0058AF; }
 
 .nav > li.active {
-  border-left: 4px solid #1bb394;
-  background: #1b826d; }
+  border-left: 4px solid #0058AF;
+  background: #0058AF; }
 
 .nav.nav-second-level > li.active {
   border: none; }
@@ -3523,7 +3523,7 @@ samp {
 
 body {
   font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background-color: #005846;
+  background-color: #0058AF;
   font-size: 13px;
   color: #676a6c;
   overflow-x: hidden; }
