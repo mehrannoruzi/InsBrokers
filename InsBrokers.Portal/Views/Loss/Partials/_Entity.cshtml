@@ -47,17 +47,14 @@
         </div>
     </div>
     <div class="row">
-
-        <div class="col-12 col-sm-6">
-            <custom-input-for for="Cost" class="form-control ltr-elm" />
-        </div>
-    </div>
-    <div class="row">
         <div class="col-12 col-sm-6">
             <custom-select-for for="Status" items="EnumExtension.GetEnumElements<LossStatus>().Select(x=>new SelectListItem {
                     Text = x.Description,
                     Value = x.Name
                 }).ToList()" />
+        </div>
+        <div class="col-12 col-sm-6">
+            <custom-input-for for="Cost" class="form-control ltr-elm" />
         </div>
     </div>
     <div class="row">

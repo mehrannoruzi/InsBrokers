@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using InsBrokers.Portal.Resource;
 using DomainString = InsBrokers.Domain.Resource.Strings;
+using Elk.AspNetCore.Mvc;
 
 namespace InsBrokers.Portal.Controllers
 {
-    [AuthorizationFilter]
+    [AuthorizationFilter2]
     public partial class MemberRelativeController : Controller
     {
         private readonly IRelativeService _MemberRelativeSrv;
