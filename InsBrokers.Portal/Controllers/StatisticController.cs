@@ -1,11 +1,11 @@
-﻿using InsBrokers.Service;
+﻿using Elk.AspNetCore;
+using InsBrokers.Service;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Elk.AspNetCore;
 
 namespace InsBrokers.Portal.Controllers
 {
-    [AuthorizationFilter]
+    //[AuthorizationFilter]
     public class StatisticController : Controller
     {
         private readonly ILossService _lossSrv;

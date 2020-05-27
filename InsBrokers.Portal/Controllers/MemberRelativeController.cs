@@ -10,7 +10,7 @@ using DomainString = InsBrokers.Domain.Resource.Strings;
 
 namespace InsBrokers.Portal.Controllers
 {
-    [AuthorizationFilter]
+    //[AuthorizationFilter]
     public partial class MemberRelativeController : Controller
     {
         private readonly IRelativeService _MemberRelativeSrv;

@@ -19,7 +19,7 @@ using Elk.Http;
 
 namespace InsBrokers.Portal.Controllers
 {
-    [AuthorizationFilter]
+    //[AuthorizationFilter]
     public partial class ActionController : Controller
     {
         private readonly IActionService _actionSrv;

@@ -1,16 +1,14 @@
 using System;
 using Elk.Core;
 using System.Linq;
+using Elk.AspNetCore;
 using InsBrokers.Domain;
 using InsBrokers.Service;
-using Elk.AspNetCore.Mvc;
-
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using InsBrokers.Portal.Resource;
 using Microsoft.AspNetCore.Authorization;
 using DomainString = InsBrokers.Domain.Resource.Strings;
-using Elk.AspNetCore;
 
 namespace InsBrokers.Portal.Controllers
 {
