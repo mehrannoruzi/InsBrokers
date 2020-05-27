@@ -22,7 +22,10 @@ namespace InsBrokers.Domain
         [Description("مادر")]
         Mother = 6,
 
-        [Description("پدربزرگ/مادربزرگ")]
-        Grandpa = 11,
+        [Description("پدربزرگ")]
+        GrandPa = 13,
+
+        [Description("مادربزرگ")]
+        GrandMa = 14,
     }
 }

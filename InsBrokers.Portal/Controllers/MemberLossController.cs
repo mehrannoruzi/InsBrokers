@@ -1,15 +1,15 @@
-using Elk.Core;
-using InsBrokers.Domain;
-using InsBrokers.Service;
 using System;
+using Elk.Core;
 using Elk.Http;
 using Elk.AspNetCore;
+using InsBrokers.Domain;
+using InsBrokers.Service;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using InsBrokers.Portal.Resource;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
+using InsBrokers.Portal.Resource;
+using Microsoft.AspNetCore.Hosting;
 using DomainString = InsBrokers.Domain.Resource.Strings;
 
 namespace InsBrokers.Portal.Controllers
@@ -19,11 +19,14 @@ namespace InsBrokers.Portal.Controllers
     {
         private readonly ILossService _LossSrv;
         private readonly IWebHostEnvironment _env;
+
         public MemberLossController(ILossService LossSrv, IWebHostEnvironment env)
         {
             _LossSrv = LossSrv;
             _env = env;
         }
+
+
 
         private IEnumerable<LossDescriptionDTO> GetTypes()
         {

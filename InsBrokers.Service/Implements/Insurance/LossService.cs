@@ -128,7 +128,7 @@ namespace InsBrokers.Service
                     var to = PersianDateTime.Parse(filter.LossDateShFrom).ToDateTime();
                     conditions = conditions.And(x => x.InsertDateMi <= to);
                 }
-                if (!string.IsNullOrWhiteSpace(filter.LossType))
+                if (filter.LossType.IsNotNull())
                     conditions = conditions.And(x => x.LossType == filter.LossType);
                 if (!string.IsNullOrWhiteSpace(filter.NationalCode))
                     conditions = conditions.And(x => x.User.NationalCode == filter.NationalCode);

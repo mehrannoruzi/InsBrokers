@@ -1,6 +1,6 @@
 ﻿@model StatisticModel
 @{
-    ViewBag.Title = "آمار";
+    ViewBag.Title = "داشبورد مدیریت";
 }
     <div class="continer">
         <div class="row m-b">
@@ -47,9 +47,6 @@
     <script>
         var userInDays = @(Html.Raw(Model.UserInDays.SerializeToJson()));
         var lossInDays = @(Html.Raw(Model.LossInDays.SerializeToJson()));
-
     </script>
     <script src="~/Scripts/App/Statistic/index.js"></script>
 }
-
-
