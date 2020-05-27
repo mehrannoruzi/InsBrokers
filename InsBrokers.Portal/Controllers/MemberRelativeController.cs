@@ -10,7 +10,7 @@ using DomainString = InsBrokers.Domain.Resource.Strings;
 
 namespace InsBrokers.Portal.Controllers
 {
-    //[AuthorizationFilter]
+    [AuthorizationFilter]
     public partial class MemberRelativeController : Controller
     {
         private readonly IRelativeService _MemberRelativeSrv;
@@ -21,7 +21,7 @@ namespace InsBrokers.Portal.Controllers
         }
 
 
-        [HttpGet]
+        [HttpGet, AuthEqualTo("MemberRelative", nameof(Manage))]
         public virtual JsonResult Add()
             => Json(new Modal
             {
@@ -30,7 +30,7 @@ namespace InsBrokers.Portal.Controllers
                 AutoSubmitUrl = Url.Action("Add", "MemberRelative")
             });
 
-        [HttpPost]
+        [HttpPost, AuthEqualTo("MemberRelative", nameof(Manage))]
         public virtual async Task<JsonResult> Add(Relative model)
         {
             model.UserId = User.GetUserId();
@@ -38,7 +38,7 @@ namespace InsBrokers.Portal.Controllers
             return Json(await _MemberRelativeSrv.AddAsync(model));
         }
 
-        [HttpGet]
+        [HttpGet, AuthEqualTo("MemberRelative", nameof(Manage))]
         public virtual async Task<JsonResult> Update(int id)
         {
             var findRep = await _MemberRelativeSrv.FindAsync(id);
@@ -54,14 +54,14 @@ namespace InsBrokers.Portal.Controllers
             });
         }
 
-        [HttpPost]
+        [HttpPost, AuthEqualTo(nameof(MemberRelativeController), nameof(Manage))]
         public virtual async Task<JsonResult> Update(Relative model)
         {
             if (!ModelState.IsValid) return Json(new { IsSuccessful = false, Message = ModelState.GetModelError() });
             return Json(await _MemberRelativeSrv.UpdateAsync(model));
         }
 
-        [HttpPost]
+        [HttpPost, AuthEqualTo(nameof(MemberRelativeController), nameof(Manage))]
         public virtual async Task<JsonResult> Delete(int id) => Json(await _MemberRelativeSrv.DeleteAsync(id));
 
         [HttpGet]

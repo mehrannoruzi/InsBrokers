@@ -13,8 +13,8 @@ namespace InsBrokers.Domain
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int LossId { get; set; }
-        [ForeignKey(nameof(UserId))]
 
+        [ForeignKey(nameof(UserId))]
         [Display(Name = nameof(Strings.OriginalInsured), ResourceType = typeof(Strings))]
         public User User { get; set; }
         [Display(Name = nameof(Strings.User), ResourceType = typeof(Strings))]
