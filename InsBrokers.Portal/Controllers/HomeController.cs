@@ -1,11 +1,11 @@
 ﻿using Elk.Core;
 using InsBrokers.Domain;
-using InsBrokers.Portal.Resource;
 using InsBrokers.Service;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+using InsBrokers.Portal.Resource;
+using Microsoft.Extensions.Configuration;
 
 namespace InsBrokers.Portal.Controllers
 {

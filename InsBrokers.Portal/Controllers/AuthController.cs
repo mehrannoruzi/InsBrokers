@@ -1,16 +1,15 @@
 using Elk.Core;
+using Elk.Cache;
+using Elk.AspNetCore;
 using InsBrokers.Service;
 using System.Threading.Tasks;
-
 using Microsoft.AspNetCore.Mvc;
-using InsBrokers.Portal.Resource;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.Extensions.Configuration;
 using InsBrokers.DataAccess.Ef;
-using Elk.AspNetCore;
-using Elk.Cache;
 using InsBrokers.InfraStructure;
+using Microsoft.AspNetCore.Http;
+using InsBrokers.Portal.Resource;
+using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Authentication;
 
 namespace InsBrokers.Portal.Controllers
 {

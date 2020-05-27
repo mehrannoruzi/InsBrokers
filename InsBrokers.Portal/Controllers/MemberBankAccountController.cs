@@ -1,8 +1,8 @@
 using Elk.Core;
+using Elk.Http;
+using Elk.AspNetCore;
 using InsBrokers.Domain;
 using InsBrokers.Service;
-using Elk.AspNetCore;
-using Elk.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using InsBrokers.Portal.Resource;
@@ -10,7 +10,7 @@ using DomainString = InsBrokers.Domain.Resource.Strings;
 
 namespace InsBrokers.Portal.Controllers
 {
-    [AuthorizationFilter]
+    //[AuthorizationFilter]
     public partial class MemberBankAccountController : Controller
     {
         private readonly IBankAccountService _BankAccountSrv;
