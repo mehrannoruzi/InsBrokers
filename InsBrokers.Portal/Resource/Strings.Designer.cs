@@ -169,6 +169,15 @@ namespace InsBrokers.Portal.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to مدارک.
+        /// </summary>
+        public static string Documents {
+            get {
+                return ResourceManager.GetString("Documents", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to دانلود.
         /// </summary>
         public static string Download {
@@ -489,6 +498,15 @@ namespace InsBrokers.Portal.Resource {
         public static string Password {
             get {
                 return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to گذروازه باید حد اقل 5 کاراکتر و حداکثر 20 کاراکتر باشد.
+        /// </summary>
+        public static string PasswordValidationFailed {
+            get {
+                return ResourceManager.GetString("PasswordValidationFailed", resourceCulture);
             }
         }
         

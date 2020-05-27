@@ -153,6 +153,9 @@
   <data name="Details" xml:space="preserve">
     <value>جزییات</value>
   </data>
+  <data name="Documents" xml:space="preserve">
+    <value>مدارک</value>
+  </data>
   <data name="Download" xml:space="preserve">
     <value>دانلود</value>
   </data>
@@ -260,6 +263,9 @@
   </data>
   <data name="Password" xml:space="preserve">
     <value>گذرواژه</value>
+  </data>
+  <data name="PasswordValidationFailed" xml:space="preserve">
+    <value>گذروازه باید حد اقل 5 کاراکتر و حداکثر 20 کاراکتر باشد</value>
   </data>
   <data name="PleaseSelect" xml:space="preserve">
     <value>لطفا انتخاب نمایید</value>

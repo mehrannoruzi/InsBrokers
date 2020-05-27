@@ -79,6 +79,15 @@ namespace InsBrokers.Domain.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to شبا باید با IR شروع شده و شامل 24 عدد باشد.
+        /// </summary>
+        public static string InvalidShaba {
+            get {
+                return ResourceManager.GetString("InvalidShaba", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to لطفا بیشتر از {1} کاراکتر وارد نکنید.
         /// </summary>
         public static string MaxLength {

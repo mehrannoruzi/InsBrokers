@@ -81,7 +81,7 @@ namespace InsBrokers.Domain
         public string Password { get; set; }
 
         [Column(TypeName = "varchar(50)")]
-        [Display(Name = nameof(Strings.Password), ResourceType = typeof(Strings))]
+        [Display(Name = nameof(Strings.NewPassword), ResourceType = typeof(Strings))]
         [MaxLength(50, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
         [StringLength(50, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
         public string NewPassword { get; set; }

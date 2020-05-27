@@ -54,6 +54,7 @@ namespace InsBrokers.Service
             Relative.Name = model.Name;
             Relative.Family = model.Family;
             Relative.FatherName = model.FatherName;
+            Relative.Gender = model.Gender;
             Relative.BirthDay = model.BirthDay;
             Relative.BirthDayMi = PersianDateTime.Parse(model.BirthDay).ToDateTime();
             Relative.IdentityNumber = model.IdentityNumber;
@@ -86,7 +87,7 @@ namespace InsBrokers.Service
 
         public IDictionary<object, object> Search(string searchParameter, Guid? userId, int take = 10)
         {
-            var items = _RelativeRepo.Get(x => userId == null ? true : x.UserId == userId && x.Name.Contains(searchParameter) || x.Family.Contains(searchParameter), o => o.OrderByDescending(x => x.UserId));
+            var items = _RelativeRepo.Get(x => userId == null ? true : x.UserId == userId && (x.Name.Contains(searchParameter) || x.Family.Contains(searchParameter)), o => o.OrderByDescending(x => x.UserId));
             return items?.ToDictionary(k => (object)k.RelativeId, v => (object)$"{v.Name} {v.Family}({v.NationalCode})"); ;
         }
     }

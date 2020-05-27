@@ -79,7 +79,7 @@ namespace InsBrokers.Portal.Controllers
         {
             if (!ModelState.IsValid) return Json(new { IsSuccessful = false, Message = ModelState.GetModelError() });
             var update = await _LossSrv.AdminUpdateAsync(model, _env.ContentRootPath, files);
-            return Json(new { update.IsSuccessful,update.Message });
+            return Json(new { update.IsSuccessful, update.Message });
         }
 
         [HttpPost]
@@ -88,6 +88,7 @@ namespace InsBrokers.Portal.Controllers
         [HttpGet]
         public virtual ActionResult Manage(LossSearchFilter filter)
         {
+            ViewBag.WithoutAddButton = true;
             ViewBag.Types = GetTypes();
             if (!Request.IsAjaxRequest()) return View(_LossSrv.Get(filter));
             else return PartialView("Partials/_List", _LossSrv.Get(filter));
@@ -96,5 +97,24 @@ namespace InsBrokers.Portal.Controllers
         [HttpPost]
         public virtual async Task<JsonResult> DeleteAsset([FromServices] ILossAssetService assetSrv, int assetId)
             => Json(await assetSrv.DeleteAsync(assetId));
+
+        [HttpGet, AuthEqualTo("Loss", "Update")]
+        public virtual async Task<JsonResult> Details(int id)
+        {
+            var findRep = await _LossSrv.FindAsync(id);
+            if (!findRep.IsSuccessful) return Json(new { IsSuccessful = false, Message = Strings.RecordNotFound.Fill(DomainString.Loss) });
+            ViewBag.Types = GetTypes();
+            return Json(new Modal
+            {
+                Title = $"{Strings.Details} {DomainString.Loss}",
+                AutoSubmitBtnText = Strings.Edit,
+                Body = ControllerExtension.RenderViewToString(this, "Partials/_Details", findRep.Result),
+                AutoSubmit = false
+            });
+        }
+
+        [HttpGet, AuthEqualTo("Loss", "Add")]
+        public virtual JsonResult Search([FromServices]IRelativeService relativeSrv, string q)
+        => Json(relativeSrv.Search(q, User.GetUserId()).ToSelectListItems());
     }
 }

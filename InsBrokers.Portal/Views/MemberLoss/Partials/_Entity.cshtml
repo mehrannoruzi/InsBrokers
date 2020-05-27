@@ -2,63 +2,67 @@
 @{
     Layout = null;
 }
-<form asp-controller="MemberLoss" asp-action="@(Model.LossId==0?"Add":"Update")">
-    <div class="row">
-        @Html.HiddenFor(x => x.UserId)
-        @Html.HiddenFor(x => x.LossId)
-        <div class="col-12 col-sm-6">
-            <custom-select-for for="RelativeId"
-                               optional-label="@Strings.OriginalInsured"
-                               items="Model.Relative == null ? new List<SelectListItem>() : new List<SelectListItem> {
+    <form asp-controller="MemberLoss" asp-action="@(Model.LossId==0?"Add":"Update")">
+        <div class="row">
+            @Html.HiddenFor(x => x.UserId)
+            @Html.HiddenFor(x => x.LossId)
+            <div class="col-12 col-sm-6">
+                <custom-select-for for="RelativeId"
+                                   optional-label="@Strings.OriginalInsured"
+                                   items="Model.Relative == null ? new List<SelectListItem>() : new List<SelectListItem> {
                                     new SelectListItem{
                                     Text = Model.Relative.Fullname,
                                     Value = Model.RelativeId.ToString()
                                     }
                                 }"
-                               class="form-control with-ajax select2"
-                               select-data-url="@Url.Action("Search", "MemberRelative",new {userId = User.GetUserId() })" />
-        </div>
-        <div class="col-12 col-sm-6">
-            <div class="form-group">
-                <label for="@nameof(Model.LossType)">@Html.DisplayNameFor(x => x.LossType)</label>
-                <select class="form-control" id="@nameof(Model.LossType)" name="@nameof(Model.LossType)">
-                    @foreach (var type in (List<LossDescriptionDTO>)ViewBag.Types)
-                    {
-                        <option data-description="@Html.Raw(type.AtachmentDetails)" value="@type.Code">@type.Name_Fa</option>
-                    }
-                </select>
+                                   class="form-control with-ajax select2"
+                                   select-data-url="@Url.Action("Search", "MemberRelative",new {userId = User.GetUserId() })" />
+            </div>
+            <div class="col-12 col-sm-6">
+                <div class="form-group">
+                    <label for="@nameof(Model.LossType)">@Html.DisplayNameFor(x => x.LossType)</label>
+                    <select class="form-control" id="@nameof(Model.LossType)" name="@nameof(Model.LossType)">
+                        @foreach (var type in (List<LossDescriptionDTO>)ViewBag.Types)
+                        {
+                            <option data-description="@Html.Raw(type.AtachmentDetails)" value="@type.Code">@type.Name_Fa</option>
+                        }
+                    </select>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-12 col-sm-6">
-            <custom-input-for for="LossDateSh" class="form-control pdate ltr-elm" />
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <custom-input-for for="LossDateSh" class="form-control pdate ltr-elm" />
+            </div>
+            <div class="col-12 col-sm-6">
+                <custom-input-for for="Cost" class="form-control ltr-elm" />
+            </div>
         </div>
-        <div class="col-12 col-sm-6">
-            <custom-input-for for="Cost" class="form-control ltr-elm" />
-        </div>
-    </div>
-    @*<div class="row">
+        @*<div class="row">
 
-    </div>*@
-    <div class="row">
-        <div class="col-12">
-            <custom-textarea-for for="Description"></custom-textarea-for>
+        </div>*@
+        <div class="row">
+            <div class="col-12">
+                <custom-textarea-for for="Description"></custom-textarea-for>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <p class="alert alert-info text-center" id="asset-description"></p>
+        <div class="row">
+            <div class="col-12">
+                <p class="alert alert-info text-center" id="asset-description"></p>
+            </div>
+            <div class="col-12">
+                <partial name="~/Views/LossAsset/Partials/_Entity.cshtml" model="Model.LossAssets??new List<LossAsset>()" />
+            </div>
         </div>
-        <div class="col-12">
-            <partial name="~/Views/LossAsset/Partials/_Entity.cshtml" model="Model.LossAssets??new List<LossAsset>()" />
-        </div>
-    </div>
-    <div class="custom-modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">@Strings.Close</button>
-        <custom-button text="@Strings.Submit" icon="zmdi zmdi-floppy" class="btn-primary btn-submit-loss float-left"></custom-button>
-    </div>
-</form>
+        @if (Model.Status == LossStatus.Added)
+        {
+            <div class="custom-modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@Strings.Close</button>
+                <custom-button text="@Strings.Submit" icon="zmdi zmdi-floppy" class="btn-primary btn-submit-loss float-left"></custom-button>
+            </div>
+        }
+
+    </form>
 <script>
     $('#asset-description').text($('#modal #' + '@nameof(Model.LossType)' + ' option:selected').data('description'));
     assets = [];

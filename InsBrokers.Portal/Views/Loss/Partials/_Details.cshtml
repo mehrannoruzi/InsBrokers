@@ -1,0 +1,63 @@
+﻿@model Loss
+@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-12 col-sm-6">
+        <div class="form-group">
+            <label for="@nameof(Model.UserId)">@Html.DisplayNameFor(x => x.UserId)</label>
+            <input name="@nameof(Model.UserId)" type="text" class="form-control" value="@Model.User.Fullname" readonly />
+        </div>
+    </div>
+    <div class="col-12 col-sm-6">
+        <div class="form-group">
+            <label for="@nameof(Model.LossType)">@Html.DisplayNameFor(x => x.LossType)</label>
+            <select class="form-control" disabled id="@nameof(Model.LossType)" name="@nameof(Model.LossType)">
+                @foreach (var type in (List<LossDescriptionDTO>)ViewBag.Types)
+                {
+                    <option data-description="@Html.Raw(type.AtachmentDetails)" value="@type.Code">@type.Name_Fa</option>
+                }
+            </select>
+        </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 col-sm-6">
+        <div class="form-group">
+            <label for="@nameof(Model.RelativeId)">@Html.DisplayNameFor(x => x.RelativeId)</label>
+            <input name="@nameof(Model.RelativeId)" type="text" class="form-control" value="@(Model.Relative==null?Strings.OriginalInsured:Model.Relative.Fullname)" readonly />
+        </div>
+    </div>
+    <div class="col-12 col-sm-6">
+        <custom-input-for for="LossDateSh" class="form-control ltr-elm" readonly="true" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 col-sm-6">
+        <div class="form-group">
+            <label for="@nameof(Model.Status)">@Html.DisplayNameFor(x => x.Status)</label>
+            <input name="@nameof(Model.Status)" type="text" class="form-control" value="@(Model.Status.GetDescription())" readonly />
+        </div>
+    </div>
+    <div class="col-12 col-sm-6">
+        <custom-input-for for="Cost" class="form-control ltr-elm" readonly="true" />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <custom-textarea-for for="Description" readonly="true"></custom-textarea-for>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <p class="alert alert-info text-center" id="asset-description"></p>
+    </div>
+    <div class="col-12">
+            <partial name="~/Views/LossAsset/Partials/_Details.cshtml" model="Model.LossAssets??new List<LossAsset>()" />
+        </div>
+</div>
+<script>
+    $('#asset-description').text($('#modal #' + '@nameof(Model.LossType)' + ' option:selected').data('description'));
+</script>

@@ -1,18 +1,10 @@
 ﻿@model IEnumerable<LossAsset>
 @{
     Layout = null;
-
 }
 
-<input id="input-file" type="file" class="d-none" />
 <div class="upload-box">
     <div class="row" id="files">
-        <div class="col-12 col-sm-4 m-b">
-            <div id="uploader">
-                <i class="zmdi zmdi-plus"></i>
-                <label>آپلود مدرک</label>
-            </div>
-        </div>
         @if (Model != null)
         {
             foreach (var asset in Model)

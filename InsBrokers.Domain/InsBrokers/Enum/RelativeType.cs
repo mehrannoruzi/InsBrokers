@@ -4,8 +4,6 @@ namespace InsBrokers.Domain
 {
     public enum RelativeType : byte
     {
-        [Description("بیمه شده اصلی")]
-        MainPerson = 1,
 
         [Description("همسر")]
         Partner = 12,
