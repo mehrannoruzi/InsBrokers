@@ -28,12 +28,12 @@ namespace InsBrokers.Domain
         [Required(ErrorMessageResourceName = nameof(ErrorMessage.Required), ErrorMessageResourceType = typeof(ErrorMessage))]
         public int Cost { get; set; }
 
-        [Display(Name = nameof(Strings.Relation), ResourceType = typeof(Strings))]
+        [Display(Name = nameof(Strings.PatientName), ResourceType = typeof(Strings))]
         public int? RelativeId { get; set; }
 
         [Display(Name = nameof(Strings.LossType), ResourceType = typeof(Strings))]
         [Required(ErrorMessageResourceName = nameof(ErrorMessage.Required), ErrorMessageResourceType = typeof(ErrorMessage))]
-        public string LossType { get; set; }
+        public LossType LossType { get; set; }
 
         [Display(Name = nameof(Strings.LossDateSh), ResourceType = typeof(Strings))]
         public DateTime LossDateMi { get; set; }
@@ -59,23 +59,17 @@ namespace InsBrokers.Domain
         [MaxLength(10, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
         public string ModifyDateSh { get; set; }
 
-        //[Display(Name = nameof(Strings.PatientName), ResourceType = typeof(Strings))]
-        //[Required(ErrorMessageResourceName = nameof(ErrorMessage.Required), ErrorMessageResourceType = typeof(ErrorMessage))]
-        //[MaxLength(50, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
-        //[StringLength(50, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
-        //public string PatientName { get; set; }
-
         [Display(Name = nameof(Strings.Description), ResourceType = typeof(Strings))]
         [MaxLength(250, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
         [StringLength(250, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
         public string Description { get; set; }
 
-
-
-        public IList<LossAsset> LossAssets  { get; set; }
-
         [NotMapped]
         [Display(Name = nameof(Strings.PatientName), ResourceType = typeof(Strings))]
         public Relative Relative { get; set; }
+
+
+
+        public IList<LossAsset> LossAssets  { get; set; }
     }
 }

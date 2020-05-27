@@ -7,21 +7,6 @@
         @Html.HiddenFor(x => x.UserId)
         @Html.HiddenFor(x => x.LossId)
         <div class="col-12 col-sm-6">
-            <div class="form-group">
-                <label for="@nameof(Model.LossType)">@Html.DisplayNameFor(x => x.LossType)</label>
-                <select class="form-control" id="@nameof(Model.LossType)" name="@nameof(Model.LossType)">
-                    @foreach (var type in (List<LossDescriptionDTO>)ViewBag.Types)
-                    {
-                        <option data-description="@Html.Raw(type.AtachmentDetails)" value="@type.Code">@type.Name_Fa</option>
-                    }
-                </select>
-            </div>
-
-        </div>
-        @*<div class="col-12 col-sm-6">
-            <custom-input-for for="PatientName" />
-        </div>*@
-        <div class="col-12 col-sm-6">
             <custom-select-for for="RelativeId"
                                optional-label="@Strings.OriginalInsured"
                                items="Model.Relative == null ? new List<SelectListItem>() : new List<SelectListItem> {
@@ -32,6 +17,17 @@
                                 }"
                                class="form-control with-ajax select2"
                                select-data-url="@Url.Action("Search", "MemberRelative",new {userId = User.GetUserId() })" />
+        </div>
+        <div class="col-12 col-sm-6">
+            <div class="form-group">
+                <label for="@nameof(Model.LossType)">@Html.DisplayNameFor(x => x.LossType)</label>
+                <select class="form-control" id="@nameof(Model.LossType)" name="@nameof(Model.LossType)">
+                    @foreach (var type in (List<LossDescriptionDTO>)ViewBag.Types)
+                    {
+                        <option data-description="@Html.Raw(type.AtachmentDetails)" value="@type.Code">@type.Name_Fa</option>
+                    }
+                </select>
+            </div>
         </div>
     </div>
     <div class="row">

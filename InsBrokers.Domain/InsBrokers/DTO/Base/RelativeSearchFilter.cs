@@ -1,6 +1,6 @@
-﻿using Elk.Core;
+﻿using System;
+using Elk.Core;
 using InsBrokers.Domain.Resource;
-using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace InsBrokers.Domain

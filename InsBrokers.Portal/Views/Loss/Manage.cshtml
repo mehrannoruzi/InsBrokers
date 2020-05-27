@@ -7,7 +7,7 @@
     <link href="@Url.Content("~/Styles/App/LossAsset/uploader.min.css")" rel="stylesheet" />
 }
 @section filter{
-    <partial name="Partials/_Filters" model="new LossSearchFilter { LossType = null}" />
+    <partial name="Partials/_Filters" model="new LossSearchFilter { LossType = null }" />
 }
 <partial name="Partials/_List" model="@Model" />
 @section scripts{

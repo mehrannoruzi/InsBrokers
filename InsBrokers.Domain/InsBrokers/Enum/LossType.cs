@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace InsBrokers.Domain.InsBrokers.Enum
+namespace InsBrokers.Domain
 {
     public enum LossType : byte
     {

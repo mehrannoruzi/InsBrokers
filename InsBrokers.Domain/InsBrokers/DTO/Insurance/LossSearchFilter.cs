@@ -1,5 +1,5 @@
-﻿using Elk.Core;
-using System;
+﻿using System;
+using Elk.Core;
 using InsBrokers.Domain.Resource;
 using System.ComponentModel.DataAnnotations;
 
@@ -10,7 +10,7 @@ namespace InsBrokers.Domain
         public Guid? UserId { get; set; }
 
         [Display(Name = nameof(Strings.LossType), ResourceType = typeof(Strings))]
-        public string LossType { get; set; }
+        public LossType? LossType { get; set; }
 
         [Display(Name = nameof(Strings.LossDateShFrom), ResourceType = typeof(Strings))]
         public string LossDateShFrom { get; set; }

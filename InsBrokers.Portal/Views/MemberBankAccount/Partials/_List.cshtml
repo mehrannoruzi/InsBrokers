@@ -10,7 +10,7 @@
                 <th data-toggle="true">#</th>
                 <th>@Html.DisplayNameFor(x => x.Items[0].BankName)</th>
                 <th data-hide="phone">@Html.DisplayNameFor(x => x.Items[0].AccountNumber)</th>
-                <th data-hide="all">@Html.DisplayNameFor(x => x.Items[0].Shaba)</th>
+                <th>@Html.DisplayNameFor(x => x.Items[0].Shaba)</th>
                 <th class="text-center"> <i class="zmdi zmdi-wrench rotate-90"></i></th>
             </tr>
         </thead>
@@ -36,14 +36,11 @@
                                     <i class="zmdi zmdi-delete default-i"></i>
                                     @Strings.Delete
                                 </a>
-
                             </div>
                         </div>
                     </td>
                 </tr>
             }
-
-
         </tbody>
         <tfoot class="d-none">
             <tr>
@@ -62,5 +59,3 @@ else
         <small>@string.Format(Strings.ThereIsNoRecord, Strings.Item)</small>
     </div>
 }
-
-

@@ -2,11 +2,11 @@
 using Elk.Core;
 using System.Linq;
 using InsBrokers.Domain;
-using InsBrokers.DataAccess.Ef;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
-using InsBrokers.Service.Resource;
+using System.Linq.Expressions;
+using InsBrokers.DataAccess.Ef;
 using System.Collections.Generic;
+using InsBrokers.Service.Resource;
 
 namespace InsBrokers.Service
 {
