@@ -10,7 +10,7 @@ using DomainString = InsBrokers.Domain.Resource.Strings;
 
 namespace InsBrokers.Portal.Controllers
 {
-   // [AuthorizationFilter]
+    [AuthorizationFilter]
     public partial class MemberAddressController : Controller
     {
         private readonly IAddressService _MemberAddressSrv;
