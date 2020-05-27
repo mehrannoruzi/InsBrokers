@@ -50,8 +50,8 @@ namespace InsBrokers.Domain
         [StringLength(20, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
         public string AccountNumber { get; set; }
 
-        [Column(TypeName = "varchar(24)")]
         [RegularExpression(@"IR\d()")]
+        [Column(TypeName = "varchar(26)")]
         [Display(Name = nameof(Strings.Shaba), ResourceType = typeof(Strings))]
         [MaxLength(26, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
         [StringLength(26, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
