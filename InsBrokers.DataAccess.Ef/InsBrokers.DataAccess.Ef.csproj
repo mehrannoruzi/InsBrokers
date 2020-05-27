@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\AppDb\20200527133058_ChangeShabaLen.cs" />
+    <Compile Remove="Migrations\AppDb\20200527133058_ChangeShabaLen.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\InsBrokers.Domain\InsBrokers.Domain.csproj" />
   </ItemGroup>
 
