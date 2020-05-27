@@ -28,7 +28,7 @@ namespace InsBrokers.Service
             if (model.IsDefault)
             {
                 var existActionInRole = await _authUow.ActionInRoleRepo.FirstOrDefaultAsync(conditions: x => x.RoleId == model.RoleId && x.IsDefault);
-                existActionInRole.IsDefault = false;
+                if(existActionInRole.IsNotNull()) existActionInRole.IsDefault = false;
             }
 
             await _authUow.ActionInRoleRepo.AddAsync(model);
