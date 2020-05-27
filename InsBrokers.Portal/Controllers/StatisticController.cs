@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace InsBrokers.Portal.Controllers
 {
-    //[AuthorizationFilter]
+    [AuthorizationFilter]
     public class StatisticController : Controller
     {
         private readonly ILossService _lossSrv;
