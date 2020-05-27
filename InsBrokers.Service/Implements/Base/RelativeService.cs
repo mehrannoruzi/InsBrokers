@@ -60,6 +60,7 @@ namespace InsBrokers.Service
             Relative.NationalCode = model.NationalCode;
             Relative.RelativeType = model.RelativeType;
             Relative.TakafolKind = model.TakafolKind;
+            _RelativeRepo.Update(Relative);
             var saveResult = _appUow.ElkSaveChangesAsync();
             return new Response<Relative> { Result = Relative, IsSuccessful = saveResult.Result.IsSuccessful, Message = saveResult.Result.Message };
         }

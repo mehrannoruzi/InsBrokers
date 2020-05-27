@@ -70,6 +70,8 @@ namespace InsBrokers.Service
             var address = await _addressRepo.FindAsync(model.AddressId);
             if (address == null) return new Response<Address> { Message = ServiceMessage.RecordNotExist };
 
+            address.Province = model.Province;
+            address.City = model.City;
             address.AddressDetails = model.AddressDetails;
 
             var saveResult = _appUow.ElkSaveChangesAsync();
