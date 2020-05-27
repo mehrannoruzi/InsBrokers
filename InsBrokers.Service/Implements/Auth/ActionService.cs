@@ -62,7 +62,7 @@ namespace InsBrokers.Service
 
         public async Task<IResponse<Action>> FindAsync(int actionId)
         {
-            var findedAction = await _authUow.ActionRepo.FindAsync(actionId);
+            var findedAction = await _authUow.ActionRepo.FirstOrDefaultAsync(x => x.ActionId == actionId, new List<Expression<Func<Domain.Action, object>>> { x => x.Parent });
             if (findedAction == null) return new Response<Action> { Message = ServiceMessage.RecordNotExist.Fill(DomainStrings.Action) };
             return new Response<Action> { Result = findedAction, IsSuccessful = true };
         }

@@ -223,25 +223,47 @@ namespace InsBrokers.Service
             }
             if (userMenu.DefaultUserAction == null || userMenu.DefaultUserAction.Controller == null) return null;
             #endregion
-
-            var userActions =
-                spResult.Where(x => x.IsAction)
-                .Select(rvm => new UserAction
-                {
-                    Controller = rvm.ControllerName.ToLower(),
-                    Action = rvm.ActionName.ToLower(),
-                    RoleId = rvm.RoleId,
-                    RoleNameFa = rvm.RoleNameFa
-                })
-             .Union(
-                 spResult.Where(x => !x.IsAction)
-                 .SelectMany(x => x.ActionsList.Select(rvm => new UserAction
-                 {
-                     Controller = rvm.ControllerName.ToLower(),
-                     Action = rvm.ActionName.ToLower(),
-                     RoleId = rvm.RoleId,
-                     RoleNameFa = rvm.RoleNameFa
-                 }))).ToList();
+            var userActions = new List<UserAction>();
+            foreach (var item in spResult)
+            {
+                if (item.IsAction)
+                    userActions.Add(new UserAction
+                    {
+                        Controller = item.ControllerName.ToLower(),
+                        Action = item.ActionName.ToLower(),
+                        RoleId = item.RoleId,
+                        RoleNameFa = item.RoleNameFa
+                    });
+                if (item.ActionsList != null)
+                    foreach (var child in item.ActionsList)
+                        userActions.Add(new UserAction
+                        {
+                            Controller = child.ControllerName.ToLower(),
+                            Action = child.ActionName.ToLower(),
+                            RoleId = child.RoleId,
+                            RoleNameFa = child.RoleNameFa
+                        });
+            }
+            userActions = userActions.Distinct().ToList();
+            //var userActions =
+            //    spResult.Where(x => x.IsAction)
+            //    .Select(rvm => new UserAction
+            //    {
+            //        Controller = rvm.ControllerName.ToLower(),
+            //        Action = rvm.ActionName.ToLower(),
+            //        RoleId = rvm.RoleId,
+            //        RoleNameFa = rvm.RoleNameFa
+            //    })
+            //    .Union()
+            // .Union(
+            //     spResult.Where(x => !x.IsAction)
+            //     .SelectMany(x => x.ActionsList.Select(rvm => new UserAction
+            //     {
+            //         Controller = rvm.ControllerName.ToLower(),
+            //         Action = rvm.ActionName.ToLower(),
+            //         RoleId = rvm.RoleId,
+            //         RoleNameFa = rvm.RoleNameFa
+            //     }))).ToList();
             userMenu.Menu = GetAvailableMenu(spResult, urlPrefix);
             userMenu.ActionList = userActions;
 
