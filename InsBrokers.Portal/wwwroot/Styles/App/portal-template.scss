@@ -1,3 +1,29 @@
 ﻿.Zebra_DatePicker_Icon_Inside {
     top: 35px !important;
 }
+
+@font-face {
+    font-family: "iransans";
+    src: url(/Fonts/iransans.eot) format("embedded-opentype"), url(/Fonts/iransans.ttf) format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+*:not(i) {
+    font-family: "iransans";
+}
+
+p {
+    margin-bottom: 0;
+}
+.elementor-icon-list-item:after{
+    display:none;
+}
+.elementor-icon-list-icon i {
+    display: none;
+}
+@media(max-width:576px) {
+    #home-auth-page {
+        padding: 30px;
+    }
+}
