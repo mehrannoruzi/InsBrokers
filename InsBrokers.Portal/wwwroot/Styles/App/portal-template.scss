@@ -16,12 +16,15 @@
 p {
     margin-bottom: 0;
 }
-.elementor-icon-list-item:after{
-    display:none;
+
+.elementor-icon-list-item:after {
+    display: none;
 }
+
 .elementor-icon-list-icon i {
     display: none;
 }
+
 @media(max-width:576px) {
     #home-auth-page {
         padding: 30px;

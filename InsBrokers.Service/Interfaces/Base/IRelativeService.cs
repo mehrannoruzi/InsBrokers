@@ -14,5 +14,6 @@ namespace InsBrokers.Service
         PagingListDetails<Relative> Get(RelativeSearchFilter filter);
         Task<IResponse<Relative>> UpdateAsync(Relative model);
         IDictionary<object, object> Search(string searchParameter, Guid? userId, int take = 10);
+        string Export(RelativeSearchFilter filter);
     }
 }

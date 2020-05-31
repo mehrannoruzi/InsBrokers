@@ -7,10 +7,13 @@
                 @*<span class="m-r-sm text-muted welcome-message">@Strings.WelcomeMessage.</span>*@
             </div>
         </div>
+        <div class="wide-logo d-flex justify-content-center align-items-center">
+            <img src="~/Images/Portal/Logo-1.png" />
+        </div>
         <ul class="nav navbar-top-links navbar-right">
             <li>
-                <a asp-controller="Auth" asp-action="SignOut" >
-                    <span><i class="zmdi zmdi-power default-i"></i></span> @Strings.SignOut
+                <a asp-controller="Auth" asp-action="SignOut">
+                    @Strings.SignOut &nbsp;<span><i class="zmdi zmdi-power default-i"></i></span>
                 </a>
             </li>
         </ul>

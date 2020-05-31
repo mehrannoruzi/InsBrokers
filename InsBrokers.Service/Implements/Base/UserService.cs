@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Elk.Core;
 using Elk.Cache;
 using System.Text;
@@ -87,7 +87,7 @@ namespace InsBrokers.Service
             user.BirthDay = model.BirthDay;
             user.BirthDayMi = PersianDateTime.Parse(model.BirthDay).ToDateTime();
             user.IsActive = model.IsActive;
-
+            user.BaseInsurance = model.BaseInsurance;
             var saveResult = await _appUow.ElkSaveChangesAsync();
             return new Response<User> { Result = user, IsSuccessful = saveResult.IsSuccessful, Message = saveResult.Message };
         }
@@ -417,6 +417,30 @@ namespace InsBrokers.Service
                 FileLoger.Error(e);
                 return result;
             }
+        }
+
+        public string Export(UserSearchFilter filter)
+        {
+            Expression<Func<User, bool>> conditions = x => true;
+            if (filter != null)
+            {
+                if (!string.IsNullOrWhiteSpace(filter.FullNameF))
+                    conditions = conditions.And(x => x.Name.Contains(filter.FullNameF));
+                if (!string.IsNullOrWhiteSpace(filter.EmailF))
+                    conditions = x => x.Email.Contains(filter.EmailF);
+                if (!string.IsNullOrWhiteSpace(filter.MobileNumberF))
+                    conditions = x => x.MobileNumber.ToString().Contains(filter.MobileNumberF);
+            }
+
+            var items = _appUow.UserRepo.Get(conditions, x => x.OrderByDescending(u => u.InsertDateMi));
+            var sb = new StringBuilder(",Fullname,Mobile Number,National Code,Gender,Base Insurance,Is Active,Email,FatherName,BirthDay,Register Date" + Environment.NewLine);
+            int idx = 1;
+            foreach (var item in items)
+            {
+                sb.Append($"{idx},{item.Fullname},{item.MobileNumber},{item.NationalCode},{item.Gender.GetDescription()},{item.BaseInsurance.GetDescription()},{(item.IsActive ? "بلی" : "خیر")},{item.Email},{item.FatherName},{item.BirthDay},{item.InsertDateSh}" + Environment.NewLine);
+                idx++;
+            }
+            return sb.ToString();
         }
     }
 }

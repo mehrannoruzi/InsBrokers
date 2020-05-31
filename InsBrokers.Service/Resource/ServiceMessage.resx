@@ -138,6 +138,9 @@
   <data name="MemberIsBlocked" xml:space="preserve">
     <value>اکانت کاربر قفل شده است</value>
   </data>
+  <data name="OriginalInsured" xml:space="preserve">
+    <value>بیمه شده اصلی</value>
+  </data>
   <data name="RecordNotExist" xml:space="preserve">
     <value>آیتم مورد نظر یافت نشد</value>
   </data>

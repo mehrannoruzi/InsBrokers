@@ -7,6 +7,7 @@ using System.Linq.Expressions;
 using InsBrokers.DataAccess.Ef;
 using System.Collections.Generic;
 using InsBrokers.Service.Resource;
+using System.Text;
 
 namespace InsBrokers.Service
 {
@@ -89,6 +90,30 @@ namespace InsBrokers.Service
         {
             var items = _RelativeRepo.Get(x => userId == null ? true : x.UserId == userId && (x.Name.Contains(searchParameter) || x.Family.Contains(searchParameter)), o => o.OrderByDescending(x => x.UserId));
             return items?.ToDictionary(k => (object)k.RelativeId, v => (object)$"{v.Name} {v.Family}({v.NationalCode})"); ;
+        }
+
+        public string Export(RelativeSearchFilter filter)
+        {
+            Expression<Func<Relative, bool>> conditions = x => true;
+            if (filter != null)
+            {
+                if (filter.UserId != null)
+                    conditions = conditions.And(x => x.UserId == filter.UserId);
+                if (!string.IsNullOrWhiteSpace(filter.NationalCode))
+                    conditions = conditions.And(x => x.NationalCode == filter.NationalCode);
+                if (!string.IsNullOrWhiteSpace(filter.Name))
+                    conditions = conditions.And(x => (x.Name + " " + x.Family).Contains(filter.Name));
+            }
+
+            var items = _RelativeRepo.Get(conditions, x => x.OrderByDescending(u => u.RelativeId)); ;
+            var sb = new StringBuilder(",Fullname,Relation,Gender,Takafol,National Code,Identity Number,FatherName,BirthDay,Register Date" + Environment.NewLine);
+            int idx = 1;
+            foreach (var item in items)
+            {
+                sb.Append($"{idx},{item.Fullname},{item.RelativeType.GetDescription()},{item.Gender.GetDescription()},{item.TakafolKind.GetDescription()},{item.NationalCode},{item.IdentityNumber},{item.FatherName},{item.BirthDay},{item.InsertDateSh}" + Environment.NewLine);
+                idx++;
+            }
+            return sb.ToString();
         }
     }
 }

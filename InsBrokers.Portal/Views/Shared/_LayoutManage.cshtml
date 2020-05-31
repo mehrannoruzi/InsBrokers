@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 @{
     var withotAddBotton = ViewBag.WithoutAddButton ?? false;
+    var excelExport = ViewBag.ExcelExport ?? false;
 }
 <html lang="fa" dir="rtl">
 <head>
@@ -33,8 +34,17 @@
                                     </div>
                                     <div class="ibox-content">
                                         @RenderSection("filter", false)
-                                        <div class="row btn-group">
+                                        <div class="row">
                                             <div class="col-12">
+                                                @if (excelExport)
+                                                {
+                                                    <button type="button"
+                                                            id="btn-excel"
+                                                            class="btn btn-info btn-action m-t float-right"
+                                                            data-url="@Url.Action("Excel")">
+                                                        @Strings.ExportToExcel
+                                                    </button>
+                                                }
                                                 <button type="button" class="btn btn-info m-t btn-action search">
                                                     <span class="text">@Strings.Search</span>
                                                     <div class="icon">
@@ -52,7 +62,6 @@
                                                    class="btn btn-primary btn-action btn-modal m-b"
                                                    data-url="@Url.Action("Add")"></custom-button>
                                 }
-
                             </div>
 
                         </div>

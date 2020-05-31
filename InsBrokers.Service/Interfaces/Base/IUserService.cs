@@ -23,5 +23,6 @@ namespace InsBrokers.Service
         Task<IResponse<User>> SignUp(PortalSignUpModel model);
         Task<IResponse<int>> GetUserCount();
         Task<IResponse<Dictionary<string, int>>> GetUserCountLastDaysAsync(int dayCount = 10);
+        string Export(UserSearchFilter filter);
     }
 }

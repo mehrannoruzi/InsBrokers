@@ -112,6 +112,7 @@ namespace InsBrokers.Domain
         public string Email { get; set; }
 
         [NotMapped]
+        [Display(Name = nameof(Strings.FullName), ResourceType = typeof(Strings))]
         public string Fullname => $"{Name} {Family}";
 
 

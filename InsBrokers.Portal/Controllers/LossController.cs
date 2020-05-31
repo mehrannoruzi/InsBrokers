@@ -94,6 +94,7 @@ namespace InsBrokers.Portal.Controllers
         public virtual ActionResult Manage(LossSearchFilter filter)
         {
             ViewBag.WithoutAddButton = true;
+            ViewBag.ExcelExport = true;
             ViewBag.Types = GetTypes();
             if (!Request.IsAjaxRequest()) return View(_LossSrv.Get(filter));
             else return PartialView("Partials/_List", _LossSrv.Get(filter));
@@ -126,5 +127,9 @@ namespace InsBrokers.Portal.Controllers
         [HttpGet, AuthEqualTo("Loss", "Add")]
         public virtual JsonResult Search([FromServices]IRelativeService relativeSrv, string q)
         => Json(relativeSrv.Search(q, User.GetUserId()).ToSelectListItems());
+
+        [HttpGet, AuthEqualTo("Loss", "Manage")]
+        public virtual JsonResult Excel(LossSearchFilter filter)
+            =>Json(_LossSrv.Export(filter));
     }
 }

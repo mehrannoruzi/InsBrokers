@@ -142,7 +142,7 @@ namespace InsBrokers.Portal.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to تمام حقوق مادی و معنوی این اثر محفوظ می باشد.
+        ///   Looks up a localized string similar to تمام حقوق مادی و معنوی این اثر متعلق به کارگزاری رسمی بیمه نفت و انرژی می باشد.
         /// </summary>
         public static string CopyRights {
             get {
@@ -237,6 +237,15 @@ namespace InsBrokers.Portal.Resource {
         public static string ErrorPageMessage {
             get {
                 return ResourceManager.GetString("ErrorPageMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to خروجی اکسل.
+        /// </summary>
+        public static string ExportToExcel {
+            get {
+                return ResourceManager.GetString("ExportToExcel", resourceCulture);
             }
         }
         

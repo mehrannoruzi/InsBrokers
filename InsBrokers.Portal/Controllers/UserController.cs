@@ -82,6 +82,7 @@ namespace InsBrokers.Portal.Controllers
         [HttpGet]
         public virtual ActionResult Manage(UserSearchFilter filter)
         {
+            ViewBag.ExcelExport = true;
             if (!Request.IsAjaxRequest()) return View(_userSrv.Get(filter));
             else return PartialView("Partials/_List", _userSrv.Get(filter));
         }
@@ -105,6 +106,10 @@ namespace InsBrokers.Portal.Controllers
                 AutoSubmit = false
             });
         }
+
+        [HttpGet, AuthEqualTo("User", "Manage")]
+        public virtual JsonResult Excel(UserSearchFilter filter)
+                => Json(_userSrv.Export(filter));
 
     }
 }

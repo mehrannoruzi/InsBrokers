@@ -1,0 +1,10 @@
+@model PagingListDetails<Relative>
+@{
+    ViewBag.Title = $"{Strings.Management} {InsBrokers.Domain.Resource.Strings.Relatives}";
+    Layout = "_LayoutManage";
+}
+
+@section filter{
+    <partial name="Partials/_Filters" model="new RelativeSearchFilter()" />
+}
+<partial name="Partials/_List" model="@Model" />

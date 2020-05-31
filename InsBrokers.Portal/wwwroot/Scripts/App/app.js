@@ -27,7 +27,6 @@ $(document).ready(function () {
 
     //modal close event
     $("#modal").on("hidden.bs.modal", function () {
-        console.log($(this).data('refresh-list'));
         if ($(this).data('refresh-list')) refreshList();
     });
 });
@@ -806,9 +805,30 @@ var notifyType = {
     warning: "warning"
 };
 
+var exportToExcel = function (csvContent) {
+    var link = document.createElement("a");
+    link.className += "no-loading";
+    link.setAttribute("href", 'data:text/csv;charset=utf-8,%EF%BB%BF' + encodeURI(csvContent));
+    link.setAttribute("download", "export-" + new Date().getTime().toString()+".csv");
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+};
 
 $(document).ready(function () {
-
+    $('#btn-excel').on('click', function () {
+        let $btn = $(this);
+        let url = $btn.data('url');
+        ajaxBtn.inProgress($btn);
+        $.get(url, customSerialize($('.filters')))
+            .done(function (rep) {
+                ajaxBtn.normal();
+                exportToExcel(rep);
+            })
+        .fail(function (e) {
+            ajaxBtn.normal();
+        });
+    });
     var setActiveMenu = function () {
         let currentUrl = window.location.href.toString().toLowerCase();
         $('nav ul.nav > li:not(".nav-header")  a:not([href="#"])').each(function () {

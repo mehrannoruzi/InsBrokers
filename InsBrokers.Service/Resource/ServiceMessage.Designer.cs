@@ -124,6 +124,15 @@ namespace InsBrokers.Service.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to بیمه شده اصلی.
+        /// </summary>
+        public static string OriginalInsured {
+            get {
+                return ResourceManager.GetString("OriginalInsured", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to آیتم مورد نظر یافت نشد.
         /// </summary>
         public static string RecordNotExist {

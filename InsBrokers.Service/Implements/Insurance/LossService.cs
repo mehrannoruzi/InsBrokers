@@ -9,6 +9,7 @@ using InsBrokers.DataAccess.Ef;
 using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using InsBrokers.Service.Resource;
+using System.Text;
 
 namespace InsBrokers.Service
 {
@@ -77,7 +78,6 @@ namespace InsBrokers.Service
             Loss.LossType = model.LossType;
             Loss.LossDateSh = model.LossDateSh;
             Loss.LossDateMi = PersianDateTime.Parse(model.LossDateSh).ToDateTime();
-            //Loss.PatientName = model.PatientName;
             Loss.Cost = model.Cost;
             Loss.Description = model.Description;
             var getAssets = await _LossAssetSrv.SaveRange(root, model.UserId, files);
@@ -136,8 +136,8 @@ namespace InsBrokers.Service
             }
             var result = _LossRepo.Get(conditions, filter, x => x.OrderByDescending(u => u.LossId), new List<Expression<Func<Loss, object>>> { i => i.User, i => i.LossAssets });
             var ids = result.Items.Where(x => x.RelativeId != null).Select(x => x.RelativeId).ToList();
-            var relatives = _appUow.RelativeRepo.Get(x => ids.Contains(x.RelativeId), o=>o.OrderByDescending(x=>x.RelativeId));
-            foreach (var loss in result.Items.Where(x=>x.RelativeId!=null))
+            var relatives = _appUow.RelativeRepo.Get(x => ids.Contains(x.RelativeId), o => o.OrderByDescending(x => x.RelativeId));
+            foreach (var loss in result.Items.Where(x => x.RelativeId != null))
                 loss.Relative = relatives.FirstOrDefault(x => x.RelativeId == loss.RelativeId);
             return result;
         }
@@ -182,6 +182,50 @@ namespace InsBrokers.Service
                 FileLoger.Error(e);
                 return result;
             }
+        }
+
+        public string Export(LossSearchFilter filter)
+        {
+            Expression<Func<Loss, bool>> conditions = x => true;
+            if (filter != null)
+            {
+                if (filter.UserId != null)
+                    conditions = conditions.And(x => x.UserId == filter.UserId);
+                if (!string.IsNullOrWhiteSpace(filter.LossDateShFrom))
+                {
+                    var from = PersianDateTime.Parse(filter.LossDateShFrom).ToDateTime();
+                    conditions = conditions.And(x => x.InsertDateMi >= from);
+                }
+                if (!string.IsNullOrWhiteSpace(filter.LossDateShFrom))
+                {
+                    var to = PersianDateTime.Parse(filter.LossDateShFrom).ToDateTime();
+                    conditions = conditions.And(x => x.InsertDateMi <= to);
+                }
+                if (filter.LossType.IsNotNull())
+                    conditions = conditions.And(x => x.LossType == filter.LossType);
+                if (!string.IsNullOrWhiteSpace(filter.NationalCode))
+                    conditions = conditions.And(x => x.User.NationalCode == filter.NationalCode);
+
+            }
+            var result = _LossRepo.Get(conditions, x => x.OrderByDescending(u => u.LossId), new List<Expression<Func<Loss, object>>> { i => i.User, i => i.LossAssets });
+            var ids = result.Where(x => x.RelativeId != null).Select(x => x.RelativeId).ToList();
+            var relatives = _appUow.RelativeRepo.Get(x => ids.Contains(x.RelativeId), o => o.OrderByDescending(x => x.RelativeId));
+            var sb = new StringBuilder(",User,Mobile Number,National Code,Patient Name,Cost Type,Cost,Date,Status,Description" + Environment.NewLine);
+            int idx = 1;
+            Relative relative = null;
+            string relativeName = string.Empty;
+            foreach (var loss in result)
+            {
+                if (loss.RelativeId != null)
+                {
+                    relative = relatives.FirstOrDefault(x => x.RelativeId == loss.RelativeId);
+                    relativeName = relative == null ? ServiceMessage.OriginalInsured : relative.Fullname;
+                }
+                else relativeName = ServiceMessage.OriginalInsured;
+                sb.Append($"{idx},{loss.User.Fullname},{loss.User.MobileNumber},{loss.User.NationalCode},{relativeName},{loss.LossType.GetDescription()},{loss.Cost.ToString("N0")},{loss.LossDateSh},{loss.Status.GetDescription()},{loss.Description}" + Environment.NewLine);
+                idx++;
+            }
+            return sb.ToString();
         }
     }
 }

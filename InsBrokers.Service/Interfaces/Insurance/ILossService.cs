@@ -16,5 +16,6 @@ namespace InsBrokers.Service
         Task<IResponse<Loss>> UpdateAsync(Loss model, string root, IList<IFormFile> files);
         Task<IResponse<int>> GetLossCount();
         Task<IResponse<Dictionary<string, int>>> GetLossCountLastDaysAsync(int dayCount = 10);
+        string Export(LossSearchFilter filter);
     }
 }

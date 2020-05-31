@@ -27,7 +27,6 @@ $(document).ready(function () {
 
     //modal close event
     $("#modal").on("hidden.bs.modal", function () {
-        console.log($(this).data('refresh-list'));
         if ($(this).data('refresh-list')) refreshList();
     });
 });
