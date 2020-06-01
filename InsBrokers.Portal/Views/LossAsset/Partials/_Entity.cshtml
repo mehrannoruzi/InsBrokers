@@ -18,7 +18,7 @@
             foreach (var asset in Model)
             {
                 <div class="col-12 col-sm-4 uploaded m-b">
-                    <button type="button" class="btn-remove" data-url="@Url.Action("DeleteAsset", "MemberLoss", new { assetId = asset.LossAssetId })"><i class="zmdi zmdi-close"></i></button>
+                    <button type="button" class="btn-remove" data-url="@Url.Action("DeleteAsset", new { assetId = asset.LossAssetId })"><i class="zmdi zmdi-close"></i></button>
                     @{
                         if (asset.FileType == FileType.Image)
                         {
