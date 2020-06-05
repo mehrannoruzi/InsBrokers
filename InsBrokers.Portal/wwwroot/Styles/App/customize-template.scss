@@ -24,6 +24,10 @@ body.rtls .navbar-top-links li:last-child {
             align-items: center;
             flex-direction: column;
 
+            img{
+                max-width:150px;
+                margin-bottom:5px;
+            }
             i {
                 font-size: 50px;
             }
@@ -33,7 +37,9 @@ body.rtls .navbar-top-links li:last-child {
             figure {
                 padding: 10px 0;
                 margin-bottom: 0px;
-
+                img{
+                    width:100px;
+                }
                 figcaption{
                     font-size:0.9rem;
                 }

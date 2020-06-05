@@ -18,12 +18,17 @@ body.rtls .navbar-top-links li:last-child {
     justify-content: center;
     align-items: center;
     flex-direction: column; }
+    .menu-item .menu-link figure img {
+      max-width: 150px;
+      margin-bottom: 5px; }
     .menu-item .menu-link figure i {
       font-size: 50px; }
   @media (max-width: 576px) {
     .menu-item .menu-link figure {
       padding: 10px 0;
       margin-bottom: 0px; }
+      .menu-item .menu-link figure img {
+        width: 100px; }
       .menu-item .menu-link figure figcaption {
         font-size: 0.9rem; } }
 

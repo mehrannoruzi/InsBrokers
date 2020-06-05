@@ -71,21 +71,21 @@ namespace InsBrokers.Portal.Controllers
                 cacheProvider.Remove(GlobalVariables.CacheSettings.MenuModelCacheKey(User.GetUserId()));
                 cacheProvider.Remove(GlobalVariables.CacheSettings.MainMenuCacheKey(User.GetUserId()));
                 await _httpAccessor.HttpContext.SignOutAsync();
-    }
+            }
 
             return RedirectToAction("SignIn");
-}
+        }
 
-[HttpGet]
-public virtual ActionResult RecoverPasswrod() => View();
+        [HttpGet]
+        public virtual ActionResult RecoverPasswrod() => View();
 
-[HttpPost]
-public virtual async Task<JsonResult> RecoverPasswrod(string mobileNumber)
-{
-    var emailModel = new EmailMessage();
-    emailModel.Body = await ControllerExtension.RenderViewToStringAsync(this, "Partials/_NewPassword", "");
-    return Json(await _userSrv.RecoverPassword(long.Parse(mobileNumber), _config["CustomSettings:EmailServiceConfig:EmailUserName"], emailModel));
-}
+        [HttpPost]
+        public virtual async Task<JsonResult> RecoverPasswrod(string mobileNumber)
+        {
+            var emailModel = new EmailMessage();
+            emailModel.Body = await ControllerExtension.RenderViewToStringAsync(this, "Partials/_NewPassword", "");
+            return Json(await _userSrv.RecoverPassword(long.Parse(mobileNumber), _config["CustomSettings:EmailServiceConfig:EmailUserName"], emailModel));
+        }
 
     }
 }
