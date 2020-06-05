@@ -385,6 +385,15 @@ namespace InsBrokers.Portal.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to مراکز طرف قرارداد.
+        /// </summary>
+        public static string ListOfParties {
+            get {
+                return ResourceManager.GetString("ListOfParties", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to مدیریت.
         /// </summary>
         public static string Management {
