@@ -9,7 +9,9 @@
 <input type="hidden" id="t_id" value="123" />
 <div class="middle-box text-center loginscreen animated fadeInDown">
     <div>
-        <h4 class="title alert alert-info">@Strings.WelcomeMessage</h4>
+        <div class="m-b">
+            <img class="w-100" src="@Url.Content("~/Images/Portal/Logo-1.png")" />
+        </div>
         <form class="m-t" role="form" asp-action="SignIn" asp-controller="Auth" method="post">
             <div class="alert alert-danger invisible">
                 <p class="text"></p>
@@ -30,7 +32,6 @@
             <custom-button  text="@Strings.SignIn" icon="zmdi zmdi-sign-in rotate-180 default-i" class="btn-primary full-width m-b btn-action btn-sign-in"></custom-button>
             <a asp-controller="Auth" asp-action="RecoverPasswrod"><small>@Strings.ForgotPassword</small></a>
         </form>
-        <p class="m-t">@Strings.CopyRights</p>
     </div>
 </div>
 @section scripts{

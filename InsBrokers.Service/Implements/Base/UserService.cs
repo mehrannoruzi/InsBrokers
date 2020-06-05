@@ -271,6 +271,17 @@ namespace InsBrokers.Service
             return userMenu;
         }
 
+        public List<MenuSPModel> GetMainMenu(Guid userId)
+        {
+            var userMenu = (List<MenuSPModel>)_cacheProvider.Get(GlobalVariables.CacheSettings.MainMenuCacheKey(userId));
+            if (userMenu != null) return userMenu;
+
+            userMenu = _dapperUserRepo.GetUserMenu(userId).ToList();
+            _cacheProvider.Add(GlobalVariables.CacheSettings.MainMenuCacheKey(userId), userMenu, DateTime.Now.AddMinutes(30));
+            return userMenu;
+
+        }
+
         public void SignOut(Guid userId)
         {
             _cacheProvider.Remove(GlobalVariables.CacheSettings.MenuModelCacheKey(userId));
@@ -295,8 +306,8 @@ namespace InsBrokers.Service
 
         public IDictionary<object, object> Search(string searchParameter, int take = 10)
         {
-            var items = _appUow.UserRepo.Get(x => x.Name.Contains(searchParameter) || x.Family.Contains(searchParameter), o => o.OrderByDescending(x => x.UserId));
-            return items?.ToDictionary(k => (object)k.UserId, v => (object)$"{v.Name} {v.Family}({v.Email})"); ;
+            var items = _appUow.UserRepo.Get(x => x.Name.Contains(searchParameter) || x.Family.Contains(searchParameter) || x.NationalCode.Contains(searchParameter), o => o.OrderByDescending(x => x.UserId));
+            return items?.ToDictionary(k => (object)k.UserId, v => (object)$"{v.Name} {v.Family}({v.NationalCode})"); ;
         }
 
         public async Task<IResponse<string>> RecoverPassword(long mobileNumber, string from, EmailMessage model)

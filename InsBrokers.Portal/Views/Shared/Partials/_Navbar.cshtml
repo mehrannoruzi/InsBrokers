@@ -1,5 +1,5 @@
 
-<div class="row border-bottom">
+<div class="border-bottom">
     <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
             <a class="navbar-minimalize minimalize-styl-2 btn btn-primary varia rtl-f-r" href="#"><i class="zmdi zmdi-menu"></i></a>
@@ -13,7 +13,7 @@
         <ul class="nav navbar-top-links navbar-right">
             <li>
                 <a asp-controller="Auth" asp-action="SignOut">
-                    @Strings.SignOut &nbsp;<span><i class="zmdi zmdi-power default-i"></i></span>
+                   @User.GetFullname() &nbsp;<span><i class="zmdi zmdi-power default-i"></i></span>
                 </a>
             </li>
         </ul>
@@ -22,12 +22,14 @@
 </div>
 
 <div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-lg-10">
+    <div class="col-8 col-sm-8">
         <ol class="breadcrumb">
             <li class="breadcrumb-item active">
                 <a href="#">@ViewBag.Title</a>
             </li>
         </ol>
     </div>
-    <div class="col-lg-2"></div>
+    <div class="col-4 col-sm-4">
+        <a href="@Url.Action("index","MemberStatistic")"><i class="zmdi zmdi-arrow-left default-i"></i></a>
+    </div>
 </div>

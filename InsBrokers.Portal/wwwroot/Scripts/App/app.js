@@ -160,7 +160,10 @@ var refreshList = function (pageNumber) {
     $.get($frm.attr('action'), params)
         .done(function (rep) {
             $wrapper.loadOverStop();
-            $wrapper.find('.ibox-content').html(rep);
+            let $target = $wrapper.find('.ibox-content');
+
+            if ($target.length === 0) $wrapper.html(rep);
+            else  $wrapper.find('.ibox-content').html(rep);
             //enable footable plugin on items tables
             $('.footable').footable({
                 pageSize: 200,
@@ -522,8 +525,8 @@ var fireGlobalPlugins = function () {
     });
 
     $('.i-checks').iCheck({
-        checkboxClass: 'icheckbox_square-green',
-        radioClass: 'iradio_square-green',
+        checkboxClass: 'icheckbox_square-blue',
+        radioClass: 'iradio_square-blue',
     });
 
     $('.pdate').Zebra_DatePicker();
@@ -870,11 +873,11 @@ $(document).ready(function () {
             return;
         if (nowClosed) {
             $ibox.animate({ 'margin-left': '-=125px' });
-            $filters.animate({ 'padding-top': '+=40px' });
+            $filters.animate({ 'padding-top': '+=55px' });
         }
         else {
             $ibox.animate({ 'margin-left': '+=125px' });
-            $filters.animate({ 'padding-top': '-=40px' });
+            $filters.animate({ 'padding-top': '-=55px' });
         }
     });
 

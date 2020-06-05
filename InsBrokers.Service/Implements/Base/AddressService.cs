@@ -53,7 +53,9 @@ namespace InsBrokers.Service
                     conditions = conditions.And(x => x.AddressDetails.Contains(filter.Details));
             }
 
-            return _addressRepo.Get(conditions, filter, x => x.OrderByDescending(u => u.AddressId)); ;
+            return _addressRepo.Get(conditions, filter, x => x.OrderByDescending(u => u.AddressId), new System.Collections.Generic.List<Expression<Func<Address, object>>> {
+                x=>x.User
+            });
         }
 
 
@@ -70,6 +72,7 @@ namespace InsBrokers.Service
             var address = await _addressRepo.FindAsync(model.AddressId);
             if (address == null) return new Response<Address> { Message = ServiceMessage.RecordNotExist };
 
+            address.UserId = model.UserId;
             address.Province = model.Province;
             address.City = model.City;
             address.AddressDetails = model.AddressDetails;
@@ -90,9 +93,11 @@ namespace InsBrokers.Service
             };
         }
 
-        public async Task<IResponse<Address>> FindAsync(int roleId)
+        public async Task<IResponse<Address>> FindAsync(int id)
         {
-            var address = await _addressRepo.FindAsync(roleId);
+            var address = await _addressRepo.FirstOrDefaultAsync(x => x.AddressId == id, new System.Collections.Generic.List<Expression<Func<Address, object>>> {
+                x=>x.User
+            });
             if (address == null) return new Response<Address> { Message = ServiceMessage.RecordNotExist };
             return new Response<Address> { Result = address, IsSuccessful = true };
         }

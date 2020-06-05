@@ -1,19 +1,19 @@
-@model PagingListDetails<InsBrokers.Domain.Action>
+@model PagingListDetails<Address>
 @{
     Layout = null;
 }
-
 @if (Model.TotalCount > 0)
 {
     <table class="footable table table-hover toggle-arrow-tiny">
         <thead>
             <tr>
                 <th data-toggle="true">#</th>
-                <th>@Html.DisplayNameFor(x => x.Items[0].Icon)</th>
-                <th data-hide="phone">@Html.DisplayNameFor(x => x.Items[0].Name)</th>
-                <th data-hide="phone">@Html.DisplayNameFor(x => x.Items[0].Path)</th>
-                <th data-hide="all">@Html.DisplayNameFor(x => x.Items[0].ShowInMenu)</th>
-                <th data-hide="all">@Html.DisplayNameFor(x => x.Items[0].OrderPriority)</th>
+                <th>@Html.DisplayNameFor(x => x.Items[0].User)</th>
+                <th data-ng-hide="phpne">@Html.DisplayNameFor(x => x.Items[0].User.MobileNumber)</th>
+                <th data-ng-hide="phpne">@Html.DisplayNameFor(x => x.Items[0].User.NationalCode)</th>
+                <th data-ng-hide="all">@Html.DisplayNameFor(x => x.Items[0].Province)</th>
+                <th data-ng-hide="all">@Html.DisplayNameFor(x => x.Items[0].City)</th>
+                <th data-ng-hide="all">@Html.DisplayNameFor(x => x.Items[0].AddressDetails)</th>
                 <th class="text-center"> <i class="zmdi zmdi-wrench rotate-90"></i></th>
             </tr>
         </thead>
@@ -22,25 +22,27 @@
             {
                 <tr>
                     <td>@(((Model.PageNumber - 1) * Model.PageSize) + Model.Items.IndexOf(item) + 1)</td>
-                    <td>@item.Icon</td>
-                    <td>@item.Name</td>
-                    <td dir="ltr">@item.Path</td>
-                    <td>@(item.ShowInMenu?Strings.Yes:Strings.No)</td>
-                    <td>@item.OrderPriority</td>
+                    <td>@item.User.Fullname</td>
+                    <td>@item.User.NationalCode</td>
+                    <td>@item.User.NationalCode</td>
+                    <td>@item.Province</td>
+                    <td>@item.City</td>
+                    <td>@item.AddressDetails</td>
                     <td class="actions">
-                        <div class="dropdown">
+                        <div class="dropdown b-a-c">
                             <span class="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="zmdi zmdi-more rotate-90"></i>
                             </span>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item btn-modal" data-url="@Url.Action("Update","Action",new { id = item.ActionId })">
+                                <a class="dropdown-item update" data-url="@Url.Action("Update","Address",new { id = item.AddressId })">
                                     <i class="zmdi zmdi-edit default-i"></i>
                                     @Strings.Edit
                                 </a>
-                                <a class="dropdown-item delete" data-url="@Url.Action("Delete","Action",new { id = item.ActionId })">
+                                <a class="dropdown-item delete" data-url="@Url.Action("Delete","Address",new { id = item.AddressId })">
                                     <i class="zmdi zmdi-delete default-i"></i>
                                     @Strings.Delete
                                 </a>
+
                             </div>
                         </div>
                     </td>
@@ -66,3 +68,5 @@ else
         <small>@string.Format(Strings.ThereIsNoRecord, Strings.Item)</small>
     </div>
 }
+
+

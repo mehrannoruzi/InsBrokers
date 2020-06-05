@@ -64,7 +64,7 @@ namespace InsBrokers.Portal
 
                 app.UseExceptionHandler("/Home/Error");
 
-               // app.UseHsts();
+                app.UseHsts();
 
                 app.Use(async (context, next) =>
                 {

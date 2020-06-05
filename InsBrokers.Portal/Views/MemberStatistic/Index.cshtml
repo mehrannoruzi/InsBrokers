@@ -1,12 +1,58 @@
-﻿
+﻿@model IList<MenuSPModel>
 @{
     ViewBag.Title = "داشبورد کاربر";
 }
+@section styles{
+    <link href="~/Styles/App/customize-template.min.css" rel="stylesheet" />
+}
 
-
+@*<div class="continer">
+        <div style="text-align:center">
+            <h1> به کارگزاری رسمی بیمه صنعت نفت خوش آمدید</h1>
+            <h3>با استفاده از منوهای سمت راست نسبت به تکمیل اطلاعات خود و یا ویرایش آن اقدام نمایید.</h3>
+        </div>
+    </div>*@
 <div class="continer">
-    <div style="text-align:center">
-        <h1> به کارگزاری رسمی بیمه صنعت نفت خوش آمدید</h1>
-        <h3>با استفاده از منوهای سمت راست نسبت به تکمیل اطلاعات خود و یا ویرایش آن اقدام نمایید.</h3>
-    </div>    
+    <div class="row">
+        @foreach (var item in Model.Where(x => x.ShowInMenu && x.ParentId == null).OrderBy(x => x.OrderPriority).ToList())
+        {
+            @if (item.ControllerName != "MemberStatistic" && item.ActionName != "Index")
+            {
+                <div class="col-6 col-sm-6 menu-item">
+                    <a class="menu-link" href="@Url.Action(item.ActionName,item.ControllerName)">
+                        <figure>
+                            <i class="@item.Icon"></i>
+                            <figcaption>@item.Name</figcaption>
+                        </figure>
+                    </a>
+                </div>
+            }
+
+        }
+
+        @*<div class="col-12 col-sm-6">
+            <a class="nav-link" href="@Url.Action("Manage","MemberRelative")">
+                <figure>
+                    <i class="zmdi zmdi-accounts-add"></i>
+                    <figcaption>ثبت بستگان</figcaption>
+                </figure>
+            </a>
+        </div>
+        <div class="col-12 col-sm-6">
+            <a class="nav-link" href="@Url.Action("Manage","MemberLoss")">
+                <figure>
+                    <i class="zmdi zmdi-receipt"></i>
+                    <figcaption>ثبت هزینه درمان</figcaption>
+                </figure>
+            </a>
+        </div>
+        <div class="col-12 col-sm-6">
+            <a class="nav-link" href="@Url.Action("Manage","MemberBankAccount")">
+                <figure>
+                    <i class="zmdi zmdi-receipt"></i>
+                    <figcaption>ثبت شماره حساب</figcaption>
+                </figure>
+            </a>
+        </div>*@
+    </div>
 </div>

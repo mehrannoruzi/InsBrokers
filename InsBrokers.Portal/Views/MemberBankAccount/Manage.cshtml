@@ -1,10 +1,12 @@
 @model PagingListDetails<BankAccount>
 @{
     ViewBag.Title = $"{Strings.Management} {InsBrokers.Domain.Resource.Strings.BankAccount}";
-    Layout = "_LayoutManage";
+    Layout = "_PortalLayoutManage";
 }
 
-
+@section styles{
+    <link href="@Url.Content("~/Styles/App/customize-template.min.css")" rel="stylesheet" />
+}
 @section filter{
     <partial name="Partials/_Filters" model="new BankAccountSearchFilter()" />
 }

@@ -142,7 +142,7 @@ $iWidth: 40px;
         display: inline-block;
         text-align: center;
         margin-left: $iWidth;
-        padding: 0 10px
+        padding: 5px 10px
     }
 }
 
@@ -746,4 +746,7 @@ ul.nav.metismenu {
 .copied-value {
     cursor: not-allowed;
     color: #00b597;
+}
+.ibox-title h5 {
+    padding: 6px 0 !important;
 }

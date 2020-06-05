@@ -8,12 +8,12 @@
         <div class="col-12 col-sm-6">
             <custom-select-for for="ParentId" optional-label="@Strings.SelectPlease"
                                class="form-control select2 with-ajax w-100"
-                               items="Model.Parent==null?new List<SelectListItem>():new List<SelectListItem> {
+                               items='Model.Parent==null?new List<SelectListItem>():new List<SelectListItem> {
                                         new SelectListItem{
-                                            Text = Model.Parent.Path,
+                                            Text = Model.Parent.Name+"("+Model.Parent.Path +")",
                                             Value = Model.ParentId.ToString()
                                         }
-                                    }"
+                                    }'
                                select-data-url="@Url.Action("Search","Action")" />
         </div>
         <div class="col-12 col-sm-6">

@@ -1,0 +1,31 @@
+@model Address
+@{
+    Layout = null;
+}
+@Html.HiddenFor(x => x.AddressId)
+<div class="row">
+    <div class="col-12">
+        <custom-select-for for="UserId" class="form-control select2 with-ajax"
+                           items='Model.User==null?new List<SelectListItem>():new List<SelectListItem> {
+                                    new SelectListItem{
+                                        Text = $"{Model.User.Fullname}({Model.User.MobileNumber})",
+                                        Value = Model.UserId.ToString(),
+                                        Selected = true
+                                    }
+                                }'
+                           select-data-url="@Url.Action("Search","User")"></custom-select-for>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 col-sm-6">
+        <custom-input-for for="Province" />
+    </div>
+    <div class="col-12 col-sm-6">
+        <custom-input-for for="City" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <custom-textarea-for for="AddressDetails"></custom-textarea-for>
+    </div>
+</div>

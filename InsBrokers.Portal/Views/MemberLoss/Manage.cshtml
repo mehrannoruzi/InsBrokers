@@ -1,10 +1,11 @@
 @model PagingListDetails<Loss>
 @{
     ViewBag.Title = $"{Strings.Management} {InsBrokers.Domain.Resource.Strings.Loss}";
-    Layout = "_LayoutManage";
+    Layout = "_PortalLayoutManage";
 }
 @section styles{
     <link href="@Url.Content("~/Styles/App/LossAsset/uploader.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Styles/App/customize-template.min.css")" rel="stylesheet" />
 }
 @section filter{
     <partial name="Partials/_Filters" model="new LossSearchFilter { LossType = null }" />

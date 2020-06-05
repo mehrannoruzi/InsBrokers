@@ -50,5 +50,9 @@
   {
     "outputFile": "wwwroot/Styles/App/LossAsset/uploader.css",
     "inputFile": "wwwroot/Styles/App/LossAsset/uploader.scss"
+  },
+  {
+    "outputFile": "wwwroot/Styles/App/customize-template.css",
+    "inputFile": "wwwroot/Styles/App/customize-template.scss"
   }
 ]

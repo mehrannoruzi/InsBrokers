@@ -73,11 +73,11 @@ $(document).ready(function () {
             return;
         if (nowClosed) {
             $ibox.animate({ 'margin-left': '-=125px' });
-            $filters.animate({ 'padding-top': '+=40px' });
+            $filters.animate({ 'padding-top': '+=55px' });
         }
         else {
             $ibox.animate({ 'margin-left': '+=125px' });
-            $filters.animate({ 'padding-top': '-=40px' });
+            $filters.animate({ 'padding-top': '-=55px' });
         }
     });
 

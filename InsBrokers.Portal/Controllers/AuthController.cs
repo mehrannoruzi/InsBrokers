@@ -69,6 +69,7 @@ namespace InsBrokers.Portal.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 cacheProvider.Remove(GlobalVariables.CacheSettings.MenuModelCacheKey(User.GetUserId()));
+                cacheProvider.Remove(GlobalVariables.CacheSettings.MainMenuCacheKey(User.GetUserId()));
                 await _httpAccessor.HttpContext.SignOutAsync();
     }
 

@@ -15,6 +15,7 @@ namespace InsBrokers.Service
         Task<IResponse<User>> FindAsync(Guid userId);
         Task<IResponse<User>> FindByMobileNumber(long mobileNumber);
         MenuModel GetAvailableActions(Guid userId, List<MenuSPModel> spResult = null, string urlPrefix = "");
+        List<MenuSPModel> GetMainMenu(Guid userId);
         Task<IResponse<User>> Authenticate(long mobileNumber, string password);
         void SignOut(Guid userId);
         PagingListDetails<User> Get(UserSearchFilter filter);

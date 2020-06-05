@@ -4,63 +4,131 @@
 }
 @if (Model.TotalCount > 0)
 {
-    <table class="footable table table-hover toggle-arrow-tiny">
-        <thead>
-            <tr>
-                <th data-toggle="true">#</th>
-                <th>@Html.DisplayNameFor(x => x.Items[0].User)</th>
-                <th>@Html.DisplayNameFor(x => x.Items[0].Relative)</th>
-                <th data-hide="phone">@Html.DisplayNameFor(x => x.Items[0].LossType)</th>
-                <th data-hide="phone">@Html.DisplayNameFor(x => x.Items[0].Cost)</th>
-                <th data-hide="phone">@Html.DisplayNameFor(x => x.Items[0].LossDateSh)</th>
-                <th>@Html.DisplayNameFor(x => x.Items[0].Status)</th>
-                <th data-hide="all">@Html.DisplayNameFor(x => x.Items[0].Description)</th>
-                <th class="text-center"> <i class="zmdi zmdi-wrench rotate-90"></i></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.Items)
-            {
-                <tr>
-                    <td>@(((Model.PageNumber - 1) * Model.PageSize) + Model.Items.IndexOf(item) + 1)</td>
-                    <td>@item.User.Fullname</td>
-                    <td>@(item.Relative == null ? Strings.OriginalInsured : item.Relative.Fullname)</td>
-                    <td>@item.LossType.GetDescription()</td>
-                    <td>@item.Cost.ToString("#,#")</td>
-                    <td>@item.LossDateSh</td>
-                    <td>@item.Status.GetDescription()</td>
-                    <td>@item.Description</td>
-                    <td class="actions">
-                        <div class="dropdown b-a-c">
-                            <span class="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="zmdi zmdi-more rotate-90"></i>
-                            </span>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item update" data-url="@Url.Action("Update","MemberLoss",new { id = item.LossId })">
-                                    <i class="zmdi zmdi-edit default-i"></i>
-                                    @Strings.Edit
-                                </a>
-                                <a class="dropdown-item delete" data-url="@Url.Action("Delete","MemberLoss",new { id = item.LossId })">
-                                    <i class="zmdi zmdi-delete default-i"></i>
-                                    @Strings.Delete
-                                </a>
+    @foreach (var item in Model.Items)
+    {
+        var status = "";
+        switch (item.Status)
+        {
+            case LossStatus.Agreed:
+                status = "info";
+                break;
+            case LossStatus.Payed:
+                status = "primary";
+                break;
+            case LossStatus.Denied:
+                status = "danger";
+                break;
+            case LossStatus.Added:
+                status = "success";
+                break;
+        }
+        <div class="list-item">
+            <div class="dropdown actions">
+                <span class="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="zmdi zmdi-more rotate-90"></i>
+                </span>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item update text-right" data-url="@Url.Action("Update","MemberLoss",new { id = item.LossId })">
+                        <i class="zmdi zmdi-edit default-i"></i>
+                        @Strings.Edit
+                    </a>
+                    <a class="dropdown-item delete text-right" data-url="@Url.Action("Delete","MemberLoss",new { id = item.LossId })">
+                        <i class="zmdi zmdi-delete default-i"></i>
+                        @Strings.Delete
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-sm-6">
+                    <div class="field m-b">
+                        @Html.DisplayNameFor(x => x.Items[0].LossType): <span>@item.LossType.GetDescription()</span>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6">
+                    <div class="field m-b">
+                        @Html.DisplayNameFor(x => x.Items[0].Relative): <span>@(item.Relative == null ? Strings.OriginalInsured : item.Relative.Fullname)</span>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6">
+                    <div class="field m-b">
+                        @Html.DisplayNameFor(x => x.Items[0].Cost): <span>@item.Cost.ToString("N0")</span>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6">
+                    <div class="field m-b">
+                        @Html.DisplayNameFor(x => x.Items[0].InsertDateSh): <span>@item.InsertDateSh</span>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6">
 
+                    <div class="field m-b">
+                        @Html.DisplayNameFor(x => x.Items[0].Status):
+                        <label class="label label-@status">
+                            <span>@item.Status.GetDescription()</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    @*<table class="footable table table-hover toggle-arrow-tiny">
+            <thead>
+                <tr>
+                    <th data-toggle="true">#</th>
+                    <th>@Html.DisplayNameFor(x => x.Items[0].User)</th>
+                    <th>@Html.DisplayNameFor(x => x.Items[0].Relative)</th>
+                    <th data-hide="phone">@Html.DisplayNameFor(x => x.Items[0].LossType)</th>
+                    <th data-hide="phone">@Html.DisplayNameFor(x => x.Items[0].Cost)</th>
+                    <th data-hide="phone">@Html.DisplayNameFor(x => x.Items[0].LossDateSh)</th>
+                    <th>@Html.DisplayNameFor(x => x.Items[0].Status)</th>
+                    <th data-hide="all">@Html.DisplayNameFor(x => x.Items[0].Description)</th>
+                    <th class="text-center"> <i class="zmdi zmdi-wrench rotate-90"></i></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Items)
+                {
+                    <tr>
+                        <td>@(((Model.PageNumber - 1) * Model.PageSize) + Model.Items.IndexOf(item) + 1)</td>
+                        <td>@item.User.Fullname</td>
+                        <td>@(item.Relative == null ? Strings.OriginalInsured : item.Relative.Fullname)</td>
+                        <td>@item.LossType.GetDescription()</td>
+                        <td>@item.Cost.ToString("#,#")</td>
+                        <td>@item.LossDateSh</td>
+                        <td>@item.Status.GetDescription()</td>
+                        <td>@item.Description</td>
+                        <td class="actions">
+                            <div class="dropdown b-a-c">
+                                <span class="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="zmdi zmdi-more rotate-90"></i>
+                                </span>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item update" data-url="@Url.Action("Update","MemberLoss",new { id = item.LossId })">
+                                        <i class="zmdi zmdi-edit default-i"></i>
+                                        @Strings.Edit
+                                    </a>
+                                    <a class="dropdown-item delete" data-url="@Url.Action("Delete","MemberLoss",new { id = item.LossId })">
+                                        <i class="zmdi zmdi-delete default-i"></i>
+                                        @Strings.Delete
+                                    </a>
+
+                                </div>
                             </div>
-                        </div>
+                        </td>
+                    </tr>
+                }
+
+
+            </tbody>
+            <tfoot class="d-none">
+                <tr>
+                    <td colspan="5">
+                        <ul class="pagination float-right"></ul>
                     </td>
                 </tr>
-            }
-
-
-        </tbody>
-        <tfoot class="d-none">
-            <tr>
-                <td colspan="5">
-                    <ul class="pagination float-right"></ul>
-                </td>
-            </tr>
-        </tfoot>
-    </table>
+            </tfoot>
+        </table>*@
     <partial name="Partials/_Pagination" model="@Model" />
 }
 

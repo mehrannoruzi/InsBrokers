@@ -1,0 +1,15 @@
+@model AddressSearchFilter
+@{
+    Layout = null;
+}
+
+    <div class="row">
+        <div class="col-12 col-sm-6">
+            <custom-select-for for="UserId" class="form-control select2 with-ajax"
+                               optional-label="@Strings.PleaseSelect"
+                               select-data-url="@Url.Action("Search","User")"></custom-select-for>
+        </div>
+        <div class="col-12 col-sm-6">
+            <custom-input-for for="Details" />
+        </div>
+    </div>

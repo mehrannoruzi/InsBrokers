@@ -69,7 +69,10 @@ var refreshList = function (pageNumber) {
     $.get($frm.attr('action'), params)
         .done(function (rep) {
             $wrapper.loadOverStop();
-            $wrapper.find('.ibox-content').html(rep);
+            let $target = $wrapper.find('.ibox-content');
+
+            if ($target.length === 0) $wrapper.html(rep);
+            else  $wrapper.find('.ibox-content').html(rep);
             //enable footable plugin on items tables
             $('.footable').footable({
                 pageSize: 200,
