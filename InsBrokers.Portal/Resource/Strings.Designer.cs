@@ -142,7 +142,7 @@ namespace InsBrokers.Portal.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to تمام حقوق مادی و معنوی این اثر متعلق به کارگزاری رسمی بیمه نفت و انرژی می باشد.
+        ///   Looks up a localized string similar to تمام حقوق مادی و معنوی این اثر متعلق به کارگزاری بیمه نفت و انرژی می باشد.
         /// </summary>
         public static string CopyRights {
             get {

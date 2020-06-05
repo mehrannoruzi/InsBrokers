@@ -100,7 +100,7 @@ namespace InsBrokers.Portal.Controllers
             else return PartialView("Partials/_List", _LossSrv.Get(filter));
         }
 
-        [HttpPost]
+        [HttpPost, AuthEqualTo("Loss", "Delete")]
         public virtual async Task<JsonResult> DeleteAsset([FromServices] ILossAssetService assetSrv, int assetId)
             => Json(await assetSrv.DeleteAsync(assetId));
 
