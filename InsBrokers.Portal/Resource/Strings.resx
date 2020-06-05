@@ -225,6 +225,9 @@
   <data name="LenghIsNotInRange" xml:space="preserve">
     <value>تعداد کاراکترها میبایست بین {0} و {1} باشد</value>
   </data>
+  <data name="ListOfParties" xml:space="preserve">
+    <value>مراکز طرف قرارداد</value>
+  </data>
   <data name="Management" xml:space="preserve">
     <value>مدیریت</value>
   </data>
