@@ -1,0 +1,46 @@
+﻿@model ContactUsDTO
+@{
+    ViewBag.Title = InsBrokers.Domain.Resource.Strings.ContactUs;
+}
+
+@section styles{
+    <link href="@Url.Content("~/Styles/App/customize-template.min.css")" rel="stylesheet" />
+}
+<form class="container">
+    <div class="row" dir="ltr">
+        <div class="col-6 offset-3">
+            <div class="m-b- p-5 bg-white" dir="rtl">
+                <div class="row">
+                    <div class="col-12">
+                        <custom-input-for for="FullName"></custom-input-for>
+                    </div>
+                    <div class="col-12">
+                        <custom-input-for for="MobileNumber"></custom-input-for>
+                    </div>
+                    <div class="col-12">
+                        <custom-input-for for="Subject"></custom-input-for>
+                    </div>
+                    <div class="col-12">
+                        <custom-textarea-for for="Description"></custom-textarea-for>
+                    </div>
+                    <div class="col-12">
+                        <custom-button type="button" text="@Strings.Submit" icon="zmdi zmdi-floppy" class="btn-primary full-width m-b btn-action" id="btn-submit"></custom-button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</form>
+@section scripts{
+    <script>
+        $('#btn-submit').click(function () {
+            let $btn = $(this);
+            let $frm = $btn.closest('form');
+            if (!$frm.valid()) return;
+            showNotif(notifyType.success, strings.success);
+
+        });
+    </script>
+}

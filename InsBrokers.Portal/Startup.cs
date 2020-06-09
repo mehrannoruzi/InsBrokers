@@ -56,11 +56,12 @@ namespace InsBrokers.Portal
             }
             else
             {
-                cachePeriod = "604800";
-                app.UseStaticFiles(new StaticFileOptions
-                {
-                    OnPrepareResponse = ctx => { ctx.Context.Response.Headers.Append("Cache-Control", $"public, max-age={cachePeriod}"); }
-                });
+                app.UseStaticFiles();
+                //cachePeriod = "604800";
+                //app.UseStaticFiles(new StaticFileOptions
+                //{
+                //    OnPrepareResponse = ctx => { ctx.Context.Response.Headers.Append("Cache-Control", $"public, max-age={cachePeriod}"); }
+                //});
 
                 app.UseExceptionHandler("/Home/Error");
 

@@ -159,6 +159,9 @@
   <data name="Code" xml:space="preserve">
     <value>کد</value>
   </data>
+  <data name="ContactUs" xml:space="preserve">
+    <value>تماس با ما</value>
+  </data>
   <data name="Content" xml:space="preserve">
     <value>متن</value>
   </data>
@@ -350,6 +353,9 @@
   </data>
   <data name="Status" xml:space="preserve">
     <value>وضعیت</value>
+  </data>
+  <data name="Subject" xml:space="preserve">
+    <value>موضوع</value>
   </data>
   <data name="TakafolKind" xml:space="preserve">
     <value>نوع تکفل</value>
