@@ -30,3 +30,30 @@ p {
         padding: 30px;
     }
 }
+
+footer {
+    background-color: #1d2731;
+    color: #fff;
+
+    .sec {
+        padding: 10px;
+    }
+
+    #links {
+        display: flex;
+        flex-direction: column;
+
+        a {
+            padding: 5px 0;
+        }
+    }
+
+    a {
+        color: #fff;
+
+        &:hover {
+            text-decoration: none;
+            color: #fff;
+        }
+    }
+}

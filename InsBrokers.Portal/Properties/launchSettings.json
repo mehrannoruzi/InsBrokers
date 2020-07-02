@@ -11,7 +11,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "Auth/SignIn",
+      "launchUrl": "Home/Index",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -19,7 +19,7 @@
     "InsBrokers.Portal": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "Auth/SignIn",
+      "launchUrl": "Home/Index",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

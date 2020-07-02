@@ -1,10 +1,7 @@
 ﻿header {
-  /*position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 999;*/
   background-color: #34495e; }
+  header ul {
+    margin-bottom: 0; }
   header .main-nav .menu-icon {
     padding-left: 7.5px;
     display: none;
@@ -70,12 +67,14 @@
         display: block; }
     header .main-nav [name=toggle]:checked + ul {
       display: flex; } }
-  header .auth {
-    padding: 15px 0;
+  header .email {
+    color: #fff;
+    justify-content: center;
+    align-items: center;
     display: flex; }
-    header .auth > a {
-      padding: 5px 0;
-      color: #fff; }
+    header .email .zmdi-email {
+      margin-left: 10px;
+      font-size: 20px; }
 
 html[dir=ltr] .main-nav ul {
   animation-name: slideInLeft; }

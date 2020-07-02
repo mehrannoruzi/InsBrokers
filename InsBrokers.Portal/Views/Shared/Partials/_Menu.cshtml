@@ -4,34 +4,14 @@
             <label class="menu-icon" for="toggle"><i class="zmdi zmdi-menu"></i></label>
             <input type="checkbox" name="toggle" id="toggle" class="d-none" />
             <ul class="animated">
-                <li class="logo"><img src="@Url.Content("/Images/logo-2.png")" /></li>
+                @*<li class="logo"><img src="@Url.Content("/Images/logo-2.png")" /></li>*@
                 <li class="close-menu"><label for="toggle"><i class="zmdi zmdi-close"></i></label></li>
-                <li class="navlink"><a href="@Url.Action("Index","Home",new { })">خانه</a></li>
-                @*<li class="navlink">
-                        <a>دسته ها</a>
-                        <ul class="sub-menu animated slideDown">
-                            <li class="navlink"><a>آیتم 1</a></li>
-                            <li class="navlink"><a>آیتم 2</a></li>
-                        </ul>
-                    </li>*@
-                @*<li class="navlink"></li>*@
-                <li class="navlink"><a>درباره ما</a></li>
+                <li class="navlink"><a href="@Url.Action("Index","Home",new { })">درباره ما</a></li>
                 <li class="navlink"><a>تماس با ما</a></li>
+                <li class="navlink"><a> قوانین و مقررات</a></li>
             </ul>
-            <div class="float-left auth">
-                @if (!User.Identity.IsAuthenticated)
-                {
-                    <a class="" href="@Url.Action("Auth","Home",new { })">ثبت نام | ورود</a>
-                }
-                else
-                {
-                    <div class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">@User.GetFullname()</a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="@Url.Action("SignOut","Auth")">@Strings.SignOut</a>
-                        </div>
-                    </div>
-                }
+            <div class="float-left email">
+                <i class="zmdi zmdi-email"></i><span>info@dnaft.ir</span>
             </div>
         </div>
     </nav>

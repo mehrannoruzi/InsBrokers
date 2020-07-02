@@ -9195,7 +9195,9 @@ html, body {
   font-style: normal; }
 
 *:not(i) {
-  font-family: "iransans"; }
+  font-family: "iransans";
+  direction: rtl;
+  text-align: right; }
 
 select {
   height: 32px !important;

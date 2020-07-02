@@ -31,6 +31,8 @@
 
 *:not(i){
     font-family: "iransans";
+    direction:rtl;
+    text-align:right;
 }
 
 select {

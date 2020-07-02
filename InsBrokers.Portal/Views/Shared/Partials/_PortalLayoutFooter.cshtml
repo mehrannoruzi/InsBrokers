@@ -1,4 +1,15 @@
-﻿<script>
+﻿<footer>
+    <div class="container">
+        <div class="row">
+            <section class="sec col-12 col-sm-4" id="links">
+                <a href="@Url.Action("/Home/AboutUs")">درباره ما</a>
+                <a href="@Url.Action("/Home/ContactUs")">تماس با ما</a>
+                <a href="@Url.Action("/Home/Rules")">قوانین و مقررات</a>
+            </section>
+        </div>
+    </div>
+</footer>
+<script>
         const urlPrefix = '@Configuration["UrlPrefix"]';
         const strings = {
             error: '@Html.Raw(Strings.Error)',

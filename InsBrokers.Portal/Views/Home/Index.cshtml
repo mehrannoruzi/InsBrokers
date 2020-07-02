@@ -4,27 +4,22 @@
 }
 @section styles{
     <link href="~/Styles/App/Home/index.min.css" rel="stylesheet" />
-    <link href="~/Styles/Libs/slick.css" rel="stylesheet" />
-    <link href="~/Styles/Libs/slick-theme.css" rel="stylesheet" />
 }
 <div id="home-index-page">
-    @*<div id="main-slider-wrapper">
-        <div id="main-slider">
-            <div class="slide">
-                <img src="~/Images/Slides/slide1.jpg" />
+    <div class="container">
+        <div class="row" id="row-req">
+            <div class="col-12 col-sm-6" id="logo-wrapper">
+                <img src="@Url.Content("~/Images/Portal/Logo-1.png")" />
             </div>
-            <div class="slide">
-                <img src="~/Images/Slides/slide2.jpg" />
+            <div class="col-12 col-sm-6 justify-content-center justify-content-sm-end" id="insurance-req">
+                <a id="btn-insurance-req" class="btn btn-warning" asp-controller="home" asp-action="register">درخواست بیمه</a>
             </div>
         </div>
-        <div id="cover">
-            <h1 class="hx">@Strings.WebsiteName</h1>
-            <button id="switch"> </button>
-        </div>
-    </div>*@
-
+    </div>
+    <partial name="Partials/_Motto" />
+    <partial name="Partials/_Counts" />
+    <partial name="Partials/_DownloadApp" />
 </div>
 @section scripts{
-    @*<script src="~/Scripts/Libs/slick.js"></script>
-    <script src="~/Scripts/App/Home/index.js"></script>*@
+
 }

@@ -12,13 +12,15 @@
     "inputFiles": [
       "wwwroot/Styles/Libs/zebra-date-picker.css",
       "wwwroot/Styles/App/portal-template.css",
+      "wwwroot/Styles/App/menu.min.css",
+      "wwwroot/Styles/App/fa.min.css",
       "wwwroot/Styles/App/common.css"
     ]
   },
   {
     "outputFileName": "wwwroot/Styles/Libs/portal-libs.css",
     "inputFiles": [
-      //"wwwroot/Styles/Libs/bootstrap.min.css",
+      "wwwroot/Styles/Libs/bootstrap.min.css",
       "wwwroot/Styles/Libs/material-design-iconic-font.min.css",
       "wwwroot/Styles/Libs/toastr.css",
       "wwwroot/Styles/Libs/animate.css"

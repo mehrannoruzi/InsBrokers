@@ -6,12 +6,11 @@ $subMenuBgColor: #34495e;
 $headerBgColor: #34495e;
 
 header {
-    /*position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 999;*/
     background-color: $headerBgColor;
+
+    ul{
+        margin-bottom:0;
+    }
 
     .main-nav {
 
@@ -126,13 +125,15 @@ header {
         }
     }
 
-    .auth {
-        padding: 15px 0;
+    .email {
+        color: #fff;
+        justify-content: center;
+        align-items: center;
         display: flex;
 
-        > a {
-            padding: 5px 0;
-            color:#fff;
+        .zmdi-email{
+            margin-left:10px;
+            font-size:20px;
         }
     }
 }
