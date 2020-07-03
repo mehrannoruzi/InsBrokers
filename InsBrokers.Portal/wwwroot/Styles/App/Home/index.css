@@ -4,16 +4,20 @@
 #home-index-page #motto-wrapper {
   background-image: url("/Images/Portal/mottob-bg.jpg");
   background-size: 100% 100%;
-  height: 300px;
+  height: 500px;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column; }
+  flex-direction: column;
+  /*&:before{
+
+        }*/ }
   #home-index-page #motto-wrapper #motto {
     color: #fff;
     font-weight: 800;
-    font-size: 1.5rem; }
+    font-size: 2.5rem;
+    text-shadow: 2px 2px #0a0a0a; }
   #home-index-page #motto-wrapper .btns {
     margin-top: 30px;
     display: flex;
@@ -22,7 +26,8 @@
       display: inline-flex;
       color: #fff;
       text-align: center;
-      width: 100px;
+      width: 150px;
+      font-size: 1.2rem;
       padding: 10px;
       margin: 10px;
       box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
@@ -50,7 +55,7 @@
 
 #home-index-page #download-app {
   padding: 30px 0;
-  background-color: #fff; }
+  background-color: #eaf4ff; }
   #home-index-page #download-app #download {
     display: flex;
     justify-content: center;
@@ -68,7 +73,8 @@
         display: inline-flex;
         color: #fff;
         text-align: center;
-        width: 100px;
+        width: 150px;
+        font-size: 1.2rem;
         padding: 10px;
         margin: 10px;
         box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
@@ -82,3 +88,9 @@
           /*background-color: #ccc;*/ }
         #home-index-page #download-app #download .btns a#btn-android {
           /*background-color: #ccc;*/ }
+
+@media (max-width: 768px) {
+  #home-index-page #motto-wrapper {
+    height: 300px; }
+    #home-index-page #motto-wrapper #motto {
+      font-size: 1.5rem; } }
