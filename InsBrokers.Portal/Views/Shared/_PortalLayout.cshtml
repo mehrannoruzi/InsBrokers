@@ -15,6 +15,16 @@
         <partial name="Partials/_Menu" />
     </header>
     <section>
+        <div class="container">
+            <div class="row" id="row-req">
+                <div class="col-12 col-sm-6" id="logo-wrapper">
+                    <img src="@Url.Content("~/Images/Portal/Logo-1.png")" />
+                </div>
+                <div class="col-12 col-sm-6 justify-content-center justify-content-sm-end" id="insurance-req">
+                    <a id="btn-insurance-req" class="btn btn-warning" asp-controller="home" asp-action="register">درخواست بیمه</a>
+                </div>
+            </div>
+        </div>
         @RenderBody()
     </section>
     <partial name="Partials/_PortalLayoutFooter" />

@@ -44,7 +44,7 @@
   {
     "outputFileName": "wwwroot/Scripts/App/portal-app.js",
     "inputFiles": [
-      //"wwwroot/Scripts/App/portal-template.js",
+      "wwwroot/Scripts/App/portal-template.js",
       "wwwroot/Scripts/App/portal-plugins.js",
       "wwwroot/Scripts/App/portal-common.js"
     ]

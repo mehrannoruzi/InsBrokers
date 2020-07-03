@@ -97,6 +97,15 @@ namespace InsBrokers.Portal.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to تهران، میدان آرزانتین ،خیابان بیهقی، کوچه دهم شرقی، پلاک 6.
+        /// </summary>
+        public static string AddressDetailsInfo {
+            get {
+                return ResourceManager.GetString("AddressDetailsInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to آیا از انجام این کار مطمن هستید؟.
         /// </summary>
         public static string AreYouSure {
@@ -525,6 +534,15 @@ namespace InsBrokers.Portal.Resource {
         public static string PasswordValidationFailed {
             get {
                 return ResourceManager.GetString("PasswordValidationFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;a href=&quot;tel:02188173100&quot;&gt;02188173100&lt;/a&gt;-&lt;a href=&quot;tel:02188173200&quot;&gt;88173200&lt;/a&gt;-&lt;a href=&quot;tel:02188173400&quot;&gt;88173400&lt;/a&gt;.
+        /// </summary>
+        public static string PhoneNumbersInfo {
+            get {
+                return ResourceManager.GetString("PhoneNumbersInfo", resourceCulture);
             }
         }
         

@@ -23,18 +23,53 @@ p {
   #home-auth-page {
     padding: 30px; } }
 
+#row-req {
+  margin-top: 20px;
+  margin-bottom: 20px; }
+  #row-req #logo-wrapper {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px; }
+  #row-req #insurance-req {
+    display: flex;
+    align-items: center; }
+    #row-req #insurance-req #btn-insurance-req {
+      color: #fff;
+      border: solid 2px #1f2498;
+      background-color: #4a4eae;
+      font-size: 1.3rem;
+      padding: 10px 15px; }
+      #row-req #insurance-req #btn-insurance-req:hover {
+        box-shadow: 0px 8px 15px rgba(74, 78, 174, 0.5); }
+
 footer {
   background-color: #1d2731;
   color: #fff; }
   footer .sec {
     padding: 10px; }
-  footer #links {
+  footer .hx {
+    padding: 5px 0;
+    font-weight: 800; }
+  footer .links {
     display: flex;
     flex-direction: column; }
-    footer #links a {
-      padding: 5px 0; }
-  footer a {
-    color: #fff; }
-    footer a:hover {
-      text-decoration: none;
+    footer .links a {
+      padding: 5px 0;
       color: #fff; }
+      footer .links a:hover {
+        text-decoration: none;
+        color: #fff; }
+  footer .contact-info .address, footer .contact-info .phone-numbers, footer .contact-info .sms {
+    padding: 5px 0; }
+    footer .contact-info .address i, footer .contact-info .phone-numbers i, footer .contact-info .sms i {
+      font-size: 20px;
+      vertical-align: middle;
+      margin-left: 5px; }
+    footer .contact-info .address a, footer .contact-info .phone-numbers a, footer .contact-info .sms a {
+      color: #fff; }
+  footer .copy-right {
+    padding: 10px 15px;
+    background-color: #131c24;
+    color: #fff; }

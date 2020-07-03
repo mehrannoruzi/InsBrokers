@@ -25,6 +25,7 @@ namespace InsBrokers.Portal.Controllers
             return View();
         }
 
+        [HttpGet]
         public IActionResult Register() => View();
 
         [HttpPost]
@@ -41,5 +42,24 @@ namespace InsBrokers.Portal.Controllers
 
             return Json(new {IsSuccessful = true, Result = Url.Action(menuRep.DefaultUserAction.Action, menuRep.DefaultUserAction.Controller, new { })});
         }
+
+        [HttpGet]
+        public IActionResult Android() => View();
+
+
+        [HttpGet]
+        public IActionResult IOS() => View();
+
+
+        [HttpGet]
+        public IActionResult ContactUs() => View();
+
+
+        [HttpGet]
+        public IActionResult AboutUs() => View();
+
+
+        [HttpGet]
+        public IActionResult Rules() => View();
     }
 }

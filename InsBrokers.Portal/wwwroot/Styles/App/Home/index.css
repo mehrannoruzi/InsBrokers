@@ -1,27 +1,6 @@
 ﻿body {
   background-color: #eee !important; }
 
-#home-index-page #row-req {
-  margin-top: 20px;
-  margin-bottom: 20px; }
-  #home-index-page #row-req #logo-wrapper {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    margin-top: 10px;
-    margin-bottom: 10px; }
-  #home-index-page #row-req #insurance-req {
-    display: flex;
-    align-items: center; }
-    #home-index-page #row-req #insurance-req #btn-insurance-req {
-      color: #fff;
-      border: solid 2px #1f2498;
-      background-color: #4a4eae;
-      font-size: 1.3rem;
-      padding: 10px 15px; }
-      #home-index-page #row-req #insurance-req #btn-insurance-req:hover {
-        box-shadow: 0px 8px 15px rgba(74, 78, 174, 0.5); }
-
 #home-index-page #motto-wrapper {
   background-image: url("/Images/Portal/mottob-bg.jpg");
   background-size: 100% 100%;

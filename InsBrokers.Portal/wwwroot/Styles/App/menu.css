@@ -14,15 +14,18 @@
   header .main-nav ul {
     padding: 15px 0; }
     header .main-nav ul li {
-      display: inline-block;
-      color: #fff; }
+      display: inline-block; }
       header .main-nav ul li a {
         padding: 5px 7.5px;
-        cursor: pointer; }
+        cursor: pointer;
+        color: #fff;
+        text-decoration: none; }
         header .main-nav ul li a:hover {
           color: red !important; }
       header .main-nav ul li:hover .sub-menu {
         display: block; }
+      header .main-nav ul li.current a {
+        color: red; }
     header .main-nav ul .close-menu {
       display: none;
       position: absolute;
@@ -67,14 +70,19 @@
         display: block; }
     header .main-nav [name=toggle]:checked + ul {
       display: flex; } }
-  header .email {
+  header .contact {
     color: #fff;
     justify-content: center;
     align-items: center;
     display: flex; }
-    header .email .zmdi-email {
-      margin-left: 10px;
-      font-size: 20px; }
+    header .contact a {
+      color: #fff; }
+      header .contact a:last-child {
+        margin-right: 30px; }
+      header .contact a i {
+        vertical-align: middle;
+        margin-left: 5px;
+        font-size: 20px; }
 
 html[dir=ltr] .main-nav ul {
   animation-name: slideInLeft; }

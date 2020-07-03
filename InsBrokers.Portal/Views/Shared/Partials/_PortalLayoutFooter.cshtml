@@ -1,12 +1,22 @@
 ﻿<footer>
     <div class="container">
         <div class="row">
-            <section class="sec col-12 col-sm-4" id="links">
-                <a href="@Url.Action("/Home/AboutUs")">درباره ما</a>
-                <a href="@Url.Action("/Home/ContactUs")">تماس با ما</a>
-                <a href="@Url.Action("/Home/Rules")">قوانین و مقررات</a>
+            <section class="sec col-12 col-sm-6 links">
+                <h6 class="hx">دسترسی سریع:</h6>
+                <a asp-controller="home" asp-action="aboutus">درباره ما</a>
+                <a asp-controller="home" asp-action="contactus">تماس با ما</a>
+                <a asp-controller="home" asp-action="rules">قوانین و مقررات</a>
+            </section>
+            <section class="sec col-12 col-sm-6 contact-info">
+                <h6 class="hx">ما اینجا هستیم:</h6>
+                <p class="address"><i class="zmdi zmdi-pin-drop"></i>@Strings.AddressDetailsInfo</p>
+                <p class="phone-numbers"><i class="zmdi zmdi-phone"></i>@Html.Raw(Strings.PhoneNumbersInfo)</p>
+                <p class="sms"><i class="zmdi zmdi-comment-alt-text"></i>02186030731</p>
             </section>
         </div>
+    </div>
+    <div class="copy-right text-center">
+        @Strings.CopyRights
     </div>
 </footer>
 <script>

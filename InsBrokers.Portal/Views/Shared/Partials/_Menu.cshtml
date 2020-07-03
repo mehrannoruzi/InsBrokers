@@ -6,12 +6,15 @@
             <ul class="animated">
                 @*<li class="logo"><img src="@Url.Content("/Images/logo-2.png")" /></li>*@
                 <li class="close-menu"><label for="toggle"><i class="zmdi zmdi-close"></i></label></li>
-                <li class="navlink"><a href="@Url.Action("Index","Home",new { })">درباره ما</a></li>
-                <li class="navlink"><a>تماس با ما</a></li>
-                <li class="navlink"><a> قوانین و مقررات</a></li>
+                <li class="navlink"><a asp-controller="home" asp-action="index">خانه</a></li>
+                <li class="navlink"><a asp-controller="home" asp-action="aboutus">درباره ما</a></li>
+                <li class="navlink"><a asp-controller="home" asp-action="contactus">تماس با ما</a></li>
+                <li class="navlink"><a asp-controller="home" asp-action="rules"> قوانین و مقررات</a></li>
             </ul>
-            <div class="float-left email">
-                <i class="zmdi zmdi-email"></i><span>info@dnaft.ir</span>
+            <div class="float-left contact" >
+                <a class="email" href="mailto:info@bimehnaft.ir"><i class="zmdi zmdi-email"></i><span>info@bimehnaft.ir</span></a>
+                <a class="tel" href="tel:02188173100"><i class="zmdi zmdi-phone"></i><span>02188173100</span></a>
+                
             </div>
         </div>
     </nav>

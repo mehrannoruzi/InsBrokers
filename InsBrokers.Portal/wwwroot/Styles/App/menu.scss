@@ -1,6 +1,7 @@
 ﻿$navLinkColor: #fff;
 $navLinkHoverColor: red;
 $navLinkActiveBorderColor: blue;
+$navLinkActiveColor:red;
 $menuPadding: 7.5px;
 $subMenuBgColor: #34495e;
 $headerBgColor: #34495e;
@@ -8,8 +9,8 @@ $headerBgColor: #34495e;
 header {
     background-color: $headerBgColor;
 
-    ul{
-        margin-bottom:0;
+    ul {
+        margin-bottom: 0;
     }
 
     .main-nav {
@@ -33,11 +34,13 @@ header {
 
             li {
                 display: inline-block;
-                color: $navLinkColor;
+
 
                 a {
                     padding: 5px 7.5px;
                     cursor: pointer;
+                    color: $navLinkColor;
+                    text-decoration:none;
 
                     &:hover {
                         color: $navLinkHoverColor !important;
@@ -47,6 +50,12 @@ header {
                 &:hover {
                     .sub-menu {
                         display: block;
+                    }
+                }
+
+                &.current{
+                    a{
+                        color:$navLinkActiveColor;
                     }
                 }
             }
@@ -125,15 +134,24 @@ header {
         }
     }
 
-    .email {
+    .contact {
         color: #fff;
         justify-content: center;
         align-items: center;
         display: flex;
 
-        .zmdi-email{
-            margin-left:10px;
-            font-size:20px;
+        a {
+            color: #fff;
+
+            &:last-child {
+                margin-right: 30px;
+            }
+
+            i {
+                vertical-align: middle;
+                margin-left: 5px;
+                font-size: 20px;
+            }
         }
     }
 }
