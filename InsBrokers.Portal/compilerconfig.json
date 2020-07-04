@@ -54,5 +54,9 @@
   {
     "outputFile": "wwwroot/Styles/App/customize-template.css",
     "inputFile": "wwwroot/Styles/App/customize-template.scss"
+  },
+  {
+    "outputFile": "wwwroot/Styles/App/Home/contact-us.css",
+    "inputFile": "wwwroot/Styles/App/Home/contact-us.scss"
   }
 ]

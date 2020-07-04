@@ -147,6 +147,9 @@
   <data name="Close" xml:space="preserve">
     <value>بستن</value>
   </data>
+  <data name="ContactUs" xml:space="preserve">
+    <value>تماس با ما</value>
+  </data>
   <data name="CopyRights" xml:space="preserve">
     <value>تمام حقوق مادی و معنوی این اثر متعلق به کارگزاری بیمه نفت و انرژی می باشد</value>
   </data>

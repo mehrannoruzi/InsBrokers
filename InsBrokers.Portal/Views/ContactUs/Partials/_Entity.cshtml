@@ -1,0 +1,21 @@
+@model ContactUs
+@{
+    Layout = null;
+}
+    @Html.HiddenFor(x => x.ContactUsId)
+<div class="row">
+    <div class="col-12 col-sm-6">
+        <custom-input-for for="Subject" />
+    </div>
+    <div class="col-12 col-sm-6">
+        <custom-input-for for="MobileNumber" class="form-control ltr-elm"/>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <custom-input-for for="FullName" />
+    </div>
+    <div class="col-12 col-sm-12">
+        <custom-textarea-for rows="4" for="Content" class="form-control" />
+    </div>
+</div>

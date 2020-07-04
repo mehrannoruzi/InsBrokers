@@ -58,6 +58,7 @@ namespace InsBrokers.DependencyResolver
             services.AddScoped<IAddressService, AddressService>();
             services.AddScoped<IBankAccountService, BankAccountService>();
             services.AddScoped<IRelativeService, RelativeService>();
+            services.AddScoped<IContactUsService, ContactUsService>();
 
             #endregion
 

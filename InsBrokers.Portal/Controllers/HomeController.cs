@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using InsBrokers.Portal.Resource;
 using Microsoft.Extensions.Configuration;
+using Elk.AspNetCore;
+using System.Linq;
+using System.Security.Claims;
 
 namespace InsBrokers.Portal.Controllers
 {
@@ -40,7 +43,7 @@ namespace InsBrokers.Portal.Controllers
 
             await CreateCookie(save.Result, true);
 
-            return Json(new {IsSuccessful = true, Result = Url.Action(menuRep.DefaultUserAction.Action, menuRep.DefaultUserAction.Controller, new { })});
+            return Json(new { IsSuccessful = true, Result = Url.Action(menuRep.DefaultUserAction.Action, menuRep.DefaultUserAction.Controller, new { }) });
         }
 
         [HttpGet]
@@ -52,8 +55,24 @@ namespace InsBrokers.Portal.Controllers
 
 
         [HttpGet]
-        public IActionResult ContactUs() => View();
+        public IActionResult ContactUs([FromServices]IUserService userService)
+        {
+            if (User.Identity.IsAuthenticated)
+                return View(new ContactUsDTO
+                {
+                    FullName = User.GetFullname(),
+                    MobileNumber = long.Parse(User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name).Value)
+                });
+            return View(new ContactUsDTO());
+        }
 
+        [HttpPost]
+        public async Task<IActionResult> ContactUs([FromServices]IContactUsService contactUsService, ContactUs model)
+        {
+            if (!ModelState.IsValid) return Json(new { IsSuccessful = false, Message = ModelState.GetModelError() });
+            if (User.Identity.IsAuthenticated) model.UserId = User.GetUserId();
+            return Json(await contactUsService.AddAsync(model));
+        }
 
         [HttpGet]
         public IActionResult AboutUs() => View();

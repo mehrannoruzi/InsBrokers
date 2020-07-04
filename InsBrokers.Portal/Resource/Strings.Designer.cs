@@ -151,6 +151,15 @@ namespace InsBrokers.Portal.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to تماس با ما.
+        /// </summary>
+        public static string ContactUs {
+            get {
+                return ResourceManager.GetString("ContactUs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to تمام حقوق مادی و معنوی این اثر متعلق به کارگزاری بیمه نفت و انرژی می باشد.
         /// </summary>
         public static string CopyRights {

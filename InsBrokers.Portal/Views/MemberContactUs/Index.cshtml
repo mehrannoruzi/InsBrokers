@@ -6,9 +6,10 @@
 @section styles{
     <link href="@Url.Content("~/Styles/App/customize-template.min.css")" rel="stylesheet" />
 }
-<form class="">
-    <div class="row" dir="ltr">
-        <div class="col-12  col-sm-6 offset-sm-3">
+<form asp-controller="MemberContactUs" asp-action="Add">
+    <div class="row">
+        <div class="col-12 col-sm-3"></div>
+        <div class="col-12  col-sm-6">
             <div class="m-b- p-5 bg-white" dir="rtl">
                 <div class="row">
                     <div class="col-12">
@@ -21,7 +22,7 @@
                         <custom-input-for for="Subject"></custom-input-for>
                     </div>
                     <div class="col-12">
-                        <custom-textarea-for for="Description"></custom-textarea-for>
+                        <custom-textarea-for for="Content"></custom-textarea-for>
                     </div>
                     <div class="col-12">
                         <custom-button type="button" text="@Strings.Submit" icon="zmdi zmdi-floppy" class="btn-primary full-width m-b btn-action" id="btn-submit"></custom-button>
@@ -30,17 +31,9 @@
             </div>
 
         </div>
-
+        <div class="col-12 col-sm-3"></div>
     </div>
 </form>
 @section scripts{
-    <script>
-        $('#btn-submit').click(function () {
-            let $btn = $(this);
-            let $frm = $btn.closest('form');
-            if (!$frm.valid()) return;
-            showNotif(notifyType.success, strings.success);
-
-        });
-    </script>
+    <script src="@Url.Content("~/Scripts/App/MemberContactUs/index.js")"></script>
 }

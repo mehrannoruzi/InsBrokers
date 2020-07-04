@@ -1,0 +1,16 @@
+@model PagingListDetails<ContactUs>
+@{
+    ViewBag.Title = $"{Strings.Management} {InsBrokers.Domain.Resource.Strings.ContactUs}";
+    Layout = "_LayoutManage";
+}
+@*@section styles{
+    <link href="@Url.Content("~/Styles/App/ContactUs/manage.css")" rel="stylesheet" />
+}*@
+
+@section filter{
+    <partial name="Partials/_Filters" model="new ContactUsSearchFilter()" />
+}
+<partial name="Partials/_List" model="@Model" />
+@*@section scripts{
+    <script src="@Url.Content("~/Scripts/App/ContactUs/manage.js")"></script>
+}*@

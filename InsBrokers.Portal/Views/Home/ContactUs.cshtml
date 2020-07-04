@@ -1,8 +1,44 @@
-﻿
+﻿@model ContactUsDTO
 @{
-    ViewData["Title"] = "ContactUs";
+    ViewBag.Title = Strings.ContactUs;
     Layout = "~/Views/Shared/_PortalLayout.cshtml";
 }
+@section styles{
+    <link href="@Url.Content("~/Styles/App/Home/contact-us.min.css")" rel="stylesheet" />
+}
+<div id="contact-us">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-sm-2"></div>
+            <div class="col-12  col-sm-8">
+                <form asp-controller="Home" asp-action="ContactUs" class="wrapper" dir="rtl">
+                    <h1 class="heading">@Strings.ContactUs</h1>
+                    <div class="row">
+                        <div class="col-12">
+                            <custom-input-for for="FullName"></custom-input-for>
+                        </div>
+                        <div class="col-12">
+                            <custom-input-for for="MobileNumber"></custom-input-for>
+                        </div>
+                        <div class="col-12">
+                            <custom-input-for for="Subject"></custom-input-for>
+                        </div>
+                        <div class="col-12">
+                            <custom-textarea-for for="Content"></custom-textarea-for>
+                        </div>
+                        <div class="col-12">
+                            <custom-button type="button" text="@Strings.Submit" icon="zmdi zmdi-floppy" class="btn-primary full-width m-b btn-action float-left" id="btn-submit"></custom-button>
+                        </div>
+                    </div>
+                </form>
 
-<h1>ContactUs</h1>
+            </div>
+            <div class="col-12 col-sm-2"></div>
+        </div>
+    </div>
 
+</div>
+
+@section scripts{
+    <script src="~/Scripts/App/Home/contact-us.js"></script>
+}

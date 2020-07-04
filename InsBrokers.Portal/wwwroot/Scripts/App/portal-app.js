@@ -29,9 +29,28 @@ var fireGlobalPlugins = function () {
     $('.pdate').Zebra_DatePicker();
 
 };
+
 /*--------------------------------------
             notifications
 ---------------------------------------*/
+$.fn.inlineNotify = function (type, message) {
+    let $frm = $(this);
+    let template = `<div class="row inner-notification">
+                        <div class="col-12">
+                            <div class="alert">
+                                <p class="text text-center"></p>
+                            </div>
+                        </div>
+                    </div>`;
+    let $elm = $frm.find('.inner-notification');
+    if ($elm.length === 0)
+        $elm = $(template).prependTo($frm);
+    $elm.find('.alert').removeClass().addClass('alert alert-' + type);
+    $elm.find('.text').text(message);
+    $elm.slideDown(300);
+    return this;
+};
+
 $.fn.showMessage = function (type, message) {
     let $frm = $(this);
     let template = `<div class="row inner-notification">
