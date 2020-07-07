@@ -45,31 +45,59 @@ p {
         box-shadow: 0px 8px 15px rgba(74, 78, 174, 0.5); }
 
 footer {
-  background-color: #0b4580;
-  color: #fff; }
+  background-color: #d6e9fc;
+  color: #010101;
+  line-height: 28px;
+  padding-top: 15px;
+  margin-top: 15px; }
   footer .sec {
     padding: 10px; }
   footer .hx {
     padding: 5px 0;
-    font-weight: 800; }
+    font-weight: 800;
+    color: #003478;
+    font-size: 18px;
+    font-weight: 800;
+    text-transform: uppercase; }
   footer .links {
     display: flex;
     flex-direction: column; }
     footer .links a {
       padding: 5px 0;
-      color: #fff; }
+      color: #010101;
+      font-size: 1.1rem; }
       footer .links a:hover {
         text-decoration: none;
-        color: #fff; }
+        color: #666; }
   footer .contact-info .address, footer .contact-info .phone-numbers, footer .contact-info .sms {
     padding: 5px 0; }
     footer .contact-info .address i, footer .contact-info .phone-numbers i, footer .contact-info .sms i {
       font-size: 20px;
       vertical-align: middle;
-      margin-left: 5px; }
+      margin-left: 5px;
+      color: #7f99bb; }
     footer .contact-info .address a, footer .contact-info .phone-numbers a, footer .contact-info .sms a {
-      color: #fff; }
+      color: #010101; }
+  footer .feed #input_feed {
+    margin-top: 15px;
+    width: 100%;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    text-align: center;
+    padding: 10px;
+    height: auto; }
+  footer .feed #btn_feed {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 91px 0px 10px 0px transparent;
+    width: 100%;
+    color: #ffffff;
+    background-color: #003478;
+    text-align: center;
+    padding: 10px; }
   footer .copy-right {
     padding: 10px 15px;
-    background-color: #0058AF;
+    background-color: #003478;
     color: #fff; }

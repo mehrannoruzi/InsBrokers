@@ -16,17 +16,16 @@
 #home-index-page {
 
     #motto-wrapper {
-        background-image: url('/Images/Portal/mottob-bg.jpg');
-        background-size: 100% 100%;
+        background-image: url('/Images/Portal/mottob-bg.png');
+        background-repeat: no-repeat;
+        background-size: 100% auto;
         height: 500px;
         width: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        /*&:before{
 
-        }*/
         #motto {
             color: #fff;
             font-weight: 800;
@@ -45,6 +44,13 @@
 
             #btn-sign-up {
             }
+        }
+    }
+
+    @media(max-width:576px) {
+        #motto-wrapper {
+            background-size: auto 100%;
+            background-position: center center;
         }
     }
 
@@ -87,6 +93,14 @@
             justify-content: center;
             align-items: center;
             flex-direction: column;
+            line-height: 28px;
+
+            .hint {
+                margin-bottom: 15px;
+                text-align: center;
+                text-align-last: center;
+                line-height: 28px;
+            }
 
             .hx {
                 font-weight: 800;

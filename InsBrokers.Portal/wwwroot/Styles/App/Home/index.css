@@ -2,17 +2,15 @@
   background-color: #eee !important; }
 
 #home-index-page #motto-wrapper {
-  background-image: url("/Images/Portal/mottob-bg.jpg");
-  background-size: 100% 100%;
+  background-image: url("/Images/Portal/mottob-bg.png");
+  background-repeat: no-repeat;
+  background-size: 100% auto;
   height: 500px;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  /*&:before{
-
-        }*/ }
+  flex-direction: column; }
   #home-index-page #motto-wrapper #motto {
     color: #fff;
     font-weight: 800;
@@ -33,6 +31,11 @@
       box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
       justify-content: center;
       align-items: center; }
+
+@media (max-width: 576px) {
+  #home-index-page #motto-wrapper {
+    background-size: auto 100%;
+    background-position: center center; } }
 
 #home-index-page #counts {
   margin: 30px 0; }
@@ -60,7 +63,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column; }
+    flex-direction: column;
+    line-height: 28px; }
+    #home-index-page #download-app #download .hint {
+      margin-bottom: 15px;
+      text-align: center;
+      text-align-last: center;
+      line-height: 28px; }
     #home-index-page #download-app #download .hx {
       font-weight: 800;
       text-align-last: center;

@@ -9,6 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Elk.AspNetCore;
 using System.Linq;
 using System.Security.Claims;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
 namespace InsBrokers.Portal.Controllers
 {
@@ -47,7 +49,18 @@ namespace InsBrokers.Portal.Controllers
         }
 
         [HttpGet]
-        public IActionResult Android() => View();
+        public async Task<FileResult> Android([FromServices] IWebHostEnvironment env)
+        {
+            var path = Path.Combine(env.WebRootPath, "Files", "DarmanNaft.apk");
+
+            var memory = new MemoryStream();
+            using (var stream = new FileStream(path, FileMode.Open))
+            {
+                await stream.CopyToAsync(memory);
+            }
+            memory.Position = 0;
+            return File(memory, "application/vnd.android.package-archive", Path.GetFileName(path));
+        }
 
 
         [HttpGet]

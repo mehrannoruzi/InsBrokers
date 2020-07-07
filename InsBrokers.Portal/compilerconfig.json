@@ -58,5 +58,9 @@
   {
     "outputFile": "wwwroot/Styles/App/Home/contact-us.css",
     "inputFile": "wwwroot/Styles/App/Home/contact-us.scss"
+  },
+  {
+    "outputFile": "wwwroot/Styles/App/Home/ios.css",
+    "inputFile": "wwwroot/Styles/App/Home/ios.scss"
   }
 ]

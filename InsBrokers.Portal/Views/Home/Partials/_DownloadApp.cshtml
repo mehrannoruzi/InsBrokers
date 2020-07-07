@@ -10,13 +10,16 @@
                 <img src="@Url.Content("~/Images/Portal/mobile.jpg")" />
             </div>
             <div class="col-12 col-sm-8" id="download">
-                <h5 class="hx">برای دانلود اپلیکیشن از گزینه های زیر اقدام کنید</h5>
+                <h5 class="hint">
+                    شما می توانید سوالات و پیشنهادات خود را به صورت آنلاین در اپ بپرسید، کارشناسان ما سریعا با شما تماس گرفته و پاسخگوی شما خواهند بود.
+                </h5>
+                <h4 class="hx">برای دانلود اپلیکیشن از گزینه های زیر اقدام کنید</h4>
                 <div class="btns">
-                    <a id="btn-android" class="btn btn-success">
+                    <a id="btn-android" target="_blank" class="btn btn-success" href="@Url.Action("Android","Home")">
                         <i class="zmdi zmdi-android"></i>
                         اندروید
                     </a>
-                    <a id="btn-ios" class="btn btn-info">
+                    <a id="btn-ios" class="btn btn-info" href="@Url.Action("Ios","Home")">
                         <i class="zmdi zmdi-apple"></i>
                         IOS
                     </a>
