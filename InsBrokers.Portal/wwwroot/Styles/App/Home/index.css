@@ -103,3 +103,6 @@
     height: 300px; }
     #home-index-page #motto-wrapper #motto {
       font-size: 1.5rem; } }
+
+footer {
+  margin-top: 0 !important; }

@@ -27,7 +27,8 @@ $(document).ready(function () {
 
     //modal close event
     $("#modal").on("hidden.bs.modal", function () {
-        if ($(this).data('refresh-list')) refreshList();
+        let pageNumber = $('.pagination .page-item.active > .page-link').data('number');
+        if ($(this).data('refresh-list')) refreshList(pageNumber);
     });
 });
 var modalTemplate = {

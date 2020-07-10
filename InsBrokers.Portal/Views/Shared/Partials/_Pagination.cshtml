@@ -6,11 +6,35 @@
     {
         baseNumber = Model.PageNumber - 3;
     }
+    int lastPageNumber = Model.TotalCount / Model.PageSize + (Model.TotalCount % Model.PageSize == 0 ? 0 : 1);
 }
+@*<nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            <li class="page-item @(Model.HasPrevious?"":"disabled")">
+                <a class="page-link" data-number="1"><i class="zmdi zmdi-long-arrow-right"></i></a>
+            </li>
+            @{
+                var pageNumber = 0;
+                for (int i = 1; i <= 5; i++)
+                {
+                    pageNumber = baseNumber + i;
+                    <li class="page-item @(Model.PageNumber == pageNumber?"active":"") @(((pageNumber-1)*Model.PageSize)<Model.TotalCount?"":"disabled")">
+                        <a class="page-link" data-number="@pageNumber">@pageNumber</a>
+                    </li>
+                }
+            }
+            <li class="page-item">
+                <a class="page-link" data-number="@(Model.TotalCount/Model.PageSize)"><i class="zmdi zmdi-long-arrow-left"></i></a>
+            </li>
+        </ul>
+    </nav>*@
 <nav aria-label="Page navigation">
     <ul class="pagination justify-content-center">
-        <li class="page-item @(Model.HasPrevious?"":"disabled")">
+        <li class="page-item @(Model.PageNumber>1?"":"disabled")">
             <a class="page-link" data-number="1"><i class="zmdi zmdi-long-arrow-right"></i></a>
+        </li>
+        <li class="page-item @(Model.PageNumber>1?"":"disabled")">
+            <a class="page-link" data-number="@(Model.PageNumber-1)"><i class="zmdi zmdi-chevron-right"></i></a>
         </li>
         @{
             var pageNumber = 0;
@@ -22,8 +46,11 @@
                 </li>
             }
         }
+        <li class="page-item @(Model.PageNumber>lastPageNumber?"disabled":"")">
+            <a class="page-link" data-number="@(Model.PageNumber+1)"><i class="zmdi zmdi-chevron-left"></i></a>
+        </li>
         <li class="page-item">
-            <a class="page-link" data-number="@(Model.TotalCount/Model.PageSize)"><i class="zmdi zmdi-long-arrow-left"></i></a>
+            <a class="page-link" data-number="@(lastPageNumber)"><i class="zmdi zmdi-long-arrow-left"></i></a>
         </li>
     </ul>
 </nav>
