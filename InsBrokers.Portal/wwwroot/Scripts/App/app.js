@@ -164,7 +164,7 @@ var refreshList = function (pageNumber) {
             let $target = $wrapper.find('.ibox-content');
 
             if ($target.length === 0) $wrapper.html(rep);
-            else  $wrapper.find('.ibox-content').html(rep);
+            else $wrapper.find('.ibox-content').html(rep);
             //enable footable plugin on items tables
             $('.footable').footable({
                 pageSize: 200,
@@ -813,26 +813,72 @@ var exportToExcel = function (csvContent) {
     var link = document.createElement("a");
     link.className += "no-loading";
     link.setAttribute("href", 'data:text/csv;charset=utf-8,%EF%BB%BF' + encodeURI(csvContent));
-    link.setAttribute("download", "export-" + new Date().getTime().toString()+".csv");
+    link.setAttribute("download", "export-" + new Date().getTime().toString() + ".csv");
     document.body.appendChild(link);
     link.click();
     link.remove();
 };
 
+var exportToExcel2 = function (url) {
+    var link = document.createElement("a");
+    link.className += "no-loading";
+    link.setAttribute("href", url);
+    link.setAttribute("target", '_blank');
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+};
+
+
 $(document).ready(function () {
+
     $('#btn-excel').on('click', function () {
+
         let $btn = $(this);
-        let url = $btn.data('url');
+        let url = window.location.origin + $btn.data('url');
+
         ajaxBtn.inProgress($btn);
-        $.get(url, customSerialize($('.filters')))
-            .done(function (rep) {
-                ajaxBtn.normal();
-                exportToExcel(rep);
-            })
-        .fail(function (e) {
-            ajaxBtn.normal();
-        });
+
+        if (url.includes("/User/")) {
+
+            let fullName = $('#FullNameF').val();
+            let email = $('#EmailF').val();
+            let dateFrom = $('#DateFrom').val();
+            let dateTo = $('#DateTo').val();
+            let mobileNumber = $('#MobileNumberF').val();
+            url = url + '?' + 'FullNameF=' + fullName + '&EmailF=' + email + '&dateFrom=' + dateFrom + '&dateTo=' + dateTo + '&MobileNumberF=' + mobileNumber;
+            console.log(url);
+
+            exportToExcel2(url);
+        }
+        else {
+            $.get(url, customSerialize($('.filters')))
+                .done(function (rep) {
+                    ajaxBtn.normal();
+                    exportToExcel(rep);
+                })
+                .fail(function (e) {
+                    ajaxBtn.normal();
+                });
+        }
+
+        ajaxBtn.normal();
     });
+
+    //$('#btn-excel').on('click', function () {
+    //    let $btn = $(this);
+    //    let url = $btn.data('url');
+    //    ajaxBtn.inProgress($btn);
+    //    $.get(url, customSerialize($('.filters')))
+    //        .done(function (rep) {
+    //            ajaxBtn.normal();
+    //            exportToExcel(rep);
+    //        })
+    //        .fail(function (e) {
+    //            ajaxBtn.normal();
+    //        });
+    //});
+
     var setActiveMenu = function () {
         let currentUrl = window.location.href.toString().toLowerCase();
         $('nav ul.nav > li:not(".nav-header")  a:not([href="#"])').each(function () {

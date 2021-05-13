@@ -35,22 +35,22 @@
                                     <div class="ibox-content">
                                         @RenderSection("filter", false)
                                         <div class="row">
-                                            <div class="col-12">
-                                                @if (excelExport)
-                                                {
-                                                    <button type="button"
-                                                            id="btn-excel"
-                                                            class="btn btn-info btn-action m-t float-right"
-                                                            data-url="@Url.Action("Excel")">
-                                                        @Strings.ExportToExcel
-                                                    </button>
-                                                }
+                                            <div class="col-12" style="text-align:left; direction:ltr">
                                                 <button type="button" class="btn btn-info m-t btn-action search">
                                                     <span class="text">@Strings.Search</span>
                                                     <div class="icon">
                                                         <i class="zmdi zmdi-search-for"></i>
                                                     </div>
                                                 </button>
+                                                @if (excelExport)
+                                                {
+                                                    <button type="button"
+                                                            id="btn-excel"
+                                                            class="btn btn-danger btn-action m-t float-left"
+                                                            data-url="@Url.Action("Excel")" style="min-height: 41px;">
+                                                        @Strings.ExportToExcel
+                                                    </button>
+                                                }
                                             </div>
                                         </div>
                                     </div>

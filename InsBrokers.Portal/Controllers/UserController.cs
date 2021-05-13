@@ -76,9 +76,10 @@ namespace InsBrokers.Portal.Controllers
         public virtual async Task<JsonResult> ProfileInfo(User model)
         {
             if (User.GetUserId() != model.UserId) return Json(new Response<string> { Message = Strings.Error });
-            if(!string.IsNullOrWhiteSpace(model.NewPassword) && model.NewPassword.Length<5) return Json(new Response<string> {Message = Strings.PasswordValidationFailed });
+            if (!string.IsNullOrWhiteSpace(model.NewPassword) && model.NewPassword.Length < 5) return Json(new Response<string> { Message = Strings.PasswordValidationFailed });
             return Json(await _userSrv.UpdateProfile(model));
         }
+
         [HttpGet]
         public virtual ActionResult Manage(UserSearchFilter filter)
         {
@@ -107,9 +108,25 @@ namespace InsBrokers.Portal.Controllers
             });
         }
 
+        //[HttpGet, AuthEqualTo("User", "Manage")]
+        //public virtual JsonResult Excel(UserSearchFilter filter)
+        //        => Json(_userSrv.Export(filter));
+
         [HttpGet, AuthEqualTo("User", "Manage")]
-        public virtual JsonResult Excel(UserSearchFilter filter)
-                => Json(_userSrv.Export(filter));
+        public virtual IActionResult Excel(UserSearchFilter filter)
+        {
+            try
+            {
+                string fileName = $"Customers_{PersianDateTime.Now.ToString(PersianDateTimeFormat.Date).Replace("/", "-")}.xlsx";
+                var contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                var fileContent = _userSrv.ExportExcel(filter);
+                return File(fileContent, contentType, fileName);
+            }
+            catch
+            {
+                return null;
+            }
+        }
 
     }
 }

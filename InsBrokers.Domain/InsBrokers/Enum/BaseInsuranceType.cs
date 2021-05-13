@@ -2,7 +2,7 @@
 
 namespace InsBrokers.Domain
 {
-	public enum BaseInsuranceType : byte
+    public enum BaseInsuranceType : byte
 	{
         [Description("تامین اجتماعی")]
         TaminEjtemaei = 1,

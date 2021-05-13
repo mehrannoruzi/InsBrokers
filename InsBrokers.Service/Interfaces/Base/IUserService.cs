@@ -25,5 +25,6 @@ namespace InsBrokers.Service
         Task<IResponse<int>> GetUserCount();
         Task<IResponse<Dictionary<string, int>>> GetUserCountLastDaysAsync(int dayCount = 10);
         string Export(UserSearchFilter filter);
+        byte[] ExportExcel(UserSearchFilter filter);
     }
 }

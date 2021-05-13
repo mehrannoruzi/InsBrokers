@@ -1,17 +1,19 @@
 ﻿using System;
 using Elk.Core;
 using Elk.Cache;
+using System.IO;
 using System.Text;
 using System.Linq;
+using ClosedXML.Excel;
 using InsBrokers.Domain;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
 using InsBrokers.DataAccess.Ef;
+using InsBrokers.InfraStructure;
 using System.Collections.Generic;
 using InsBrokers.Service.Resource;
 using InsBrokers.DataAccess.Dapper;
 using DomainStrings = InsBrokers.Domain.Resource.Strings;
-using InsBrokers.InfraStructure;
 
 namespace InsBrokers.Service
 {
@@ -298,10 +300,21 @@ namespace InsBrokers.Service
                     conditions = x => x.Email.Contains(filter.EmailF);
                 if (!string.IsNullOrWhiteSpace(filter.MobileNumberF))
                     conditions = x => x.MobileNumber.ToString().Contains(filter.MobileNumberF);
+
+                if (!string.IsNullOrWhiteSpace(filter.DateFrom))
+                {
+                    var dateFrom = PersianDateTime.Parse(filter.DateFrom).ToDateTime();
+                    conditions = conditions.And(x => x.InsertDateMi >= dateFrom);
+                }
+                if (!string.IsNullOrWhiteSpace(filter.DateTo))
+                {
+                    var dateTo = PersianDateTime.Parse(filter.DateTo).ToDateTime();
+                    conditions = conditions.And(x => x.InsertDateMi < dateTo);
+                }
             }
 
-            var items = _appUow.UserRepo.Get(conditions, filter, x => x.OrderByDescending(u => u.InsertDateMi));
-            return items;
+            var users = _appUow.UserRepo.Get(conditions, filter, x => x.OrderByDescending(u => u.InsertDateMi));
+            return users;
         }
 
         public IDictionary<object, object> Search(string searchParameter, int take = 10)
@@ -430,7 +443,7 @@ namespace InsBrokers.Service
             }
         }
 
-        public string Export(UserSearchFilter filter)
+        public string ExportToExcel(UserSearchFilter filter)
         {
             Expression<Func<User, bool>> conditions = x => true;
             if (filter != null)
@@ -453,5 +466,210 @@ namespace InsBrokers.Service
             }
             return sb.ToString();
         }
+
+        public string Export(UserSearchFilter filter)
+        {
+            Expression<Func<User, bool>> conditions = x => true;
+            if (filter != null)
+            {
+                if (!string.IsNullOrWhiteSpace(filter.FullNameF))
+                    conditions = conditions.And(x => x.Name.Contains(filter.FullNameF));
+                if (!string.IsNullOrWhiteSpace(filter.EmailF))
+                    conditions = x => x.Email.Contains(filter.EmailF);
+                if (!string.IsNullOrWhiteSpace(filter.MobileNumberF))
+                    conditions = x => x.MobileNumber.ToString().Contains(filter.MobileNumberF);
+
+                if (!string.IsNullOrWhiteSpace(filter.DateFrom))
+                {
+                    var dateFrom = PersianDateTime.Parse(filter.DateFrom).ToDateTime();
+                    conditions = conditions.And(x => x.InsertDateMi >= dateFrom);
+                }
+                if (!string.IsNullOrWhiteSpace(filter.DateTo))
+                {
+                    var dateTo = PersianDateTime.Parse(filter.DateTo).ToDateTime();
+                    conditions = conditions.And(x => x.InsertDateMi < dateTo);
+                }
+            }
+
+            var users = _appUow.UserRepo.Get(
+                conditions: conditions,
+                orderBy: x => x.OrderBy(x => x.UserId),
+                includeProperties: new List<Expression<Func<User, object>>>
+                {
+                    x => x.Addresses,
+                    x => x.BankAccounts,
+                    x => x.Relatives,
+                });
+
+            int rowNumber = 0;
+            var titleEn = ",Name,LName,PersonelCode,SodurPlace,IdentityNo,BirthYear,BirthMonth,BirthDay,CodeMelli,Address,Tel,Jens,FatherName,BSKind,Nesbat,BeginDate,EndDate,TakafolKind,Tarh,Workunit,AccNOBimegarOneNo,Bank,ShebaAcc,Mobile,Email,RegisterDate" + Environment.NewLine;
+            var result = new StringBuilder(titleEn);
+            foreach (var user in users)
+            {
+                rowNumber++;
+                result.Append($"{rowNumber},{user.Name},{user.Family},{0},,{user.IdentityNumber},{GetYearOfDate(user.BirthDay)},{GetMounthOfDate(user.BirthDay)},{GetDayOfDate(user.BirthDay)},=\"{user.NationalCode}\",{user.Addresses.FirstOrDefault()?.FullAddress},,{(byte)user.Gender},{user.FatherName},{(byte)InsuranceType.Main},,,,,,,,{user.BankAccounts.FirstOrDefault()?.BankName.GetDescription()},{user.BankAccounts.FirstOrDefault()?.Shaba},{user.MobileNumber},{user.Email},{user.InsertDateSh}" + Environment.NewLine);
+
+                foreach (var relative in user.Relatives)
+                    result.Append($"{rowNumber},{relative.Name},{relative.Family},,,{relative.IdentityNumber},{GetYearOfDate(relative.BirthDay)},{GetMounthOfDate(relative.BirthDay)},{GetDayOfDate(relative.BirthDay)},{relative.NationalCode},,,{(byte)relative.Gender},{relative.FatherName},{(byte)InsuranceType.Secondary},{(byte)relative.RelativeType},,,{(byte)relative.TakafolKind},,,,,,,,{relative.InsertDateSh}" + Environment.NewLine);
+            }
+
+            return result.ToString();
+        }
+
+        public byte[] ExportExcel(UserSearchFilter filter)
+        {
+            #region Get Customers
+            Expression<Func<User, bool>> conditions = x => true;
+            if (filter != null)
+            {
+                if (!string.IsNullOrWhiteSpace(filter.FullNameF))
+                    conditions = conditions.And(x => x.Name.Contains(filter.FullNameF));
+                if (!string.IsNullOrWhiteSpace(filter.EmailF))
+                    conditions = x => x.Email.Contains(filter.EmailF);
+                if (!string.IsNullOrWhiteSpace(filter.MobileNumberF))
+                    conditions = x => x.MobileNumber.ToString().Contains(filter.MobileNumberF);
+
+                if (!string.IsNullOrWhiteSpace(filter.DateFrom))
+                {
+                    var dateFrom = PersianDateTime.Parse(filter.DateFrom).ToDateTime();
+                    conditions = conditions.And(x => x.InsertDateMi >= dateFrom);
+                }
+                if (!string.IsNullOrWhiteSpace(filter.DateTo))
+                {
+                    var dateTo = PersianDateTime.Parse(filter.DateTo).ToDateTime();
+                    conditions = conditions.And(x => x.InsertDateMi < dateTo);
+                }
+            }
+
+            var customers = _appUow.UserRepo.Get(
+                conditions: conditions,
+                orderBy: x => x.OrderBy(x => x.UserId),
+                includeProperties: new List<Expression<Func<User, object>>>
+                {
+                    x => x.Addresses,
+                    x => x.BankAccounts,
+                    x => x.Relatives,
+                });
+            #endregion
+
+            using (var workbook = new XLWorkbook())// ($"Customers-{PersianDateTime.Now.ToString(PersianDateTimeFormat.Date).Replace("/", "-")}.xlsx"))
+            {
+                #region Set Titles
+                var worksheet = workbook.Worksheets.Add("Customers");
+                worksheet.Cell(1, 1).SetValue("").Style.Font.SetBold(true);
+                worksheet.Cell(1, 2).SetValue("Name").SetDataType(XLDataType.Text).Style.Font.SetBold(true);
+                worksheet.Cell(1, 3).SetValue("LName").SetDataType(XLDataType.Text).Style.Font.SetBold(true);
+                worksheet.Cell(1, 4).SetValue("PersonelCode").Style.Font.SetBold(true);
+                worksheet.Cell(1, 5).SetValue("SodurPlace").SetDataType(XLDataType.Text).Style.Font.SetBold(true);
+                worksheet.Cell(1, 6).SetValue("IdentityNo").SetDataType(XLDataType.Text).Style.Font.SetBold(true);
+                worksheet.Cell(1, 7).SetValue("BirthYear").SetDataType(XLDataType.Text).Style.Font.SetBold(true);
+                worksheet.Cell(1, 8).SetValue("BirthMonth").SetDataType(XLDataType.Text).Style.Font.SetBold(true);
+                worksheet.Cell(1, 9).SetValue("BirthDay").SetDataType(XLDataType.Text).Style.Font.SetBold(true);
+                worksheet.Cell(1, 10).SetValue("CodeMelli").SetDataType(XLDataType.Text).Style.Font.SetBold(true);
+                worksheet.Cell(1, 11).SetValue("Address").SetDataType(XLDataType.Text).Style.Font.SetBold(true);
+                worksheet.Cell(1, 12).SetValue("Tel").SetDataType(XLDataType.Text).Style.Font.SetBold(true);
+                worksheet.Cell(1, 13).SetValue("Jens").Style.Font.SetBold(true);
+                worksheet.Cell(1, 14).SetValue("FatherName").SetDataType(XLDataType.Text).Style.Font.SetBold(true);
+                worksheet.Cell(1, 15).SetValue("BSKind").Style.Font.SetBold(true);
+                worksheet.Cell(1, 16).SetValue("Nesbat").Style.Font.SetBold(true);
+                worksheet.Cell(1, 17).SetValue("BeginDate").SetDataType(XLDataType.Text).Style.Font.SetBold(true);
+                worksheet.Cell(1, 18).SetValue("EndDate").SetDataType(XLDataType.Text).Style.Font.SetBold(true);
+                worksheet.Cell(1, 19).SetValue("TakafolKind").Style.Font.SetBold(true);
+                worksheet.Cell(1, 20).SetValue("Tarh").SetDataType(XLDataType.Text).Style.Font.SetBold(true);
+                worksheet.Cell(1, 21).SetValue("Workunit").SetDataType(XLDataType.Text).Style.Font.SetBold(true);
+                worksheet.Cell(1, 22).SetValue("AccNOBimegarOneNo").SetDataType(XLDataType.Text).Style.Font.SetBold(true);
+                worksheet.Cell(1, 23).SetValue("Bank").SetDataType(XLDataType.Text).Style.Font.SetBold(true);
+                worksheet.Cell(1, 24).SetValue("ShebaAcc").SetDataType(XLDataType.Text).Style.Font.SetBold(true);
+                worksheet.Cell(1, 25).SetValue("Mobile").SetDataType(XLDataType.Text).Style.Font.SetBold(true);
+                worksheet.Cell(1, 26).SetValue("Email").SetDataType(XLDataType.Text).Style.Font.SetBold(true);
+                worksheet.Cell(1, 27).SetValue("RegisterDate").SetDataType(XLDataType.Text).Style.Font.SetBold(true);
+                #endregion
+
+                int rowNumber = 1;
+                int customerNumber = 0;
+                foreach (var customer in customers)
+                {
+                    #region Set Customer Info
+                    rowNumber++;
+                    customerNumber++;
+                    worksheet.Cell(rowNumber, 1).Value = customerNumber;
+                    worksheet.Cell(rowNumber, 2).SetDataType(XLDataType.Text).SetValue(customer.Name);
+                    worksheet.Cell(rowNumber, 3).SetDataType(XLDataType.Text).SetValue(customer.Family);
+                    worksheet.Cell(rowNumber, 4).SetDataType(XLDataType.Text).SetValue(0);
+                    worksheet.Cell(rowNumber, 5).SetDataType(XLDataType.Text).SetValue("");
+                    worksheet.Cell(rowNumber, 6).SetDataType(XLDataType.Text).SetValue(customer.IdentityNumber);
+                    worksheet.Cell(rowNumber, 7).SetDataType(XLDataType.Text).SetValue(GetYearOfDate(customer.BirthDay));
+                    worksheet.Cell(rowNumber, 8).SetDataType(XLDataType.Text).SetValue(GetMounthOfDate(customer.BirthDay));
+                    worksheet.Cell(rowNumber, 9).SetDataType(XLDataType.Text).SetValue(GetDayOfDate(customer.BirthDay));
+                    worksheet.Cell(rowNumber, 10).SetDataType(XLDataType.Text).SetValue(customer.NationalCode);
+                    worksheet.Cell(rowNumber, 11).SetDataType(XLDataType.Text).SetValue(customer.Addresses.FirstOrDefault()?.FullAddress);
+                    worksheet.Cell(rowNumber, 12).SetDataType(XLDataType.Text).SetValue("");
+                    worksheet.Cell(rowNumber, 13).SetDataType(XLDataType.Text).SetValue((byte)customer.Gender);
+                    worksheet.Cell(rowNumber, 14).SetDataType(XLDataType.Text).SetValue(customer.FatherName);
+                    worksheet.Cell(rowNumber, 15).SetDataType(XLDataType.Text).SetValue((byte)InsuranceType.Main);
+                    worksheet.Cell(rowNumber, 16).SetDataType(XLDataType.Text).SetValue("");
+                    worksheet.Cell(rowNumber, 17).SetDataType(XLDataType.Text).SetValue("");
+                    worksheet.Cell(rowNumber, 18).SetDataType(XLDataType.Text).SetValue("");
+                    worksheet.Cell(rowNumber, 19).SetDataType(XLDataType.Text).SetValue("");
+                    worksheet.Cell(rowNumber, 20).SetDataType(XLDataType.Text).SetValue("");
+                    worksheet.Cell(rowNumber, 21).SetDataType(XLDataType.Text).SetValue("");
+                    worksheet.Cell(rowNumber, 22).SetDataType(XLDataType.Text).SetValue("");
+                    worksheet.Cell(rowNumber, 23).SetDataType(XLDataType.Text).SetValue(customer.BankAccounts.FirstOrDefault()?.BankName.GetDescription());
+                    worksheet.Cell(rowNumber, 24).SetDataType(XLDataType.Text).SetValue(customer.BankAccounts.FirstOrDefault()?.Shaba);
+                    worksheet.Cell(rowNumber, 25).SetDataType(XLDataType.Text).SetValue(customer.MobileNumber);
+                    worksheet.Cell(rowNumber, 26).SetDataType(XLDataType.Text).SetValue(customer.Email);
+                    worksheet.Cell(rowNumber, 27).SetDataType(XLDataType.Text).SetValue(customer.InsertDateSh);
+                    #endregion
+
+                    foreach (var relative in customer.Relatives)
+                    {
+                        #region Set Relative Info
+                        rowNumber++;
+                        worksheet.Cell(rowNumber, 1).Value = customerNumber;
+                        worksheet.Cell(rowNumber, 2).SetDataType(XLDataType.Text).SetValue(relative.Name);
+                        worksheet.Cell(rowNumber, 3).SetDataType(XLDataType.Text).SetValue(relative.Family);
+                        worksheet.Cell(rowNumber, 4).SetDataType(XLDataType.Text).SetValue("");
+                        worksheet.Cell(rowNumber, 5).SetDataType(XLDataType.Text).SetValue("");
+                        worksheet.Cell(rowNumber, 6).SetDataType(XLDataType.Text).SetValue(relative.IdentityNumber);
+                        worksheet.Cell(rowNumber, 7).SetDataType(XLDataType.Text).SetValue(GetYearOfDate(relative.BirthDay));
+                        worksheet.Cell(rowNumber, 8).SetDataType(XLDataType.Text).SetValue(GetMounthOfDate(relative.BirthDay));
+                        worksheet.Cell(rowNumber, 9).SetDataType(XLDataType.Text).SetValue(GetDayOfDate(relative.BirthDay));
+                        worksheet.Cell(rowNumber, 10).SetDataType(XLDataType.Text).SetValue(relative.NationalCode);
+                        worksheet.Cell(rowNumber, 11).SetDataType(XLDataType.Text).SetValue("");
+                        worksheet.Cell(rowNumber, 12).SetDataType(XLDataType.Text).SetValue("");
+                        worksheet.Cell(rowNumber, 13).SetDataType(XLDataType.Text).SetValue((byte)relative.Gender);
+                        worksheet.Cell(rowNumber, 14).SetDataType(XLDataType.Text).SetValue(relative.FatherName);
+                        worksheet.Cell(rowNumber, 15).SetDataType(XLDataType.Text).SetValue((byte)InsuranceType.Secondary);
+                        worksheet.Cell(rowNumber, 16).SetDataType(XLDataType.Text).SetValue((byte)relative.RelativeType);
+                        worksheet.Cell(rowNumber, 17).SetDataType(XLDataType.Text).SetValue("");
+                        worksheet.Cell(rowNumber, 18).SetDataType(XLDataType.Text).SetValue("");
+                        worksheet.Cell(rowNumber, 19).SetDataType(XLDataType.Text).SetValue((byte)relative.TakafolKind);
+                        worksheet.Cell(rowNumber, 20).SetDataType(XLDataType.Text).SetValue("");
+                        worksheet.Cell(rowNumber, 21).SetDataType(XLDataType.Text).SetValue("");
+                        worksheet.Cell(rowNumber, 22).SetDataType(XLDataType.Text).SetValue("");
+                        worksheet.Cell(rowNumber, 23).SetDataType(XLDataType.Text).SetValue("");
+                        worksheet.Cell(rowNumber, 24).SetDataType(XLDataType.Text).SetValue("");
+                        worksheet.Cell(rowNumber, 25).SetDataType(XLDataType.Text).SetValue("");
+                        worksheet.Cell(rowNumber, 26).SetDataType(XLDataType.Text).SetValue("");
+                        worksheet.Cell(rowNumber, 27).SetDataType(XLDataType.Text).SetValue(relative.InsertDateSh);
+                        #endregion
+                    }
+                }
+
+                using (var stream = new MemoryStream())
+                {
+                    worksheet.RightToLeft = true;
+                    //worksheet.AdjustToContent();
+                    workbook.SaveAs(stream);
+                    var fileContent = stream.ToArray();
+                    return fileContent;
+                }
+            }
+        }
+
+        private string GetDayOfDate(string persianDate) => persianDate.Substring(8, 2);
+        private string GetMounthOfDate(string persianDate) => persianDate.Substring(5, 2);
+        private string GetYearOfDate(string persianDate) => persianDate.Substring(0, 4);
+
     }
 }

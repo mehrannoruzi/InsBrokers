@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="ClosedXML" Version="0.95.4" />
     <PackageReference Include="Elk.Cache" Version="1.1.0" />
     <PackageReference Include="Elk.Http" Version="1.1.0" />
   </ItemGroup>

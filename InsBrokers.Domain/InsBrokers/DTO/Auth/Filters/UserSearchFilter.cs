@@ -18,5 +18,13 @@ namespace InsBrokers.Domain
         [MaxLength(50, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
         [StringLength(50, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
         public string EmailF { get; set; }
+
+        [Display(Name = nameof(Strings.DateFrom), ResourceType = typeof(Strings))]
+        [MaxLength(10, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
+        public string DateFrom { get; set; }
+
+        [Display(Name = nameof(Strings.DateTo), ResourceType = typeof(Strings))]
+        [MaxLength(10, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
+        public string DateTo { get; set; }
     }
 }

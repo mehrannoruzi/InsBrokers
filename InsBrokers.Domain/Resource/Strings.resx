@@ -180,6 +180,12 @@
   <data name="Date" xml:space="preserve">
     <value>تاریخ</value>
   </data>
+  <data name="DateFrom" xml:space="preserve">
+    <value>از تاریخ</value>
+  </data>
+  <data name="DateTo" xml:space="preserve">
+    <value>تا تاریخ</value>
+  </data>
   <data name="Description" xml:space="preserve">
     <value>توضیحات</value>
   </data>

@@ -4,26 +4,25 @@ namespace InsBrokers.Domain
 {
     public enum RelativeType : byte
     {
-
-        [Description("همسر")]
-        Partner = 12,
-
-        [Description("پسر")]
-        Boy = 7,
-
-        [Description("دختر")]
-        Girl = 8,
-
         [Description("پدر")]
-        Father = 5,
+        Father = 105,
 
         [Description("مادر")]
-        Mother = 6,
+        Mother = 106,
 
-        [Description("پدربزرگ")]
-        GrandPa = 13,
+        [Description("همسر")]
+        Partner = 107,
 
-        [Description("مادربزرگ")]
-        GrandMa = 14,
+        [Description("پسر")]
+        Boy = 108,
+
+        [Description("دختر")]
+        Girl = 109,
+
+        //[Description("پدربزرگ")]
+        //GrandPa = 110,
+
+        //[Description("مادربزرگ")]
+        //GrandMa = 111,
     }
 }

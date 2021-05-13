@@ -250,6 +250,24 @@ namespace InsBrokers.Domain.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to از تاریخ.
+        /// </summary>
+        public static string DateFrom {
+            get {
+                return ResourceManager.GetString("DateFrom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to تا تاریخ.
+        /// </summary>
+        public static string DateTo {
+            get {
+                return ResourceManager.GetString("DateTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to توضیحات.
         /// </summary>
         public static string Description {
