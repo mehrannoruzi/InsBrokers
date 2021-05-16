@@ -8,7 +8,9 @@ using ClosedXML.Excel;
 using InsBrokers.Domain;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
+using InsBrokers.CrossCutting;
 using InsBrokers.DataAccess.Ef;
+using Microsoft.AspNetCore.Http;
 using InsBrokers.InfraStructure;
 using System.Collections.Generic;
 using InsBrokers.Service.Resource;
@@ -38,7 +40,12 @@ namespace InsBrokers.Service
         }
 
 
+
         #region CRUD
+        private string GetDayOfDate(string persianDate) => persianDate.Substring(8, 2);
+        private string GetMounthOfDate(string persianDate) => persianDate.Substring(5, 2);
+        private string GetYearOfDate(string persianDate) => persianDate.Substring(0, 4);
+
 
         public async Task<IResponse<User>> AddAsync(User model)
         {
@@ -113,7 +120,6 @@ namespace InsBrokers.Service
 
             return new Response<User> { Result = findedUser, IsSuccessful = true };
         }
-
         #endregion
 
 
@@ -341,64 +347,155 @@ namespace InsBrokers.Service
             return new Response<string> { IsSuccessful = true, Message = saveResult.Message };
         }
 
+        public async Task<IResponse<object>> AddUserAttachments(IFormFile file, UserAttachmentType type)
+        {
+            var response = new Response<object>();
+            try
+            {
+                if (file.IsNull() || file.Length < 0) return new Response<object> { Message = "هیچ فایلی آپلود نشده است." };
+                if (file.Length > (1000 * 1024)) return new Response<object> { Message = "فایل آپلود شده نباید بیشتر از 1MB باشد." };
+
+                #region Save Attachment To Host
+                var fullPath = HttpFileTools.GetPath(
+                    fileNameWithExtension: type.ToString() + Path.GetExtension(file.FileName),
+                    root: "Files/UserAttachment");
+                if (string.IsNullOrWhiteSpace(fullPath)) return new Response<object> { Message = ServiceMessage.Error };
+
+                var fileUrl = HttpFileTools.Save(file, fullPath);
+                #endregion
+
+                #region Save Attachment To Database
+                var userAttschment = new UserAttachment
+                {
+                    Url = fileUrl,
+                    Size = file.Length,
+                    UserAttachmentType = type,
+                    FileType = FileType.Image,
+                    Extention = Path.GetExtension(file.FileName),
+                    Name = Path.GetFileNameWithoutExtension(fileUrl),
+                    UserId = Guid.Parse("EC5FC734-9046-4CFB-65C3-08D7FFC82032")
+                };
+
+                await _appUow.UserAttachmentRepo.AddAsync(userAttschment);
+                var fileSaveResult = await _appUow.ElkSaveChangesAsync();
+                if (fileSaveResult.IsSuccessful)
+                {
+                    response.IsSuccessful = true;
+                    response.Result = userAttschment;
+                    response.Message = ServiceMessage.Success;
+                }
+                else
+                    response.Message = ServiceMessage.Error;
+                #endregion
+
+                return response;
+            }
+            catch (Exception e)
+            {
+                FileLoger.Error(e);
+                response.Message = ServiceMessage.Exception;
+                return response;
+            }
+        }
+
         public async Task<IResponse<User>> SignUp(PortalSignUpModel model)
         {
-            var mobNum = long.Parse(model.MobileNumber);
-            var user = await _appUow.UserRepo.FirstOrDefaultAsync(conditions: x => x.MobileNumber == mobNum);
-            if (user != null) return new Response<User> { Message = ServiceMessage.DuplicateRecord };
-            user = new User
+            using (var trans = _appUow.Database.BeginTransaction())
             {
-                Name = model.Name,
-                Family = model.Family,
-                FatherName = model.FatherName,
-                Email = model.Email,
-                MobileNumber = mobNum,
-                BaseInsurance = model.BaseInsurance,
-                Password = HashGenerator.Hash(model.Password),
-                IsActive = true,
-                Gender = model.Gender,
-                BirthDay = model.BirthDay,
-                BirthDayMi = PersianDateTime.Parse(model.BirthDay).ToDateTime(),
-                NationalCode = model.NationalCode,
-                IdentityNumber = model.IdentityNumber,
-                BankAccounts = new List<BankAccount>{
-                    new BankAccount
+                try
+                {
+                    #region Check User Exist
+                    var mobileNumber = long.Parse(model.MobileNumber);
+                    var user = await _appUow.UserRepo.FirstOrDefaultAsync(conditions: x => x.MobileNumber == mobileNumber);
+                    if (user != null) return new Response<User> { Message = ServiceMessage.DuplicateRecord };
+                    #endregion
+
+                    #region Save User
+                    user = new User
                     {
-                        BankName = model.BankName,
-                        AccountNumber = model.AccountNumber,
-                        Shaba = model.Shaba
+                        Name = model.Name,
+                        Family = model.Family,
+                        FatherName = model.FatherName,
+                        Email = model.Email,
+                        MobileNumber = mobileNumber,
+                        BaseInsurance = model.BaseInsurance,
+                        Password = HashGenerator.Hash(model.Password),
+                        IsActive = true,
+                        Gender = model.Gender,
+                        BirthDay = model.BirthDay,
+                        BirthDayMi = PersianDateTime.Parse(model.BirthDay).ToDateTime(),
+                        NationalCode = model.NationalCode,
+                        IdentityNumber = model.IdentityNumber,
+                        InsurancePlan = model.InsurancePlan,
+                        Organization = model.Organization,
+
+                        BankAccounts = new List<BankAccount>{
+                            new BankAccount
+                            {
+                                BankName = model.BankName,
+                                AccountNumber = model.AccountNumber,
+                                Shaba = model.Shaba
+                            }
+                        },
+                        Addresses = new List<Address> {
+                            new Address
+                            {
+                                Province = model.Province,
+                                City = model.City,
+                                AddressDetails = model.AddressDetails
+                            }
+                        }
+                    };
+
+                    await _appUow.UserRepo.AddAsync(user);
+                    var save = await _appUow.ElkSaveChangesAsync();
+                    if (!save.IsSuccessful) return new Response<User> { Message = save.Message };
+                    #endregion
+
+                    #region Save User Attachments
+                    foreach (var attachmentId in model.UserAttachmentIds)
+                    {
+                        var userAttachment = await _appUow.UserAttachmentRepo.FindAsync(attachmentId);
+                        if (userAttachment.IsNull()) continue;
+
+                        userAttachment.UserId = user.UserId;
                     }
-                },
-                Addresses = new List<Address> {
-                    new Address {
-                        Province = model.Province,
-                        City = model.City,
-                        AddressDetails = model.AddressDetails
+
+                    var updateUserAttachments = await _appUow.ElkSaveChangesAsync();
+                    if (!updateUserAttachments.IsSuccessful)
+                    {
+                        trans.Rollback();
+                        return new Response<User> { Message = ServiceMessage.Error };
                     }
+                    #endregion
+
+                    #region Save User Role
+                    await _authUow.UserInRoleRepo.AddAsync(new UserInRole { RoleId = model.MemberRoleId, UserId = user.UserId });
+                    var addUserInRole = await _authUow.ElkSaveChangesAsync();
+                    if (!addUserInRole.IsSuccessful)
+                    {
+                        trans.Rollback();
+                        return new Response<User> { Message = addUserInRole.Message };
+                    }
+                    #endregion
+
+                    #region Create Result
+                    await trans.CommitAsync();
+                    return new Response<User>
+                    {
+                        Result = user,
+                        Message = save.Message,
+                        IsSuccessful = save.IsSuccessful
+                    };
+                    #endregion
                 }
-            };
-            using var bt = _appUow.Database.BeginTransaction();
-            await _appUow.UserRepo.AddAsync(user);
-            var save = await _appUow.ElkSaveChangesAsync();
-            if (!save.IsSuccessful) return new Response<User> { Message = save.Message };
-            await _authUow.UserInRoleRepo.AddAsync(new UserInRole
-            {
-                RoleId = model.MemberRoleId,
-                UserId = user.UserId
-            });
-            var addUserInRole = await _authUow.ElkSaveChangesAsync();
-            if (!addUserInRole.IsSuccessful)
-            {
-                bt.Rollback();
-                return new Response<User> { Message = addUserInRole.Message };
+                catch (Exception e)
+                {
+                    await trans.RollbackAsync();
+                    FileLoger.Error(e);
+                    return new Response<User> { };
+                }
             }
-            bt.Commit();
-            return new Response<User>
-            {
-                IsSuccessful = save.IsSuccessful,
-                Result = user,
-                Message = save.Message
-            };
         }
 
         public async Task<IResponse<int>> GetUserCount()
@@ -611,8 +708,8 @@ namespace InsBrokers.Service
                     worksheet.Cell(rowNumber, 17).SetDataType(XLDataType.Text).SetValue("");
                     worksheet.Cell(rowNumber, 18).SetDataType(XLDataType.Text).SetValue("");
                     worksheet.Cell(rowNumber, 19).SetDataType(XLDataType.Text).SetValue("");
-                    worksheet.Cell(rowNumber, 20).SetDataType(XLDataType.Text).SetValue("");
-                    worksheet.Cell(rowNumber, 21).SetDataType(XLDataType.Text).SetValue("");
+                    worksheet.Cell(rowNumber, 20).SetDataType(XLDataType.Text).SetValue(customer.InsurancePlan);
+                    worksheet.Cell(rowNumber, 21).SetDataType(XLDataType.Text).SetValue(customer.Organization);
                     worksheet.Cell(rowNumber, 22).SetDataType(XLDataType.Text).SetValue("");
                     worksheet.Cell(rowNumber, 23).SetDataType(XLDataType.Text).SetValue(customer.BankAccounts.FirstOrDefault()?.BankName.GetDescription());
                     worksheet.Cell(rowNumber, 24).SetDataType(XLDataType.Text).SetValue(customer.BankAccounts.FirstOrDefault()?.Shaba);
@@ -644,8 +741,8 @@ namespace InsBrokers.Service
                         worksheet.Cell(rowNumber, 17).SetDataType(XLDataType.Text).SetValue("");
                         worksheet.Cell(rowNumber, 18).SetDataType(XLDataType.Text).SetValue("");
                         worksheet.Cell(rowNumber, 19).SetDataType(XLDataType.Text).SetValue((byte)relative.TakafolKind);
-                        worksheet.Cell(rowNumber, 20).SetDataType(XLDataType.Text).SetValue("");
-                        worksheet.Cell(rowNumber, 21).SetDataType(XLDataType.Text).SetValue("");
+                        worksheet.Cell(rowNumber, 20).SetDataType(XLDataType.Text).SetValue(customer.InsurancePlan);
+                        worksheet.Cell(rowNumber, 21).SetDataType(XLDataType.Text).SetValue(customer.Organization);
                         worksheet.Cell(rowNumber, 22).SetDataType(XLDataType.Text).SetValue("");
                         worksheet.Cell(rowNumber, 23).SetDataType(XLDataType.Text).SetValue("");
                         worksheet.Cell(rowNumber, 24).SetDataType(XLDataType.Text).SetValue("");
@@ -666,10 +763,6 @@ namespace InsBrokers.Service
                 }
             }
         }
-
-        private string GetDayOfDate(string persianDate) => persianDate.Substring(8, 2);
-        private string GetMounthOfDate(string persianDate) => persianDate.Substring(5, 2);
-        private string GetYearOfDate(string persianDate) => persianDate.Substring(0, 4);
 
     }
 }

@@ -164,7 +164,7 @@ var refreshList = function (pageNumber) {
             let $target = $wrapper.find('.ibox-content');
 
             if ($target.length === 0) $wrapper.html(rep);
-            else $wrapper.find('.ibox-content').html(rep);
+            else  $wrapper.find('.ibox-content').html(rep);
             //enable footable plugin on items tables
             $('.footable').footable({
                 pageSize: 200,
@@ -828,7 +828,6 @@ var exportToExcel2 = function (url) {
     link.click();
     link.remove();
 };
-
 
 $(document).ready(function () {
 

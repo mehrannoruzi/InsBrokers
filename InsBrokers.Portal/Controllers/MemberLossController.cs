@@ -59,17 +59,18 @@ namespace InsBrokers.Portal.Controllers
         {
             model.UserId = User.GetUserId();
             if (!ModelState.IsValid) return Json(new { IsSuccessful = false, Message = ModelState.GetModelError() });
+
             var save = await _LossSrv.AddAsync(model, _env.ContentRootPath, model.Files);
             return Json(new { save.IsSuccessful, save.Message });
         }
 
         [HttpGet]
-        public virtual async Task<JsonResult> Update([FromServices]IRelativeService relativeSrv,int id)
+        public virtual async Task<JsonResult> Update([FromServices] IRelativeService relativeSrv, int id)
         {
             var find = await _LossSrv.FindAsync(id);
             if (!find.IsSuccessful) return Json(new { IsSuccessful = false, Message = Strings.RecordNotFound.Fill(DomainString.Loss) });
             ViewBag.Types = GetTypes();
-            if(find.Result.RelativeId!=null)
+            if (find.Result.RelativeId != null)
             {
                 var rel = await relativeSrv.FindAsync(find.Result.RelativeId ?? 0);
                 find.Result.Relative = rel.Result;
@@ -89,7 +90,7 @@ namespace InsBrokers.Portal.Controllers
         {
             if (!ModelState.IsValid) return Json(new { IsSuccessful = false, Message = ModelState.GetModelError() });
             var update = await _LossSrv.UpdateAsync(model, _env.ContentRootPath, files);
-            return Json(new { update.IsSuccessful,update.Message });
+            return Json(new { update.IsSuccessful, update.Message });
         }
 
         [HttpPost]

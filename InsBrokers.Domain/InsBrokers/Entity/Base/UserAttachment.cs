@@ -28,7 +28,7 @@ namespace InsBrokers.Domain
         public UserAttachmentType UserAttachmentType { get; set; }
 
         [Display(Name = nameof(Strings.Size), ResourceType = typeof(Strings))]
-        public int Size { get; set; }
+        public long Size { get; set; }
 
         [Display(Name = nameof(Strings.IsDeleted), ResourceType = typeof(Strings))]
         [Required(ErrorMessageResourceName = nameof(ErrorMessage.Required), ErrorMessageResourceType = typeof(ErrorMessage))]
@@ -48,16 +48,16 @@ namespace InsBrokers.Domain
         [MaxLength(5, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
         public string Extention { get; set; }
 
-        [Column(TypeName = "varchar(16)")]
+        [Column(TypeName = "varchar(50)")]
         [Display(Name = nameof(Strings.Name), ResourceType = typeof(Strings))]
         [Required(ErrorMessageResourceName = nameof(ErrorMessage.Required), ErrorMessageResourceType = typeof(ErrorMessage))]
-        [MaxLength(16, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
+        [MaxLength(50, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
         public string Name { get; set; }
 
-        [Column(TypeName = "varchar(150)")]
+        [Column(TypeName = "varchar(250)")]
         [Display(Name = nameof(Strings.Url), ResourceType = typeof(Strings))]
         [Required(ErrorMessageResourceName = nameof(ErrorMessage.Required), ErrorMessageResourceType = typeof(ErrorMessage))]
-        [MaxLength(150, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
+        [MaxLength(250, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
         public string Url { get; set; }
     }
 }

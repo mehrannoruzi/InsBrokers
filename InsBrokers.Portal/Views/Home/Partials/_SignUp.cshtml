@@ -6,75 +6,158 @@
 
 <form id="frm-register" class="w-100" action="@Url.Action("SignUp","Home")">
     <div class="row">
-        <div class="col-12 col-sm-6 col-md-4">
-            <custom-input-for for="Name" class="form-control" />
-        </div>
-        <div class="col-12 col-sm-6 col-md-4">
-            <custom-input-for for="Family" class="form-control" />
-        </div>
-        <div class="col-12 col-sm-6 col-md-4">
-            <custom-input-for for="FatherName" class="form-control" />
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12 col-sm-4">
-            <custom-input-for for="NationalCode" class="form-control ltr-elm" />
-        </div>
-        <div class="col-12 col-sm-4">
-            <custom-input-for for="IdentityNumber" class="form-control ltr-elm" />
-        </div>
-        <div class="col-12 col-sm-4">
-            <custom-input-for for="MobileNumber" class="form-control ltr-elm" />
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12 col-sm-4">
-            <custom-input-for for="BirthDay" class="form-control ltr-elm pdate" />
-        </div>
-        <div class="col-12 col-sm-4">
-            <custom-input-for for="Email" class="form-control ltr-elm" />
-        </div>
-        <div class="col-12 col-sm-4">
-            <custom-input-for for="Password" class="form-control ltr-elm" type="password" />
+        <div style="width: 100%;">
+            <div class="field m-b" style=" border: #00000015;
+                 border-style: solid;
+                 padding-right: 15px;
+                 padding-left: 15px;
+                 margin: 15px;">
+                <label class="label label-info" style="margin-top:15px;">
+                    <span>اطلاعات سازمانی</span>
+                </label>
+                <div class="row">
+                    <div class="col-12 col-sm-6 col-md-4">
+                        <custom-select-for for="Organization" class="form-control" items="ViewBag.OrganizationList" />
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4">
+                        <custom-select-for for="InsurancePlan" class="form-control" items="ViewBag.InsurancePlan" />
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4">
+                        <custom-select-for for="BaseInsurance" class="form-control" items="EnumExtension.GetEnumElements<BaseInsuranceType>().Select(x=>new SelectListItem {
+                            Text = x.Description, Value = x.Name }).ToList()" />
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-12 col-sm-6 col-md-4">
-            <custom-select-for for="Gender" class="form-control" items="EnumExtension.GetEnumElements<Gender>().Select(x=>new SelectListItem {
-                Text = x.Description,
-                Value = x.Name
-            }).ToList()" />
-        </div>
-        <div class="col-12 col-sm-6 col-md-4">
-            <custom-select-for for="BankName" class="form-control" items="EnumExtension.GetEnumElements<BankName>().Select(x=>new SelectListItem {
-                Text = x.Description,
-                Value = x.Name
-            }).ToList()" />
-        </div>
-        <div class="col-12 col-sm-6 col-md-4">
-            <custom-input-for for="AccountNumber" class="form-control ltr-elm" />
+        <div style="width: 100%;">
+            <div class="field m-b" style="border: #00000015;
+                border-style: solid;
+                padding-right: 15px;
+                padding-left: 15px;
+                margin: 15px;">
+                <label class="label label-info" style="margin-top:15px;">
+                    <span>اطلاعات شخصی</span>
+                </label>
+                <div class="row">
+                    <div class="col-12 col-sm-6 col-md-4">
+                        <custom-input-for for="Name" class="form-control" />
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4">
+                        <custom-input-for for="Family" class="form-control" />
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4">
+                        <custom-input-for for="FatherName" class="form-control" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-sm-6 col-md-4">
+                        <custom-select-for for="Gender" class="form-control" items="EnumExtension.GetEnumElements<Gender>().Select(x=>new SelectListItem {
+                            Text = x.Description,
+                            Value = x.Name
+                        }).ToList()" />
+                    </div>
+                    <div class="col-12 col-sm-4">
+                        <custom-input-for for="BirthDay" class="form-control ltr-elm pdate" />
+                    </div>
+                    <div class="col-12 col-sm-4">
+                        <custom-input-for for="IdentityNumber" class="form-control ltr-elm" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-sm-4">
+                        <custom-input-for for="NationalCode" class="form-control ltr-elm" />
+                    </div>
+                    <div class="col-12 col-sm-4">
+                        <custom-input-for for="MobileNumber" class="form-control ltr-elm" />
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-12 col-sm-4">
+                        <custom-input-for for="Email" class="form-control ltr-elm" />
+                    </div>
+                    <div class="col-12 col-sm-4">
+                        <custom-input-for for="Password" class="form-control ltr-elm" type="password" />
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-12 col-sm-6 col-md-4">
-            <custom-input-for for="Shaba" class="form-control ltr-elm" place-holder="IR..." />
-        </div>
-        <div class="col-12 col-sm-6 col-md-4">
-            <custom-select-for for="BaseInsurance" class="form-control" items="EnumExtension.GetEnumElements<BaseInsuranceType>().Select(x=>new SelectListItem {
-                Text = x.Description,
-                Value = x.Name
-            }).ToList()" />
-        </div>
-        <div class="col-12 col-sm-6 col-md-4">
-            <custom-input-for for="Province" class="form-control" />
-        </div>
-        <div class="col-12 col-sm-6 col-md-4">
-            <custom-input-for for="City" class="form-control" />
+        <div style="width: 100%;">
+            <div class="field m-b" style="border: #00000015;
+                border-style: solid;
+                padding-right: 15px;
+                padding-left: 15px;
+                margin: 15px;">
+                <label class="label label-info" style="margin-top:15px;">
+                    <span>اطلاعات بانکی</span>
+                </label>
+                <div class="row">
+                    <div class="col-12 col-sm-6 col-md-4">
+                        <custom-select-for for="BankName" class="form-control" items="EnumExtension.GetEnumElements<BankName>().Select(x=>new SelectListItem {
+                        Text = x.Description,
+                        Value = x.Name
+                    }).ToList()" />
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4">
+                        <custom-input-for for="AccountNumber" class="form-control ltr-elm" />
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4">
+                        <custom-input-for for="Shaba" class="form-control ltr-elm" place-holder="IR..." />
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-12">
-            <custom-textarea-for for="AddressDetails" class="form-control" />
+        <div style="width: 100%;">
+            <div class="field m-b" style="border: #00000015;
+                border-style: solid;
+                padding-right: 15px;
+                padding-left: 15px;
+                margin: 15px;">
+                <label class="label label-info" style="margin-top:15px;">
+                    <span>آدرس</span>
+                </label>
+                <div class="row">
+                    <div class="col-12 col-sm-6 col-md-4">
+                        <custom-input-for for="Province" class="form-control" />
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4">
+                        <custom-input-for for="City" class="form-control" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <custom-textarea-for for="AddressDetails" class="form-control" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div style="width: 100%;">
+            <div class="field m-b" style="border: #00000015;
+                border-style: solid;
+                padding-right: 15px;
+                padding-left: 15px;
+                margin: 15px;">
+                <label class="label label-info" style="margin-top:15px;">
+                    <span>آپلود مدارک</span>
+                </label>
+                <div class="row">
+                    <partial name="Partials/_UserAttachment" model='new List<UserAttachment>()
+                    {
+                        new UserAttachment{ UserAttachmentType = UserAttachmentType.IdentityCard },
+                        new UserAttachment{ UserAttachmentType = UserAttachmentType.NationalCard },
+                        new UserAttachment{ UserAttachmentType = UserAttachmentType.InsuranceBooklet },
+                    }' />
+                </div>
+
+            </div>
         </div>
     </div>
     <div class="row">

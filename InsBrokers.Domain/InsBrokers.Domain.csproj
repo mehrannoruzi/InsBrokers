@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="Elk.EntityFrameworkCore.Tools" Version="1.1.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.6" />
   </ItemGroup>
 
   <ItemGroup>
