@@ -210,6 +210,9 @@
   <data name="FileUrl" xml:space="preserve">
     <value>آدرس فایل</value>
   </data>
+  <data name="FullAddress" xml:space="preserve">
+    <value>آدرس کامل</value>
+  </data>
   <data name="FullName" xml:space="preserve">
     <value>نام و نام خانوادگی</value>
   </data>
@@ -303,6 +306,9 @@
   <data name="OrderPriority" xml:space="preserve">
     <value>اولویت</value>
   </data>
+  <data name="Organization" xml:space="preserve">
+    <value>نام سازمان</value>
+  </data>
   <data name="OriginalInsured" xml:space="preserve">
     <value>بیمه شده اصلی</value>
   </data>
@@ -320,6 +326,9 @@
   </data>
   <data name="Percent" xml:space="preserve">
     <value>درصد</value>
+  </data>
+  <data name="Plan" xml:space="preserve">
+    <value>طرح</value>
   </data>
   <data name="Province" xml:space="preserve">
     <value>استان</value>

@@ -340,6 +340,15 @@ namespace InsBrokers.Domain.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to آدرس کامل.
+        /// </summary>
+        public static string FullAddress {
+            get {
+                return ResourceManager.GetString("FullAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to نام و نام خانوادگی.
         /// </summary>
         public static string FullName {
@@ -619,6 +628,15 @@ namespace InsBrokers.Domain.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to نام سازمان.
+        /// </summary>
+        public static string Organization {
+            get {
+                return ResourceManager.GetString("Organization", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to بیمه شده اصلی.
         /// </summary>
         public static string OriginalInsured {
@@ -669,6 +687,15 @@ namespace InsBrokers.Domain.Resource {
         public static string Percent {
             get {
                 return ResourceManager.GetString("Percent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to طرح.
+        /// </summary>
+        public static string Plan {
+            get {
+                return ResourceManager.GetString("Plan", resourceCulture);
             }
         }
         

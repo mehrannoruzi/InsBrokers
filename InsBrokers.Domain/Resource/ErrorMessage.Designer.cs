@@ -61,6 +61,15 @@ namespace InsBrokers.Domain.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to شماره حساب باید حتما به صورت عدد وارد شود.
+        /// </summary>
+        public static string AccountNumberIsInt {
+            get {
+                return ResourceManager.GetString("AccountNumberIsInt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to شماره کارت وارد شده صحیح نمی باشد.
         /// </summary>
         public static string CardNumberFormat {
@@ -70,11 +79,47 @@ namespace InsBrokers.Domain.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to شماره موبایل صحیح نیست.
+        ///   Looks up a localized string similar to حتما عدد وارد نمایید..
+        /// </summary>
+        public static string IntRequired {
+            get {
+                return ResourceManager.GetString("IntRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to تاریخ شمسی به صورت صحیح وارد نشده است، به عنوان مثال 1400/02/03.
+        /// </summary>
+        public static string InvalidDate {
+            get {
+                return ResourceManager.GetString("InvalidDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to آدرس ایمیل باید به صورت کامل وارد شود، به عنوان مثال xxxx@xxxx.com.
+        /// </summary>
+        public static string InvalidEmail {
+            get {
+                return ResourceManager.GetString("InvalidEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شماره موبایل صحیح نیست، به عنوان مثال 09301234567.
         /// </summary>
         public static string InvalidMobileNumber {
             get {
                 return ResourceManager.GetString("InvalidMobileNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to کد ملی باید 10 کاراکتر کامل باشد.
+        /// </summary>
+        public static string InvalidNationalCode {
+            get {
+                return ResourceManager.GetString("InvalidNationalCode", resourceCulture);
             }
         }
         

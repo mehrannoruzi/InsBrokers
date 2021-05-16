@@ -117,11 +117,26 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AccountNumberIsInt" xml:space="preserve">
+    <value>شماره حساب باید حتما به صورت عدد وارد شود</value>
+  </data>
   <data name="CardNumberFormat" xml:space="preserve">
     <value>شماره کارت وارد شده صحیح نمی باشد</value>
   </data>
+  <data name="IntRequired" xml:space="preserve">
+    <value>حتما عدد وارد نمایید.</value>
+  </data>
+  <data name="InvalidDate" xml:space="preserve">
+    <value>تاریخ شمسی به صورت صحیح وارد نشده است، به عنوان مثال 1400/02/03</value>
+  </data>
+  <data name="InvalidEmail" xml:space="preserve">
+    <value>آدرس ایمیل باید به صورت کامل وارد شود، به عنوان مثال xxxx@xxxx.com</value>
+  </data>
   <data name="InvalidMobileNumber" xml:space="preserve">
-    <value>شماره موبایل صحیح نیست</value>
+    <value>شماره موبایل صحیح نیست، به عنوان مثال 09301234567</value>
+  </data>
+  <data name="InvalidNationalCode" xml:space="preserve">
+    <value>کد ملی باید 10 کاراکتر کامل باشد</value>
   </data>
   <data name="InvalidShaba" xml:space="preserve">
     <value>شبا باید با IR شروع شده و شامل 24 عدد باشد</value>

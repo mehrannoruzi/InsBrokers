@@ -111,6 +111,22 @@ namespace InsBrokers.Domain
         [StringLength(50, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
         public string Email { get; set; }
 
+        [Column(TypeName = "nvarchar(50)")]
+        [Display(Name = nameof(Strings.Plan), ResourceType = typeof(Strings))]
+        [Required(ErrorMessageResourceName = nameof(ErrorMessage.Required), ErrorMessageResourceType = typeof(ErrorMessage))]
+        [MaxLength(50, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
+        [StringLength(50, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
+        public string InsurancePlan { get; set; }
+
+        [Column(TypeName = "nvarchar(100)")]
+        [Display(Name = nameof(Strings.Organization), ResourceType = typeof(Strings))]
+        [Required(ErrorMessageResourceName = nameof(ErrorMessage.Required), ErrorMessageResourceType = typeof(ErrorMessage))]
+        [MaxLength(100, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
+        [StringLength(100, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
+        public string Organization { get; set; }
+
+
+
         [NotMapped]
         [Display(Name = nameof(Strings.FullName), ResourceType = typeof(Strings))]
         public string Fullname => $"{Name} {Family}";
