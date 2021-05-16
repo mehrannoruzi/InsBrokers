@@ -17,3 +17,53 @@
       flex: 1; }
   #home-auth-page .tab-content {
     width: 100%; }
+
+.uploader {
+  border: dashed 2px #ccc;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  flex-direction: column; }
+  .uploader .title {
+    font-size: 0.9rem; }
+  .uploader i {
+    font-size: 20px; }
+
+.upload-wrapper {
+  display: flex;
+  flex-direction: row; }
+
+.uploader, .uploaded {
+  width: 100px;
+  height: 100px;
+  margin-left: 16px; }
+
+.uploaded {
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column; }
+  .uploaded .btn-remove {
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #6d6c6c;
+    color: red;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    border: none;
+    font-size: 30px; }
+  .uploaded:hover .btn-remove {
+    display: flex; }
+  .uploaded img {
+    height: 100px;
+    max-width: 100%; }
+
+#frm-register .Zebra_DatePicker_Icon_Inside {
+  top: 23px !important; }

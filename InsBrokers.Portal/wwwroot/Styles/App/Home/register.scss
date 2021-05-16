@@ -12,8 +12,8 @@
             margin: 0 10px;
         }
 
-        #pills-sign-up-tab{
-            font-size:1.5rem;
+        #pills-sign-up-tab {
+            font-size: 1.5rem;
         }
 
         &:after, &:before {
@@ -27,4 +27,69 @@
     .tab-content {
         width: 100%;
     }
+}
+
+.uploader {
+    border: dashed 2px #ccc;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    flex-direction: column;
+
+    .title {
+        font-size: 0.9rem;
+    }
+
+    i {
+        font-size: 20px;
+    }
+}
+
+.upload-wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+.uploader, .uploaded {
+    width: 100px;
+    height: 100px;
+    margin-left: 16px;
+}
+
+.uploaded {
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+
+    .btn-remove {
+        display: none;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+        background-color: rgb(109,108,108);
+        color: red;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+        border: none;
+        font-size: 30px;
+    }
+
+    &:hover .btn-remove {
+        display: flex;
+    }
+
+    img {
+        height: 100px;
+        max-width: 100%;
+    }
+}
+
+#frm-register .Zebra_DatePicker_Icon_Inside {
+    top: 23px !important;
 }

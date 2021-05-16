@@ -3,10 +3,11 @@
     ViewBag.Title = Strings.SignUp;
 }
 @section styles{
+    <link href="~/Styles/Libs//loadover.css" rel="stylesheet" />
     <link href="~/Styles/App/Home/register.min.css" rel="stylesheet" />
     <link href="~/Styles/App/app.min.css" rel="stylesheet" />
 
-    <link href="@Url.Content("~/Styles/App/LossAsset/uploader.min.css")" rel="stylesheet" />
+    @*<link href="@Url.Content("~/Styles/App/LossAsset/uploader.min.css")" rel="stylesheet" />*@
     <link href="@Url.Content("~/Styles/App/customize-template.min.css")" rel="stylesheet" />
 }
 
@@ -33,7 +34,15 @@
     </div>
 </div>
 @section scripts{
+    <script>
+        const config = {
+            registerUrl: '@Url.Action("SignUp","Home")',
+            uploadUrl:'@Url.Action("AddUserAttachments", "User")'
+        };
+    </script>
+    <script src="~/Scripts/Libs/loadover.js"></script>
+    <script src="~/Scripts/App/common.js"></script>
+    <script src="~/Scripts/App/plugins.js"></script>
     <script src="~/Scripts/App/Home/register.js"></script>
 
-    
 }

@@ -165,25 +165,26 @@ $(document).ready(function () {
     });
 
     //change default validation messages 
-    jQuery.extend(jQuery.validator.messages, {
-        required: validationMessages.required,
-        remote: validationMessages.remote,
-        email: validationMessages.email,
-        url: validationMessages.url,
-        date: validationMessages.date,
-        dateISO: validationMessages.dateISO,
-        number: validationMessages.number,
-        digits: validationMessages.digits,
-        creditcard: validationMessages.creditcard,
-        equalTo: validationMessages.equalTo,
-        accept: validationMessages.accept,
-        maxlength: jQuery.validator.format(validationMessages.maxlength),
-        minlength: jQuery.validator.format(validationMessages.minlength),
-        rangelength: jQuery.validator.format(validationMessages.rangelength),
-        range: jQuery.validator.format(validationMessages.range),
-        max: jQuery.validator.format(validationMessages.max),
-        min: jQuery.validator.format(validationMessages.min)
-    });
+    //if (validationMessages)
+    //    jQuery.extend(jQuery.validator.messages, {
+    //        required: validationMessages.required,
+    //        remote: validationMessages.remote,
+    //        email: validationMessages.email,
+    //        url: validationMessages.url,
+    //        date: validationMessages.date,
+    //        dateISO: validationMessages.dateISO,
+    //        number: validationMessages.number,
+    //        digits: validationMessages.digits,
+    //        creditcard: validationMessages.creditcard,
+    //        equalTo: validationMessages.equalTo,
+    //        accept: validationMessages.accept,
+    //        maxlength: jQuery.validator.format(validationMessages.maxlength),
+    //        minlength: jQuery.validator.format(validationMessages.minlength),
+    //        rangelength: jQuery.validator.format(validationMessages.rangelength),
+    //        range: jQuery.validator.format(validationMessages.range),
+    //        max: jQuery.validator.format(validationMessages.max),
+    //        min: jQuery.validator.format(validationMessages.min)
+    //    });
 
     //
     $(document).on('click', '.inner-notification', function () {
@@ -394,10 +395,8 @@ $(document).ajaxError(function (event, jqxhr, settings, thrownError) {
 var customSerialize = function ($wrapper, checkNumbers) {
     let model = {};
     $wrapper.find('input:not([type="checkbox"]):not([type="radio"]),select,textarea').each(function () {
-
         if (checkNumbers && !isNaN($(this).val()) && $(this).val() !== '') {
             model[$(this).attr('name')] = parseInt($(this).val());
-
         }
         else
             model[$(this).attr('name')] = $(this).val();
@@ -431,14 +430,14 @@ var postObjectList = function (url, model, success, error) {
     });
 };
 
-const fileTypes = {
-    Unknown: { id: 0, type: 'application/octet-stream' },
-    Image: { id: 1, type: 'image/png' },
-    Document: { id: 2, type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' },
-    Archive: { id: 3, type: 'application/zip' },
-    Audio: { id: 4, type: 'audio/mpeg' },
-    Video: { id: 5, type: 'video/mp4' }
-};
+//const fileTypes = {
+//    Unknown: { id: 0, type: 'application/octet-stream' },
+//    Image: { id: 1, type: 'image/png' },
+//    Document: { id: 2, type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' },
+//    Archive: { id: 3, type: 'application/zip' },
+//    Audio: { id: 4, type: 'audio/mpeg' },
+//    Video: { id: 5, type: 'video/mp4' }
+//};
 
 var getFileType = function (fileName) {
     let ext = fileName.toLowerCase().split('.').reverse()[0];

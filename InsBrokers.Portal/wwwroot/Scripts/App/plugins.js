@@ -8,18 +8,19 @@
 
 var fireGlobalPlugins = function () {
     //fireDropzone();
-    $('.footable').footable({
-        pageSize: 200,
-        "breakpoints": {
-            phone: 576,
-            tablet: 1024
-        }
-    });
-
-    $('.i-checks').iCheck({
-        checkboxClass: 'icheckbox_square-blue',
-        radioClass: 'iradio_square-blue',
-    });
+    if (jQuery().footable)
+        $('.footable').footable({
+            pageSize: 200,
+            "breakpoints": {
+                phone: 576,
+                tablet: 1024
+            }
+        });
+    if (jQuery().iCheck)
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass: 'iradio_square-blue',
+        });
 
     $('.pdate').Zebra_DatePicker();
 

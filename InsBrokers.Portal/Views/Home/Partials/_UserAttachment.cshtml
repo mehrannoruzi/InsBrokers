@@ -10,27 +10,11 @@
         {
             foreach (var attachment in Model)
             {
-                <div class="row" style="width:100%;">
-                    <div class="col-12 col-sm-4 m-b">
-                        <div id="uploader">
-                            <i class="zmdi zmdi-plus"></i>
-                            <label>آپلود @attachment.UserAttachmentType.GetDescription()</label>
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm-4 uploaded m-b">
-                        @*<button type="button" class="btn-remove" data-url="@Url.Action("DeleteAttachment", new { assetId = asset.LossAssetId })"><i class="zmdi zmdi-close"></i></button>
-                            @{
-                                if (attachment.FileType == FileType.Image)
-                                {
-
-                                    <img src="@Url.Content(attachment.Url)" />
-                                }
-                                else
-                                {
-                                    <img src="@Url.Content($"~/Images/FileTypes/{attachment.FileType.ToString().ToLower()}.png")" />
-                                }
-                            }
-                            <a target="_blank" href="@Url.Content(attachment.Url)">@Strings.Download</a>*@
+                <div class="col-12 m-b upload-wrapper">
+                    <div class="uploader">
+                        <input class="input-uploader d-none" type="file" accept="image/*" name="img-uploader" data-type="@attachment.UserAttachmentType" />
+                        <i class="zmdi zmdi-plus"></i>
+                        <label class="title">آپلود @attachment.UserAttachmentType.GetDescription()</label>
                     </div>
                 </div>
             }

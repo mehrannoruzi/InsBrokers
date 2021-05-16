@@ -139,7 +139,7 @@
         </div>
     </div>
     <div class="row">
-        <div style="width: 100%;">
+        <div class="col-12 col-sm-12">
             <div class="field m-b" style="border: #00000015;
                 border-style: solid;
                 padding-right: 15px;
@@ -148,14 +148,12 @@
                 <label class="label label-info" style="margin-top:15px;">
                     <span>آپلود مدارک</span>
                 </label>
-                <div class="row">
-                    <partial name="Partials/_UserAttachment" model='new List<UserAttachment>()
+                <partial name="Partials/_UserAttachment" model='new List<UserAttachment>()
                     {
                         new UserAttachment{ UserAttachmentType = UserAttachmentType.IdentityCard },
                         new UserAttachment{ UserAttachmentType = UserAttachmentType.NationalCard },
                         new UserAttachment{ UserAttachmentType = UserAttachmentType.InsuranceBooklet },
                     }' />
-                </div>
 
             </div>
         </div>
