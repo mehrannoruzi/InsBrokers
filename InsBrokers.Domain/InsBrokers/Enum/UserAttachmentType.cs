@@ -4,16 +4,16 @@ namespace InsBrokers.Domain
 {
     public enum UserAttachmentType
     {
-        [Description("کارت ملی")]
+        [Description("تصویر کارت ملی")]
         NationalCard = 1,
 
-        [Description("شناسنامه")]
+        [Description("تصویر شناسنامه")]
         IdentityCard = 2,
 
         [Description("عکس پرسنلی")]
         PersoneliPicture = 3,
 
-        [Description("دفترچه بیمه")]
+        [Description("تصویر دفترچه بیمه")]
         InsuranceBooklet = 4,
     }
 }
