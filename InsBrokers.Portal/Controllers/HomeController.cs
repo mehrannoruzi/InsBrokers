@@ -33,6 +33,10 @@ namespace InsBrokers.Portal.Controllers
             return View();
         }
 
+        [HttpPost]
+        public virtual async Task<JsonResult> AddUserAttachments(UserAttachmentModel model)
+            => Json(await _userSrv.AddUserAttachments(model.File, model.Type));
+
         [HttpGet]
         public IActionResult Register()
         {

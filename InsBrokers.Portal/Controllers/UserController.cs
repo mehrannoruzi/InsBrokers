@@ -40,10 +40,6 @@ namespace InsBrokers.Portal.Controllers
             return Json(await _userSrv.AddAsync(model));
         }
 
-        [HttpPost]
-        public virtual async Task<JsonResult> AddUserAttachments(UserAttachmentModel model)
-            => Json(await _userSrv.AddUserAttachments(model.File, model.Type));
-
         [HttpGet]
         public virtual async Task<JsonResult> Update(Guid id)
         {
