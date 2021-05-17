@@ -39,7 +39,7 @@ $(document).ready(function () {
                         let $wrapper = $elm.closest('.upload-wrapper');
                         let template = uploadTemplate(url, file.name);
                         $wrapper.append(template);
-                        attachmemts.push(rep.Result.UserAttachmentId);
+                        attachmemts.push({ type: rep.Result.UserAttachmentType, id: rep.Result.UserAttachmentId });
                         console.log(attachmemts);
                     }
                     else showNotif(notifyType.danger, rep.Message);
@@ -62,12 +62,25 @@ $(document).ready(function () {
         $uploaded.remove();
         console.log(attachmemts);
     });
+    const validateFiles = () => {
+        let types = [];
+        $(".input-uploader").each(function () { types.push($(this).data("type")); });
+        let isValid = true;
+        for (let t of types) {
+            if (!attachmemts.some(x => x.type === t)) isValid = false;
+        }
+        if (!isValid)
+            showToast(notifyType.danger, "لطفا فایلهای مورد نیاز را آپلود نمایید");
+        return isValid;
+    }
     $('#home-auth-page').on('click', '#btn-sign-up', function () {
+
         let $btn = $(this);
         let $frm = $btn.closest('form');
         if (!$frm.valid()) return;
+        if (!validateFiles()) return;
         let model = customSerialize($frm);
-        model.UserAttachmentIds = attachmemts;
+        model.UserAttachmentIds = attachmemts.map(x => x.id);
         ajaxBtn.inProgress($btn);
         console.log(model);
         $.ajax({
