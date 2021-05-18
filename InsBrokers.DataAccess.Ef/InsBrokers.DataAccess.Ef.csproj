@@ -9,6 +9,8 @@
     <Compile Remove="Migrations\AppDb\20200527133058_ChangeShabaLen.Designer.cs" />
     <Compile Remove="Migrations\AppDb\20200703185138_AddContactUs.cs" />
     <Compile Remove="Migrations\AppDb\20200703185138_AddContactUs.Designer.cs" />
+    <Compile Remove="Migrations\AppDb\20210518151526_Add.User.InsuranceNumber.cs" />
+    <Compile Remove="Migrations\AppDb\20210518151526_Add.User.InsuranceNumber.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

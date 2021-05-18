@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AccidentsInsurance" xml:space="preserve">
+    <value>بیمه عمر و حوادث</value>
+  </data>
   <data name="AccountNumber" xml:space="preserve">
     <value>شماره حساب</value>
   </data>
@@ -219,6 +222,9 @@
   <data name="Gender" xml:space="preserve">
     <value>جنسیت</value>
   </data>
+  <data name="HasAccidentsInsurance" xml:space="preserve">
+    <value>بیمه حوادث دارد ؟</value>
+  </data>
   <data name="Icon" xml:space="preserve">
     <value>آیکون</value>
   </data>
@@ -227,6 +233,9 @@
   </data>
   <data name="InsertDate" xml:space="preserve">
     <value>تاریخ ثبت</value>
+  </data>
+  <data name="InsuranceNumber" xml:space="preserve">
+    <value>شماره سریال بیمه پایه</value>
   </data>
   <data name="IsActive" xml:space="preserve">
     <value>فعال است؟</value>

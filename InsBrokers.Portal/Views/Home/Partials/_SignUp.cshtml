@@ -16,16 +16,44 @@
                     <span>اطلاعات سازمانی</span>
                 </label>
                 <div class="row">
+                    <div class="alert alert-info" style="
+                            width:100%;
+                            padding-right: 15px;
+                            margin: 15px; ">
+                        <p class="text">برای مشاهده جزئیات طرح های بیمه تکمیلی بر روی آن کلیک نمایید.</p>
+                        <br />
+                        <ul>
+                            <li><a target="_blank" href="~/Files/Boronzi.jpeg">طرح برنزی</a></li>
+                            <li><a target="_blank" href="~/Files/Noghrei.jpeg">طرح نقره ای</a></li>
+                            <li><a target="_blank" href="~/Files/Talaei.jpeg">طرح طلایی</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-12 col-sm-6 col-md-4">
                         <custom-select-for for="Organization" class="form-control" items="ViewBag.OrganizationList" />
                     </div>
                     <div class="col-12 col-sm-6 col-md-4">
                         <custom-select-for for="InsurancePlan" class="form-control" items="ViewBag.InsurancePlan" />
                     </div>
+                </div>
+                <div class="row">
                     <div class="col-12 col-sm-6 col-md-4">
                         <custom-select-for for="BaseInsurance" class="form-control" items="EnumExtension.GetEnumElements<BaseInsuranceType>().Select(x=>new SelectListItem {
                             Text = x.Description, Value = x.Name }).ToList()" />
                     </div>
+                    <div class="col-12 col-sm-6 col-md-4">
+                        <custom-input-for for="InsuranceNumber" class="form-control ltr-elm" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div style="
+                            width:100%;
+                            margin: 15px; ">
+                        <input type="checkbox" id="HasAccidentsInsurance" checked="checked" disabled="disabled" title="بیمه عمر و حوادث برای بیمه گر اصلی اجباری می باشد." />
+                        <span>برای اعضاء اصلی  سرمایه فوت به هر علت به مبلغ 500.000.000 ریال، فوت بر اثر حادثه500.000.000 ریال، نقص عضو و از کار افتادگی 500.000.000 ریال در نظر گرفته شده است. </span>
+                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -73,15 +101,6 @@
                         <custom-input-for for="MobileNumber" class="form-control ltr-elm" />
                     </div>
                 </div>
-                <div class="row">
-
-                    <div class="col-12 col-sm-4">
-                        <custom-input-for for="Email" class="form-control ltr-elm" />
-                    </div>
-                    <div class="col-12 col-sm-4">
-                        <custom-input-for for="Password" class="form-control ltr-elm" type="password" />
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -98,9 +117,9 @@
                 <div class="row">
                     <div class="col-12 col-sm-6 col-md-4">
                         <custom-select-for for="BankName" class="form-control" items="EnumExtension.GetEnumElements<BankName>().Select(x=>new SelectListItem {
-                        Text = x.Description,
-                        Value = x.Name
-                    }).ToList()" />
+                            Text = x.Description,
+                            Value = x.Name
+                        }).ToList()" />
                     </div>
                     <div class="col-12 col-sm-6 col-md-4">
                         <custom-input-for for="AccountNumber" class="form-control ltr-elm" />
@@ -150,9 +169,9 @@
                 </label>
                 <partial name="Partials/_UserAttachment" model='new List<UserAttachment>()
                     {
-                        new UserAttachment{ UserAttachmentType = UserAttachmentType.IdentityCard },
-                        new UserAttachment{ UserAttachmentType = UserAttachmentType.NationalCard },
-                        new UserAttachment{ UserAttachmentType = UserAttachmentType.InsuranceBooklet },
+                        new UserAttachment{ UserAttachmentType = UserAttachmentType.IdentityCardPage1 },
+                        new UserAttachment{ UserAttachmentType = UserAttachmentType.IdentityCardPage2 },
+                        new UserAttachment{ UserAttachmentType = UserAttachmentType.NationalCard }
                     }' />
 
             </div>

@@ -1,4 +1,4 @@
-@model SignInModel
+﻿@model SignInModel
 @{
     ViewBag.Title = Strings.SignIn;
     Layout = Url.Content("~/Views/Auth/_Layout.cshtml");
@@ -13,8 +13,9 @@
             <img class="w-100" src="@Url.Content("~/Images/Portal/Logo-1.png")" />
         </div>
         <form class="m-t" role="form" asp-action="SignIn" asp-controller="Auth" method="post">
-            <div class="alert alert-danger invisible">
-                <p class="text"></p>
+            <div class="alert alert-danger">
+                <p class="text">نام کاربری شماره موبایل کاربر می باشد.</p>
+                <p class="text">کلمه عبور کد ملی 10 رقمی کاربر می باشد.</p>
             </div>
             <div class="form-group">
                 <input asp-for="MobileNumber" class="form-control ltr-elm p-h-r" placeholder="@Html.DisplayNameFor(x => x.MobileNumber)" />

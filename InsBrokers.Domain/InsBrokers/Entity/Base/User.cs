@@ -30,6 +30,10 @@ namespace InsBrokers.Domain
         [Required(ErrorMessageResourceName = nameof(ErrorMessage.Required), ErrorMessageResourceType = typeof(ErrorMessage))]
         public bool IsActive { get; set; }
 
+        [Display(Name = nameof(Strings.HasAccidentsInsurance), ResourceType = typeof(Strings))]
+        [Required(ErrorMessageResourceName = nameof(ErrorMessage.Required), ErrorMessageResourceType = typeof(ErrorMessage))]
+        public bool HasAccidentsInsurance { get; set; }
+
         [Display(Name = nameof(Strings.IsRecoveredPassword), ResourceType = typeof(Strings))]
         public bool MustChangePassword { get; set; }
 
@@ -71,6 +75,13 @@ namespace InsBrokers.Domain
         [MaxLength(10, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
         [StringLength(10, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
         public string IdentityNumber { get; set; }
+
+        [Column(TypeName = "varchar(20)")]
+        [Display(Name = nameof(Strings.InsuranceNumber), ResourceType = typeof(Strings))]
+        [Required(ErrorMessageResourceName = nameof(ErrorMessage.Required), ErrorMessageResourceType = typeof(ErrorMessage))]
+        [MaxLength(20, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
+        [StringLength(20, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
+        public string InsuranceNumber { get; set; }
 
         [Column(TypeName = "varchar(50)")]
         [DataType(DataType.Password)]

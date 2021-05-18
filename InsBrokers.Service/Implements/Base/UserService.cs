@@ -15,6 +15,7 @@ using InsBrokers.InfraStructure;
 using System.Collections.Generic;
 using InsBrokers.Service.Resource;
 using InsBrokers.DataAccess.Dapper;
+using Microsoft.Extensions.Configuration;
 using DomainStrings = InsBrokers.Domain.Resource.Strings;
 
 namespace InsBrokers.Service
@@ -24,17 +25,19 @@ namespace InsBrokers.Service
         private readonly AppUnitOfWork _appUow;
         private readonly AuthUnitOfWork _authUow;
         private readonly IEmailService _emailService;
+        private readonly IConfiguration _configuration;
         private readonly DapperUserRepo _dapperUserRepo;
         private readonly IMemoryCacheProvider _cacheProvider;
         private string UserCountLastDaysCacheKey() => "UserCountLastDays";
         //private string MenuModelCacheKey(Guid userId) => $"MenuModel_{userId.ToString().Replace("-", "_")}";
 
         public UserService(AppUnitOfWork appUow, AuthUnitOfWork authUow, IMemoryCacheProvider cacheProvider,
-            IEmailService emailService, DapperUserRepo dapperUserRepo)
+            IEmailService emailService, DapperUserRepo dapperUserRepo, IConfiguration configuration)
         {
             _appUow = appUow;
             _authUow = authUow;
             _emailService = emailService;
+            _configuration = configuration;
             _cacheProvider = cacheProvider;
             _dapperUserRepo = dapperUserRepo;
         }
@@ -416,10 +419,9 @@ namespace InsBrokers.Service
                         Name = model.Name,
                         Family = model.Family,
                         FatherName = model.FatherName,
-                        Email = model.Email,
                         MobileNumber = mobileNumber,
                         BaseInsurance = model.BaseInsurance,
-                        Password = HashGenerator.Hash(model.Password),
+                        Password = HashGenerator.Hash(model.NationalCode),
                         IsActive = true,
                         Gender = model.Gender,
                         BirthDay = model.BirthDay,
@@ -427,7 +429,9 @@ namespace InsBrokers.Service
                         NationalCode = model.NationalCode,
                         IdentityNumber = model.IdentityNumber,
                         InsurancePlan = model.InsurancePlan,
+                        InsuranceNumber = model.InsuranceNumber,
                         Organization = model.Organization,
+                        HasAccidentsInsurance = true,
 
                         BankAccounts = new List<BankAccount>{
                             new BankAccount
@@ -495,6 +499,56 @@ namespace InsBrokers.Service
                     FileLoger.Error(e);
                     return new Response<User> { };
                 }
+            }
+        }
+
+        private int GetInsurancePlanPrice(string plan)
+        {
+            if (plan.Contains("برنزی")) return int.Parse(_configuration["InsurancePlanSettings:BoronziPlanPrice"]);
+            else if (plan.Contains("نقره ای")) return int.Parse(_configuration["InsurancePlanSettings:NoghreiPlanPrice"]);
+            else if (plan.Contains("طلایی")) return int.Parse(_configuration["InsurancePlanSettings:TalaeiPlanPrice"]);
+
+            return 0;
+        }
+
+        public async Task<IResponse<object>> GetInsuranceInfo(Guid userId)
+        {
+            var response = new Response<object>();
+            try
+            {
+                var user = await _appUow.UserRepo.FirstOrDefaultAsync(conditions: x => x.UserId == userId, includeProperties: new List<Expression<Func<User, object>>> { x => x.Relatives });
+                if (user.IsNull()) return new Response<object> { Message = ServiceMessage.RecordNotExist };
+
+                var relativesCount = user.Relatives.Count() + 1;
+                var insurancePlanPrice = GetInsurancePlanPrice(user.InsurancePlan);
+                var totalPrice = relativesCount * insurancePlanPrice;
+                var accidentsInsurancePrice = int.Parse(_configuration["InsurancePlanSettings:AccidentsInsurancePrice"]);
+
+                var insuranceInfo = new List<object>
+                {
+                    new { Type="UserInsuranceInfo", Plan = user.InsurancePlan, Price = insurancePlanPrice, Count = relativesCount, TotalPrice = totalPrice},
+                    new { Type="AccidentsInsuranceInfo", Plan = DomainStrings.AccidentsInsurance, Price = accidentsInsurancePrice, Count = 1, TotalPrice = int.Parse(_configuration["InsurancePlanSettings:AccidentsInsurancePrice"]) * 1 },
+                };
+
+                var paymentPart = new
+                {
+                    PaymentPart1 = (totalPrice / 3) + accidentsInsurancePrice,
+                    PaymentPart2 = (totalPrice / 3),
+                    PaymentPart3 = totalPrice - ((totalPrice / 3) * 2),
+                    PaymentPart2Date = _configuration["InsurancePlanSettings:PaymentPart2Date"],
+                    PaymentPart3Date = _configuration["InsurancePlanSettings:PaymentPart3Date"]
+                };
+
+                response.Result = new { InsuranceInfo = insuranceInfo, PaymentPart = paymentPart };
+
+                response.IsSuccessful = true;
+                response.Message = ServiceMessage.Success;
+                return response;
+            }
+            catch (Exception e)
+            {
+                FileLoger.Error(e);
+                return response;
             }
         }
 
@@ -710,7 +764,7 @@ namespace InsBrokers.Service
                     worksheet.Cell(rowNumber, 19).SetDataType(XLDataType.Text).SetValue("");
                     worksheet.Cell(rowNumber, 20).SetDataType(XLDataType.Text).SetValue(customer.InsurancePlan);
                     worksheet.Cell(rowNumber, 21).SetDataType(XLDataType.Text).SetValue(customer.Organization);
-                    worksheet.Cell(rowNumber, 22).SetDataType(XLDataType.Text).SetValue("");
+                    worksheet.Cell(rowNumber, 22).SetDataType(XLDataType.Text).SetValue(customer.InsuranceNumber);
                     worksheet.Cell(rowNumber, 23).SetDataType(XLDataType.Text).SetValue(customer.BankAccounts.FirstOrDefault()?.BankName.GetDescription());
                     worksheet.Cell(rowNumber, 24).SetDataType(XLDataType.Text).SetValue(customer.BankAccounts.FirstOrDefault()?.Shaba);
                     worksheet.Cell(rowNumber, 25).SetDataType(XLDataType.Text).SetValue(customer.MobileNumber);
@@ -743,7 +797,7 @@ namespace InsBrokers.Service
                         worksheet.Cell(rowNumber, 19).SetDataType(XLDataType.Text).SetValue((byte)relative.TakafolKind);
                         worksheet.Cell(rowNumber, 20).SetDataType(XLDataType.Text).SetValue(customer.InsurancePlan);
                         worksheet.Cell(rowNumber, 21).SetDataType(XLDataType.Text).SetValue(customer.Organization);
-                        worksheet.Cell(rowNumber, 22).SetDataType(XLDataType.Text).SetValue("");
+                        worksheet.Cell(rowNumber, 22).SetDataType(XLDataType.Text).SetValue(relative.InsuranceNumber);
                         worksheet.Cell(rowNumber, 23).SetDataType(XLDataType.Text).SetValue("");
                         worksheet.Cell(rowNumber, 24).SetDataType(XLDataType.Text).SetValue("");
                         worksheet.Cell(rowNumber, 25).SetDataType(XLDataType.Text).SetValue("");

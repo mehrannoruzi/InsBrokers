@@ -6,14 +6,20 @@ namespace InsBrokers.Domain
     {
         [Description("تصویر کارت ملی")]
         NationalCard = 1,
+        
+        [Description("تصویر پشت کارت ملی")]
+        NationalCardPage2 = 2,
 
-        [Description("تصویر شناسنامه")]
-        IdentityCard = 2,
+        [Description("تصویر صفحه اول شناسنامه")]
+        IdentityCardPage1 = 3,
+
+        [Description("تصویر صفحه دوم شناسنامه")]
+        IdentityCardPage2 = 4,
 
         [Description("عکس پرسنلی")]
-        PersoneliPicture = 3,
+        PersoneliPicture = 5,
 
         [Description("تصویر دفترچه بیمه")]
-        InsuranceBooklet = 4,
+        InsuranceBooklet = 6,
     }
 }

@@ -11,7 +11,7 @@ using DomainString = InsBrokers.Domain.Resource.Strings;
 
 namespace InsBrokers.Portal.Controllers
 {
-    [AuthorizationFilter]
+    //[AuthorizationFilter]
     public partial class UserController : Controller
     {
         private readonly IUserService _userSrv;
@@ -127,6 +127,11 @@ namespace InsBrokers.Portal.Controllers
                 return null;
             }
         }
+
+        [HttpGet]
+        public virtual async Task<IActionResult> InsuranceInfo()
+            => Json(await _userSrv.GetInsuranceInfo(Guid.Parse("dd1d79b7-ca86-41be-6008-08d919c27afe")));
+            //=> Json(await _userSrv.GetInsuranceInfo(User.GetUserId()));
 
     }
 }

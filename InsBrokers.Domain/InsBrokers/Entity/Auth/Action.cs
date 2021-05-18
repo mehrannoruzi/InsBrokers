@@ -51,9 +51,16 @@ namespace InsBrokers.Domain
         [StringLength(40, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
         public string Icon { get; set; }
 
+        [Column(TypeName = "varchar(150)")]
+        [Display(Name = nameof(Strings.Icon), ResourceType = typeof(Strings))]
+        [MaxLength(150, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
+        [StringLength(150, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
+        public string StaticPath { get; set; }
+
+
         [NotMapped]
         [Display(Name = nameof(Strings.Path), ResourceType = typeof(Strings))]
-        public string Path { get { return $"/{ControllerName}/{ActionName}"; } }
+        public string Path => string.IsNullOrWhiteSpace(StaticPath) ? $"/{ControllerName}/{ActionName}" : StaticPath;
 
         public virtual ICollection<ActionInRole> ActionInRoles { get; set; }
     }

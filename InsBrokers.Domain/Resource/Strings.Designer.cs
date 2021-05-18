@@ -61,6 +61,15 @@ namespace InsBrokers.Domain.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to بیمه عمر و حوادث.
+        /// </summary>
+        public static string AccidentsInsurance {
+            get {
+                return ResourceManager.GetString("AccidentsInsurance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to شماره حساب.
         /// </summary>
         public static string AccountNumber {
@@ -367,6 +376,15 @@ namespace InsBrokers.Domain.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to بیمه حوادث دارد ؟.
+        /// </summary>
+        public static string HasAccidentsInsurance {
+            get {
+                return ResourceManager.GetString("HasAccidentsInsurance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to آیکون.
         /// </summary>
         public static string Icon {
@@ -390,6 +408,15 @@ namespace InsBrokers.Domain.Resource {
         public static string InsertDate {
             get {
                 return ResourceManager.GetString("InsertDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شماره سریال بیمه پایه.
+        /// </summary>
+        public static string InsuranceNumber {
+            get {
+                return ResourceManager.GetString("InsuranceNumber", resourceCulture);
             }
         }
         
