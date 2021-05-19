@@ -404,15 +404,19 @@ var customSerialize = function ($wrapper, checkNumbers) {
 
     $wrapper.find('input[type="checkbox"],input[type="radio"]').each(function () {
         let name = $(this).attr('name');
-        let val = $(this).attr('value').toLowerCase();
-        if (!val || val === 'true' || val === 'false') val = $(this).prop('checked');
-        if (!model[name]) {
-            model[name] = val;
+        let v = $(this).attr('value');
+        if (typeof v !== 'undefined') {
+            let val = v.toLowerCase();
+            if (!val || val === 'true' || val === 'false') val = $(this).prop('checked');
+            if (!model[name]) {
+                model[name] = val;
+            }
+            else {
+                if (Array.isArray(model[name])) model[name].push(val);
+                else model[name] = [model[name], val];
+            }
         }
-        else {
-            if (Array.isArray(model[name])) model[name].push(val);
-            else model[name] = [model[name], val];
-        }
+
     });
     return model;
 };

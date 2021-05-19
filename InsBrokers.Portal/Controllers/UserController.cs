@@ -130,7 +130,7 @@ namespace InsBrokers.Portal.Controllers
 
         [HttpGet]
         public virtual async Task<IActionResult> InsuranceInfo()
-            => Json(await _userSrv.GetInsuranceInfo(Guid.Parse("dd1d79b7-ca86-41be-6008-08d919c27afe")));
+            => View(await _userSrv.GetInsuranceInfo(Guid.Parse("dd1d79b7-ca86-41be-6008-08d919c27afe")));
             //=> Json(await _userSrv.GetInsuranceInfo(User.GetUserId()));
 
     }

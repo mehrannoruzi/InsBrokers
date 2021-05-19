@@ -19,7 +19,7 @@ namespace InsBrokers.Service
         List<MenuSPModel> GetMainMenu(Guid userId);
         Task<IResponse<User>> Authenticate(long mobileNumber, string password);
         void SignOut(Guid userId);
-        Task<IResponse<object>> GetInsuranceInfo(Guid userId);
+        Task<IResponse<InsuranceInformation>> GetInsuranceInfo(Guid userId);
         PagingListDetails<User> Get(UserSearchFilter filter);
         IDictionary<object, object> Search(string query, int take = 10);
         Task<IResponse<string>> RecoverPassword(long mobileNumber, string from, EmailMessage model);

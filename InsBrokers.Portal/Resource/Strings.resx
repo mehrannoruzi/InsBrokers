@@ -309,6 +309,9 @@
   <data name="Required" xml:space="preserve">
     <value>این فیلد اجباری می باشد</value>
   </data>
+  <data name="Return" xml:space="preserve">
+    <value>بازگشت</value>
+  </data>
   <data name="Roles" xml:space="preserve">
     <value>نقش ها</value>
   </data>

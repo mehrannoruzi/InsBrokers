@@ -50,7 +50,7 @@
                     <div style="
                             width:100%;
                             margin: 15px; ">
-                        <input type="checkbox" id="HasAccidentsInsurance" checked="checked" disabled="disabled" title="بیمه عمر و حوادث برای بیمه گر اصلی اجباری می باشد." />
+                        <input type="checkbox" id="HasAccidentsInsurance" name="HasAccidentsInsurance" value="true" checked="checked" disabled="disabled" title="بیمه عمر و حوادث برای بیمه گر اصلی اجباری می باشد." />
                         <span>برای اعضاء اصلی  سرمایه فوت به هر علت به مبلغ 500.000.000 ریال، فوت بر اثر حادثه500.000.000 ریال، نقص عضو و از کار افتادگی 500.000.000 ریال در نظر گرفته شده است. </span>
                     </div>
                     
@@ -178,12 +178,12 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-12 d-flex justify-content-between mb-15">
-            <a class="btn btn-info btn-action ltr" href="@Url.Action("SignIn","Auth")">
-                <span class="text">@Strings.SignIn</span>
+        <div class="col-12 d-flex justify-content-end mb-15">
+            <a class="btn btn-info btn-action ml-2" href="@Url.Action("Index","Home")">
                 <div class="icon">
                     <i class="zmdi zmdi-sign-in"></i>
                 </div>
+                <span class="text">@Strings.Return</span>
             </a>
             <custom-button id="btn-sign-up" class="btn btn-primary" type="button" text="@Strings.SignUp" icon="zmdi zmdi-floppy"></custom-button>
         </div>

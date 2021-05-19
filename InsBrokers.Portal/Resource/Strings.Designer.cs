@@ -637,6 +637,15 @@ namespace InsBrokers.Portal.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to بازگشت.
+        /// </summary>
+        public static string Return {
+            get {
+                return ResourceManager.GetString("Return", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to نقش ها.
         /// </summary>
         public static string Roles {

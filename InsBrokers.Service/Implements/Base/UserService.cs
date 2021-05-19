@@ -511,35 +511,33 @@ namespace InsBrokers.Service
             return 0;
         }
 
-        public async Task<IResponse<object>> GetInsuranceInfo(Guid userId)
+        public async Task<IResponse<InsuranceInformation>> GetInsuranceInfo(Guid userId)
         {
-            var response = new Response<object>();
+            var response = new Response<InsuranceInformation>();
             try
             {
                 var user = await _appUow.UserRepo.FirstOrDefaultAsync(conditions: x => x.UserId == userId, includeProperties: new List<Expression<Func<User, object>>> { x => x.Relatives });
-                if (user.IsNull()) return new Response<object> { Message = ServiceMessage.RecordNotExist };
-
+                if (user.IsNull()) return new Response<InsuranceInformation> { Message = ServiceMessage.RecordNotExist };
+                response.Result = new InsuranceInformation();
                 var relativesCount = user.Relatives.Count() + 1;
                 var insurancePlanPrice = GetInsurancePlanPrice(user.InsurancePlan);
                 var totalPrice = relativesCount * insurancePlanPrice;
                 var accidentsInsurancePrice = int.Parse(_configuration["InsurancePlanSettings:AccidentsInsurancePrice"]);
 
-                var insuranceInfo = new List<object>
-                {
-                    new { Type="UserInsuranceInfo", Plan = user.InsurancePlan, Price = insurancePlanPrice, Count = relativesCount, TotalPrice = totalPrice},
-                    new { Type="AccidentsInsuranceInfo", Plan = DomainStrings.AccidentsInsurance, Price = accidentsInsurancePrice, Count = 1, TotalPrice = int.Parse(_configuration["InsurancePlanSettings:AccidentsInsurancePrice"]) * 1 },
-                };
-
-                var paymentPart = new
+                response.Result = new InsuranceInformation
                 {
                     PaymentPart1 = (totalPrice / 3) + accidentsInsurancePrice,
                     PaymentPart2 = (totalPrice / 3),
                     PaymentPart3 = totalPrice - ((totalPrice / 3) * 2),
                     PaymentPart2Date = _configuration["InsurancePlanSettings:PaymentPart2Date"],
                     PaymentPart3Date = _configuration["InsurancePlanSettings:PaymentPart3Date"]
-                };
 
-                response.Result = new { InsuranceInfo = insuranceInfo, PaymentPart = paymentPart };
+                };
+                response.Result.Details = new List<InsuranceDetail>
+                {
+                    new InsuranceDetail{ Type="UserInsuranceInfo", Plan = user.InsurancePlan, Price = insurancePlanPrice, Count = relativesCount, TotalPrice = totalPrice},
+                    new InsuranceDetail{ Type="AccidentsInsuranceInfo", Plan = DomainStrings.AccidentsInsurance, Price = accidentsInsurancePrice, Count = 1, TotalPrice = int.Parse(_configuration["InsurancePlanSettings:AccidentsInsurancePrice"]) * 1 },
+                };
 
                 response.IsSuccessful = true;
                 response.Message = ServiceMessage.Success;
