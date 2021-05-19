@@ -22,79 +22,95 @@
 @{
     if (Model.IsSuccessful)
     {
-        <div class="container">
-            <div class="row">
-                <h4 class="w-100">پیش فاکتور</h4>
-                <p class="mb-15">
-                    کاربر گرامی پیش فاکتور، نحوه محاسبه، و نحوه پرداخت اقساط بیمه نامه در جدول زیر نشان داده شده است.
-                    <br />
-                    بیمه عمر و حادثه  برای سرپرست خانوار و بصورت اجباری است و مبلغ آن در قسط اول همراه با بیمه درمان باید پرداخت گردد:
-                </p>
-                <ul class="list-group w-100 mb-15">
-                    @{
-                        if (Model.Result.Details != null)
-                        {
-                            @foreach (var item in Model.Result.Details)
-                            {
-                                <li><strong>@item.Plan:</strong>  @item.Price.ToString("N0")</li>
-                            }
-                        }
-                    }
-                </ul>
-                <table class="table table-bordered mb-15">
-                    <thead>
-                        <tr>
-                            <th>طرح انتخابی</th>
-                            <th>مبلغ طرح(تومان)</th>
-                            <th>تعداد نفرات</th>
-                            <th>جمع کل</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @{
-                            if (Model.Result.Details != null)
-                            {
-                                @foreach (var item in Model.Result.Details)
+
+        <div class="row">
+            <div class="col-12 col-sm-12">
+                <div class="ibox">
+                    <div class="ibox-title">
+                        <h5>@Strings.PreFactor</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="zmdi zmdi-chevron-down"></i>
+                            </a>
+                            <a class="close-link">
+                                <i class="zmdi zmdi-close"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <p class="mb-15">
+                            کاربر گرامی پیش فاکتور، نحوه محاسبه، و نحوه پرداخت اقساط بیمه نامه در جدول زیر نشان داده شده است.
+                            <br />
+                            بیمه عمر و حادثه  برای سرپرست خانوار و بصورت اجباری است و مبلغ آن در قسط اول همراه با بیمه درمان باید پرداخت گردد:
+                        </p>
+                        <ul class="list-group w-100 mb-15">
+                            @{
+                                if (Model.Result.Details != null)
                                 {
-                                    <tr>
-                                        <td>@item.Plan</td>
-                                        <td>@item.Price.ToString("N0")</td>
-                                        <td>@item.Count</td>
-                                        <td>@item.TotalPrice.ToString("N0")</td>
-                                    </tr>
+                                    @foreach (var item in Model.Result.Details)
+                                    {
+                                        <li><strong>@item.Plan:</strong>  @item.Price.ToString("N0")</li>
+                                    }
                                 }
                             }
-                        }
-                        <tr>
-                            <td colspan="3">جمع کل</td>
-                            <td>@Model.Result.Details.Sum(x => x.TotalPrice).ToString("N0")</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <h4 class="w-100">نحوه محاسبه</h4>
-                <ul class="list-group w-100 mb-15">
-                    <li>قسط اول: مبلغ / 3 + مبلغ بیمه عمر و حوادث = جمع کل (نقدی)</li>
-                    <li>قسط دوم: مبلغ / 3)</li>
-                    <li>قسط سوم: مبلغ / 3)</li>
-                </ul>
-                <h4 class="w-100">نحوه پرداخت</h4>
-                <p>
-                    تعداد اقساط سه قسط می باشد.
-                    <br />
-                    قسط اول باید بصورت نقدی پرداخت گردد.
-                    <br />
-                    دو قسط بعدی بصورت چک در تاریخ های زیر
-                    <br />
-                    قسط دوم @Model.Result.PaymentPart2Date , مبلغ : @Model.Result.PaymentPart2
-                    <br />
-                    قسط سوم @Model.Result.PaymentPart3Date , مبلغ : @Model.Result.PaymentPart3
-                </p>
-                <p>
-                    <br />
-                    لطفاً مبلغ <strong>@Model.Result.PaymentPart1.ToString("N0")</strong> تومان به حساب بانک تجارت به نام صندوق تعاون و رفاه سازمان نظام دامپزشکی به شماره حساب 123551087 و یا شماره کارت 5859837008101624 و یا شماره شبای 560180000000000123551087 واریز گردد.
-                </p>
+                        </ul>
+                        <table class="table table-bordered mb-15">
+                            <thead>
+                                <tr>
+                                    <th>طرح انتخابی</th>
+                                    <th>مبلغ طرح(تومان)</th>
+                                    <th>تعداد نفرات</th>
+                                    <th>جمع کل</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    if (Model.Result.Details != null)
+                                    {
+                                        @foreach (var item in Model.Result.Details)
+                                        {
+                                            <tr>
+                                                <td>@item.Plan</td>
+                                                <td>@item.Price.ToString("N0")</td>
+                                                <td>@item.Count</td>
+                                                <td>@item.TotalPrice.ToString("N0")</td>
+                                            </tr>
+                                        }
+                                    }
+                                }
+                                <tr>
+                                    <td colspan="3">جمع کل</td>
+                                    <td>@Model.Result.Details.Sum(x => x.TotalPrice).ToString("N0")</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h4 class="w-100">نحوه محاسبه</h4>
+                        <ul class="list-group w-100 mb-15">
+                            <li>قسط اول: مبلغ / 3 + مبلغ بیمه عمر و حوادث = جمع کل (نقدی)</li>
+                            <li>قسط دوم: مبلغ / 3)</li>
+                            <li>قسط سوم: مبلغ / 3)</li>
+                        </ul>
+                        <h4 class="w-100">نحوه پرداخت</h4>
+                        <p>
+                            تعداد اقساط سه قسط می باشد.
+                            <br />
+                            قسط اول باید بصورت نقدی پرداخت گردد.
+                            <br />
+                            دو قسط بعدی بصورت چک در تاریخ های زیر
+                            <br />
+                            قسط دوم @Model.Result.PaymentPart2Date , مبلغ : @Model.Result.PaymentPart2
+                            <br />
+                            قسط سوم @Model.Result.PaymentPart3Date , مبلغ : @Model.Result.PaymentPart3
+                        </p>
+                        <p>
+                            <br />
+                            لطفاً مبلغ <strong>@Model.Result.PaymentPart1.ToString("N0")</strong> تومان به حساب بانک تجارت به نام صندوق تعاون و رفاه سازمان نظام دامپزشکی به شماره حساب 123551087 و یا شماره کارت 5859837008101624 و یا شماره شبای 560180000000000123551087 واریز گردد.
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
+
     }
 }
 
