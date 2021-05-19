@@ -34,6 +34,8 @@ namespace InsBrokers.Domain
 
         public string Actions { get; set; }
 
+        public string StaticPath { get; set; }
+
         [NotMapped]
         public List<MenuSPModel> ActionsList { get { return (Actions ?? "[]").DeSerializeJson<List<MenuSPModel>>(); } }
 
