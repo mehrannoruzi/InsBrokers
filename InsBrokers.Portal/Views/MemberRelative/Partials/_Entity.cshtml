@@ -3,28 +3,28 @@
     Layout = null;
 }
 @Html.HiddenFor(x => x.RelativeId)
-    <div class="row">
-        <div class="col-12 col-sm-4">
-            <custom-input-for for="Name" />
-        </div>
-        <div class="col-12 col-sm-4">
-            <custom-input-for for="Family" />
-        </div>
-        <div class="col-12 col-sm-4">
-            <custom-input-for for="FatherName" />
-        </div>
+<div class="row">
+    <div class="col-12 col-sm-4">
+        <custom-input-for for="Name" />
     </div>
-    <div class="row">
-        <div class="col-12 col-sm-4">
-            <custom-input-for for="IdentityNumber" class="form-control ltr-elm" />
-        </div>
-        <div class="col-12 col-sm-4">
-            <custom-input-for for="NationalCode" class="form-control ltr-elm" />
-        </div>
-        <div class="col-12 col-sm-4">
-            <custom-input-for for="BirthDay" class="form-control ltr-elm pdate" />
-        </div>
+    <div class="col-12 col-sm-4">
+        <custom-input-for for="Family" />
     </div>
+    <div class="col-12 col-sm-4">
+        <custom-input-for for="FatherName" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 col-sm-4">
+        <custom-input-for for="IdentityNumber" class="form-control ltr-elm" />
+    </div>
+    <div class="col-12 col-sm-4">
+        <custom-input-for for="NationalCode" class="form-control ltr-elm" />
+    </div>
+    <div class="col-12 col-sm-4">
+        <custom-input-for for="BirthDay" class="form-control ltr-elm pdate" />
+    </div>
+</div>
 <div class="row">
     <div class="col-12 col-sm-6">
         <custom-select-for for="Gender" class="form-control" items="EnumExtension.GetEnumElements<Gender>().Select(x=>new SelectListItem {
@@ -46,7 +46,7 @@
                                 Value = x.Name
                             }).ToList()" />
     </div>
-    <div class="col-12 col-sm-6">
-
+    <div class="col-12 col-sm-6 @(Model.TakafolKind==TakafolKind.NonUnderTakafol?"":"d-none")" id="isurance-number-wrapper">
+        <custom-input-for for="InsuranceNumber" />
     </div>
 </div>

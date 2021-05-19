@@ -22,9 +22,9 @@
             }
         <div class="col-6 col-sm-6 menu-item">
             @{
-                if (item.ShowInMenu)
+                if (!string.IsNullOrWhiteSpace(item.StaticPath))
                 {
-                    <a class="menu-link" href="" target="_blank">
+                    <a class="menu-link" href="@item.StaticPath" target="_blank">
                         <figure>
                             @*<i class="@item.Icon"></i>*@
                             <img src="~/Images/Portal/@(item.Icon)" />

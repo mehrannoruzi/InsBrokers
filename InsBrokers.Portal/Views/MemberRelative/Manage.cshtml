@@ -11,3 +11,14 @@
     <partial name="Partials/_Filters" model="new RelativeSearchFilter()" />
 }
 <partial name="Partials/_List" model="@Model" />
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $(document).on("change", "#TakafolKind", function () {
+                let val = $(this).val();
+                if (val === "NonUnderTakafol") $("#isurance-number-wrapper").removeClass("d-none");
+                else $("#isurance-number-wrapper").addClass("d-none");
+            });
+        });
+    </script>
+}
