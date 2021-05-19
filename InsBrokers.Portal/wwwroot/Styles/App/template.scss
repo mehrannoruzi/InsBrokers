@@ -4821,6 +4821,7 @@ code {
     padding: 2px 4px;
     white-space: nowrap;
 }
+
 .filters {
     position: relative;
 
@@ -4828,12 +4829,23 @@ code {
         margin-left: 125px;
     }
 
+    .ibox.has-btn-extra:not(.fixed-ibox) {
+        margin-left: 300px;
+    }
+
     > .btn-action {
         position: absolute;
         left: 0;
         top: 0;
     }
+
+    > .btn-extra {
+        position: absolute;
+        left: 130px;
+        top: 0;
+    }
 }
+
 .ibox {
     clear: both;
     margin-bottom: 10px;
@@ -10517,6 +10529,7 @@ body.md-skin {
 p {
     margin-bottom: 0;
 }
+
 @media(max-width:576px) {
     .wide-logo {
 

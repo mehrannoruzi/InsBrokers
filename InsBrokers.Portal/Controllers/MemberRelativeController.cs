@@ -68,6 +68,10 @@ namespace InsBrokers.Portal.Controllers
         public virtual ActionResult Manage(RelativeSearchFilter filter)
         {
             filter.UserId = User.GetUserId();
+            ViewBag.HasExtraButton = true;
+            ViewBag.ExtraButtonUrl = Url.Action("InsuranceInfo","User");
+            ViewBag.ExtraButtonText = Strings.PreFactor;
+            ViewBag.ExtraButtonIcon = "zmdi-eye";
             if (!Request.IsAjaxRequest()) return View(_MemberRelativeSrv.Get(filter));
             else return PartialView("Partials/_List", _MemberRelativeSrv.Get(filter));
         }

@@ -565,6 +565,15 @@ namespace InsBrokers.Portal.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to پیش فاکتور.
+        /// </summary>
+        public static string PreFactor {
+            get {
+                return ResourceManager.GetString("PreFactor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to صفحه قبلی.
         /// </summary>
         public static string PrevPage {

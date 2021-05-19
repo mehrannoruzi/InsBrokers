@@ -4008,9 +4008,15 @@ code {
   position: relative; }
   .filters .ibox:not(.fixed-ibox) {
     margin-left: 125px; }
+  .filters .ibox.has-btn-extra:not(.fixed-ibox) {
+    margin-left: 300px; }
   .filters > .btn-action {
     position: absolute;
     left: 0;
+    top: 0; }
+  .filters > .btn-extra {
+    position: absolute;
+    left: 130px;
     top: 0; }
 
 .ibox {

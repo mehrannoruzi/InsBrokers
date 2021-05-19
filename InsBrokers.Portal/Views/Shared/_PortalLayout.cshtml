@@ -10,7 +10,7 @@
     @RenderSection("styles", false)
     <partial name="Partials/_PortalLayoutHeader" />
 </head>
-<body dir="@(rtl?"rtl":"ltr")">
+<body dir="@(rtl ? "rtl" : "ltr")">
     <header>
         <partial name="Partials/_Menu" />
     </header>
@@ -21,7 +21,18 @@
                     <img src="@Url.Content("~/Images/Portal/Logo-1.png")" />
                 </div>
                 <div class="col-12 col-sm-6 justify-content-center justify-content-sm-end" id="insurance-req">
-                    <a id="btn-insurance-req" class="btn btn-warning" asp-controller="home" asp-action="register">ثبت نام</a>
+
+                    @{
+                        if (Context.Request.Path.ToString().ToLower() == "/home/register")
+                        {
+                            <a id="btn-insurance-req" class="btn btn-warning" asp-controller="auth" asp-action="signin">ورود</a>
+                        }
+                        else
+                        {
+                            <a id="btn-insurance-req" class="btn btn-warning" asp-controller="home" asp-action="register">ثبت نام</a>
+                        }
+
+                    }
                 </div>
             </div>
         </div>

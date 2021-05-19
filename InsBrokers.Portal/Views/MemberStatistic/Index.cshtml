@@ -20,41 +20,31 @@
             {
                 continue;
             }
-            <div class="col-6 col-sm-6 menu-item">
-                <a class="menu-link" href="@Url.Action(item.ActionName,item.ControllerName)">
-                    <figure>
-                        @*<i class="@item.Icon"></i>*@
-                        <img src="~/Images/Portal/@(item.Icon)" />
-                        <figcaption>@item.Name</figcaption>
-                    </figure>
-                </a>
-            </div>
+        <div class="col-6 col-sm-6 menu-item">
+            @{
+                if (item.ShowInMenu)
+                {
+                    <a class="menu-link" href="" target="_blank">
+                        <figure>
+                            @*<i class="@item.Icon"></i>*@
+                            <img src="~/Images/Portal/@(item.Icon)" />
+                            <figcaption>@item.Name</figcaption>
+                        </figure>
+                    </a>
+                }
+                else
+                {
+                    <a class="menu-link" href="@Url.Action(item.ActionName,item.ControllerName)">
+                        <figure>
+                            @*<i class="@item.Icon"></i>*@
+                            <img src="~/Images/Portal/@(item.Icon)" />
+                            <figcaption>@item.Name</figcaption>
+                        </figure>
+                    </a>
+                }
+            }
+        </div>
 
         }
-
-        @*<div class="col-12 col-sm-6">
-            <a class="nav-link" href="@Url.Action("Manage","MemberRelative")">
-                <figure>
-                    <i class="zmdi zmdi-accounts-add"></i>
-                    <figcaption>ثبت بستگان</figcaption>
-                </figure>
-            </a>
-        </div>
-        <div class="col-12 col-sm-6">
-            <a class="nav-link" href="@Url.Action("Manage","MemberLoss")">
-                <figure>
-                    <i class="zmdi zmdi-receipt"></i>
-                    <figcaption>ثبت هزینه درمان</figcaption>
-                </figure>
-            </a>
-        </div>
-        <div class="col-12 col-sm-6">
-            <a class="nav-link" href="@Url.Action("Manage","MemberBankAccount")">
-                <figure>
-                    <i class="zmdi zmdi-receipt"></i>
-                    <figcaption>ثبت شماره حساب</figcaption>
-                </figure>
-            </a>
-        </div>*@
     </div>
 </div>

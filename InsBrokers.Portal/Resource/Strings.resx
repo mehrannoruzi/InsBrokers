@@ -285,6 +285,9 @@
   <data name="PleaseSelect" xml:space="preserve">
     <value>لطفا انتخاب نمایید</value>
   </data>
+  <data name="PreFactor" xml:space="preserve">
+    <value>پیش فاکتور</value>
+  </data>
   <data name="PrevPage" xml:space="preserve">
     <value>صفحه قبلی</value>
   </data>
