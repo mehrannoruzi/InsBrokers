@@ -23,7 +23,7 @@ namespace InsBrokers.Portal.Controllers
             {
                 new Claim(ClaimTypes.NameIdentifier,user.UserId.ToString()),
                 new Claim(ClaimTypes.Name, user.MobileNumber.ToString()),
-                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.Email, string.IsNullOrWhiteSpace(user.Email) ? string.Empty : user.Email),
                 new Claim("Fullname", user.Fullname)
             };
 
