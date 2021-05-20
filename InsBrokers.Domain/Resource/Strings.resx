@@ -141,6 +141,9 @@
   <data name="Application" xml:space="preserve">
     <value>اپلیکیشن</value>
   </data>
+  <data name="Attachments" xml:space="preserve">
+    <value>لیست مدارک</value>
+  </data>
   <data name="BankAccount" xml:space="preserve">
     <value>حساب بانکی</value>
   </data>

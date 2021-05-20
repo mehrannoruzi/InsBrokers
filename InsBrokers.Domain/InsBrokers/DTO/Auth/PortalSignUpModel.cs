@@ -35,9 +35,9 @@ namespace InsBrokers.Domain
         [Display(Name = nameof(Strings.NationalCode), ResourceType = typeof(Strings))]
         [Required(ErrorMessageResourceName = nameof(ErrorMessage.Required), ErrorMessageResourceType = typeof(ErrorMessage))]
         [MaxLength(10, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
-        //[MinLength(10, ErrorMessageResourceName = nameof(ErrorMessage.MinLength), ErrorMessageResourceType = typeof(ErrorMessage))]
         [StringLength(10, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
-        [NationalCode(ErrorMessageResourceName = nameof(ErrorMessage.InvalidNationalCode), ErrorMessageResourceType = typeof(ErrorMessage))]
+        //[MinLength(10, ErrorMessageResourceName = nameof(ErrorMessage.MinLength), ErrorMessageResourceType = typeof(ErrorMessage))]
+        //[NationalCode(ErrorMessageResourceName = nameof(ErrorMessage.InvalidNationalCode), ErrorMessageResourceType = typeof(ErrorMessage))]
         public string NationalCode { get; set; }
 
         [Display(Name = nameof(Strings.IdentityNumber), ResourceType = typeof(Strings))]

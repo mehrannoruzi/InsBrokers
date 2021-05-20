@@ -1,6 +1,7 @@
 ﻿using System;
 using Elk.Core;
 using InsBrokers.Domain.Resource;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -23,7 +24,7 @@ namespace InsBrokers.Domain
         [Display(Name = nameof(Strings.Gender), ResourceType = typeof(Strings))]
         [Required(ErrorMessageResourceName = nameof(ErrorMessage.Required), ErrorMessageResourceType = typeof(ErrorMessage))]
         public Gender Gender { get; set; }
-        
+
         [Display(Name = nameof(Strings.TakafolKind), ResourceType = typeof(Strings))]
         [Required(ErrorMessageResourceName = nameof(ErrorMessage.Required), ErrorMessageResourceType = typeof(ErrorMessage))]
         public TakafolKind TakafolKind { get; set; }
@@ -86,8 +87,14 @@ namespace InsBrokers.Domain
         [StringLength(25, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
         public string FatherName { get; set; }
 
+
+
         [NotMapped]
         [Display(Name = nameof(Strings.Family), ResourceType = typeof(Strings))]
         public string Fullname => $"{Name} {Family}";
+
+
+        [Display(Name = nameof(Strings.Attachments), ResourceType = typeof(Strings))]
+        public List<RelativeAttachment> RelativeAttachments { get; set; }
     }
 }

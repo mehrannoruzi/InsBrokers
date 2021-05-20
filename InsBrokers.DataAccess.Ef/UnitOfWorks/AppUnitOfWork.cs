@@ -32,6 +32,7 @@ namespace InsBrokers.DataAccess.Ef
         public IGenericRepo<Address> AddressRepo=> _serviceProvider.GetService<IGenericRepo<Address>>();
         public IGenericRepo<ContactUs> ContactUsRepo => _serviceProvider.GetService<IGenericRepo<ContactUs>>();
         public IGenericRepo<Relative> RelativeRepo => _serviceProvider.GetService<IGenericRepo<Relative>>();
+        public IGenericRepo<RelativeAttachment> RelativeAttachmentRepo => _serviceProvider.GetService<IGenericRepo<RelativeAttachment>>();
         public IGenericRepo<BankAccount> BankAccountRepo=> _serviceProvider.GetService<IGenericRepo<BankAccount>>();
         #endregion
 
