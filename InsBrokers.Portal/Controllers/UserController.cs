@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using InsBrokers.Portal.Resource;
 using DomainString = InsBrokers.Domain.Resource.Strings;
+using Microsoft.Extensions.Configuration;
 
 namespace InsBrokers.Portal.Controllers
 {
@@ -15,10 +16,12 @@ namespace InsBrokers.Portal.Controllers
     public partial class UserController : Controller
     {
         private readonly IUserService _userSrv;
+        private readonly IConfiguration _configuration;
 
-        public UserController(IUserService userBiz)
+        public UserController(IUserService userBiz, IConfiguration configuration)
         {
             _userSrv = userBiz;
+            _configuration = configuration;
         }
 
 
@@ -70,7 +73,13 @@ namespace InsBrokers.Portal.Controllers
 
         [HttpGet]
         public virtual async Task<ActionResult> ProfileInfo()
-                => View((await _userSrv.FindAsync(User.GetUserId())).Result);
+        {
+            var user = await _userSrv.FindWithAttachmentsAsync(User.GetUserId());
+            foreach (var item in user.Result.UserAttachments)
+                item.Url = $"{_configuration["CustomSettings:MainAddress"]}{item.Url}";
+
+            return View(user.Result);
+        }
 
         [HttpPost]
         public virtual async Task<JsonResult> ProfileInfo(User model)
@@ -130,8 +139,8 @@ namespace InsBrokers.Portal.Controllers
 
         [HttpGet]
         public virtual async Task<IActionResult> InsuranceInfo()
-            => View(await _userSrv.GetInsuranceInfo(Guid.Parse("dd1d79b7-ca86-41be-6008-08d919c27afe")));
-            //=> Json(await _userSrv.GetInsuranceInfo(User.GetUserId()));
+            => View(await _userSrv.GetInsuranceInfo(User.GetUserId()));
+        //=> View(await _userSrv.GetInsuranceInfo(Guid.Parse("dd1d79b7-ca86-41be-6008-08d919c27afe")));
 
     }
 }
