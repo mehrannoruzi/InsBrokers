@@ -24,7 +24,7 @@ namespace InsBrokers.Service
         PagingListDetails<User> Get(UserSearchFilter filter);
         IDictionary<object, object> Search(string query, int take = 10);
         Task<IResponse<string>> RecoverPassword(long mobileNumber, string from, EmailMessage model);
-        Task<IResponse<object>> AddAttachments(IFormFile file, UserAttachmentType type);
+        Task<IResponse<object>> AddAttachments(IFormFile file, AttachmentType type);
         Task<IResponse<bool>> DeleteAttachment(int attachmentId);
         List<UserAttachment> GetUserAttachments(Guid userId);
         Task<IResponse<User>> SignUp(PortalSignUpModel model);

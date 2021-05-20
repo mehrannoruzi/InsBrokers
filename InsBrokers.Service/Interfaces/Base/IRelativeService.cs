@@ -15,7 +15,7 @@ namespace InsBrokers.Service
         Task<IResponse<Relative>> FindWithAttachmentsAsync(int id);
         PagingListDetails<Relative> Get(RelativeSearchFilter filter);
         Task<IResponse<Relative>> UpdateAsync(Relative model);
-        Task<IResponse<object>> AddAttachments(IFormFile file, UserAttachmentType type);
+        Task<IResponse<object>> AddAttachments(Guid userId, IFormFile file, AttachmentType type);
         Task<IResponse<bool>> DeleteAttachment(int attachmentId);
         IDictionary<object, object> Search(string searchParameter, Guid? userId, int take = 10);
         string Export(RelativeSearchFilter filter);

@@ -2,7 +2,7 @@
 
 namespace InsBrokers.Domain
 {
-    public enum UserAttachmentType
+    public enum AttachmentType
     {
         [Description("تصویر کارت ملی")]
         NationalCard = 1,

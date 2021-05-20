@@ -47,8 +47,19 @@ namespace InsBrokers.Service
         {
             await _appUow.RelativeRepo.AddAsync(model);
 
-            var saveResult = await _appUow.ElkSaveChangesAsync();
-            return new Response<Relative> { Result = model, IsSuccessful = saveResult.IsSuccessful, Message = saveResult.Message };
+            #region Save Attachments
+            var attachments = _appUow.RelativeAttachmentRepo.Get(conditions: x => model.RelativeAttachmentIds.Contains(x.RelativeAttachmentId));
+            foreach (var attachment in attachments)
+                attachment.RelativeId = model.RelativeId;
+            #endregion
+
+            var addRelativeResult = await _appUow.ElkSaveChangesAsync();
+            return new Response<Relative>
+            {
+                Result = model,
+                Message = addRelativeResult.Message,
+                IsSuccessful = addRelativeResult.IsSuccessful
+            };
         }
 
         public async Task<IResponse<Relative>> UpdateAsync(Relative model)
@@ -103,7 +114,7 @@ namespace InsBrokers.Service
             return new Response<Relative> { Result = relative, IsSuccessful = true };
         }
 
-        public async Task<IResponse<object>> AddAttachments(IFormFile file, UserAttachmentType type)
+        public async Task<IResponse<object>> AddAttachments(Guid userId, IFormFile file, AttachmentType type)
         {
             var response = new Response<object>();
             try
@@ -114,7 +125,7 @@ namespace InsBrokers.Service
                 #region Save Attachment To Host
                 var fullPath = HttpFileTools.GetPath(
                     fileNameWithExtension: type.ToString() + Path.GetExtension(file.FileName),
-                    root: "Files/UserAttachment");
+                    root: $"Files/RelativeAttachment/{userId}");
                 if (string.IsNullOrWhiteSpace(fullPath)) return new Response<object> { Message = ServiceMessage.Error };
 
                 var fileUrl = HttpFileTools.Save(file, fullPath);
@@ -129,7 +140,7 @@ namespace InsBrokers.Service
                     FileType = FileType.Image,
                     Extention = Path.GetExtension(file.FileName),
                     Name = Path.GetFileNameWithoutExtension(fileUrl),
-                    RelativeId = 0
+                    RelativeId = 1
                 };
 
                 await _appUow.RelativeAttachmentRepo.AddAsync(relativeAttachment);

@@ -25,7 +25,7 @@ namespace InsBrokers.Domain
 
         [Display(Name = nameof(Strings.UserAttachmentType), ResourceType = typeof(Strings))]
         [Required(ErrorMessageResourceName = nameof(ErrorMessage.Required), ErrorMessageResourceType = typeof(ErrorMessage))]
-        public UserAttachmentType UserAttachmentType { get; set; }
+        public AttachmentType UserAttachmentType { get; set; }
 
         [Display(Name = nameof(Strings.Size), ResourceType = typeof(Strings))]
         public long Size { get; set; }

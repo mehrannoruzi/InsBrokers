@@ -12,7 +12,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace InsBrokers.Portal.Controllers
 {
-    //[AuthorizationFilter]
+    [AuthorizationFilter]
     public partial class UserController : Controller
     {
         private readonly IUserService _userSrv;

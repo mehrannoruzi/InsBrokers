@@ -93,6 +93,8 @@ namespace InsBrokers.Domain
         [Display(Name = nameof(Strings.Family), ResourceType = typeof(Strings))]
         public string Fullname => $"{Name} {Family}";
 
+        [NotMapped]
+        public List<int> RelativeAttachmentIds { get; set; }
 
         [Display(Name = nameof(Strings.Attachments), ResourceType = typeof(Strings))]
         public List<RelativeAttachment> RelativeAttachments { get; set; }

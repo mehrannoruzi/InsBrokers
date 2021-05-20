@@ -367,7 +367,7 @@ namespace InsBrokers.Service
             return new Response<string> { IsSuccessful = true, Message = saveResult.Message };
         }
 
-        public async Task<IResponse<object>> AddAttachments(IFormFile file, UserAttachmentType type)
+        public async Task<IResponse<object>> AddAttachments(IFormFile file, AttachmentType type)
         {
             var response = new Response<object>();
             try

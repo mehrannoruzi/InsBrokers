@@ -22,7 +22,7 @@ namespace InsBrokers.Portal.Controllers
         private readonly IUserService _userSrv;
         private readonly IRelativeService _relativeSrv;
 
-        public HomeController(IUserService userSrv, IRelativeService relativeSrv, 
+        public HomeController(IUserService userSrv, IRelativeService relativeSrv,
             IConfiguration configuration, IHttpContextAccessor httpAccessor) : base(httpAccessor)
         {
             _userSrv = userSrv;
@@ -37,12 +37,12 @@ namespace InsBrokers.Portal.Controllers
         }
 
         [HttpPost]
-        public virtual async Task<JsonResult> AddUserAttachments(UserAttachmentModel model)
+        public virtual async Task<JsonResult> AddUserAttachments(AttachmentModel model)
             => Json(await _userSrv.AddAttachments(model.File, model.Type));
 
         [HttpPost]
-        public virtual async Task<JsonResult> AddRelativeAttachments(UserAttachmentModel model)
-            => Json(await _relativeSrv.AddAttachments(model.File, model.Type));
+        public virtual async Task<JsonResult> AddRelativeAttachments(AttachmentModel model)
+            => Json(await _relativeSrv.AddAttachments(User.GetUserId(), model.File, model.Type));
 
         [HttpGet]
         public IActionResult Register()
