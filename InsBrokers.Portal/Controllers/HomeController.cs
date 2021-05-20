@@ -18,12 +18,15 @@ namespace InsBrokers.Portal.Controllers
 {
     public class HomeController : BaseAuthController
     {
-        private readonly IUserService _userSrv;
         private IConfiguration _configuration;
+        private readonly IUserService _userSrv;
+        private readonly IRelativeService _relativeSrv;
 
-        public HomeController(IUserService userSrv, IConfiguration configuration, IHttpContextAccessor httpAccessor) : base(httpAccessor)
+        public HomeController(IUserService userSrv, IRelativeService relativeSrv, 
+            IConfiguration configuration, IHttpContextAccessor httpAccessor) : base(httpAccessor)
         {
             _userSrv = userSrv;
+            _relativeSrv = relativeSrv;
             _configuration = configuration;
         }
 
@@ -35,7 +38,11 @@ namespace InsBrokers.Portal.Controllers
 
         [HttpPost]
         public virtual async Task<JsonResult> AddUserAttachments(UserAttachmentModel model)
-            => Json(await _userSrv.AddUserAttachments(model.File, model.Type));
+            => Json(await _userSrv.AddAttachments(model.File, model.Type));
+
+        [HttpPost]
+        public virtual async Task<JsonResult> AddRelativeAttachments(UserAttachmentModel model)
+            => Json(await _relativeSrv.AddAttachments(model.File, model.Type));
 
         [HttpGet]
         public IActionResult Register()
