@@ -18,7 +18,7 @@ namespace InsBrokers.Portal
         [MaxLength(15, ErrorMessageResourceName = nameof(Strings.MaxLength), ErrorMessageResourceType = typeof(Strings))]
         [MinLength(5, ErrorMessageResourceName = nameof(Strings.MinLength), ErrorMessageResourceType = typeof(Strings))]
         [StringLength(15, MinimumLength = 5, ErrorMessageResourceName = nameof(Strings.Min5MaxLength), ErrorMessageResourceType = typeof(Strings))]
-        [Display(Name = nameof(Password), ResourceType = typeof(Strings))]
+        [Display(Name = nameof(DomainString.NationalCode), ResourceType = typeof(DomainString))]
         [Required(ErrorMessageResourceName = nameof(Strings.Required), ErrorMessageResourceType = typeof(Strings), AllowEmptyStrings = false)]
         public string Password { get; set; }
 

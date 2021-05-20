@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using InsBrokers.Portal.Resource;
 using DomainString = InsBrokers.Domain.Resource.Strings;
+using Microsoft.Extensions.Configuration;
 
 namespace InsBrokers.Portal.Controllers
 {
@@ -14,10 +15,12 @@ namespace InsBrokers.Portal.Controllers
     public partial class RelativeController : Controller
     {
         private readonly IRelativeService _relativeSrv;
+        private readonly IConfiguration _configuration;
 
-        public RelativeController(IRelativeService MemberRelativeSrv)
+        public RelativeController(IRelativeService MemberRelativeSrv, IConfiguration configuration)
         {
             _relativeSrv = MemberRelativeSrv;
+            _configuration = configuration;
         }
 
 
@@ -40,8 +43,11 @@ namespace InsBrokers.Portal.Controllers
         [HttpGet]
         public virtual async Task<JsonResult> Update(int id)
         {
-            var findRep = await _relativeSrv.FindAsync(id);
+            var findRep = await _relativeSrv.FindWithAttachmentsAsync(id);
             if (!findRep.IsSuccessful) return Json(new { IsSuccessful = false, Message = Strings.RecordNotFound.Fill(DomainString.Relatives) });
+
+            foreach (var item in findRep.Result.RelativeAttachments)
+                item.Url = $"{_configuration["CustomSettings:MainAddress"]}{item.Url}";
 
             return Json(new Modal
             {

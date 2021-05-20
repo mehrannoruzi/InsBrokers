@@ -1,13 +1,17 @@
 ﻿using System;
 using Elk.Core;
+using System.IO;
 using System.Linq;
 using System.Text;
 using InsBrokers.Domain;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
+using InsBrokers.CrossCutting;
 using InsBrokers.DataAccess.Ef;
+using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using InsBrokers.Service.Resource;
+using DomainStrings = InsBrokers.Domain.Resource.Strings;
 
 namespace InsBrokers.Service
 {
@@ -84,6 +88,101 @@ namespace InsBrokers.Service
             var Relative = await _RelativeRepo.FindAsync(id);
             if (Relative == null) return new Response<Relative> { Message = ServiceMessage.RecordNotExist };
             return new Response<Relative> { Result = Relative, IsSuccessful = true };
+        }
+
+        public async Task<IResponse<Relative>> FindWithAttachmentsAsync(int id)
+        {
+            var relative = await _appUow.RelativeRepo.FirstOrDefaultAsync(
+                conditions: x => x.RelativeId == id,
+                includeProperties: new List<Expression<Func<Relative, object>>>
+                {
+                    x => x.RelativeAttachments
+                });
+            if (relative == null) return new Response<Relative> { Message = ServiceMessage.RecordNotExist.Fill(DomainStrings.Relatives) };
+
+            return new Response<Relative> { Result = relative, IsSuccessful = true };
+        }
+
+        public async Task<IResponse<object>> AddAttachments(IFormFile file, UserAttachmentType type)
+        {
+            var response = new Response<object>();
+            try
+            {
+                if (file.IsNull() || file.Length < 0) return new Response<object> { Message = "هیچ فایلی آپلود نشده است." };
+                if (file.Length > (1000 * 1024)) return new Response<object> { Message = "فایل آپلود شده نباید بیشتر از 1MB باشد." };
+
+                #region Save Attachment To Host
+                var fullPath = HttpFileTools.GetPath(
+                    fileNameWithExtension: type.ToString() + Path.GetExtension(file.FileName),
+                    root: "Files/UserAttachment");
+                if (string.IsNullOrWhiteSpace(fullPath)) return new Response<object> { Message = ServiceMessage.Error };
+
+                var fileUrl = HttpFileTools.Save(file, fullPath);
+                #endregion
+
+                #region Save Attachment To Database
+                var relativeAttachment = new RelativeAttachment
+                {
+                    Url = fileUrl,
+                    Size = file.Length,
+                    UserAttachmentType = type,
+                    FileType = FileType.Image,
+                    Extention = Path.GetExtension(file.FileName),
+                    Name = Path.GetFileNameWithoutExtension(fileUrl),
+                    RelativeId = 0
+                };
+
+                await _appUow.RelativeAttachmentRepo.AddAsync(relativeAttachment);
+                var fileSaveResult = await _appUow.ElkSaveChangesAsync();
+                if (fileSaveResult.IsSuccessful)
+                {
+                    response.IsSuccessful = true;
+                    response.Result = relativeAttachment;
+                    response.Message = ServiceMessage.Success;
+                }
+                else
+                    response.Message = ServiceMessage.Error;
+                #endregion
+
+                return response;
+            }
+            catch (Exception e)
+            {
+                FileLoger.Error(e);
+                response.Message = ServiceMessage.Exception;
+                return response;
+            }
+        }
+
+        public async Task<IResponse<bool>> DeleteAttachment(int attachmentId)
+        {
+            var response = new Response<bool>();
+            try
+            {
+                var attachment = await _appUow.RelativeAttachmentRepo.FindAsync(attachmentId);
+                _appUow.RelativeAttachmentRepo.Delete(attachment);
+                var deleteFileResult = await _appUow.ElkSaveChangesAsync();
+                if (deleteFileResult.IsSuccessful)
+                {
+                    response.Result = true;
+                    response.IsSuccessful = true;
+                    response.Message = ServiceMessage.Success;
+                }
+                else
+                {
+                    response.Result = false;
+                    response.IsSuccessful = true;
+                    response.Message = ServiceMessage.Error;
+                }
+
+                return response;
+            }
+            catch (Exception e)
+            {
+                FileLoger.Error(e);
+                response.Message = ServiceMessage.Exception;
+                return response;
+            }
         }
 
         public IDictionary<object, object> Search(string searchParameter, Guid? userId, int take = 10)

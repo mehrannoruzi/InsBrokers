@@ -123,6 +123,23 @@ namespace InsBrokers.Service
 
             return new Response<User> { Result = findedUser, IsSuccessful = true };
         }
+
+        public async Task<IResponse<User>> FindWithAttachmentsAsync(Guid userId)
+        {
+            var findedUser = await _appUow.UserRepo.FirstOrDefaultAsync(
+                conditions: x => x.UserId == userId,
+                includeProperties: new List<Expression<Func<User, object>>>
+                {
+                    x => x.Addresses,
+                    x => x.BankAccounts,
+                    x => x.Relatives,
+                    x => x.UserAttachments
+                });
+            if (findedUser == null) return new Response<User> { Message = ServiceMessage.RecordNotExist.Fill(DomainStrings.User) };
+
+            return new Response<User> { Result = findedUser, IsSuccessful = true };
+        }
+
         #endregion
 
 
@@ -350,7 +367,7 @@ namespace InsBrokers.Service
             return new Response<string> { IsSuccessful = true, Message = saveResult.Message };
         }
 
-        public async Task<IResponse<object>> AddUserAttachments(IFormFile file, UserAttachmentType type)
+        public async Task<IResponse<object>> AddAttachments(IFormFile file, UserAttachmentType type)
         {
             var response = new Response<object>();
             try
@@ -398,6 +415,51 @@ namespace InsBrokers.Service
                 FileLoger.Error(e);
                 response.Message = ServiceMessage.Exception;
                 return response;
+            }
+        }
+
+        public async Task<IResponse<bool>> DeleteAttachment(int attachmentId)
+        {
+            var response = new Response<bool>();
+            try
+            {
+                var attachment = await _appUow.UserAttachmentRepo.FindAsync(attachmentId);
+                _appUow.UserAttachmentRepo.Delete(attachment);
+                var deleteFileResult = await _appUow.ElkSaveChangesAsync();
+                if (deleteFileResult.IsSuccessful)
+                {
+                    response.Result = true;
+                    response.IsSuccessful = true;
+                    response.Message = ServiceMessage.Success;
+                }
+                else
+                {
+                    response.Result = false;
+                    response.IsSuccessful = true;
+                    response.Message = ServiceMessage.Error;
+                }
+
+                return response;
+            }
+            catch (Exception e)
+            {
+                FileLoger.Error(e);
+                response.Message = ServiceMessage.Exception;
+                return response;
+            }
+        }
+
+        public List<UserAttachment> GetUserAttachments(Guid userId)
+        {
+            var response = new Response<List<UserAttachment>>();
+            try
+            {
+                return _appUow.UserAttachmentRepo.Get(conditions: x => x.UserId == userId);
+            }
+            catch (Exception e)
+            {
+                FileLoger.Error(e);
+                return null;
             }
         }
 
@@ -518,12 +580,13 @@ namespace InsBrokers.Service
             {
                 var user = await _appUow.UserRepo.FirstOrDefaultAsync(conditions: x => x.UserId == userId, includeProperties: new List<Expression<Func<User, object>>> { x => x.Relatives });
                 if (user.IsNull()) return new Response<InsuranceInformation> { Message = ServiceMessage.RecordNotExist };
-                response.Result = new InsuranceInformation();
+
                 var relativesCount = user.Relatives.Count() + 1;
                 var insurancePlanPrice = GetInsurancePlanPrice(user.InsurancePlan);
                 var totalPrice = relativesCount * insurancePlanPrice;
                 var accidentsInsurancePrice = int.Parse(_configuration["InsurancePlanSettings:AccidentsInsurancePrice"]);
 
+                response.Result = new InsuranceInformation();
                 response.Result = new InsuranceInformation
                 {
                     PaymentPart1 = (totalPrice / 3) + accidentsInsurancePrice,

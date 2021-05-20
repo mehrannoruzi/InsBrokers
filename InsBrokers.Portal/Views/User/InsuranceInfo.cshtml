@@ -38,22 +38,26 @@
                         </div>
                     </div>
                     <div class="ibox-content">
-                        <p class="mb-15">
-                            کاربر گرامی پیش فاکتور، نحوه محاسبه، و نحوه پرداخت اقساط بیمه نامه در جدول زیر نشان داده شده است.
+                        <div class="alert alert-info" style="
+                            width:100%;
+                            padding-right: 15px;">
+                            <p class="text">کاربر گرامی پیش فاکتور، نحوه محاسبه، و نحوه پرداخت اقساط بیمه نامه در جدول زیر نشان داده شده است.</p>
                             <br />
-                            بیمه عمر و حادثه  برای سرپرست خانوار و بصورت اجباری است و مبلغ آن در قسط اول همراه با بیمه درمان باید پرداخت گردد:
-                        </p>
-                        <ul class="list-group w-100 mb-15">
-                            @{
-                                if (Model.Result.Details != null)
-                                {
-                                    @foreach (var item in Model.Result.Details)
-                                    {
-                                        <li><strong>@item.Plan:</strong>  @item.Price.ToString("N0")</li>
-                                    }
-                                }
-                            }
-                        </ul>
+                            <br />
+                            <p class="text">
+                                بیمه عمر و حادثه  برای سرپرست خانوار و بصورت اجباری است و مبلغ آن در قسط اول همراه با بیمه درمان باید پرداخت گردد.
+                            </p>
+                            <ul>
+                                <li style="padding-top:10px;"><a target="_blank" href="~/Files/Boronzi.jpeg">طرح برنزی = 1.920.000 تومان</a></li>
+                                <li style="padding-top:10px;"><a target="_blank" href="~/Files/Noghrei.jpeg">طرح نقره ای = 2.520.000 تومان</a></li>
+                                <li style="padding-top:10px;"><a target="_blank" href="~/Files/Talaei.jpeg">طرح طلایی = 4.320.000 تومان</a></li>
+                            </ul>
+                        </div>
+                        <div class="row" style="text-align:center">
+                            <br />
+                            <br />
+                            <h3 style="padding-right: 15px;">@Strings.PreFactor</h3>
+                        </div>
                         <table class="table table-bordered mb-15">
                             <thead>
                                 <tr>
@@ -86,26 +90,37 @@
                         </table>
                         <h4 class="w-100">نحوه محاسبه</h4>
                         <ul class="list-group w-100 mb-15">
-                            <li>قسط اول: مبلغ / 3 + مبلغ بیمه عمر و حوادث = جمع کل (نقدی)</li>
-                            <li>قسط دوم: مبلغ / 3)</li>
-                            <li>قسط سوم: مبلغ / 3)</li>
+                            <li>قسط اول: مبلغ / 3 + مبلغ بیمه عمر و حوادث (نقدی پرداخت می شود)</li>
+                            <li>قسط دوم: مبلغ / 3</li>
+                            <li>قسط سوم: مبلغ / 3</li>
                         </ul>
                         <h4 class="w-100">نحوه پرداخت</h4>
                         <p>
                             تعداد اقساط سه قسط می باشد.
                             <br />
-                            قسط اول باید بصورت نقدی پرداخت گردد.
                             <br />
-                            دو قسط بعدی بصورت چک در تاریخ های زیر
+                            قسط اول باید بصورت نقدی پرداخت شود و دو قسط بعدی بصورت چک در تاریخ های زیر :
                             <br />
-                            قسط دوم @Model.Result.PaymentPart2Date , مبلغ : @Model.Result.PaymentPart2
                             <br />
-                            قسط سوم @Model.Result.PaymentPart3Date , مبلغ : @Model.Result.PaymentPart3
+                            قسط اول بعد از خرید بیمه نامه به مبلغ : @Model.Result.PaymentPart1.ToString("N0") تومان
+                            <br />
+                            <br />
+                            قسط دوم در تاریخ: @Model.Result.PaymentPart2Date , مبلغ : @Model.Result.PaymentPart2.ToString("N0") تومان
+                            <br />
+                            <br />
+                            قسط سوم در تاریخ: @Model.Result.PaymentPart3Date , مبلغ : @Model.Result.PaymentPart3.ToString("N0") تومان
                         </p>
                         <p>
                             <br />
-                            لطفاً مبلغ <strong>@Model.Result.PaymentPart1.ToString("N0")</strong> تومان به حساب بانک تجارت به نام صندوق تعاون و رفاه سازمان نظام دامپزشکی به شماره حساب 123551087 و یا شماره کارت 5859837008101624 و یا شماره شبای 560180000000000123551087 واریز گردد.
+                            <br />
+                            <strong>
+                                لطفاً مبلغ <span style="color:crimson">@Model.Result.PaymentPart1.ToString("N0")</span> تومان را به حساب بانک تجارت به نام صندوق تعاون و رفاه سازمان نظام دامپزشکی به شماره حساب 123551087 و یا شماره کارت 5859837008101624 و یا شماره شبای 560180000000000123551087 واریز نمایید.
+                            </strong>
                         </p>
+                        <br />
+                        <br />
+                        <br />
+                        <br />
                     </div>
                 </div>
             </div>
