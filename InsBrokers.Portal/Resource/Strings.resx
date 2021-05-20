@@ -165,6 +165,9 @@
   <data name="Download" xml:space="preserve">
     <value>دانلود</value>
   </data>
+  <data name="DownloadAllAttachments" xml:space="preserve">
+    <value>دانلود کل مدارک</value>
+  </data>
   <data name="DropYourFileHere" xml:space="preserve">
     <value>فایل خود را اینجا رها کنید</value>
   </data>
@@ -257,6 +260,9 @@
   </data>
   <data name="MinValueNotReached" xml:space="preserve">
     <value>لطفا مقداری بیشتر یا مساوی با {0} وارد نمایید</value>
+  </data>
+  <data name="MustUploadAttachments" xml:space="preserve">
+    <value>کاربر گرامی باید مدارک مورد نیاز را آپلود نمایید.</value>
   </data>
   <data name="No" xml:space="preserve">
     <value>خیر</value>

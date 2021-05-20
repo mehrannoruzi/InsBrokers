@@ -205,6 +205,15 @@ namespace InsBrokers.Portal.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to دانلود کل مدارک.
+        /// </summary>
+        public static string DownloadAllAttachments {
+            get {
+                return ResourceManager.GetString("DownloadAllAttachments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to فایل خود را اینجا رها کنید.
         /// </summary>
         public static string DropYourFileHere {
@@ -480,6 +489,15 @@ namespace InsBrokers.Portal.Resource {
         public static string MinValueNotReached {
             get {
                 return ResourceManager.GetString("MinValueNotReached", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to کاربر گرامی باید مدارک مورد نیاز را آپلود نمایید..
+        /// </summary>
+        public static string MustUploadAttachments {
+            get {
+                return ResourceManager.GetString("MustUploadAttachments", resourceCulture);
             }
         }
         

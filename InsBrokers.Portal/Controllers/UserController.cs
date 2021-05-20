@@ -1,26 +1,30 @@
 using System;
 using Elk.Core;
 using Elk.Http;
+using System.IO;
 using Elk.AspNetCore;
 using InsBrokers.Domain;
 using InsBrokers.Service;
+using System.IO.Compression;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using InsBrokers.Portal.Resource;
-using DomainString = InsBrokers.Domain.Resource.Strings;
 using Microsoft.Extensions.Configuration;
+using DomainString = InsBrokers.Domain.Resource.Strings;
 
 namespace InsBrokers.Portal.Controllers
 {
-    [AuthorizationFilter]
+    //[AuthorizationFilter]
     public partial class UserController : Controller
     {
         private readonly IUserService _userSrv;
+        private readonly IRelativeService _relativeSrv;
         private readonly IConfiguration _configuration;
 
-        public UserController(IUserService userBiz, IConfiguration configuration)
+        public UserController(IUserService userSrv, IRelativeService relativeSrv, IConfiguration configuration)
         {
-            _userSrv = userBiz;
+            _userSrv = userSrv;
+            _relativeSrv = relativeSrv;
             _configuration = configuration;
         }
 
@@ -143,7 +147,52 @@ namespace InsBrokers.Portal.Controllers
         [HttpGet]
         public virtual async Task<IActionResult> InsuranceInfo()
             => View(await _userSrv.GetInsuranceInfo(User.GetUserId()));
-        //=> View(await _userSrv.GetInsuranceInfo(Guid.Parse("dd1d79b7-ca86-41be-6008-08d919c27afe")));
 
+        [HttpGet]
+        public async Task<ActionResult> DownloadAllAttachments(Guid id)
+        {
+            var user = await _userSrv.FindWithAttachmentsAsync(id);
+            using (var memoryStream = new MemoryStream())
+            {
+                using (var zipArchive = new ZipArchive(memoryStream, ZipArchiveMode.Create, true))
+                {
+                    foreach (var attchment in user.Result.UserAttachments)
+                    {
+                        try
+                        {
+                            var filePath = $"wwwroot/{attchment.Url}";
+                            var fileContent = await System.IO.File.ReadAllBytesAsync(filePath);
+
+
+                            var zipArchiveEntry = zipArchive.CreateEntry($"CustomerAttachments/{Path.GetFileName(filePath)}", CompressionLevel.Optimal);
+                            using (var zipStream = zipArchiveEntry.Open())
+                                zipStream.Write(fileContent, 0, fileContent.Length);
+                        }
+                        catch (Exception e) { }
+                    }
+
+                    foreach (var relative in user.Result.Relatives)
+                    {
+                        var userRelative = await _relativeSrv.FindWithAttachmentsAsync(relative.RelativeId);
+                        foreach (var attchment in userRelative.Result.RelativeAttachments)
+                        {
+                            try
+                            {
+                                var filePath = $"wwwroot/{attchment.Url}";
+                                var fileContent = await System.IO.File.ReadAllBytesAsync(filePath);
+
+
+                                var zipArchiveEntry = zipArchive.CreateEntry($"CustomerRelativesAttachments/{relative.NationalCode}/{Path.GetFileName(filePath)}", CompressionLevel.Optimal);
+                                using (var zipStream = zipArchiveEntry.Open())
+                                    zipStream.Write(fileContent, 0, fileContent.Length);
+                            }
+                            catch (Exception e) { }
+                        }
+                    }
+                }
+
+                return File(memoryStream.ToArray(), "application/zip", $"{user.Result.NationalCode}-{user.Result.MobileNumber}.zip");
+            }
+        }
     }
 }

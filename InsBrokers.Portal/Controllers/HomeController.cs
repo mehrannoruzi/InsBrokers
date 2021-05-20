@@ -71,6 +71,7 @@ namespace InsBrokers.Portal.Controllers
         public async Task<IActionResult> SignUp([FromBody] PortalSignUpModel model)
         {
             if (!ModelState.IsValid) return Json(new Response<string> { Message = ModelState.GetModelError() });
+            if (model.UserAttachmentIds.Count() <= 0) return Json(new Response<string> { Message = Strings.MustUploadAttachments });
 
             model.MemberRoleId = int.Parse(_configuration["CustomSettings:MemberRoleId"]);
             var save = await _userSrv.SignUp(model);

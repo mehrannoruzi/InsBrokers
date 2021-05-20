@@ -1,5 +1,6 @@
 using Elk.Core;
 using Elk.Http;
+using System.Linq;
 using Elk.AspNetCore;
 using InsBrokers.Domain;
 using InsBrokers.Service;
@@ -37,6 +38,8 @@ namespace InsBrokers.Portal.Controllers
         public virtual async Task<JsonResult> Add(Relative model)
         {
             if (!ModelState.IsValid) return Json(new { IsSuccessful = false, Message = ModelState.GetModelError() });
+            if (model.RelativeAttachmentIds.Count() <= 0) return Json(new Response<string> { Message = Strings.MustUploadAttachments });
+
             return Json(await _relativeSrv.AddAsync(model));
         }
 
@@ -82,7 +85,7 @@ namespace InsBrokers.Portal.Controllers
 
         [HttpGet, AuthEqualTo("Relative", "Add")]
         public virtual JsonResult Search(string q)
-            => Json(_relativeSrv.Search(q,User.GetUserId()).ToSelectListItems());
+            => Json(_relativeSrv.Search(q, User.GetUserId()).ToSelectListItems());
 
         [HttpGet, AuthEqualTo("Relative", "Manage")]
         public virtual JsonResult Excel(RelativeSearchFilter filter)
