@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using InsBrokers.Portal.Resource;
 using Microsoft.Extensions.Configuration;
 using DomainString = InsBrokers.Domain.Resource.Strings;
+using Microsoft.AspNetCore.Authorization;
 
 namespace InsBrokers.Portal.Controllers
 {
@@ -75,7 +76,7 @@ namespace InsBrokers.Portal.Controllers
         [HttpPost]
         public virtual async Task<JsonResult> Delete(Guid id) => Json(await _userSrv.DeleteAsync(id));
 
-        [HttpPost]
+        [HttpPost, AllowAnonymous]
         public virtual async Task<JsonResult> DeleteAttachment(int attachmentId) => Json(await _userSrv.DeleteAttachment(attachmentId));
 
         [HttpGet]

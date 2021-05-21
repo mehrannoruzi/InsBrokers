@@ -2,8 +2,8 @@
 
 $(document).ready(function () {
     var attachmemts = [];
-    let uploadTemplate = (url, name) => `<div class="uploaded">
-        <button type="button" class="btn-remove"><i class="zmdi zmdi-close"></i></button>
+    let uploadTemplate = (id, url, name) => `<div class="uploaded">
+        <button type="button" class="btn-remove" data-attch-id="${id}"><i class="zmdi zmdi-close"></i></button>
         <img src="${url}" />
         <span class="name">${name}</span>
     </div>`;
@@ -37,7 +37,7 @@ $(document).ready(function () {
                     if (rep.IsSuccessful) {
                         let url = window.URL.createObjectURL(file);
                         let $wrapper = $elm.closest('.upload-wrapper');
-                        let template = uploadTemplate(url, file.name);
+                        let template = uploadTemplate(rep.Result.UserAttachmentId, url, file.name);
                         $wrapper.append(template);
                         attachmemts.push({ type: rep.Result.UserAttachmentType, id: rep.Result.UserAttachmentId });
                         console.log(attachmemts);
@@ -56,10 +56,14 @@ $(document).ready(function () {
     });
     $(document).on("click", ".btn-remove", function (e) {
         let $elm = $(this);
+        let id = $elm.data("attch-id");
         let $uploaded = $elm.closest(".uploaded");
         let idx = $(".uploaded").index($uploaded);
-        attachmemts.splice(idx, 1);
-        $uploaded.remove();
+        let idx = attachments.findIndex(x => x.id === id);
+        if (~idx) {
+            attachmemts.splice(idx, 1);
+            $uploaded.remove();
+        }
         console.log(attachmemts);
     });
     const validateFiles = () => {

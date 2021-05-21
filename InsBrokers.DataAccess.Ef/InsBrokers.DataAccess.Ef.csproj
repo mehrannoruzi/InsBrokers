@@ -11,6 +11,10 @@
     <Compile Remove="Migrations\AppDb\20200703185138_AddContactUs.Designer.cs" />
     <Compile Remove="Migrations\AppDb\20210518151526_Add.User.InsuranceNumber.cs" />
     <Compile Remove="Migrations\AppDb\20210518151526_Add.User.InsuranceNumber.Designer.cs" />
+    <Compile Remove="Migrations\AppDb\20210521071718_temp.cs" />
+    <Compile Remove="Migrations\AppDb\20210521071718_temp.Designer.cs" />
+    <Compile Remove="Migrations\AppDb\20210521113824_temp2.cs" />
+    <Compile Remove="Migrations\AppDb\20210521113824_temp2.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

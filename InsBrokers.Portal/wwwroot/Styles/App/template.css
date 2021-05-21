@@ -4017,7 +4017,16 @@ code {
   .filters > .btn-extra {
     position: absolute;
     left: 130px;
-    top: 0; }
+    top: 0;
+    width: 150px;
+    background-color: #17a2b8; }
+  @media (max-width: 576px) {
+    .filters .ibox.has-btn-extra:not(.fixed-ibox) {
+      margin-left: 180px; }
+    .filters > .btn-extra {
+      width: 42px;
+      padding: 20px;
+      min-width: 42px; } }
 
 .ibox {
   clear: both;

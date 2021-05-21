@@ -1,0 +1,43 @@
+﻿@model ManageAttachmentModel
+
+<script type="text/javascript">
+    attachments = [];
+</script>
+<div class="field m-b" style="border: #00000015;
+                border-style: solid;
+                padding-right: 15px;
+                padding-left: 15px;">
+    <label class="label label-info" style="margin-top:15px;">
+        <span>آپلود مدارک</span>
+    </label>
+    @{
+        <div class="upload-box">
+            <div class="row" id="files">
+                @foreach (var type in Model.Types)
+                {
+                    <div class="col-12 m-b upload-wrapper">
+                        <div class="uploader">
+                            <input class="input-uploader d-none" type="file" accept="image/*" name="img-uploader" data-type="@type.ToString()" />
+                            <i class="zmdi zmdi-plus"></i>
+                            <label class="title">آپلود @type.GetDescription()</label>
+                        </div>
+                        @if (Model.Attachments != null)
+                        {
+                            foreach (var attch in Model.Attachments.Where(x => x.UserAttachmentType.ToString() == type.ToString()).ToList())
+                            {
+                                <div class="uploaded">
+                                    <button type="button" class="btn-remove" data-attch-id="@(attch.GetId())"><i class="zmdi zmdi-close"></i></button>
+                                    <img src="@attch.Url" alt="@attch.Name" />
+                                    <span class="name">@attch.Name</span>
+                                </div>
+                            }
+                        }
+                    </div>
+                }
+
+            </div>
+        </div>
+
+    }
+
+</div>

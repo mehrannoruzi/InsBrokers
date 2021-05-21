@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using InsBrokers.Portal.Resource;
 using DomainString = InsBrokers.Domain.Resource.Strings;
+using System.Collections.Generic;
 
 namespace InsBrokers.Portal.Controllers
 {
@@ -27,7 +28,7 @@ namespace InsBrokers.Portal.Controllers
             {
                 Title = $"{Strings.Add} {DomainString.Relatives}",
                 Body = ControllerExtension.RenderViewToString(this, "Partials/_Entity", new Relative()),
-                AutoSubmitUrl = Url.Action("Add", "MemberRelative")
+                AutoSubmit = false,
             });
 
         [HttpPost]
@@ -49,7 +50,7 @@ namespace InsBrokers.Portal.Controllers
                 Title = $"{Strings.Update} {DomainString.Relatives}",
                 AutoSubmitBtnText = Strings.Edit,
                 Body = ControllerExtension.RenderViewToString(this, "Partials/_Entity", findRep.Result),
-                AutoSubmitUrl = Url.Action("Update", "MemberRelative"),
+                AutoSubmit = false,
                 ResetForm = false
             });
         }

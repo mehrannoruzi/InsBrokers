@@ -4843,6 +4843,20 @@ code {
         position: absolute;
         left: 130px;
         top: 0;
+        width: 150px;
+        background-color: #17a2b8;
+    }
+
+    @media(max-width: 576px) {
+        .ibox.has-btn-extra:not(.fixed-ibox) {
+            margin-left: 180px;
+        }
+
+        > .btn-extra {
+            width: 42px;
+            padding: 20px;
+            min-width: 42px;
+        }
     }
 }
 

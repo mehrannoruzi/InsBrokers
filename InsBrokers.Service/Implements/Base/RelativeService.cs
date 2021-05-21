@@ -96,7 +96,8 @@ namespace InsBrokers.Service
 
         public async Task<IResponse<Relative>> FindAsync(int id)
         {
-            var Relative = await _RelativeRepo.FindAsync(id);
+            var Relative = await _RelativeRepo.FirstOrDefaultAsync(x=>x.RelativeId == id,
+                new List<Expression<Func<Relative, object>>> {x=>x.RelativeAttachments });
             if (Relative == null) return new Response<Relative> { Message = ServiceMessage.RecordNotExist };
             return new Response<Relative> { Result = Relative, IsSuccessful = true };
         }

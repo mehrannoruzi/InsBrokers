@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using InsBrokers.Portal.Resource;
 using DomainString = InsBrokers.Domain.Resource.Strings;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Authorization;
 
 namespace InsBrokers.Portal.Controllers
 {
@@ -72,7 +73,7 @@ namespace InsBrokers.Portal.Controllers
         [HttpPost]
         public virtual async Task<JsonResult> Delete(int id) => Json(await _relativeSrv.DeleteAsync(id));
 
-        [HttpPost]
+        [HttpPost, AllowAnonymous]
         public virtual async Task<JsonResult> DeleteAttachment(int attachmentId) => Json(await _relativeSrv.DeleteAttachment(attachmentId));
 
         [HttpGet]

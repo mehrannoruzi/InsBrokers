@@ -62,5 +62,9 @@
   {
     "outputFile": "wwwroot/Styles/App/Home/ios.css",
     "inputFile": "wwwroot/Styles/App/Home/ios.scss"
+  },
+  {
+    "outputFile": "wwwroot/Styles/App/attachment-management.css",
+    "inputFile": "wwwroot/Styles/App/attachment-management.scss"
   }
 ]

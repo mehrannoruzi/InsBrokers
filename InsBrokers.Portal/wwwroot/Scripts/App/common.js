@@ -113,15 +113,17 @@ $(document).ready(function () {
             $ibox.resize();
             $ibox.find('[id^=map-]').resize();
         }, 50);
+        let mobileMode = $(window).width() < 576;
+        let offset = $ibox.hasClass("has-btn-extra") ? (mobileMode ? 180 : 300) : 125;
         let $filters = $(this).closest('.filters');
         if ($ibox.hasClass('fixed-ibox'))
             return;
         if (nowClosed) {
-            $ibox.animate({ 'margin-left': '-=125px' });
+            $ibox.animate({ 'margin-left': `-=${offset}px` });
             $filters.animate({ 'padding-top': '+=55px' });
         }
         else {
-            $ibox.animate({ 'margin-left': '+=125px' });
+            $ibox.animate({ 'margin-left': `+=${offset}px` });
             $filters.animate({ 'padding-top': '-=55px' });
         }
     });

@@ -5,6 +5,8 @@
 }
 @section styles{
     <link href="@Url.Content("~/Styles/App/customize-template.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Styles//App/attachment-management.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Styles/Libs//loadover.css")" rel="stylesheet" />
 }
 
 @section filter{
@@ -12,13 +14,46 @@
 }
 <partial name="Partials/_List" model="@Model" />
 @section scripts{
+    <script src="@Url.Content("~/Scripts/Libs/loadover.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/App/attachment-management.js")"></script>
     <script>
+        const attachmanetConfig = {
+            removeUrl: '@Url.Action("DeleteAttachment", "Relative")',
+            uploadUrl:'@Url.Action("AddRelativeAttachments", "Home")'
+        };
         $(document).ready(function () {
             $(document).on("change", "#TakafolKind", function () {
                 let val = $(this).val();
                 if (val === "NonUnderTakafol") $("#isurance-number-wrapper").removeClass("d-none");
                 else $("#isurance-number-wrapper").addClass("d-none");
             });
+            $(document).on('click', '.btn-submit', function () {
+                let id = $('#RelativeId').val();
+                let $btn = $(this);
+                let $frm = $btn.closest("form");
+                let model = customSerialize($frm);
+                model.RelativeAttachmentIds = attachments.map(x=>x.id);
+                console.log(model);
+                ajaxBtn.inProgress($btn);
+                $.post($frm.attr("action"), model)
+                    .done(function (rep) {
+                        ajaxBtn.normal();
+                        if (rep.IsSuccessful) {
+                            if (id === '0') {
+                                //attachments = [];
+                                $('#modal').modal('hide');
+                            }
+                            else showNotif(notifyType.success, '@Strings.Success');
+                        }
+                    })
+                    .fail(function (e) {
+                        ajaxBtn.normal();
+                        cosnole.log(e);
+                        showNotif(notifyType.error, '@Strings.Error');
+                    });
+
+            });
         });
+
     </script>
 }

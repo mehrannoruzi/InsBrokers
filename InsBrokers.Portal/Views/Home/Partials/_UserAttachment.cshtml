@@ -2,10 +2,8 @@
 @{
     Layout = null;
 }
-
-<input id="input-file" type="file" class="d-none" />
 <div class="upload-box">
-    <div class="row" id="files">
+    <div class="row">
         @if (Model != null)
         {
             foreach (var attachment in Model)

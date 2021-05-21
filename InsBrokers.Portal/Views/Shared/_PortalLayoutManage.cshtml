@@ -64,11 +64,11 @@
                                 }
                                 @if (ViewBag.HasExtraButton != null)
                                 {
-                                    <a class="btn btn-info btn-action btn-extra ml-1" href="@ViewBag.ExtraButtonUrl" style="width:150px;background-color:#17a2b8;">
+                                    <a class="btn btn-info btn-action btn-extra ml-1" href="@ViewBag.ExtraButtonUrl">
                                         <div class="icon">
                                             <i class="zmdi @ViewBag.ExtraButtonIcon"></i>
                                         </div>
-                                        <span class="text">@ViewBag.ExtraButtonText</span>
+                                        <span class="text d-none d-sm-inline-block">@ViewBag.ExtraButtonText</span>
                                     </a>
                                 }
                             </div>

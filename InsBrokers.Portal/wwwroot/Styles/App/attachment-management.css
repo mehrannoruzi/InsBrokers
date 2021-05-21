@@ -1,0 +1,49 @@
+﻿.uploader {
+  border: dashed 2px #ccc;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  flex-direction: column; }
+  .uploader .title {
+    font-size: 0.9rem;
+    width: 80px;
+    text-align: center; }
+  .uploader i {
+    font-size: 20px; }
+
+.upload-wrapper {
+  display: flex;
+  flex-direction: row; }
+
+.uploader, .uploaded {
+  width: 100px;
+  height: 100px;
+  margin-left: 16px; }
+
+.uploaded {
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; }
+  .uploaded .btn-remove {
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #6d6c6c;
+    color: red;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    border: none;
+    font-size: 30px; }
+  .uploaded:hover .btn-remove {
+    display: flex; }
+  .uploaded img {
+    height: 85px;
+    max-width: 100%; }

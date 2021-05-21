@@ -2,51 +2,69 @@
 @{
     Layout = null;
 }
-@Html.HiddenFor(x => x.RelativeId)
-<div class="row">
-    <div class="col-12 col-sm-4">
-        <custom-input-for for="Name" />
+<form asp-controller="MemberRelative" asp-action="@(Model.RelativeId==0?"Add":"Update")">
+    @Html.HiddenFor(x => x.RelativeId)
+    <div class="row">
+        <div class="col-12 col-sm-4">
+            <custom-input-for for="Name" />
+        </div>
+        <div class="col-12 col-sm-4">
+            <custom-input-for for="Family" />
+        </div>
+        <div class="col-12 col-sm-4">
+            <custom-input-for for="FatherName" />
+        </div>
     </div>
-    <div class="col-12 col-sm-4">
-        <custom-input-for for="Family" />
+    <div class="row">
+        <div class="col-12 col-sm-4">
+            <custom-input-for for="IdentityNumber" class="form-control ltr-elm" />
+        </div>
+        <div class="col-12 col-sm-4">
+            <custom-input-for for="NationalCode" class="form-control ltr-elm" />
+        </div>
+        <div class="col-12 col-sm-4">
+            <custom-input-for for="BirthDay" class="form-control ltr-elm pdate" />
+        </div>
     </div>
-    <div class="col-12 col-sm-4">
-        <custom-input-for for="FatherName" />
-    </div>
-</div>
-<div class="row">
-    <div class="col-12 col-sm-4">
-        <custom-input-for for="IdentityNumber" class="form-control ltr-elm" />
-    </div>
-    <div class="col-12 col-sm-4">
-        <custom-input-for for="NationalCode" class="form-control ltr-elm" />
-    </div>
-    <div class="col-12 col-sm-4">
-        <custom-input-for for="BirthDay" class="form-control ltr-elm pdate" />
-    </div>
-</div>
-<div class="row">
-    <div class="col-12 col-sm-6">
-        <custom-select-for for="Gender" class="form-control" items="EnumExtension.GetEnumElements<Gender>().Select(x=>new SelectListItem {
+    <div class="row">
+        <div class="col-12 col-sm-6">
+            <custom-select-for for="Gender" class="form-control" items="EnumExtension.GetEnumElements<Gender>().Select(x=>new SelectListItem {
                                 Text = x.Description,
                                 Value = x.Name
                             }).ToList()" />
-    </div>
-    <div class="col-12 col-sm-6">
-        <custom-select-for for="RelativeType" class="form-control" items="EnumExtension.GetEnumElements<RelativeType>().Select(x=>new SelectListItem {
+        </div>
+        <div class="col-12 col-sm-6">
+            <custom-select-for for="RelativeType" class="form-control" items="EnumExtension.GetEnumElements<RelativeType>().Select(x=>new SelectListItem {
                                 Text = x.Description,
                                 Value = x.Name
                             }).ToList()" />
+        </div>
     </div>
-</div>
-<div class="row">
-    <div class="col-12 col-sm-6">
-        <custom-select-for for="TakafolKind" class="form-control" items="EnumExtension.GetEnumElements<TakafolKind>().Select(x=>new SelectListItem {
+    <div class="row">
+        <div class="col-12 col-sm-6">
+            <custom-select-for for="TakafolKind" class="form-control" items="EnumExtension.GetEnumElements<TakafolKind>().Select(x=>new SelectListItem {
                                 Text = x.Description,
                                 Value = x.Name
                             }).ToList()" />
+        </div>
+        <div class="col-12 col-sm-6 @(Model.TakafolKind==TakafolKind.NonUnderTakafol?"":"d-none")" id="isurance-number-wrapper">
+            <custom-input-for for="InsuranceNumber" />
+        </div>
     </div>
-    <div class="col-12 col-sm-6 @(Model.TakafolKind==TakafolKind.NonUnderTakafol?"":"d-none")" id="isurance-number-wrapper">
-        <custom-input-for for="InsuranceNumber" />
+    <div class="row">
+        <div class="col-12">
+            <partial name="~/Views/Shared/Partials/_AttachmentManagement.cshtml" model="new ManageAttachmentModel {
+                             Types = new List<AttachmentType> {
+                                 AttachmentType.IdentityCardPage1 ,
+                                 AttachmentType.IdentityCardPage2,
+                                 AttachmentType.NationalCard
+                             },
+                            Attachments=Model.RelativeAttachments==null?new List<BaseAttachment>(): new List<BaseAttachment>(Model.RelativeAttachments)
+                         }" />
+        </div>
     </div>
-</div>
+    <div class="custom-modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">@Strings.Close</button>
+        <custom-button type="button" text="@Strings.Submit" icon="zmdi zmdi-floppy" class="btn-primary btn-submit float-left"></custom-button>
+    </div>
+</form>
