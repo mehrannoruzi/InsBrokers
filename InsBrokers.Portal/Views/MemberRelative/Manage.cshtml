@@ -6,7 +6,7 @@
 @section styles{
     <link href="@Url.Content("~/Styles/App/customize-template.min.css")" rel="stylesheet" />
     <link href="@Url.Content("~/Styles//App/attachment-management.min.css")" rel="stylesheet" />
-    <link href="@Url.Content("~/Styles/Libs//loadover.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Styles/Libs/loadover.css")" rel="stylesheet" />
 }
 
 @section filter{
@@ -31,6 +31,7 @@
                 let id = $('#RelativeId').val();
                 let $btn = $(this);
                 let $frm = $btn.closest("form");
+                if (!$frm.valid()) return;
                 let model = customSerialize($frm);
                 model.RelativeAttachmentIds = attachments.map(x=>x.id);
                 console.log(model);
@@ -45,11 +46,12 @@
                             }
                             else showNotif(notifyType.success, '@Strings.Success');
                         }
+                        else  showNotif(notifyType.danger, rep.Message);
                     })
                     .fail(function (e) {
                         ajaxBtn.normal();
-                        cosnole.log(e);
-                        showNotif(notifyType.error, '@Strings.Error');
+                        console.log(e);
+                        showNotif(notifyType.danger, '@Strings.Error');
                     });
 
             });

@@ -57,22 +57,25 @@ $(document).ready(function () {
     $(document).on("click", ".btn-remove", function (e) {
         let $elm = $(this);
         let id = $elm.data("attch-id");
+        let $uploaded = $elm.closest(".uploaded");
+        $uploaded.loadOverStart();
         $.post(attachmanetConfig.removeUrl, { attachmentId: id })
             .done(function (rep) {
+                $uploaded.loadOverStop();
                 if (!rep.IsSuccessful) {
                     showNotif(notifyType.danger, rep.Message);
                     return;
                 }
-                let $uploaded = $elm.closest(".uploaded");
-                let idx = attachmemts.findIndex(x => x.id === id);
+                let idx = attachments.findIndex(x => x.id === id);
                 if (~idx)
                     attachmemts.splice(idx, 1);
                 $uploaded.remove();
             })
             .fail(function (e) {
-
+                $uploaded.loadOverStop();
+                showNotif(notifyType.danger, "خطایی رخ داده است، دوباره تلاش نمایید");
             });
 
-        console.log(attachmemts);
+        console.log(attachments);
     });
 });

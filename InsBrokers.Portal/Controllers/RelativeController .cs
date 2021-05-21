@@ -32,7 +32,7 @@ namespace InsBrokers.Portal.Controllers
             {
                 Title = $"{Strings.Add} {DomainString.Relatives}",
                 Body = ControllerExtension.RenderViewToString(this, "Partials/_Entity", new Relative()),
-                AutoSubmitUrl = Url.Action("Add", "Relative")
+                AutoSubmit = false
             });
 
         [HttpPost]
@@ -49,16 +49,16 @@ namespace InsBrokers.Portal.Controllers
         {
             var findRep = await _relativeSrv.FindWithAttachmentsAsync(id);
             if (!findRep.IsSuccessful) return Json(new { IsSuccessful = false, Message = Strings.RecordNotFound.Fill(DomainString.Relatives) });
-
-            foreach (var item in findRep.Result.RelativeAttachments)
-                item.Url = $"{_configuration["CustomSettings:MainAddress"]}{item.Url}";
+            if (findRep.Result.RelativeAttachments != null)
+                foreach (var item in findRep.Result.RelativeAttachments)
+                    item.Url = $"{_configuration["CustomSettings:MainAddress"]}{item.Url}";
 
             return Json(new Modal
             {
                 Title = $"{Strings.Update} {DomainString.Relatives}",
                 AutoSubmitBtnText = Strings.Edit,
                 Body = ControllerExtension.RenderViewToString(this, "Partials/_Entity", findRep.Result),
-                AutoSubmitUrl = Url.Action("Update", "Relative"),
+                AutoSubmit = false,
                 ResetForm = false
             });
         }

@@ -3,8 +3,53 @@
     ViewBag.Title = $"{Strings.Management} {InsBrokers.Domain.Resource.Strings.Relatives}";
     Layout = "_LayoutManage";
 }
-
+@section styles{
+    <link href="@Url.Content("~/Styles//App/attachment-management.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Styles/Libs/loadover.css")" rel="stylesheet" />
+}
 @section filter{
     <partial name="Partials/_Filters" model="new RelativeSearchFilter()" />
 }
 <partial name="Partials/_List" model="@Model" />
+@section scripts{
+    <script src="@Url.Content("~/Scripts/Libs/loadover.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/App/attachment-management.js")"></script>
+    <script>
+        const attachmanetConfig = {
+            removeUrl: '@Url.Action("DeleteAttachment", "Relative")',
+            uploadUrl:'@Url.Action("AddRelativeAttachments", "Home")'
+        };
+        $(document).ready(function () {
+            $(document).on('click', '.btn-submit', function () {
+                let id = $('#RelativeId').val();
+                let $btn = $(this);
+                let $frm = $btn.closest("form");
+                console.log($frm.validate());
+                if (!$frm.valid()) return;
+                let model = customSerialize($frm);
+                model.RelativeAttachmentIds = attachments.map(x=>x.id);
+                console.log(model);
+                ajaxBtn.inProgress($btn);
+                $.post($frm.attr("action"), model)
+                    .done(function (rep) {
+                        ajaxBtn.normal();
+                        if (rep.IsSuccessful) {
+                            if (id === '0') {
+                                //attachments = [];
+                                $('#modal').modal('hide');
+                            }
+                            else showNotif(notifyType.success, '@Strings.Success');
+                        }
+                        else  showNotif(notifyType.danger, rep.Message);
+                    })
+                    .fail(function (e) {
+                        ajaxBtn.normal();
+                        console.log(e);
+                        showNotif(notifyType.danger, '@Strings.Error');
+                    });
+
+            });
+        });
+
+    </script>
+}

@@ -45,21 +45,31 @@ namespace InsBrokers.Service
 
         public async Task<IResponse<Relative>> AddAsync(Relative model)
         {
+            using var bt = _appUow.Database.BeginTransaction();
             await _appUow.RelativeRepo.AddAsync(model);
-
-            #region Save Attachments
-            var attachments = _appUow.RelativeAttachmentRepo.Get(conditions: x => model.RelativeAttachmentIds.Contains(x.RelativeAttachmentId));
-            foreach (var attachment in attachments)
-                attachment.RelativeId = model.RelativeId;
-            #endregion
-
             var addRelativeResult = await _appUow.ElkSaveChangesAsync();
-            return new Response<Relative>
+            if (!addRelativeResult.IsSuccessful)
+                return new Response<Relative> { Message = addRelativeResult.Message };
+            #region Save Attachments
+            if (model.RelativeAttachmentIds != null && model.RelativeAttachmentIds.Count > 0)
             {
-                Result = model,
-                Message = addRelativeResult.Message,
-                IsSuccessful = addRelativeResult.IsSuccessful
-            };
+                var attachments = _appUow.RelativeAttachmentRepo.Get(conditions: x => model.RelativeAttachmentIds.Contains(x.RelativeAttachmentId), orderBy: o => o.OrderBy(x => x.RelativeAttachmentId));
+                if (attachments != null)
+                    foreach (var attachment in attachments)
+                    {
+                        attachment.RelativeId = model.RelativeId;
+                        _appUow.RelativeAttachmentRepo.Update(attachment);
+                    }
+                var updateAttchResult = await _appUow.ElkSaveChangesAsync();
+                if (!updateAttchResult.IsSuccessful)
+                {
+                    bt.Rollback();
+                    return new Response<Relative> { Message = updateAttchResult.Message };
+                }
+            }
+            #endregion
+            bt.Commit();
+            return new Response<Relative> { IsSuccessful = true };
         }
 
         public async Task<IResponse<Relative>> UpdateAsync(Relative model)
@@ -78,8 +88,20 @@ namespace InsBrokers.Service
             Relative.RelativeType = model.RelativeType;
             Relative.TakafolKind = model.TakafolKind;
             _RelativeRepo.Update(Relative);
+            #region Save Attachments
+            if (model.RelativeAttachmentIds != null && model.RelativeAttachmentIds.Count > 0)
+            {
+                var attachments = _appUow.RelativeAttachmentRepo.Get(conditions: x => model.RelativeAttachmentIds.Contains(x.RelativeAttachmentId), orderBy: o => o.OrderBy(ClosedXML => ClosedXML.InsertDateMi));
+                if (attachments != null)
+                    foreach (var attachment in attachments)
+                    {
+                        attachment.RelativeId = model.RelativeId;
+                        _appUow.RelativeAttachmentRepo.Update(attachment);
+                    }
+            }
+            #endregion
             var saveResult = _appUow.ElkSaveChangesAsync();
-            return new Response<Relative> { Result = Relative, IsSuccessful = saveResult.Result.IsSuccessful, Message = saveResult.Result.Message };
+            return new Response<Relative> {  IsSuccessful = saveResult.Result.IsSuccessful, Message = saveResult.Result.Message };
         }
 
         public async Task<IResponse<bool>> DeleteAsync(int id)
@@ -96,10 +118,12 @@ namespace InsBrokers.Service
 
         public async Task<IResponse<Relative>> FindAsync(int id)
         {
-            var Relative = await _RelativeRepo.FirstOrDefaultAsync(x=>x.RelativeId == id,
-                new List<Expression<Func<Relative, object>>> {x=>x.RelativeAttachments });
-            if (Relative == null) return new Response<Relative> { Message = ServiceMessage.RecordNotExist };
-            return new Response<Relative> { Result = Relative, IsSuccessful = true };
+            var relative = await _RelativeRepo.FirstOrDefaultAsync(x => x.RelativeId == id,
+                new List<Expression<Func<Relative, object>>> { x => x.RelativeAttachments });
+            if (relative == null) return new Response<Relative> { Message = ServiceMessage.RecordNotExist };
+            if (relative.RelativeAttachments != null)
+                relative.RelativeAttachments = relative.RelativeAttachments.Where(x => !x.IsDeleted).ToList();
+            return new Response<Relative> { Result = relative, IsSuccessful = true };
         }
 
         public async Task<IResponse<Relative>> FindWithAttachmentsAsync(int id)
@@ -108,8 +132,11 @@ namespace InsBrokers.Service
                 conditions: x => x.RelativeId == id,
                 includeProperties: new List<Expression<Func<Relative, object>>>
                 {
-                    x => x.RelativeAttachments
+                    x => x.RelativeAttachments,
+                    x=> x.User
                 });
+            if (relative.RelativeAttachments != null)
+                relative.RelativeAttachments = relative.RelativeAttachments.Where(x => !x.IsDeleted).ToList();
             if (relative == null) return new Response<Relative> { Message = ServiceMessage.RecordNotExist.Fill(DomainStrings.Relatives) };
 
             return new Response<Relative> { Result = relative, IsSuccessful = true };

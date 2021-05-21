@@ -4,6 +4,8 @@
 }
 @section styles{
     <link href="@Url.Content("~/Styles/App/customize-template.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Styles//App/attachment-management.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Styles/Libs//loadover.css")" rel="stylesheet" />
 }
 <div class="row">
     <div class="col-12 col-sm-12">
@@ -69,10 +71,21 @@
                             <custom-input-for type="password" for="NewPassword" class="form-control ltr-elm"></custom-input-for>
                         </div>
                     </div>
-
-                    <div class="row btn-group">
+                    <div class="row">
                         <div class="col-12">
-                            <button type="button" class="btn btn-primary block m-b m-t btn-action btn-sign-in" data-ajax-submit="true">
+                            <partial name="~/Views/Shared/Partials/_AttachmentManagement.cshtml" model="new ManageAttachmentModel {
+                             Types = new List<AttachmentType> {
+                                 AttachmentType.IdentityCardPage1 ,
+                                 AttachmentType.IdentityCardPage2,
+                                 AttachmentType.NationalCard
+                             },
+                            Attachments=Model.UserAttachments==null?new List<BaseAttachment>(): new List<BaseAttachment>(Model.UserAttachments)
+                         }" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <button type="button" class="btn btn-primary block m-b m-t btn-action btn-submit">
                                 <span class="text">@Strings.Submit</span>
                                 <div class="icon">
                                     <i class="zmdi zmdi-floppy rotate-180 default-i"></i>
@@ -85,3 +98,43 @@
         </div>
     </div>
 </div>
+@section scripts{
+    <script src="@Url.Content("~/Scripts/Libs/loadover.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/App/attachment-management.js")"></script>
+    <script>
+        const attachmanetConfig = {
+            removeUrl: '@Url.Action("DeleteAttachment", "User")',
+            uploadUrl:'@Url.Action("AddUserAttachments", "Home")'
+        };
+        $(document).ready(function () {
+            $(document).on('click', '.btn-submit', function () {
+                let $btn = $(this);
+                let $frm = $btn.closest("form");
+                if (!$frm.valid()) return;
+                let model = customSerialize($frm);
+                model.UserAttachmentIds = attachments.map(x=>x.id);
+                console.log(model);
+                ajaxBtn.inProgress($btn);
+                $.post($frm.attr("action"), model)
+                    .done(function (rep) {
+                        ajaxBtn.normal();
+                        if (rep.IsSuccessful) {
+                            if (id === '0') {
+                                attachments = [];
+                            }
+                            else showNotif(notifyType.success, '@Strings.Success');
+                        }
+                        else  showNotif(notifyType.danger, rep.Message);
+                    })
+                    .fail(function (e) {
+                        ajaxBtn.normal();
+                        console.log(e);
+                        showNotif(notifyType.danger, '@Strings.Error');
+                    });
+
+            });
+        });
+
+
+    </script>
+}

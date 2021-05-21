@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using InsBrokers.Portal.Resource;
 using DomainString = InsBrokers.Domain.Resource.Strings;
 using System.Collections.Generic;
+using Microsoft.Extensions.Configuration;
 
 namespace InsBrokers.Portal.Controllers
 {
@@ -15,10 +16,11 @@ namespace InsBrokers.Portal.Controllers
     public partial class MemberRelativeController : Controller
     {
         private readonly IRelativeService _MemberRelativeSrv;
-
-        public MemberRelativeController(IRelativeService MemberRelativeSrv)
+        private readonly IConfiguration _configuration;
+        public MemberRelativeController(IRelativeService MemberRelativeSrv, IConfiguration configuration)
         {
             _MemberRelativeSrv = MemberRelativeSrv;
+            _configuration = configuration;
         }
 
 
@@ -44,7 +46,9 @@ namespace InsBrokers.Portal.Controllers
         {
             var findRep = await _MemberRelativeSrv.FindAsync(id);
             if (!findRep.IsSuccessful) return Json(new { IsSuccessful = false, Message = Strings.RecordNotFound.Fill(DomainString.Relatives) });
-
+            if (findRep.Result.RelativeAttachments != null)
+                foreach (var item in findRep.Result.RelativeAttachments)
+                    item.Url = $"{_configuration["CustomSettings:MainAddress"]}{item.Url}";
             return Json(new Modal
             {
                 Title = $"{Strings.Update} {DomainString.Relatives}",
@@ -70,7 +74,7 @@ namespace InsBrokers.Portal.Controllers
         {
             filter.UserId = User.GetUserId();
             ViewBag.HasExtraButton = true;
-            ViewBag.ExtraButtonUrl = Url.Action("InsuranceInfo","User");
+            ViewBag.ExtraButtonUrl = Url.Action("InsuranceInfo", "User");
             ViewBag.ExtraButtonText = Strings.PreFactor;
             ViewBag.ExtraButtonIcon = "zmdi-eye";
             if (!Request.IsAjaxRequest()) return View(_MemberRelativeSrv.Get(filter));
@@ -79,6 +83,6 @@ namespace InsBrokers.Portal.Controllers
 
         [HttpGet, AuthEqualTo("MemberRelative", "Add")]
         public virtual JsonResult Search(string q)
-            => Json(_MemberRelativeSrv.Search(q,User.GetUserId()).ToSelectListItems());
+            => Json(_MemberRelativeSrv.Search(q, User.GetUserId()).ToSelectListItems());
     }
 }

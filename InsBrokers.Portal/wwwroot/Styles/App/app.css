@@ -9277,6 +9277,7 @@ select {
 .toast-close-button {
   position: absolute !important;
   left: 10px !important;
+  right:auto;
   top: 50% !important;
   margin-top: -15px !important; }
 

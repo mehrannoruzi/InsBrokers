@@ -137,7 +137,6 @@ namespace InsBrokers.Domain
         public string Organization { get; set; }
 
 
-
         [NotMapped]
         [Display(Name = nameof(Strings.FullName), ResourceType = typeof(Strings))]
         public string Fullname => $"{Name} {Family}";
@@ -151,11 +150,14 @@ namespace InsBrokers.Domain
 
         [Display(Name = nameof(Strings.Addresses), ResourceType = typeof(Strings))]
         public List<Address> Addresses { get; set; }
-        
+
         [Display(Name = nameof(Strings.BankAccounts), ResourceType = typeof(Strings))]
         public List<BankAccount> BankAccounts { get; set; }
 
         [Display(Name = nameof(Strings.UserAttachments), ResourceType = typeof(Strings))]
         public List<UserAttachment> UserAttachments { get; set; }
+
+        [NotMapped]
+        public List<int> UserAttachmentIds { get; set; }
     }
 }

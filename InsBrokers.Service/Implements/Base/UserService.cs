@@ -76,9 +76,20 @@ namespace InsBrokers.Service
             user.IdentityNumber = model.IdentityNumber;
             user.BaseInsurance = model.BaseInsurance;
             user.Gender = model.Gender;
-
+            #region Save Attachments
+            if (model.UserAttachmentIds != null && model.UserAttachmentIds.Count > 0)
+            {
+                var attachments = _appUow.UserAttachmentRepo.Get(conditions: x => model.UserAttachmentIds.Contains(x.UserAttachmentId), orderBy: o => o.OrderBy(x => x.UserAttachmentId));
+                if (attachments != null)
+                    foreach (var attachment in attachments)
+                    {
+                        attachment.UserId = model.UserId;
+                        _appUow.UserAttachmentRepo.Update(attachment);
+                    }
+            }
+            #endregion
             var saveResult = await _appUow.ElkSaveChangesAsync();
-            return new Response<User> { Result = user, IsSuccessful = saveResult.IsSuccessful, Message = saveResult.Message };
+            return new Response<User> { IsSuccessful = saveResult.IsSuccessful, Message = saveResult.Message };
         }
 
         public async Task<IResponse<User>> UpdateAsync(User model)
@@ -126,7 +137,7 @@ namespace InsBrokers.Service
 
         public async Task<IResponse<User>> FindWithAttachmentsAsync(Guid userId)
         {
-            var findedUser = await _appUow.UserRepo.FirstOrDefaultAsync(
+            var user = await _appUow.UserRepo.FirstOrDefaultAsync(
                 conditions: x => x.UserId == userId,
                 includeProperties: new List<Expression<Func<User, object>>>
                 {
@@ -135,9 +146,10 @@ namespace InsBrokers.Service
                     x => x.Relatives,
                     x => x.UserAttachments
                 });
-            if (findedUser == null) return new Response<User> { Message = ServiceMessage.RecordNotExist.Fill(DomainStrings.User) };
-
-            return new Response<User> { Result = findedUser, IsSuccessful = true };
+            if (user == null) return new Response<User> { Message = ServiceMessage.RecordNotExist.Fill(DomainStrings.User) };
+            if (user.UserAttachments != null)
+                user.UserAttachments = user.UserAttachments.Where(x => !x.IsDeleted).ToList();
+            return new Response<User> { Result = user, IsSuccessful = true };
         }
 
         #endregion
