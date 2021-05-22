@@ -10,8 +10,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using InsBrokers.Portal.Resource;
 using Microsoft.Extensions.Configuration;
-using DomainString = InsBrokers.Domain.Resource.Strings;
 using Microsoft.AspNetCore.Authorization;
+using DomainString = InsBrokers.Domain.Resource.Strings;
 
 namespace InsBrokers.Portal.Controllers
 {

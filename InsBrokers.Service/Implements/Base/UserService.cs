@@ -117,8 +117,42 @@ namespace InsBrokers.Service
 
         public async Task<IResponse<bool>> DeleteAsync(Guid userId)
         {
-            _appUow.UserRepo.Delete(new User { UserId = userId });
+
+            var user = await _appUow.UserRepo.FirstOrDefaultAsync(
+                conditions: x => x.UserId == userId,
+                includeProperties: new List<Expression<Func<User, object>>>
+                {
+                    x => x.Relatives,
+                    x => x.BankAccounts,
+                    x => x.UserAttachments,
+                    x => x.losses,
+                    x => x.Addresses
+                });
+
+            //var userAttachments = _appUow.UserAttachmentRepo.Get(conditions: x => x.UserId == userId);
+            //var bankAccounts = _appUow.BankAccountRepo.Get(conditions: x => x.UserId == userId);
+            //var addresses = _appUow.AddressRepo.Get(conditions: x => x.UserId == userId);
+            //var losses = _appUow.LossRepo.Get(conditions: x => x.UserId == userId);
+            //var relatives = _appUow.RelativeRepo.Get(conditions: x => x.UserId == userId);
+
+            var lossAssetes = new List<LossAsset>();
+            var relativeAttachments = new List<RelativeAttachment>();
+            var lossIds = user.losses.Select(x => x.LossId).ToList();
+            if (lossIds.Any()) lossAssetes = _appUow.LossAssetRepo.Get(conditions: x => lossIds.Contains(x.LossId));
+            var relativeIds = user.Relatives.Select(x => x.RelativeId).ToList();
+            if (relativeIds.Any()) relativeAttachments = _appUow.RelativeAttachmentRepo.Get(conditions: x => relativeIds.Contains(x.RelativeId));
+
+            if (user.UserAttachments.Any()) _appUow.UserAttachmentRepo.DeleteRange(user.UserAttachments);
+            if (user.BankAccounts.Any()) _appUow.BankAccountRepo.DeleteRange(user.BankAccounts);
+            if (user.Addresses.Any()) _appUow.AddressRepo.DeleteRange(user.Addresses);
+            if (lossAssetes.Any()) _appUow.LossAssetRepo.DeleteRange(lossAssetes);
+            if (user.losses.Any()) _appUow.LossRepo.DeleteRange(user.losses);
+            if (relativeAttachments.Any()) _appUow.RelativeAttachmentRepo.DeleteRange(relativeAttachments);
+            if (user.Relatives.Any()) _appUow.RelativeRepo.DeleteRange(user.Relatives);
+            _appUow.UserRepo.Delete(user);
+
             var saveResult = await _appUow.ElkSaveChangesAsync();
+
             return new Response<bool>
             {
                 Message = saveResult.Message,

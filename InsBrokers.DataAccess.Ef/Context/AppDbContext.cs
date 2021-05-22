@@ -16,7 +16,7 @@ namespace InsBrokers.DataAccess.Ef
         {
             builder.Entity<User>().HasIndex(x => x.MobileNumber).HasName("IX_MobileNumber").IsUnique();
 
-            builder.OverrideDeleteBehavior();
+            builder.OverrideDeleteBehavior(DeleteBehavior.Cascade);
             builder.RegisterAllEntities<IEntity>(typeof(User).Assembly);
         }
     }
