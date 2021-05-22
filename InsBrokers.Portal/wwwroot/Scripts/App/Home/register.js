@@ -1,7 +1,7 @@
 ﻿///<reference path="../../Libs/jquery-3.1.1.min.js" />
 
 $(document).ready(function () {
-    var attachmemts = [];
+    var attachments = [];
     let uploadTemplate = (id, url, name) => `<div class="uploaded">
         <button type="button" class="btn-remove" data-attch-id="${id}"><i class="zmdi zmdi-close"></i></button>
         <img src="${url}" />
@@ -39,8 +39,8 @@ $(document).ready(function () {
                         let $wrapper = $elm.closest('.upload-wrapper');
                         let template = uploadTemplate(rep.Result.UserAttachmentId, url, file.name);
                         $wrapper.append(template);
-                        attachmemts.push({ type: rep.Result.UserAttachmentType, id: rep.Result.UserAttachmentId });
-                        console.log(attachmemts);
+                        attachments.push({ type: rep.Result.UserAttachmentType, id: rep.Result.UserAttachmentId });
+                        console.log(attachments);
                     }
                     else showNotif(notifyType.danger, rep.Message);
                 },
@@ -61,17 +61,17 @@ $(document).ready(function () {
         //let idx = $(".uploaded").index($uploaded);
         let idx = attachments.findIndex(x => x.id === id);
         if (~idx) {
-            attachmemts.splice(idx, 1);
+            attachments.splice(idx, 1);
             $uploaded.remove();
         }
-        console.log(attachmemts);
+        console.log(attachments);
     });
     const validateFiles = () => {
         let types = [];
         $(".input-uploader").each(function () { types.push($(this).data("type")); });
         let isValid = true;
         for (let t of types) {
-            if (!attachmemts.some(x => x.type === t)) isValid = false;
+            if (!attachments.some(x => x.type === t)) isValid = false;
         }
         if (!isValid)
             showToast(notifyType.danger, "لطفا فایلهای مورد نیاز را آپلود نمایید");
@@ -84,7 +84,7 @@ $(document).ready(function () {
         if (!$frm.valid()) return;
         if (!validateFiles()) return;
         let model = customSerialize($frm);
-        model.UserAttachmentIds = attachmemts.map(x => x.id);
+        model.UserAttachmentIds = attachments.map(x => x.id);
         ajaxBtn.inProgress($btn);
         console.log(model);
         $.ajax({
