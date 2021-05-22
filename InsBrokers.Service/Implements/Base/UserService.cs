@@ -129,18 +129,12 @@ namespace InsBrokers.Service
                     x => x.Addresses
                 });
 
-            //var userAttachments = _appUow.UserAttachmentRepo.Get(conditions: x => x.UserId == userId);
-            //var bankAccounts = _appUow.BankAccountRepo.Get(conditions: x => x.UserId == userId);
-            //var addresses = _appUow.AddressRepo.Get(conditions: x => x.UserId == userId);
-            //var losses = _appUow.LossRepo.Get(conditions: x => x.UserId == userId);
-            //var relatives = _appUow.RelativeRepo.Get(conditions: x => x.UserId == userId);
-
             var lossAssetes = new List<LossAsset>();
             var relativeAttachments = new List<RelativeAttachment>();
             var lossIds = user.losses.Select(x => x.LossId).ToList();
-            if (lossIds.Any()) lossAssetes = _appUow.LossAssetRepo.Get(conditions: x => lossIds.Contains(x.LossId));
+            if (lossIds.Any()) lossAssetes = _appUow.LossAssetRepo.Get(conditions: x => lossIds.Contains(x.LossId), orderBy: x => x.OrderBy(x => x.LossAssetId));
             var relativeIds = user.Relatives.Select(x => x.RelativeId).ToList();
-            if (relativeIds.Any()) relativeAttachments = _appUow.RelativeAttachmentRepo.Get(conditions: x => relativeIds.Contains(x.RelativeId));
+            if (relativeIds.Any()) relativeAttachments = _appUow.RelativeAttachmentRepo.Get(conditions: x => relativeIds.Contains(x.RelativeId), orderBy: x => x.OrderBy(x => x.RelativeAttachmentId));
 
             if (user.UserAttachments.Any()) _appUow.UserAttachmentRepo.DeleteRange(user.UserAttachments);
             if (user.BankAccounts.Any()) _appUow.BankAccountRepo.DeleteRange(user.BankAccounts);
@@ -380,7 +374,7 @@ namespace InsBrokers.Service
                 }
                 if (!string.IsNullOrWhiteSpace(filter.DateTo))
                 {
-                    var dateTo = PersianDateTime.Parse(filter.DateTo).ToDateTime();
+                    var dateTo = PersianDateTime.Parse(filter.DateTo).ToDateTime().AddDays(1);
                     conditions = conditions.And(x => x.InsertDateMi < dateTo);
                 }
             }
@@ -794,7 +788,7 @@ namespace InsBrokers.Service
                 }
                 if (!string.IsNullOrWhiteSpace(filter.DateTo))
                 {
-                    var dateTo = PersianDateTime.Parse(filter.DateTo).ToDateTime();
+                    var dateTo = PersianDateTime.Parse(filter.DateTo).ToDateTime().AddDays(1);
                     conditions = conditions.And(x => x.InsertDateMi < dateTo);
                 }
             }
