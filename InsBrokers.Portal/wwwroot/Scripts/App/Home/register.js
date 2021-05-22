@@ -58,7 +58,7 @@ $(document).ready(function () {
         let $elm = $(this);
         let id = $elm.data("attch-id");
         let $uploaded = $elm.closest(".uploaded");
-        let idx = $(".uploaded").index($uploaded);
+        //let idx = $(".uploaded").index($uploaded);
         let idx = attachments.findIndex(x => x.id === id);
         if (~idx) {
             attachmemts.splice(idx, 1);
