@@ -3,9 +3,9 @@
     ViewBag.Title = Strings.SignUp;
 }
 @section styles{
-    <link href="~/Styles/Libs//loadover.css" rel="stylesheet" />
-    <link href="~/Styles/App/Home/register.min.css" rel="stylesheet" />
-    <link href="~/Styles/App/app.min.css" rel="stylesheet" />
+    <link href="@Url.Content("~/Styles/Libs//loadover.css")" rel="stylesheet" asp-append-version="true" />
+    <link href="@Url.Content("~/Styles/App/Home/register.min.css")" rel="stylesheet" asp-append-version="true" />
+    <link href="@Url.Content("~/Styles/App/app.min.css")" rel="stylesheet" asp-append-version="true" />
 
     @*<link href="@Url.Content("~/Styles/App/LossAsset/uploader.min.css")" rel="stylesheet" />*@
     <link href="@Url.Content("~/Styles/App/customize-template.min.css")" rel="stylesheet" />
@@ -40,9 +40,9 @@
             uploadUrl:'@Url.Action("AddUserAttachments", "Home")'
         };
     </script>
-    <script src="~/Scripts/Libs/loadover.js"></script>
-    <script src="~/Scripts/App/common.js"></script>
-    <script src="~/Scripts/App/plugins.js"></script>
-    <script src="~/Scripts/App/Home/register.js"></script>
+    <script src="@Url.Content("~/Scripts/Libs/loadover.js")" )" asp-append-version="true"></script>
+    <script src="@Url.Content("~/Scripts/App/common.js")" asp-append-version="true"></script>
+    <script src="@Url.Content("~/Scripts/App/plugins.js")" asp-append-version="true"></script>
+    <script src="@Url.Content("~/Scripts/App/Home/register.js")" asp-append-version="true"></script>
 
 }
