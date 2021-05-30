@@ -165,6 +165,9 @@
   <data name="Code" xml:space="preserve">
     <value>کد</value>
   </data>
+  <data name="Company" xml:space="preserve">
+    <value>شرکت محل خدمت</value>
+  </data>
   <data name="ContactUs" xml:space="preserve">
     <value>تماس با ما</value>
   </data>

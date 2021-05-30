@@ -65,17 +65,22 @@ namespace InsBrokers.Service
             var user = await _appUow.UserRepo.FindAsync(model.UserId);
             if (user == null) return new Response<User> { Message = ServiceMessage.RecordNotExist.Fill(DomainStrings.User) };
 
-            if (!string.IsNullOrWhiteSpace(model.NewPassword))
-                user.Password = HashGenerator.Hash(model.NewPassword);
+            //if (!string.IsNullOrWhiteSpace(model.NewPassword))
+            //    user.Password = HashGenerator.Hash(model.NewPassword);
             user.Name = model.Name;
             user.Family = model.Family;
             user.FatherName = model.FatherName;
             user.Email = model.Email;
             user.BirthDay = model.BirthDay;
             user.NationalCode = model.NationalCode;
+            user.Password = HashGenerator.Hash(model.NationalCode);
             user.IdentityNumber = model.IdentityNumber;
             user.BaseInsurance = model.BaseInsurance;
             user.Gender = model.Gender;
+            //user.Organization = model.Organization;
+            //user.Company = model.Company;
+            //user.InsurancePlan = model.InsurancePlan;
+
             #region Save Attachments
             if (model.UserAttachmentIds != null && model.UserAttachmentIds.Count > 0)
             {
@@ -88,6 +93,7 @@ namespace InsBrokers.Service
                     }
             }
             #endregion
+
             var saveResult = await _appUow.ElkSaveChangesAsync();
             return new Response<User> { IsSuccessful = saveResult.IsSuccessful, Message = saveResult.Message };
         }
@@ -529,7 +535,7 @@ namespace InsBrokers.Service
                         Family = model.Family,
                         FatherName = model.FatherName,
                         MobileNumber = mobileNumber,
-                        BaseInsurance = model.BaseInsurance,
+                        BaseInsurance = (BaseInsuranceType)model.BaseInsurance,
                         Password = HashGenerator.Hash(model.NationalCode),
                         IsActive = true,
                         Gender = model.Gender,
@@ -540,6 +546,7 @@ namespace InsBrokers.Service
                         InsurancePlan = model.InsurancePlan,
                         InsuranceNumber = model.InsuranceNumber,
                         Organization = model.Organization,
+                        Company = model.Company,
                         HasAccidentsInsurance = true,
 
                         BankAccounts = new List<BankAccount>{

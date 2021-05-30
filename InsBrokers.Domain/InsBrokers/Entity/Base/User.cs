@@ -136,6 +136,13 @@ namespace InsBrokers.Domain
         [StringLength(100, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
         public string Organization { get; set; }
 
+        [Column(TypeName = "nvarchar(100)")]
+        [Display(Name = nameof(Strings.Company), ResourceType = typeof(Strings))]
+        [Required(ErrorMessageResourceName = nameof(ErrorMessage.Required), ErrorMessageResourceType = typeof(ErrorMessage))]
+        [MaxLength(100, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
+        [StringLength(100, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]
+        public string Company { get; set; }
+
 
         [NotMapped]
         [Display(Name = nameof(Strings.FullName), ResourceType = typeof(Strings))]

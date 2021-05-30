@@ -13,8 +13,11 @@ namespace InsBrokers.Domain
         [Description("نیروهای مسلح")]
         NiruhayeMosalah = 3,
 
-        [Description("بانک")]
+        [Description("بیمه بانک")]
         Bank = 4,
+
+        [Description("بیمه سلامت")]
+        BimehSalat = 6,
 
         [Description("فاقد بیمه پایه")]
         BeduneBimehPayeh = 5,
