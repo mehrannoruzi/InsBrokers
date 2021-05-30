@@ -39,7 +39,7 @@ namespace InsBrokers.Portal.Controllers
         {
             //var t = new AclSeed(_db,_appDb);
             //var rep = t.Init();
-            var pw = HashGenerator.Hash("9334188184");
+            //var pw = HashGenerator.Hash("9334188184");
             if (User.Identity.IsAuthenticated)
             {
                 var urlPrefix = _config.GetValue<string>(UrlPrefixKey);
@@ -50,7 +50,7 @@ namespace InsBrokers.Portal.Controllers
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        public virtual async Task<JsonResult> SignIn(SignInModel model)
+        public virtual async Task<JsonResult> SignIn([FromForm] SignInModel model)
         {
             if (!ModelState.IsValid) return Json(new Response<string> { IsSuccessful = false, Message = ModelState.GetModelError() });
 
@@ -64,7 +64,7 @@ namespace InsBrokers.Portal.Controllers
             return Json(new Response<string> { IsSuccessful = true, Result = Url.Action(menuRep.DefaultUserAction.Action, menuRep.DefaultUserAction.Controller, new { }), });
         }
 
-        public virtual async Task<ActionResult> SignOut([FromServices]IMemoryCacheProvider cacheProvider)
+        public virtual async Task<ActionResult> SignOut([FromServices] IMemoryCacheProvider cacheProvider)
         {
             if (User.Identity.IsAuthenticated)
             {

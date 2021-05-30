@@ -47,19 +47,15 @@ namespace InsBrokers.Portal.Controllers
         [HttpGet]
         public IActionResult Register()
         {
-            var organizationList = new List<SelectListItem>
-            {
-                new SelectListItem { Text="", Value="", Selected = true },
-                new SelectListItem { Text="سازمان نظام دانپزشکی", Value="سازمان نظام دانپزشکی", Selected = false },
-            };
+            var organization = _configuration["CustomSettings:Organizations"].Split(";");
+            var organizationList = new List<SelectListItem> { new SelectListItem { Text = "", Value = "", Selected = true } };
+            foreach (var item in organization)
+                organizationList.Add(new SelectListItem { Text = item, Value = item, Selected = false });
 
-            var insurancePlanList = new List<SelectListItem>
-            {
-                new SelectListItem { Text="", Value="", Selected = true },
-                new SelectListItem { Text="طرح برنزی", Value="طرح برنزی", Selected = false },
-                new SelectListItem { Text="طرح نقره ای", Value="طرح نقره ای", Selected = false },
-                new SelectListItem { Text="طرح طلایی", Value="طرح طلایی", Selected = false },
-            };
+            var plans = _configuration["InsurancePlanSettings:Plans"].Split(";");
+            var insurancePlanList = new List<SelectListItem> { new SelectListItem { Text = "", Value = "", Selected = true } };
+            foreach (var item in plans)
+                insurancePlanList.Add(new SelectListItem { Text = item, Value = item, Selected = false });
 
             ViewBag.OrganizationList = organizationList;
             ViewBag.InsurancePlan = insurancePlanList;

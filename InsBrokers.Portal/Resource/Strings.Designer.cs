@@ -97,7 +97,7 @@ namespace InsBrokers.Portal.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to تهران، میدان آرزانتین ،خیابان بیهقی، کوچه دهم شرقی، پلاک 6.
+        ///   Looks up a localized string similar to تهران، میدان آرژانتین ،خیابان بیهقی، کوچه دهم شرقی، پلاک 6.
         /// </summary>
         public static string AddressDetailsInfo {
             get {
@@ -565,7 +565,7 @@ namespace InsBrokers.Portal.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;a href=&quot;tel:02188173100&quot;&gt;02188173100&lt;/a&gt;-&lt;a href=&quot;tel:02188173200&quot;&gt;88173200&lt;/a&gt;-&lt;a href=&quot;tel:02188173400&quot;&gt;88173400&lt;/a&gt;.
+        ///   Looks up a localized string similar to &lt;a href=&quot;tel:02188173100&quot;&gt;02188173100 داخلی 131&lt;/a&gt;.
         /// </summary>
         public static string PhoneNumbersInfo {
             get {

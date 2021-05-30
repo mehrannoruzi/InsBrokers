@@ -103,7 +103,7 @@ namespace InsBrokers.Domain
         public BankName BankName { get; set; }
 
         [Display(Name = nameof(Strings.AccountNumber), ResourceType = typeof(Strings))]
-        [Int(ErrorMessageResourceName = nameof(ErrorMessage.AccountNumberIsInt), ErrorMessageResourceType = typeof(ErrorMessage))]
+        //[Int(ErrorMessageResourceName = nameof(ErrorMessage.AccountNumberIsInt), ErrorMessageResourceType = typeof(ErrorMessage))]
         [Required(ErrorMessageResourceName = nameof(ErrorMessage.Required), ErrorMessageResourceType = typeof(ErrorMessage))]
         [MinLength(7, ErrorMessageResourceName = nameof(ErrorMessage.MinLength), ErrorMessageResourceType = typeof(ErrorMessage))]
         [MaxLength(20, ErrorMessageResourceName = nameof(ErrorMessage.MaxLength), ErrorMessageResourceType = typeof(ErrorMessage))]

@@ -1,28 +1,25 @@
-using DomainString = InsBrokers.Domain.Resource.Strings;
-using DomainError = InsBrokers.Domain.Resource.ErrorMessage;
 using InsBrokers.Portal.Resource;
 using System.ComponentModel.DataAnnotations;
+using DomainString = InsBrokers.Domain.Resource.Strings;
 
 namespace InsBrokers.Portal
 {
-
     public class SignInModel
     {
-
-        [RegularExpression(@"^0?9\d{9}$", ErrorMessageResourceName = nameof(DomainError.InvalidMobileNumber), ErrorMessageResourceType = typeof(DomainError))]
         [Display(Name = nameof(DomainString.MobileNumber), ResourceType = typeof(DomainString))]
-        [Required(ErrorMessageResourceName = nameof(Resource.Strings.Required), ErrorMessageResourceType = typeof(Resource.Strings), AllowEmptyStrings = false)]
+        [Required(ErrorMessageResourceName = nameof(Strings.Required), ErrorMessageResourceType = typeof(Strings), AllowEmptyStrings = false)]
+        //[RegularExpression(@"^0?9\d{9}$", ErrorMessageResourceName = nameof(DomainError.InvalidMobileNumber), ErrorMessageResourceType = typeof(DomainError))]
         public string MobileNumber { get; set; }
 
-        [DataType(DataType.Password)]
-        [MaxLength(15, ErrorMessageResourceName = nameof(Strings.MaxLength), ErrorMessageResourceType = typeof(Strings))]
-        [MinLength(5, ErrorMessageResourceName = nameof(Strings.MinLength), ErrorMessageResourceType = typeof(Strings))]
-        [StringLength(15, MinimumLength = 5, ErrorMessageResourceName = nameof(Strings.Min5MaxLength), ErrorMessageResourceType = typeof(Strings))]
+        //[DataType(DataType.Password)]
         [Display(Name = nameof(DomainString.NationalCode), ResourceType = typeof(DomainString))]
+        [MinLength(5, ErrorMessageResourceName = nameof(Strings.MinLength), ErrorMessageResourceType = typeof(Strings))]
+        [MaxLength(15, ErrorMessageResourceName = nameof(Strings.MaxLength), ErrorMessageResourceType = typeof(Strings))]
         [Required(ErrorMessageResourceName = nameof(Strings.Required), ErrorMessageResourceType = typeof(Strings), AllowEmptyStrings = false)]
+        [StringLength(15, MinimumLength = 5, ErrorMessageResourceName = nameof(Strings.Min5MaxLength), ErrorMessageResourceType = typeof(Strings))]
         public string Password { get; set; }
 
-        [Display(Name = nameof(Resource.Strings.RememberMe), ResourceType = typeof(Resource.Strings))]
+        [Display(Name = nameof(Strings.RememberMe), ResourceType = typeof(Strings))]
         public bool RememberMe { get; set; }
     }
 }

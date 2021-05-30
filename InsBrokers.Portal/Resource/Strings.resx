@@ -130,7 +130,7 @@
     <value>نقش های اضافه شده به این این اکشن</value>
   </data>
   <data name="AddressDetailsInfo" xml:space="preserve">
-    <value>تهران، میدان آرزانتین ،خیابان بیهقی، کوچه دهم شرقی، پلاک 6</value>
+    <value>تهران، میدان آرژانتین ،خیابان بیهقی، کوچه دهم شرقی، پلاک 6</value>
   </data>
   <data name="AreYouSure" xml:space="preserve">
     <value>آیا از انجام این کار مطمن هستید؟</value>
@@ -286,7 +286,7 @@
     <value>گذروازه باید حد اقل 5 کاراکتر و حداکثر 20 کاراکتر باشد</value>
   </data>
   <data name="PhoneNumbersInfo" xml:space="preserve">
-    <value>&lt;a href="tel:02188173100"&gt;02188173100&lt;/a&gt;-&lt;a href="tel:02188173200"&gt;88173200&lt;/a&gt;-&lt;a href="tel:02188173400"&gt;88173400&lt;/a&gt;</value>
+    <value>&lt;a href="tel:02188173100"&gt;02188173100 داخلی 131&lt;/a&gt;</value>
   </data>
   <data name="PleaseSelect" xml:space="preserve">
     <value>لطفا انتخاب نمایید</value>
