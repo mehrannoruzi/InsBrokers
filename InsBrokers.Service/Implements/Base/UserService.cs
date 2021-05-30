@@ -210,9 +210,16 @@ namespace InsBrokers.Service
             var hashedPassword = HashGenerator.Hash(password);
             if (user.Password != hashedPassword)
             {
-                FileLoger.Message($"UserService/Authenticate-> Invalid Password Login ! Username:{mobileNumber} Password:{password}");
-                return new Response<User> { Message = ServiceMessage.InvalidUsernameOrPassword };
+                password = password.PadLeft(10, '0');
+                hashedPassword = HashGenerator.Hash(password);
+                if (user.Password != hashedPassword)
+                {
+                    FileLoger.Message($"UserService/Authenticate-> Invalid Password Login ! Username:{mobileNumber} Password:{password}");
+                    return new Response<User> { Message = ServiceMessage.InvalidUsernameOrPassword };
+                }
             }
+
+
             //if (user.NewPassword == hashedPassword)
             //{
             //    user.Password = user.NewPassword;
