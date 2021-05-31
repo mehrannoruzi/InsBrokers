@@ -65,8 +65,6 @@ namespace InsBrokers.Service
             var user = await _appUow.UserRepo.FindAsync(model.UserId);
             if (user == null) return new Response<User> { Message = ServiceMessage.RecordNotExist.Fill(DomainStrings.User) };
 
-            //if (!string.IsNullOrWhiteSpace(model.NewPassword))
-            //    user.Password = HashGenerator.Hash(model.NewPassword);
             user.Name = model.Name;
             user.Family = model.Family;
             user.FatherName = model.FatherName;
@@ -104,9 +102,10 @@ namespace InsBrokers.Service
             if (user == null) return new Response<User> { Message = ServiceMessage.RecordNotExist.Fill(DomainStrings.User) };
 
             //if (model.MustChangePassword)
-            //    findedUser.Password = HashGenerator.Hash(model.Password);
-            if (!string.IsNullOrWhiteSpace(user.NewPassword))
-                user.Password = HashGenerator.Hash(model.NewPassword);
+            //    user.Password = HashGenerator.Hash(model.NationalCode);
+            //if (!string.IsNullOrWhiteSpace(user.NewPassword))
+            //    user.Password = HashGenerator.Hash(model.NewPassword);
+
             user.Name = model.Name;
             user.Family = model.Family;
             user.FatherName = model.FatherName;
@@ -116,7 +115,14 @@ namespace InsBrokers.Service
             user.BirthDay = model.BirthDay;
             user.BirthDayMi = PersianDateTime.Parse(model.BirthDay).ToDateTime();
             user.IsActive = model.IsActive;
+            
+            user.Password = HashGenerator.Hash(model.NationalCode);
+            user.Organization = model.Organization;
+            user.Company = model.Company;
+            user.InsurancePlan = model.InsurancePlan;
             user.BaseInsurance = model.BaseInsurance;
+            user.InsuranceNumber = model.InsuranceNumber;
+
             var saveResult = await _appUow.ElkSaveChangesAsync();
             return new Response<User> { Result = user, IsSuccessful = saveResult.IsSuccessful, Message = saveResult.Message };
         }

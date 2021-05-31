@@ -8,7 +8,9 @@ using InsBrokers.Service;
 using System.IO.Compression;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using InsBrokers.Portal.Resource;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authorization;
 using DomainString = InsBrokers.Domain.Resource.Strings;
@@ -53,6 +55,21 @@ namespace InsBrokers.Portal.Controllers
         {
             var findUser = await _userSrv.FindAsync(id);
             if (!findUser.IsSuccessful) return Json(new Response<string> { IsSuccessful = false, Message = Strings.RecordNotFound.Fill(DomainString.User) });
+
+            var organization = _configuration["CustomSettings:Organizations"].Split(";");
+            var organizationList = new List<SelectListItem> { new SelectListItem { Text = "", Value = "", Selected = true } };
+            foreach (var item in organization)
+                organizationList.Add(new SelectListItem { Text = item, Value = item, Selected = false });
+
+            var plans = _configuration["InsurancePlanSettings:Plans"].Split(";");
+            var insurancePlanList = new List<SelectListItem> { new SelectListItem { Text = "", Value = "", Selected = true } };
+            foreach (var item in plans)
+                insurancePlanList.Add(new SelectListItem { Text = item, Value = item, Selected = false });
+
+            ViewBag.OrganizationList = organizationList;
+            ViewBag.InsurancePlan = insurancePlanList;
+
+
             return Json(new Modal
             {
                 Title = $"{Strings.Update} {DomainString.User}",
@@ -69,6 +86,7 @@ namespace InsBrokers.Portal.Controllers
             ModelState.Remove(nameof(model.LastLoginDateSh));
             ModelState.Remove(nameof(model.InsertDateSh));
             ModelState.Remove(nameof(model.Password));
+
             if (!ModelState.IsValid) return Json(new Response<string> { IsSuccessful = false, Message = ModelState.GetModelError() });
             return Json(await _userSrv.UpdateAsync(model));
         }

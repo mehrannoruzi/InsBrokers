@@ -3,8 +3,42 @@
     Layout = null;
     var addMode = Model.UserId == Guid.Empty;
 }
+
 <div class="row">
     @Html.HiddenFor(x => x.UserId)
+    <div class="col-12 col-sm-4">
+        <custom-select-for for="Organization" class="form-control" items="ViewBag.OrganizationList" />
+        @*<div class="form-group">
+            <label for="@nameof(Model.Organization)">@Html.DisplayNameFor(x => x.Organization)</label>
+            <select class="form-control" id="@nameof(Model.Organization)" name="@nameof(Model.Organization)">
+                @foreach (var type in (List<LossDescriptionDTO>)ViewBag.Types)
+                {
+                    <option data-description="@Html.Raw(type.AtachmentDetails)" value="@type.Code">@type.Name_Fa</option>
+                }
+            </select>
+        </div>*@
+    </div>
+    <div class="col-12 col-sm-4">
+        <custom-input-for for="Company" class="form-control" />
+    </div>
+    <div class="col-12 col-sm-4">
+        <custom-select-for for="InsurancePlan" class="form-control" items="ViewBag.InsurancePlan" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 col-sm-4">
+        <custom-select-for for="BaseInsurance" class="form-control" items="EnumExtension.GetEnumElements<BaseInsuranceType>().Select(x=>new SelectListItem {
+                                Text = x.Description,
+                                Value = x.Name
+                            }).ToList()" />
+    </div>
+    <div class="col-12 col-sm-4">
+        <custom-input-for for="InsuranceNumber" />
+    </div>
+    <div class="col-12 col-sm-4">
+    </div>
+</div>
+<div class="row">
     <div class="col-12 col-sm-4">
         <custom-input-for for="Name" />
     </div>
@@ -12,7 +46,7 @@
         <custom-input-for for="Family" />
     </div>
     <div class="col-12 col-sm-4">
-        @*<custom-input-for for="Email" class="form-control ltr-elm" />*@
+        <custom-input-for for="Email" class="form-control ltr-elm" />
     </div>
 </div>
 <div class="row">
@@ -27,13 +61,13 @@
     </div>
     <div class="col-12 col-sm-4">
         @*@if (addMode)
-        {
-            <custom-input-for for="Password" class="form-control ltr-elm" />
-        }
-        else
-        {
-            <custom-input-for for="NewPassword" class="form-control ltr-elm" />
-        }*@
+            {
+                <custom-input-for for="Password" class="form-control ltr-elm" />
+            }
+            else
+            {
+                <custom-input-for for="NewPassword" class="form-control ltr-elm" />
+            }*@
     </div>
 </div>
 <div class="row">
@@ -52,12 +86,9 @@
         <custom-input-for for="BirthDay" class="form-control ltr-elm pdate"></custom-input-for>
     </div>
     <div class="col-12 col-sm-4">
-        <custom-select-for for="BaseInsurance" class="form-control" items="EnumExtension.GetEnumElements<BaseInsuranceType>().Select(x=>new SelectListItem {
-                                Text = x.Description,
-                                Value = x.Name
-                            }).ToList()" />
+        <custom-checkbox-for wrapper-class="chb-group" for="IsActive" />
     </div>
     <div class="col-12 col-sm-4">
-        <custom-checkbox-for wrapper-class="chb-group" for="IsActive" />
+
     </div>
 </div>
