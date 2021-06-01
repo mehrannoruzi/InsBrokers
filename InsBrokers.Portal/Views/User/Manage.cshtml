@@ -4,6 +4,16 @@
     Layout = "_LayoutManage";
 }
 
+@section styles{
+    <style>
+        @@media(min-width: 700px) {
+            .modal-dialog {
+                min-width: 700px !important;
+            }
+        }
+    </style>
+}
+
 @section filter{
 
     <partial name="Partials/_Filters" model="new UserSearchFilter()" />

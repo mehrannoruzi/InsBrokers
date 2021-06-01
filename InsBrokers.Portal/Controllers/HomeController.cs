@@ -13,6 +13,7 @@ using InsBrokers.Portal.Resource;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 
 namespace InsBrokers.Portal.Controllers
 {
@@ -66,19 +67,31 @@ namespace InsBrokers.Portal.Controllers
         [HttpPost]
         public async Task<IActionResult> SignUp([FromBody] PortalSignUpModel model)
         {
-            if (!ModelState.IsValid) return Json(new Response<string> { Message = ModelState.GetModelError() });
-            if (model.UserAttachmentIds.Count() <= 0) return Json(new Response<string> { Message = Strings.MustUploadAttachments });
+            try
+            {
+                FileLoger.CriticalInfo($"Register Clicked");
 
-            model.MemberRoleId = int.Parse(_configuration["CustomSettings:MemberRoleId"]);
-            var save = await _userSrv.SignUp(model);
-            if (!save.IsSuccessful) return Json(save);
+                if (!ModelState.IsValid) return Json(new Response<string> { Message = ModelState.GetModelError() });
+                if (model.UserAttachmentIds.Count() < 3) return Json(new Response<string> { Message = Strings.MustUploadAttachments });
 
-            var menuRep = _userSrv.GetAvailableActions(save.Result.UserId, null, _configuration["CustomSettings:UrlPrefix"]);
-            if (menuRep == null) return Json(new Response<string> { IsSuccessful = false, Message = Strings.ThereIsNoViewForUser });
+                model.MemberRoleId = int.Parse(_configuration["CustomSettings:MemberRoleId"]);
+                var save = await _userSrv.SignUp(model);
+                if (!save.IsSuccessful) return Json(save);
 
-            await CreateCookie(save.Result, true);
+                var menuRep = _userSrv.GetAvailableActions(save.Result.UserId, null, _configuration["CustomSettings:UrlPrefix"]);
+                if (menuRep == null) return Json(new Response<string> { IsSuccessful = false, Message = Strings.ThereIsNoViewForUser });
 
-            return Json(new { IsSuccessful = true, Result = Url.Action(menuRep.DefaultUserAction.Action, menuRep.DefaultUserAction.Controller, new { }) });
+                await CreateCookie(save.Result, true);
+
+                FileLoger.CriticalInfo($"Register Success");
+
+                return Json(new { IsSuccessful = true, Result = Url.Action(menuRep.DefaultUserAction.Action, menuRep.DefaultUserAction.Controller, new { }) });
+            }
+            catch (Exception e)
+            {
+                FileLoger.CriticalError(e);
+                return Json(new Response<string> { Message = Strings.Error });
+            }
         }
 
         [HttpGet]
