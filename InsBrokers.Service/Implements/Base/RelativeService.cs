@@ -148,7 +148,7 @@ namespace InsBrokers.Service
             try
             {
                 if (file.IsNull() || file.Length < 0) return new Response<object> { Message = "هیچ فایلی آپلود نشده است." };
-                if (file.Length > (1000 * 1024)) return new Response<object> { Message = "فایل آپلود شده نباید بیشتر از 1MB باشد." };
+                if (file.Length > (10000 * 1024)) return new Response<object> { Message = "فایل آپلود شده نباید بیشتر از 10MB باشد." };
 
                 #region Save Attachment To Host
                 var fullPath = HttpFileTools.GetPath(

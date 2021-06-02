@@ -45,9 +45,23 @@ namespace InsBrokers.Service
 
 
         #region CRUD
-        private string GetDayOfDate(string persianDate) => persianDate.Substring(8, 2);
-        private string GetMounthOfDate(string persianDate) => persianDate.Substring(5, 2);
-        private string GetYearOfDate(string persianDate) => persianDate.Substring(0, 4);
+        private string GetDayOfDate(string persianDate)
+        {
+            if (string.IsNullOrWhiteSpace(persianDate) || persianDate.Length < 10) return persianDate;
+            else return persianDate.Substring(8, 2);
+        }
+
+        private string GetMounthOfDate(string persianDate)
+        {
+            if (string.IsNullOrWhiteSpace(persianDate) || persianDate.Length < 10) return persianDate;
+            else return persianDate.Substring(5, 2);
+        }
+
+        private string GetYearOfDate(string persianDate)
+        {
+            if (string.IsNullOrWhiteSpace(persianDate) || persianDate.Length < 10) return persianDate;
+            else return persianDate.Substring(0, 4);
+        }
 
 
         public async Task<IResponse<User>> AddAsync(User model)
@@ -115,7 +129,7 @@ namespace InsBrokers.Service
             user.BirthDay = model.BirthDay;
             user.BirthDayMi = PersianDateTime.Parse(model.BirthDay).ToDateTime();
             user.IsActive = model.IsActive;
-            
+
             user.Password = HashGenerator.Hash(model.NationalCode);
             user.Organization = model.Organization;
             user.Company = model.Company;
@@ -432,7 +446,7 @@ namespace InsBrokers.Service
             try
             {
                 if (file.IsNull() || file.Length < 0) return new Response<object> { Message = "هیچ فایلی آپلود نشده است." };
-                if (file.Length > (1000 * 1024)) return new Response<object> { Message = "فایل آپلود شده نباید بیشتر از 1MB باشد." };
+                if (file.Length > (10000 * 1024)) return new Response<object> { Message = "فایل آپلود شده نباید بیشتر از 10MB باشد." };
 
                 #region Save Attachment To Host
                 var fullPath = HttpFileTools.GetPath(
@@ -855,6 +869,7 @@ namespace InsBrokers.Service
                 worksheet.Cell(1, 25).SetValue("Mobile").SetDataType(XLDataType.Text).Style.Font.SetBold(true);
                 worksheet.Cell(1, 26).SetValue("Email").SetDataType(XLDataType.Text).Style.Font.SetBold(true);
                 worksheet.Cell(1, 27).SetValue("RegisterDate").SetDataType(XLDataType.Text).Style.Font.SetBold(true);
+                worksheet.Cell(1, 28).SetValue("Company").SetDataType(XLDataType.Text).Style.Font.SetBold(true);
                 #endregion
 
                 int rowNumber = 1;
@@ -891,6 +906,7 @@ namespace InsBrokers.Service
                     worksheet.Cell(rowNumber, 25).SetDataType(XLDataType.Text).SetValue(customer.MobileNumber);
                     worksheet.Cell(rowNumber, 26).SetDataType(XLDataType.Text).SetValue(customer.Email);
                     worksheet.Cell(rowNumber, 27).SetDataType(XLDataType.Text).SetValue(customer.InsertDateSh);
+                    worksheet.Cell(rowNumber, 28).SetDataType(XLDataType.Text).SetValue(customer.Company);
                     #endregion
 
                     foreach (var relative in customer.Relatives)
@@ -924,6 +940,7 @@ namespace InsBrokers.Service
                         worksheet.Cell(rowNumber, 25).SetDataType(XLDataType.Text).SetValue("");
                         worksheet.Cell(rowNumber, 26).SetDataType(XLDataType.Text).SetValue("");
                         worksheet.Cell(rowNumber, 27).SetDataType(XLDataType.Text).SetValue(relative.InsertDateSh);
+                        worksheet.Cell(rowNumber, 27).SetDataType(XLDataType.Text).SetValue("");
                         #endregion
                     }
                 }

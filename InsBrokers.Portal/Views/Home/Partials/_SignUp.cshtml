@@ -27,9 +27,9 @@
                             <li style="padding-top:10px;"><a target="_blank" href="~/Files/Noghrei.jpeg">طرح نقره ای</a></li>
                             <li style="padding-top:10px;"><a target="_blank" href="~/Files/Talaei.jpeg">طرح طلایی</a></li>
                         </ul>
-                    <div style="padding-top: 20px;">
-                        <p class="text">جهت آشنایی بیشتر با قوانین و طرح ها می توانید با شماره های سازمان نظام دامپزشکی <a style="color:crimson" href="tel:02161061125">02161061125</a> و <a style="color:crimson" href="tel:02161061139">02161061139</a> تماس حاصل نمایید.</p>
-                    </div>
+                        <div style="padding-top: 20px;">
+                            <p class="text">جهت آشنایی بیشتر با قوانین و طرح ها می توانید با شماره های سازمان نظام دامپزشکی <a style="color:crimson" href="tel:02161061125">02161061125</a> و <a style="color:crimson" href="tel:02161061139">02161061139</a> تماس حاصل نمایید.</p>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -147,6 +147,9 @@
                 <label class="label label-info" style="margin-top:15px;">
                     <span>آدرس</span>
                 </label>
+                <div class="alert alert-info">
+                    <p class="text">آدرس محل سکونت خود را به صورت کامل وارد نمایید.</p>
+                </div>
                 <div class="row">
                     <div class="col-12 col-sm-6 col-md-4">
                         <custom-input-for for="Province" class="form-control" />
@@ -172,6 +175,9 @@
                 <label class="label label-info" style="margin-top:15px;">
                     <span>آپلود مدارک</span>
                 </label>
+                <div class="alert alert-info">
+                    <p class="text">سایز فایل آپلود شده نباید بیشتر از <span style="color:crimson">10MB</span> باشد.</p>
+                </div>
                 <partial name="Partials/_UserAttachment" model='new List<UserAttachment>()
                     {
                         new UserAttachment{ UserAttachmentType = AttachmentType.IdentityCardPage1 },

@@ -77,7 +77,7 @@ namespace InsBrokers.Portal
                         var statusCode = context.Response.StatusCode;
                         if (handled == null && statusCode >= 400)
                         {
-                            FileLoger.Info(exp.Error.Message);
+                            FileLoger.Error(exp.Error);
                             context.Response.Redirect($"/Error/Index?code={statusCode}");
                         }
                     }
