@@ -565,7 +565,7 @@ namespace InsBrokers.Portal.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;a href=&quot;tel:02188173100&quot;&gt;02188173100 داخلی 131&lt;/a&gt;.
+        ///   Looks up a localized string similar to &lt;a href=&quot;tel:09912701934&quot;&gt;09912701934&lt;/a&gt;.
         /// </summary>
         public static string PhoneNumbersInfo {
             get {
