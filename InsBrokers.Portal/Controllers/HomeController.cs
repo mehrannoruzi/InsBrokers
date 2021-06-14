@@ -70,13 +70,21 @@ namespace InsBrokers.Portal.Controllers
             try
             {
                 FileLoger.CriticalInfo($"Register Clicked");
+                FileLoger.CriticalInfo(model.SerializeToJson());
 
                 if (!ModelState.IsValid) return Json(new Response<string> { Message = ModelState.GetModelError() });
+
+                FileLoger.CriticalInfo($"ModelState IsValid");
+
                 if (model.UserAttachmentIds.Count() < 3) return Json(new Response<string> { Message = Strings.MustUploadAttachments });
+                
+                FileLoger.CriticalInfo($"Attachment IsValid");
 
                 model.MemberRoleId = int.Parse(_configuration["CustomSettings:MemberRoleId"]);
                 var save = await _userSrv.SignUp(model);
                 if (!save.IsSuccessful) return Json(save);
+
+                FileLoger.CriticalInfo($"SignUp Success");
 
                 var menuRep = _userSrv.GetAvailableActions(save.Result.UserId, null, _configuration["CustomSettings:UrlPrefix"]);
                 if (menuRep == null) return Json(new Response<string> { IsSuccessful = false, Message = Strings.ThereIsNoViewForUser });
@@ -89,6 +97,8 @@ namespace InsBrokers.Portal.Controllers
             }
             catch (Exception e)
             {
+                FileLoger.CriticalInfo($"Message: {e.Message} {Environment.NewLine} InnerMessage: {e.InnerException?.Message} ");
+
                 FileLoger.CriticalError(e);
                 return Json(new Response<string> { Message = Strings.Error });
             }
@@ -97,15 +107,25 @@ namespace InsBrokers.Portal.Controllers
         [HttpGet]
         public async Task<FileResult> Android([FromServices] IWebHostEnvironment env)
         {
-            var path = Path.Combine(env.WebRootPath, "Files", "DarmanNaft.apk");
-
-            var memory = new MemoryStream();
-            using (var stream = new FileStream(path, FileMode.Open))
+            try
             {
-                await stream.CopyToAsync(memory);
+                var path = Path.Combine(env.WebRootPath, "Files", "DarmanNaft.apk");
+
+                FileLoger.Info($"Download Android Clicked: {path}");
+
+                var memory = new MemoryStream();
+                using (var stream = new FileStream(path, FileMode.Open))
+                {
+                    await stream.CopyToAsync(memory);
+                }
+                memory.Position = 0;
+                return File(memory, "application/vnd.android.package-archive", Path.GetFileName(path));
             }
-            memory.Position = 0;
-            return File(memory, "application/vnd.android.package-archive", Path.GetFileName(path));
+            catch (Exception e)
+            {
+                FileLoger.Error(e);
+                return null;
+            }
         }
 
 
