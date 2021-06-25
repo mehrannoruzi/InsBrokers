@@ -100,11 +100,15 @@ namespace InsBrokers.Portal.Controllers
         [HttpGet]
         public virtual async Task<ActionResult> ProfileInfo()
         {
-            var user = await _userSrv.FindWithAttachmentsAsync(User.GetUserId());
-            foreach (var item in user.Result.UserAttachments)
+            var getUser = await _userSrv.FindWithAttachmentsAsync(User.GetUserId());
+            foreach (var item in getUser.Result.UserAttachments)
                 item.Url = $"{_configuration["CustomSettings:MainAddress"]}{item.Url}";
 
-            return View(user.Result);
+            var startDate = PersianDateTime.Parse(_configuration["CustomSettings:StartLockDate"]).ToDateTime();
+            var endDate = PersianDateTime.Parse(_configuration["CustomSettings:EndLockDate"]).ToDateTime();
+            ViewBag.CanEdit = !(getUser.Result.InsertDateMi >= startDate && getUser.Result.InsertDateMi <= endDate);
+
+            return View(getUser.Result);
         }
 
         [HttpPost]

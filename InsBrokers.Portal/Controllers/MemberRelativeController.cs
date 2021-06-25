@@ -6,21 +6,24 @@ using InsBrokers.Service;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using InsBrokers.Portal.Resource;
-using DomainString = InsBrokers.Domain.Resource.Strings;
-using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
+using DomainString = InsBrokers.Domain.Resource.Strings;
 
 namespace InsBrokers.Portal.Controllers
 {
     [AuthorizationFilter]
     public partial class MemberRelativeController : Controller
     {
-        private readonly IRelativeService _MemberRelativeSrv;
+        private readonly IUserService _userSrv;
         private readonly IConfiguration _configuration;
-        public MemberRelativeController(IRelativeService MemberRelativeSrv, IConfiguration configuration)
+        private readonly IRelativeService _MemberRelativeSrv;
+
+        public MemberRelativeController(IUserService userSrv, IRelativeService MemberRelativeSrv,
+            IConfiguration configuration)
         {
-            _MemberRelativeSrv = MemberRelativeSrv;
+            _userSrv = userSrv;
             _configuration = configuration;
+            _MemberRelativeSrv = MemberRelativeSrv;
         }
 
 
@@ -70,13 +73,20 @@ namespace InsBrokers.Portal.Controllers
         public virtual async Task<JsonResult> Delete(int id) => Json(await _MemberRelativeSrv.DeleteAsync(id));
 
         [HttpGet]
-        public virtual ActionResult Manage(RelativeSearchFilter filter)
+        public virtual async Task<ActionResult> Manage(RelativeSearchFilter filter)
         {
             filter.UserId = User.GetUserId();
             //ViewBag.HasExtraButton = true;
             //ViewBag.ExtraButtonUrl = Url.Action("InsuranceInfo", "User");
             //ViewBag.ExtraButtonText = Strings.PreFactor;
             //ViewBag.ExtraButtonIcon = "zmdi-eye";
+
+            var getUser = await _userSrv.FindAsync(User.GetUserId());
+            var startDate = PersianDateTime.Parse(_configuration["CustomSettings:StartLockDate"]).ToDateTime();
+            var endDate = PersianDateTime.Parse(_configuration["CustomSettings:EndLockDate"]).ToDateTime();
+            ViewBag.CanEdit = !(getUser.Result.InsertDateMi >= startDate && getUser.Result.InsertDateMi <= endDate);
+            ViewBag.WithoutAddButton = !ViewBag.CanEdit;
+
             if (!Request.IsAjaxRequest()) return View(_MemberRelativeSrv.Get(filter));
             else return PartialView("Partials/_List", _MemberRelativeSrv.Get(filter));
         }

@@ -7,21 +7,24 @@
     @foreach (var item in Model.Items)
     {
         <div class="list-item">
-            <div class="dropdown actions">
-                <span class="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="zmdi zmdi-more rotate-90"></i>
-                </span>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item update text-right" data-url="@Url.Action("Update","MemberRelative",new { id = item.RelativeId })">
-                        <i class="zmdi zmdi-edit default-i"></i>
-                        @Strings.Edit
-                    </a>
-                    <a class="dropdown-item delete text-right" data-url="@Url.Action("Delete","MemberRelative",new { id = item.RelativeId })">
-                        <i class="zmdi zmdi-delete default-i"></i>
-                        @Strings.Delete
-                    </a>
+            @if (ViewBag.CanEdit)
+            {
+                <div class="dropdown actions">
+                    <span class="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="zmdi zmdi-more rotate-90"></i>
+                    </span>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item update text-right" data-url="@Url.Action("Update","MemberRelative",new { id = item.RelativeId })">
+                            <i class="zmdi zmdi-edit default-i"></i>
+                            @Strings.Edit
+                        </a>
+                        <a class="dropdown-item delete text-right" data-url="@Url.Action("Delete","MemberRelative",new { id = item.RelativeId })">
+                            <i class="zmdi zmdi-delete default-i"></i>
+                            @Strings.Delete
+                        </a>
+                    </div>
                 </div>
-            </div>
+            }
             <div class="row">
                 <div class="col-12 col-sm-6">
                     <div class="field m-b">
@@ -63,7 +66,7 @@
                         @Html.DisplayNameFor(x => x.Items[0].InsertDateSh): <span>@item.InsertDateSh</span>
                     </div>
                 </div>
-                
+
             </div>
         </div>
     }

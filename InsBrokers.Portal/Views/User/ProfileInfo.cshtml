@@ -85,12 +85,15 @@
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <button type="button" class="btn btn-primary block m-b m-t btn-action btn-submit">
-                                <span class="text">@Strings.Submit</span>
-                                <div class="icon">
-                                    <i class="zmdi zmdi-floppy rotate-180 default-i"></i>
-                                </div>
-                            </button>
+                            @if (ViewBag.CanEdit)
+                            {
+                                <button type="button" class="btn btn-primary block m-b m-t btn-action btn-submit">
+                                    <span class="text">@Strings.Submit</span>
+                                    <div class="icon">
+                                        <i class="zmdi zmdi-floppy rotate-180 default-i"></i>
+                                    </div>
+                                </button>
+                            }
                         </div>
                     </div>
                 </form>
